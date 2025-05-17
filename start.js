@@ -1,23 +1,15 @@
+// Simple script to start the server and forward ports
 const { spawn } = require('child_process');
+const server = spawn('node', ['server.js']);
 
-console.log('Starting Next.js application on port 5000...');
-const nextProcess = spawn('npx', ['next', 'dev', '-p', '5000'], {
-  stdio: 'inherit',
-  shell: true
+server.stdout.on('data', (data) => {
+  console.log(`${data}`);
 });
 
-nextProcess.on('error', (error) => {
-  console.error('Failed to start Next.js process:', error);
+server.stderr.on('data', (data) => {
+  console.error(`${data}`);
 });
 
-process.on('SIGINT', () => {
-  console.log('Received SIGINT. Shutting down...');
-  nextProcess.kill('SIGINT');
-  process.exit(0);
-});
-
-process.on('SIGTERM', () => {
-  console.log('Received SIGTERM. Shutting down...');
-  nextProcess.kill('SIGTERM');
-  process.exit(0);
+server.on('close', (code) => {
+  console.log(`Server process exited with code ${code}`);
 });
