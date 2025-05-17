@@ -199,7 +199,10 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
               ].map((src, index) => (
                 <div
                   key={index}
-                  ref={(el) => (characterRefs.current[index] = el)}
+                  ref={(el) => {
+                    characterRefs.current[index] = el
+                    return undefined
+                  }}
                   className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30px] h-[50px]"
                   style={{ transformOrigin: "center center" }}
                 >
