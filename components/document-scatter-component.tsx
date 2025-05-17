@@ -1,36 +1,76 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 
-// Generate many more documents for a fuller effect
-const documents = Array.from({ length: 150 }, (_, i) => ({
-  id: i + 1,
-  type: ["paper", "folder", "note", "envelope", "certificate", "receipt", "contract"][
-    Math.floor(Math.random() * 7)
-  ] as string,
-  rotation: gsap.utils.random(-15, 15),
-  scale: gsap.utils.random(0.6, 1.3),
-  zIndex: Math.floor(gsap.utils.random(1, 10)),
-  opacity: gsap.utils.random(0.8, 1),
-}))
+// Document types
+const documentTypes = ["paper", "folder", "note", "envelope", "certificate", "receipt", "contract"];
+
+// Type definition
+type DocumentData = {
+  id: number;
+  type: string;
+  rotation: number;
+  scale: number;
+  zIndex: number;
+  opacity: number;
+}
 
 export function DocumentScatter() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isClient, setIsClient] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(0)
+  
+  // Set deterministic values for server-side rendering
+  const [docs, setDocs] = useState<DocumentData[]>(() => 
+    Array.from({ length: 150 }, (_, i) => ({
+      id: i + 1,
+      type: documentTypes[i % documentTypes.length],
+      rotation: 0,
+      scale: 1,
+      zIndex: Math.floor((i % 10) + 1),
+      opacity: 0.9,
+    }))
+  );
 
+  // Client-side processing
   useEffect(() => {
-    // Animation is controlled from the parent component
+    setIsClient(true)
+    setWindowWidth(window.innerWidth)
+    
+    // Only set random values on the client side
+    setDocs(prevDocs => prevDocs.map(doc => ({
+      ...doc,
+      rotation: gsap.utils.random(-15, 15),
+      scale: gsap.utils.random(0.6, 1.3),
+      opacity: gsap.utils.random(0.8, 1),
+    })));
+    
+    // Resize event listener
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    
+    // Cleanup
     return () => {
+      window.removeEventListener('resize', handleResize)
       if (containerRef.current) {
-        const documents = containerRef.current.querySelectorAll(".document")
-        gsap.killTweensOf(documents)
+        const documentElements = containerRef.current.querySelectorAll(".document")
+        gsap.killTweensOf(documentElements)
       }
     }
   }, [])
 
+  // Don't display anything during server-side rendering
+  if (!isClient) {
+    return <div ref={containerRef} className="relative w-full h-full"></div>
+  }
+
   return (
     <div ref={containerRef} className="relative w-full h-full flex items-center justify-center overflow-visible">
-      {documents.map((doc) => (
+      {docs.map((doc) => (
         <div
           key={doc.id}
           className="document absolute"
@@ -38,9 +78,10 @@ export function DocumentScatter() {
             transformOrigin: "center center",
             zIndex: doc.zIndex,
             opacity: doc.opacity,
-            // Initially position documents off-screen at the top
-            transform: `translateY(-100vh) translateX(${gsap.utils.random(-window.innerWidth / 2, window.innerWidth / 2)}px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
-            willChange: "transform, opacity", // パフォーマンス最適化
+            transform: `translateY(-100vh) translateX(${
+              windowWidth ? gsap.utils.random(-windowWidth / 2, windowWidth / 2) : 0
+            }px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
+            willChange: "transform, opacity" // Performance optimization
           }}
         >
           {doc.type === "paper" && <PaperDocument />}
