@@ -1,8 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useRef, useState } from "react"
 import {
   FileText,
   Clock,
@@ -17,11 +15,8 @@ import {
 } from "lucide-react"
 
 export default function FeaturesSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const cardsContainerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
-  const [scrollTriggerInstance, setScrollTriggerInstance] = useState<any>(null)
 
   // 特徴カードの配列
   const features = [
@@ -77,202 +72,21 @@ export default function FeaturesSection() {
 
   // 前のカードに移動
   const handlePrev = () => {
-    if (activeIndex > 0) {
-      setActiveIndex(activeIndex - 1)
-
-      // ScrollTriggerの位置も更新
-      if (scrollTriggerInstance) {
-        const progress = (activeIndex - 1) / (features.length - 1)
-        scrollTriggerInstance.scroll(
-          scrollTriggerInstance.start + (scrollTriggerInstance.end - scrollTriggerInstance.start) * progress,
-        )
-      }
-    }
+    if (activeIndex > 0) setActiveIndex(activeIndex - 1)
   }
 
   // 次のカードに移動
   const handleNext = () => {
-    if (activeIndex < features.length - 1) {
-      setActiveIndex(activeIndex + 1)
-
-      // ScrollTriggerの位置も更新
-      if (scrollTriggerInstance) {
-        const progress = (activeIndex + 1) / (features.length - 1)
-        scrollTriggerInstance.scroll(
-          scrollTriggerInstance.start + (scrollTriggerInstance.end - scrollTriggerInstance.start) * progress,
-        )
-      }
-    }
+    if (activeIndex < features.length - 1) setActiveIndex(activeIndex + 1)
   }
 
   // 特定のカードに移動
   const goToCard = (index: number) => {
-    if (index === activeIndex) return
-    setActiveIndex(index)
-
-    // ScrollTriggerの位置も更新
-    if (scrollTriggerInstance) {
-      const progress = index / (features.length - 1)
-      scrollTriggerInstance.scroll(
-        scrollTriggerInstance.start + (scrollTriggerInstance.end - scrollTriggerInstance.start) * progress,
-      )
-    }
+    if (index !== activeIndex) setActiveIndex(index)
   }
-
-  useEffect(() => {
-    if (typeof window === "undefined") return
-
-    // GSAPプラグインの登録
-    gsap.registerPlugin(ScrollTrigger)
-
-    // 既存のScrollTriggerをクリーンアップ
-    ScrollTrigger.getAll().forEach((trigger) => {
-      if (trigger.vars.id === "featuresScroll" || trigger.vars.id === "featuresPinning") {
-        trigger.kill()
-      }
-    })
-
-    if (sectionRef.current && cardsContainerRef.current) {
-      // カードの初期設定
-      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[]
-
-      // カードの外観を更新する関数
-      const updateCardsAppearance = (currentIndex: number, progress: number) => {
-        cards.forEach((card, i) => {
-          // 現在のカードからの距離
-          const position = i - currentIndex
-
-          // 各カードのアニメーション
-          gsap.to(card, {
-            xPercent: position * 60,
-            z: position === 0 ? 0 : -100,
-            rotationY: position * 15,
-            opacity: position === 0 ? 1 : 0.7,
-            zIndex: features.length - Math.abs(position),
-            duration: 0.5,
-            ease: "power2.out",
-          })
-        })
-      }
-
-      // スクロールトリガーの設定（カードの切り替え用）
-      const trigger = ScrollTrigger.create({
-        id: "featuresScroll",
-        trigger: sectionRef.current,
-        start: "top center", // 画面中央に来たら開始
-        end: () => `+=${window.innerHeight * 1.5}`, // スクロール距離を画面高さの1.5倍に設定
-        pin: true, // セクションをピン留め
-        pinSpacing: true, // ピン留め中のスペースを確保
-        scrub: 1, // スクロールに対する追従の滑らかさ
-        onUpdate: (self) => {
-          // スクロール位置に基づいてアクティブカードを更新
-          const newIndex = Math.min(features.length - 1, Math.max(0, Math.round(self.progress * (features.length - 1))))
-
-          if (newIndex !== activeIndex) {
-            setActiveIndex(newIndex)
-          }
-
-          // カードの位置と回転を更新
-          updateCardsAppearance(newIndex, self.progress)
-        },
-        onEnter: () => {
-          // セクションが表示されたときの処理
-          gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-        },
-        onLeave: () => {
-          // セクションが画面から出たときの処理
-          gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-        },
-        onEnterBack: () => {
-          // セクションが再び表示されたときの処理
-          gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-        },
-        onLeaveBack: () => {
-          // セクションが上方向に画面から出たときの処理
-          gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-        },
-      })
-
-      setScrollTriggerInstance(trigger)
-
-      // 初期状態の設定
-      updateCardsAppearance(0, 0)
-
-      // スクロールインジケーターの追加
-      const scrollIndicator = document.createElement("div")
-      scrollIndicator.className = "scroll-indicator"
-      scrollIndicator.style.cssText = `
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 200px;
-        height: 4px;
-        background-color: rgba(0,0,0,0.1);
-        border-radius: 2px;
-        overflow: hidden;
-        z-index: 100;
-      `
-
-      const scrollProgress = document.createElement("div")
-      scrollProgress.style.cssText = `
-        height: 100%;
-        width: 0%;
-        background-color: #0ea5e9;
-        transition: width 0.3s;
-      `
-
-      scrollIndicator.appendChild(scrollProgress)
-      sectionRef.current.appendChild(scrollIndicator)
-
-      // スクロール進捗を更新
-      trigger.vars.onUpdate = (self: any) => {
-        const newIndex = Math.min(features.length - 1, Math.max(0, Math.round(self.progress * (features.length - 1))))
-
-        if (newIndex !== activeIndex) {
-          setActiveIndex(newIndex)
-        }
-
-        // カードの位置と回転を更新
-        updateCardsAppearance(newIndex, self.progress)
-
-        // スクロールインジケーターを更新
-        scrollProgress.style.width = `${self.progress * 100}%`
-      }
-
-      return () => {
-        // クリーンアップ
-        if (scrollIndicator.parentNode) {
-          scrollIndicator.parentNode.removeChild(scrollIndicator)
-        }
-        trigger.kill()
-      }
-    }
-
-    // キーボードナビゲーション
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
-        handlePrev()
-      } else if (e.key === "ArrowRight") {
-        handleNext()
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.id === "featuresScroll" || trigger.vars.id === "featuresPinning") {
-          trigger.kill()
-        }
-      })
-    }
-  }, [activeIndex, features.length])
 
   return (
     <section
-      ref={sectionRef}
       className="py-20 bg-white relative overflow-hidden"
       style={{
         visibility: "visible",
@@ -292,7 +106,6 @@ export default function FeaturesSection() {
         <div className="relative max-w-4xl mx-auto">
           {/* カードコンテナ */}
           <div
-            ref={cardsContainerRef}
             className="relative h-[450px] perspective-1000 mx-auto"
             style={{ perspective: "1000px" }}
           >
@@ -310,8 +123,8 @@ export default function FeaturesSection() {
                   className={`absolute top-0 left-0 right-0 mx-auto w-[300px] h-[400px] ${feature.color} rounded-xl shadow-xl transition-all duration-500 ease-out`}
                   style={{
                     transform: `
-                      translateX(${position * 60}%) 
-                      translateZ(${position === 0 ? 0 : -100}px) 
+                      translateX(${position * 60}%)
+                      translateZ(${position === 0 ? 0 : -100}px)
                       rotateY(${position * 15}deg)
                     `,
                     opacity: position === 0 ? 1 : 0.7,
