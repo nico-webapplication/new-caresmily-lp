@@ -307,9 +307,8 @@ export default function FeaturesSection() {
               return (
                 <div
                   key={index}
-                  ref={(el) => {
+                  ref={(el: HTMLDivElement | null) => {
                     cardsRef.current[index] = el;
-                    return undefined;
                   }}
                   className={`absolute top-0 left-0 right-0 mx-auto w-[300px] h-[400px] ${feature.color} rounded-xl shadow-xl transition-all duration-500 ease-out`}
                   style={{
