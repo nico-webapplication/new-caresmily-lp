@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 
 // Generate many more documents for a fuller effect
@@ -17,7 +17,7 @@ const documents = Array.from({ length: 150 }, (_, i) => ({
 
 export function DocumentScatter() {
   const containerRef = useRef<HTMLDivElement>(null)
-  
+
   useEffect(() => {
     // Animation is controlled from the parent component
     return () => {
@@ -38,9 +38,9 @@ export function DocumentScatter() {
             transformOrigin: "center center",
             zIndex: doc.zIndex,
             opacity: doc.opacity,
-            // Initially position documents off-screen at the top with a fixed position
-            transform: `translateY(-100vh) translateX(0px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
-            willChange: "transform, opacity",
+            // Initially position documents off-screen at the top
+            transform: `translateY(-100vh) translateX(${gsap.utils.random(-window.innerWidth / 2, window.innerWidth / 2)}px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
+            willChange: "transform, opacity", // パフォーマンス最適化
           }}
         >
           {doc.type === "paper" && <PaperDocument />}
