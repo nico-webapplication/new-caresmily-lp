@@ -39,7 +39,7 @@ export function DocumentScatter() {
             zIndex: doc.zIndex,
             opacity: doc.opacity,
             // Initially position documents off-screen at the top
-            transform: `translateY(-100vh) translateX(${gsap.utils.random(-500, 500)}px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
+            transform: `translateY(-100vh) translateX(${gsap.utils.random(-window.innerWidth / 2, window.innerWidth / 2)}px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
             willChange: "transform, opacity", // パフォーマンス最適化
           }}
         >
