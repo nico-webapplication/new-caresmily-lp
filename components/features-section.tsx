@@ -120,6 +120,7 @@ export default function FeaturesSection() {
   }
 
   useEffect(() => {
+    // Client-side only
     if (typeof window === "undefined") return
 
     // GSAPプラグインの登録
