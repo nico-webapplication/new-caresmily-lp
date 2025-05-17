@@ -16,8 +16,7 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
   useImperativeHandle(ref, () => containerRef.current!)
 
   useEffect(() => {
-    // Only run animations on the client side
-    if (containerRef.current && typeof window !== 'undefined') {
+    if (containerRef.current) {
       // Initial state - page container is small and centered
       gsap.set(containerRef.current, {
         scale: 0.1,
@@ -39,26 +38,26 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
 
       // Page container appears with a smooth effect
       tl.to(containerRef.current, {
-        scale: 0.3, // Start with a smaller size
+        scale: 0.3, // 小さめのサイズから始める
         opacity: 1,
         duration: 0.8,
         ease: "back.out(1.2)",
       })
 
-        // Grow slightly - more smoothly
+        // 少し大きくなる - より滑らかに
         .to(containerRef.current, {
           scale: 0.4,
           duration: 0.6,
           ease: "power1.inOut",
         })
 
-        // Pause briefly
+        // 一瞬止まる
         .to(containerRef.current, {
           scale: 0.4,
           duration: 0.3,
         })
 
-        // Expand smoothly to cover the screen
+        // より滑らかに拡大して画面を覆う
         .to(containerRef.current, {
           scale: 1,
           width: "100vw",
@@ -157,8 +156,8 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
       >
         <div className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 py-20">
           <div className="absolute top-4 left-4">
-            <div className="relative w-20 h-6 bg-sky-600 rounded flex items-center justify-center">
-              <span className="text-white text-xs font-bold">CareSmily</span>
+            <div className="relative w-20 h-6">
+              <Image src="/images/CareSmily_ロゴ.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
             </div>
           </div>
 
@@ -176,20 +175,22 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
 
           <div className="relative w-full max-w-xs mx-auto h-32 mb-4">
-            {/* 3D miniature animation */}
+            {/* ミニチュアの3Dアニメーション */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full">
-              {/* Center logo */}
+              {/* 中央のロゴ */}
               <div
                 ref={miniLogoRef}
                 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30px] h-[30px] bg-white rounded-full shadow-sm flex items-center justify-center z-30"
               >
-                <span className="text-sky-600 text-[8px] font-bold">Care</span>
+                <div className="relative w-[80%] h-[80%]">
+                  <Image src="/images/CareSmily_ロゴ.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
+                </div>
               </div>
 
-              {/* Background circle */}
+              {/* 背景の円 */}
               <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] rounded-full bg-[#42a5d5]/10 z-0"></div>
 
-              {/* Characters */}
+              {/* キャラクター */}
               {[
                 "/images/nurse-tablet.png",
                 "/images/elderly-man-wheelchair.png",
@@ -198,10 +199,7 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
               ].map((src, index) => (
                 <div
                   key={index}
-                  ref={(el) => {
-                    characterRefs.current[index] = el;
-                    return undefined;
-                  }}
+                  ref={(el) => (characterRefs.current[index] = el)}
                   className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30px] h-[50px]"
                   style={{ transformOrigin: "center center" }}
                 >

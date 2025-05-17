@@ -22,10 +22,8 @@ export default function Home() {
   const [showPageReveal, setShowPageReveal] = useState(false)
 
   const playAnimation = () => {
-    if (containerRef.current && typeof window !== 'undefined') {
+    if (containerRef.current) {
       const documents = containerRef.current.querySelectorAll(".document")
-      const viewportWidth = window.innerWidth || 1024
-      const viewportHeight = window.innerHeight || 768
 
       // Store documents for later use
       documentsRef.current = Array.from(documents) as HTMLElement[]
@@ -44,8 +42,8 @@ export default function Home() {
 
       // Reset positions to top of screen with random X positions
       gsap.to(documents, {
-        x: () => gsap.utils.random(-viewportWidth / 2 + 100, viewportWidth / 2 - 100),
-        y: -viewportHeight,
+        x: () => gsap.utils.random(-window.innerWidth / 2 + 100, window.innerWidth / 2 - 100),
+        y: -window.innerHeight,
         rotation: () => gsap.utils.random(-30, 30),
         scale: () => gsap.utils.random(0.7, 1.2),
         opacity: 1,
@@ -66,8 +64,8 @@ export default function Home() {
               gsap.delayedCall(0.2, () => {
                 // Scatter documents widely (including off-screen)
                 gsap.to(documents, {
-                  x: () => gsap.utils.random(-viewportWidth * 1.2, viewportWidth * 1.2),
-                  y: () => gsap.utils.random(-viewportHeight * 1.2, viewportHeight * 1.2),
+                  x: () => gsap.utils.random(-window.innerWidth * 1.2, window.innerWidth * 1.2),
+                  y: () => gsap.utils.random(-window.innerHeight * 1.2, window.innerHeight * 1.2),
                   rotation: () => gsap.utils.random(-360, 360),
                   scale: () => gsap.utils.random(0.6, 1.3),
                   opacity: () => gsap.utils.random(0.7, 1),
@@ -152,14 +150,8 @@ export default function Home() {
     }
   }, [showPageReveal])
 
-  // Add state to check if we're on client-side
-  const [isClient, setIsClient] = useState(false)
-
   useEffect(() => {
-    // Set client-side flag
-    setIsClient(true)
-    
-    // Play animation on initial load (only on client)
+    // Play animation on initial load
     playAnimation()
 
     // Handle window resize
