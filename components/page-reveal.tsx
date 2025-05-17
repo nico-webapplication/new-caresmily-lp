@@ -16,7 +16,8 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
   useImperativeHandle(ref, () => containerRef.current!)
 
   useEffect(() => {
-    if (containerRef.current) {
+    // Only run animations on the client side
+    if (containerRef.current && typeof window !== 'undefined') {
       // Initial state - page container is small and centered
       gsap.set(containerRef.current, {
         scale: 0.1,
@@ -38,26 +39,26 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
 
       // Page container appears with a smooth effect
       tl.to(containerRef.current, {
-        scale: 0.3, // 小さめのサイズから始める
+        scale: 0.3, // Start with a smaller size
         opacity: 1,
         duration: 0.8,
         ease: "back.out(1.2)",
       })
 
-        // 少し大きくなる - より滑らかに
+        // Grow slightly - more smoothly
         .to(containerRef.current, {
           scale: 0.4,
           duration: 0.6,
           ease: "power1.inOut",
         })
 
-        // 一瞬止まる
+        // Pause briefly
         .to(containerRef.current, {
           scale: 0.4,
           duration: 0.3,
         })
 
-        // より滑らかに拡大して画面を覆う
+        // Expand smoothly to cover the screen
         .to(containerRef.current, {
           scale: 1,
           width: "100vw",
@@ -156,8 +157,8 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
       >
         <div className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 py-20">
           <div className="absolute top-4 left-4">
-            <div className="relative w-20 h-6">
-              <Image src="/images/CareSmily_ロゴ.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
+            <div className="relative w-20 h-6 bg-sky-600 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">CareSmily</span>
             </div>
           </div>
 
@@ -183,7 +184,7 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
                 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30px] h-[30px] bg-white rounded-full shadow-sm flex items-center justify-center z-30"
               >
                 <div className="relative w-[80%] h-[80%]">
-                  <Image src="/images/CareSmily_ロゴ.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
+                  <Image src="/images/CareSmily_logo.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
                 </div>
               </div>
 
