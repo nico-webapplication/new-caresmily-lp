@@ -176,22 +176,20 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
 
           <div className="relative w-full max-w-xs mx-auto h-32 mb-4">
-            {/* ミニチュアの3Dアニメーション */}
+            {/* 3D miniature animation */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full">
-              {/* 中央のロゴ */}
+              {/* Center logo */}
               <div
                 ref={miniLogoRef}
                 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30px] h-[30px] bg-white rounded-full shadow-sm flex items-center justify-center z-30"
               >
-                <div className="relative w-[80%] h-[80%]">
-                  <Image src="/images/CareSmily_logo.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
-                </div>
+                <span className="text-sky-600 text-[8px] font-bold">Care</span>
               </div>
 
-              {/* 背景の円 */}
+              {/* Background circle */}
               <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] rounded-full bg-[#42a5d5]/10 z-0"></div>
 
-              {/* キャラクター */}
+              {/* Characters */}
               {[
                 "/images/nurse-tablet.png",
                 "/images/elderly-man-wheelchair.png",
@@ -200,7 +198,10 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
               ].map((src, index) => (
                 <div
                   key={index}
-                  ref={(el) => (characterRefs.current[index] = el)}
+                  ref={(el) => {
+                    characterRefs.current[index] = el;
+                    return undefined;
+                  }}
                   className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30px] h-[50px]"
                   style={{ transformOrigin: "center center" }}
                 >
