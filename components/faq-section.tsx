@@ -12,87 +12,87 @@ export default function FAQSection() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    
+    // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger);
-
-    if (sectionRef.current && titleRef.current) {
-      // タイトルのアニメーション
-      gsap.set(titleRef.current, { opacity: 0, y: 30 });
-      ScrollTrigger.create({
+    
+    // Create animation timeline
+    const timeline = gsap.timeline({
+      scrollTrigger: {
         trigger: sectionRef.current,
         start: "top 80%",
-        onEnter: () => {
-          gsap.to(titleRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          });
-        },
-      });
-
-      // FAQ項目のアニメーション
-      if (faqItemsRef.current) {
-        const questions = faqItemsRef.current.querySelectorAll(".faq-question");
-        const answers = faqItemsRef.current.querySelectorAll(".faq-answer");
-
-        gsap.set([...questions, ...answers], { opacity: 0, y: 20 });
-
-        ScrollTrigger.batch(questions, {
-          onEnter: (elements) => {
-            gsap.to(elements, {
-              opacity: 1,
-              y: 0,
-              stagger: 0.15,
-              duration: 0.6,
-              ease: "power2.out",
-            });
-          },
-          start: "top 85%",
-        });
-
-        ScrollTrigger.batch(answers, {
-          onEnter: (elements) => {
-            gsap.to(elements, {
-              opacity: 1,
-              y: 0,
-              stagger: 0.15,
-              duration: 0.6,
-              delay: 0.1,
-              ease: "power2.out",
-            });
-          },
-          start: "top 85%",
-        });
       }
+    });
+    
+    // Animate title
+    if (titleRef.current) {
+      gsap.set(titleRef.current, { opacity: 0, y: 30 });
+      timeline.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      });
     }
-
+    
+    // Animate FAQ items
+    if (faqItemsRef.current) {
+      const questions = faqItemsRef.current.querySelectorAll(".faq-question");
+      const answers = faqItemsRef.current.querySelectorAll(".faq-answer");
+      
+      // Set initial state
+      gsap.set(questions, { opacity: 0, y: 20 });
+      gsap.set(answers, { opacity: 0, y: 20 });
+      
+      // Add animations to timeline
+      timeline.to(questions, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.6,
+        ease: "power2.out",
+      }, "-=0.2");
+      
+      timeline.to(answers, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.6,
+        ease: "power2.out",
+      }, "-=0.3");
+    }
+    
+    // Cleanup
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      if (timeline.scrollTrigger) {
+        timeline.scrollTrigger.kill();
+      }
+      timeline.kill();
     };
   }, []);
 
   // FAQ データ
   const faqItems = [
     {
-      question: "取引開始から完了までどのくらいの期間がかかりますか？",
+      question: "ケアプランの作成プロセスについて教えてください",
       answer:
-        "受け渡しの調整や検査状況によって前後しますが、おおよそ1ヶ月程度で完了します。",
-      buyerAvatar: "/male-avatar.png",
-      sellerAvatar: "/female-avatar.png",
+        "AIが利用者様の状態やニーズに基づき、最適なケアプランを提案します。そのプランを専門スタッフが確認し、必要に応じて調整を行います。最終的には利用者様とご家族にもご確認いただきます。",
+      buyerAvatar: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='5'/%3E%3Cpath d='M20 21a8 8 0 0 0-16 0'/%3E%3C/svg%3E",
+      sellerAvatar: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 11l-5-5.5-5 5.5'/%3E%3Cpath d='M17 18l-5-5.5-5 5.5'/%3E%3C/svg%3E",
     },
     {
-      question: "「検査」は具体的に何をするのでしょうか？",
+      question: "サービスの料金体系はどうなっていますか？",
       answer:
-        "専門の検査員が出品者の入力内容と実際の車両状態に相違がないかをチェックします。例えば、修復歴の有無などです。さらに、エンジンに異音がないかなど、車の状態を総合的に評価します。",
-      buyerAvatar: "/male-avatar.png",
-      sellerAvatar: "/female-avatar.png",
+        "基本料金にサービス内容に応じた追加料金が加算される仕組みです。介護保険が適用されるサービスについては、原則として1割から3割の自己負担となります。詳細な料金表はお問い合わせいただければご案内いたします。",
+      buyerAvatar: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='5'/%3E%3Cpath d='M20 21a8 8 0 0 0-16 0'/%3E%3C/svg%3E",
+      sellerAvatar: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 11l-5-5.5-5 5.5'/%3E%3Cpath d='M17 18l-5-5.5-5 5.5'/%3E%3C/svg%3E",
     },
     {
-      question: "車の検査で問題があった場合、どうしたらいいですか？",
+      question: "スタッフの資格や経験はどの程度ですか？",
       answer:
-        "出品者の入力した商品状態と異なる場合には、専門業者の検査結果をもとに購入者は取引をキャンセルすることもできます。この際、返送時の送料が出品者負担となる場合があります。",
-      buyerAvatar: "/male-avatar.png",
-      sellerAvatar: "/female-avatar.png",
+        "当社のスタッフは全員、介護福祉士や看護師などの専門資格を持ち、平均5年以上の介護経験があります。また、定期的な研修を実施し、最新の介護知識と技術の習得に努めています。",
+      buyerAvatar: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='5'/%3E%3Cpath d='M20 21a8 8 0 0 0-16 0'/%3E%3C/svg%3E",
+      sellerAvatar: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 11l-5-5.5-5 5.5'/%3E%3Cpath d='M17 18l-5-5.5-5 5.5'/%3E%3C/svg%3E",
     },
   ];
 
