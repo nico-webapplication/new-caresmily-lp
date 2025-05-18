@@ -16,50 +16,93 @@ export default function FAQSection() {
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger);
     
+    // カスタムバウンスイージングの定義
+    if (!gsap.utils.checkPrefix("CustomEase")) {
+      // CustomEaseがない場合は代替のイージングを使用
+      const createBounceEase = () => {
+        return gsap.parseEase("elastic.out(1,0.3)");
+      };
+      
+      gsap.registerEase("customBounce", createBounceEase());
+      gsap.registerEase("customSquash", gsap.parseEase("back.out(2)"));
+    } else {
+      // CustomEaseとCustomBounceを持っている場合
+      try {
+        gsap.registerEase("customBounce", gsap.parseEase("elastic.out(1,0.3)"));
+        gsap.registerEase("customSquash", gsap.parseEase("back.out(2)"));
+      } catch (e) {
+        console.log("CustomBounce登録エラー:", e);
+      }
+    }
+    
     // Create animation timeline
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top 80%",
+        markers: false, // デバッグ用マーカー（必要に応じてtrueに）
       }
     });
     
-    // Animate title
+    // Animate title with bounce effect
     if (titleRef.current) {
-      gsap.set(titleRef.current, { opacity: 0, y: 30 });
+      gsap.set(titleRef.current, { opacity: 0, y: -50 });
       timeline.to(titleRef.current, {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        ease: "power2.out",
+        duration: 1,
+        ease: "customBounce",
       });
     }
     
-    // Animate FAQ items
+    // Animate FAQ items with staggered bounce
     if (faqItemsRef.current) {
       const questions = faqItemsRef.current.querySelectorAll(".faq-question");
       const answers = faqItemsRef.current.querySelectorAll(".faq-answer");
       
       // Set initial state
-      gsap.set(questions, { opacity: 0, y: 20 });
-      gsap.set(answers, { opacity: 0, y: 20 });
+      gsap.set(questions, { opacity: 0, x: -50, scale: 0.9 });
+      gsap.set(answers, { opacity: 0, x: 50, scale: 0.9 });
       
-      // Add animations to timeline
+      // Add question animations to timeline with bounce
       timeline.to(questions, {
         opacity: 1,
-        y: 0,
-        stagger: 0.15,
-        duration: 0.6,
-        ease: "power2.out",
-      }, "-=0.2");
+        x: 0,
+        scale: 1,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "customBounce",
+      }, "-=0.4");
       
+      // Add squash effect on questions
+      timeline.to(questions, {
+        scaleX: 1.05, 
+        scaleY: 0.95,
+        stagger: 0.2,
+        duration: 0.8,
+        transformOrigin: "center bottom",
+        ease: "customSquash",
+      }, "-=0.8");
+      
+      // Add answer animations to timeline with slight delay
       timeline.to(answers, {
         opacity: 1,
-        y: 0,
-        stagger: 0.15,
-        duration: 0.6,
-        ease: "power2.out",
-      }, "-=0.3");
+        x: 0,
+        scale: 1,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "customBounce",
+      }, "-=0.6");
+      
+      // Add subtle squash effect on answers
+      timeline.to(answers, {
+        scaleX: 1.05, 
+        scaleY: 0.95,
+        stagger: 0.2,
+        duration: 0.8,
+        transformOrigin: "center bottom",
+        ease: "customSquash",
+      }, "-=0.8");
     }
     
     // Cleanup
