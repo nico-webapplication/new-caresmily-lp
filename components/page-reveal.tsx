@@ -51,13 +51,13 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
           ease: "power1.inOut",
         })
 
-        // 一瞬止まる
+        // Brief pause
         .to(containerRef.current, {
           scale: 0.4,
           duration: 0.3,
         })
 
-        // より滑らかに拡大して画面を覆う
+        // Expand smoothly to cover the screen
         .to(containerRef.current, {
           scale: 1,
           width: "100vw",
@@ -75,29 +75,29 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
         })
     }
 
-    // ミニチュアの3Dアニメーション
+    // Miniature 3D animation
     if (characterRefs.current.length === 4 && miniLogoRef.current) {
-      // 小さな円を描くアニメーション
-      const radius = 40 // 小さな半径
+      // Animation for drawing a small circle
+      const radius = 40 // Small radius
       const centerX = 0
       const centerY = 0
-      const duration = 8 // 一周の時間（秒）
+      const duration = 8 // Time for one complete rotation (seconds)
 
-      // ロゴの脈動アニメーション
+      // Logo pulsing animation
       gsap.fromTo(
         miniLogoRef.current,
         { scale: 0.8, opacity: 0.5 },
         { scale: 1, opacity: 1, duration: 1.5, repeat: -1, yoyo: true, ease: "sine.inOut" },
       )
 
-      // 各キャラクターを回転させる
+      // Rotate each character
       characterRefs.current.forEach((char, index) => {
         if (!char) return
 
-        // 各キャラクターの開始角度（90度ずつずらす）
+        // Starting angle for each character (offset by 90 degrees)
         const startAngle = index * 90
 
-        // 回転アニメーション
+        // Rotation animation
         gsap.to(char, {
           duration: duration,
           repeat: -1,
@@ -112,7 +112,7 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
 
             gsap.set(char, { x: newX, y: newY })
 
-            // 奥行き感（ミニチュアなので控えめに）
+            // Depth effect (subtle for miniature)
             const scale = 0.9 + 0.1 * Math.sin(radian)
             const zIndex = Math.sin(radian) > 0 ? 20 : 10
 
