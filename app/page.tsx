@@ -2,16 +2,22 @@
 
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import HeroSection from "@/components/hero-section"
 import ServiceSection from "@/components/service-section"
 import PointsSection from "@/components/points-section"
+import ServiceContentSection from "@/components/service-content-section"
 import FeaturesSection from "@/components/features-section"
 import TestimonialsSection from "@/components/testimonials-section"
 import AboutSection from "@/components/about-section"
+import FAQSection from "@/components/faq-section" // 追加
 import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
 import PageReveal from "@/components/page-reveal"
 import { DocumentScatter } from "@/components/document-scatter-component"
+
+// ScrollTrigger をグローバルに登録
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -24,23 +30,17 @@ export default function Home() {
   const playAnimation = () => {
     if (containerRef.current) {
       const documents = containerRef.current.querySelectorAll(".document")
-
-      // Store documents for later use
       documentsRef.current = Array.from(documents) as HTMLElement[]
 
-      // Hide content during animation
       if (contentRef.current) {
-        gsap.set(contentRef.current, {
-          opacity: 0,
-          scale: 0.8,
-          display: "none",
-        })
+        // 非表示方法は display:none のままでも OK
+        contentRef.current.style.display = "none"
+        gsap.set(contentRef.current, { opacity: 0, scale: 0.8 })
       }
 
       setAnimationComplete(false)
       setShowPageReveal(false)
 
-      // Reset positions to top of screen with random X positions
       gsap.to(documents, {
         x: () => gsap.utils.random(-window.innerWidth / 2 + 100, window.innerWidth / 2 - 100),
         y: -window.innerHeight,
@@ -51,7 +51,6 @@ export default function Home() {
         stagger: 0.005,
         ease: "power2.in",
         onComplete: () => {
-          // Fall down and pile up in center
           gsap.to(documents, {
             y: 0,
             x: (i) => gsap.utils.random(-30, 30),
@@ -60,9 +59,7 @@ export default function Home() {
             stagger: 0.01,
             ease: "bounce.out",
             onComplete: () => {
-              // Wait a moment then scatter
               gsap.delayedCall(0.2, () => {
-                // Scatter documents widely (including off-screen)
                 gsap.to(documents, {
                   x: () => gsap.utils.random(-window.innerWidth * 1.2, window.innerWidth * 1.2),
                   y: () => gsap.utils.random(-window.innerHeight * 1.2, window.innerHeight * 1.2),
@@ -73,7 +70,6 @@ export default function Home() {
                   stagger: 0.005,
                   ease: "power3.out",
                   onComplete: () => {
-                    // Show page reveal after documents scatter
                     setShowPageReveal(true)
                   },
                 })
@@ -85,11 +81,11 @@ export default function Home() {
     }
   }
 
-  // Effect to handle page reveal animation
+  // PageReveal イベントに合わせて ScrollTrigger をリフレッシュ
   useEffect(() => {
     if (showPageReveal && pageRevealRef.current && documentsRef.current.length > 0) {
-      // When page reveal starts, scatter documents further
-      const scatterDocumentsMore = () => {
+      const handlePageRevealStart = () => {
+        // 追加散らしなど
         gsap.to(documentsRef.current, {
           x: (i) => {
             const currentX = gsap.getProperty(documentsRef.current[i], "x") as number
@@ -112,12 +108,6 @@ export default function Home() {
         })
       }
 
-      // Listen for the pageRevealStart event
-      const handlePageRevealStart = () => {
-        scatterDocumentsMore()
-      }
-
-      // Listen for the pageRevealComplete event
       const handlePageRevealComplete = () => {
         if (contentRef.current) {
           contentRef.current.style.display = "block"
@@ -129,21 +119,22 @@ export default function Home() {
           })
         }
 
-        // Keep documents visible but fade them slightly
-        gsap.to(containerRef.current, {
-          opacity: 0.3,
-          duration: 1,
-        })
+        // ScrollTrigger のレイアウト情報を再取得
+        ScrollTrigger.refresh()
+
+        if (containerRef.current) {
+          gsap.to(containerRef.current, {
+            opacity: 0.3,
+            duration: 1,
+          })
+        }
 
         setAnimationComplete(true)
       }
 
-      // Add event listeners
       window.addEventListener("pageRevealStart", handlePageRevealStart)
       window.addEventListener("pageRevealComplete", handlePageRevealComplete)
-
       return () => {
-        // Remove event listeners
         window.removeEventListener("pageRevealStart", handlePageRevealStart)
         window.removeEventListener("pageRevealComplete", handlePageRevealComplete)
       }
@@ -151,10 +142,7 @@ export default function Home() {
   }, [showPageReveal])
 
   useEffect(() => {
-    // Play animation on initial load
     playAnimation()
-
-    // Handle window resize
     const handleResize = () => {
       if (containerRef.current) {
         const documents = containerRef.current.querySelectorAll(".document")
@@ -162,14 +150,13 @@ export default function Home() {
         playAnimation()
       }
     }
-
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
   return (
-    <main className="w-screen min-h-screen overflow-x-hidden bg-white">
-      {/* Animation container - always visible */}
+    <main className="min-h-screen bg-white">
+      <div className="bg-[#1A2B4A] w-full h-8"></div>
       <div
         ref={containerRef}
         className={`w-full h-screen flex items-center justify-center fixed top-0 left-0 z-10 pointer-events-none transition-opacity duration-1000 ${
@@ -180,14 +167,15 @@ export default function Home() {
         {showPageReveal && <PageReveal ref={pageRevealRef} />}
       </div>
 
-      {/* Landing page content */}
       <div ref={contentRef} className="relative z-20">
         <HeroSection onReplayAnimation={playAnimation} />
         <ServiceSection />
         <PointsSection />
-        {/* <FeaturesSection /> */}
+        <ServiceContentSection />
+        <FeaturesSection />
         <TestimonialsSection />
         <AboutSection />
+        <FAQSection /> {/* 追加 */}
         <ContactSection />
         <Footer />
       </div>
