@@ -122,153 +122,153 @@ export default function FeaturesSection() {
   useEffect(() => {
     if (typeof window === "undefined") return
 
-    // GSAPプラグインの登録
+    // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger)
 
-    // 既存のScrollTriggerをクリーンアップ
-    ScrollTrigger.getAll().forEach((trigger) => {
-      if (trigger.vars.id === "featuresScroll" || trigger.vars.id === "featuresPinning") {
-        trigger.kill()
-      }
-    })
+    // Create a GSAP context specific to this component
+    const ctx = gsap.context(() => {
+      // Clean up existing ScrollTrigger instances with these IDs
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.id === "featuresScroll" || trigger.vars.id === "featuresPinning") {
+          trigger.kill()
+        }
+      })
 
-    if (sectionRef.current && cardsContainerRef.current) {
-      // カードの初期設定
-      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[]
+      if (sectionRef.current && cardsContainerRef.current) {
+        // Get valid card elements
+        const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[]
 
-      // カードの外観を更新する関数
-      const updateCardsAppearance = (currentIndex: number, progress: number) => {
-        cards.forEach((card, i) => {
-          // 現在のカードからの距離
-          const position = i - currentIndex
+        // Function to update card appearance
+        const updateCardsAppearance = (currentIndex: number, progress: number) => {
+          cards.forEach((card, i) => {
+            // Distance from current card
+            const position = i - currentIndex
 
-          // 各カードのアニメーション
-          gsap.to(card, {
-            xPercent: position * 60,
-            z: position === 0 ? 0 : -100,
-            rotationY: position * 15,
-            opacity: position === 0 ? 1 : 0.7,
-            zIndex: features.length - Math.abs(position),
-            duration: 0.5,
-            ease: "power2.out",
+            // Animate each card
+            gsap.to(card, {
+              xPercent: position * 60,
+              z: position === 0 ? 0 : -100,
+              rotationY: position * 15,
+              opacity: position === 0 ? 1 : 0.7,
+              zIndex: features.length - Math.abs(position),
+              duration: 0.5,
+              ease: "power2.out",
+              id: `featureCard${i}`, // Add unique identifier
+            })
           })
-        })
-      }
+        }
 
-      // スクロールトリガーの設定（カードの切り替え用）
-      const trigger = ScrollTrigger.create({
-        id: "featuresScroll",
-        trigger: sectionRef.current,
-        start: "top center", // 画面中央に来たら開始
-        end: () => `+=${window.innerHeight * 1.5}`, // スクロール距離を画面高さの1.5倍に設定
-        pin: true, // セクションをピン留め
-        pinSpacing: true, // ピン留め中のスペースを確保
-        scrub: 1, // スクロールに対する追従の滑らかさ
-        onUpdate: (self) => {
-          // スクロール位置に基づいてアクティブカードを更新
+        // Create ScrollTrigger for card switching
+        const trigger = ScrollTrigger.create({
+          id: "featuresScroll",
+          trigger: sectionRef.current,
+          start: "top center", // Start when top of section reaches center of viewport
+          end: () => `+=${window.innerHeight * 1.5}`, // Scroll distance = 1.5x viewport height
+          pin: true, // Pin the section
+          pinSpacing: true, // Maintain space for pinned element
+          scrub: 1, // Smooth scrolling effect
+          onUpdate: (self) => {
+            // Update active card based on scroll position
+            const newIndex = Math.min(features.length - 1, Math.max(0, Math.round(self.progress * (features.length - 1))))
+
+            if (newIndex !== activeIndex) {
+              setActiveIndex(newIndex)
+            }
+
+            // Update card positions and rotations
+            updateCardsAppearance(newIndex, self.progress)
+          },
+          onEnter: () => {
+            // When section enters viewport
+            gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
+          },
+          onLeave: () => {
+            // When section leaves viewport
+            gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
+          },
+          onEnterBack: () => {
+            // When section re-enters viewport from below
+            gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
+          },
+          onLeaveBack: () => {
+            // When section leaves viewport from above
+            gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
+          },
+        })
+
+        setScrollTriggerInstance(trigger)
+
+        // Set initial state
+        updateCardsAppearance(0, 0)
+
+        // Add scroll indicator
+        const scrollIndicator = document.createElement("div")
+        scrollIndicator.className = "scroll-indicator"
+        scrollIndicator.style.cssText = `
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 200px;
+          height: 4px;
+          background-color: rgba(0,0,0,0.1);
+          border-radius: 2px;
+          overflow: hidden;
+          z-index: 100;
+        `
+
+        const scrollProgress = document.createElement("div")
+        scrollProgress.style.cssText = `
+          height: 100%;
+          width: 0%;
+          background-color: #0ea5e9;
+          transition: width 0.3s;
+        `
+
+        scrollIndicator.appendChild(scrollProgress)
+        sectionRef.current.appendChild(scrollIndicator)
+
+        // Update scroll progress
+        trigger.vars.onUpdate = (self: any) => {
           const newIndex = Math.min(features.length - 1, Math.max(0, Math.round(self.progress * (features.length - 1))))
 
           if (newIndex !== activeIndex) {
             setActiveIndex(newIndex)
           }
 
-          // カードの位置と回転を更新
+          // Update card positions and rotations
           updateCardsAppearance(newIndex, self.progress)
-        },
-        onEnter: () => {
-          // セクションが表示されたときの処理
-          gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-        },
-        onLeave: () => {
-          // セクションが画面から出たときの処理
-          gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-        },
-        onEnterBack: () => {
-          // セクションが再び表示されたときの処理
-          gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-        },
-        onLeaveBack: () => {
-          // セクションが上方向に画面から出たときの処理
-          gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-        },
-      })
 
-      setScrollTriggerInstance(trigger)
-
-      // 初期状態の設定
-      updateCardsAppearance(0, 0)
-
-      // スクロールインジケーターの追加
-      const scrollIndicator = document.createElement("div")
-      scrollIndicator.className = "scroll-indicator"
-      scrollIndicator.style.cssText = `
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 200px;
-        height: 4px;
-        background-color: rgba(0,0,0,0.1);
-        border-radius: 2px;
-        overflow: hidden;
-        z-index: 100;
-      `
-
-      const scrollProgress = document.createElement("div")
-      scrollProgress.style.cssText = `
-        height: 100%;
-        width: 0%;
-        background-color: #0ea5e9;
-        transition: width 0.3s;
-      `
-
-      scrollIndicator.appendChild(scrollProgress)
-      sectionRef.current.appendChild(scrollIndicator)
-
-      // スクロール進捗を更新
-      trigger.vars.onUpdate = (self: any) => {
-        const newIndex = Math.min(features.length - 1, Math.max(0, Math.round(self.progress * (features.length - 1))))
-
-        if (newIndex !== activeIndex) {
-          setActiveIndex(newIndex)
+          // Update scroll indicator
+          scrollProgress.style.width = `${self.progress * 100}%`
         }
 
-        // カードの位置と回転を更新
-        updateCardsAppearance(newIndex, self.progress)
-
-        // スクロールインジケーターを更新
-        scrollProgress.style.width = `${self.progress * 100}%`
-      }
-
-      return () => {
-        // クリーンアップ
-        if (scrollIndicator.parentNode) {
-          scrollIndicator.parentNode.removeChild(scrollIndicator)
+        // Handle keyboard navigation
+        const handleKeyDown = (e: KeyboardEvent) => {
+          if (e.key === "ArrowLeft") {
+            handlePrev()
+          } else if (e.key === "ArrowRight") {
+            handleNext()
+          }
         }
-        trigger.kill()
+
+        window.addEventListener("keydown", handleKeyDown)
+
+        // Return cleanup function
+        return () => {
+          window.removeEventListener("keydown", handleKeyDown)
+          if (scrollIndicator.parentNode) {
+            scrollIndicator.parentNode.removeChild(scrollIndicator)
+          }
+        }
       }
-    }
+    }, sectionRef); // Scope GSAP context to section element
 
-    // キーボードナビゲーション
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
-        handlePrev()
-      } else if (e.key === "ArrowRight") {
-        handleNext()
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-
+    // Return cleanup function for the entire effect
     return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.id === "featuresScroll" || trigger.vars.id === "featuresPinning") {
-          trigger.kill()
-        }
-      })
+      ctx.revert(); // This automatically cleans up all animations created in this context
     }
-  }, [activeIndex, features.length])
+  }, [activeIndex, features.length, handleNext, handlePrev])
 
   return (
     <section

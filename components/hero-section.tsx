@@ -16,95 +16,108 @@ export default function HeroSection({ onReplayAnimation }: HeroSectionProps) {
   const logoRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // 3Dアニメーションの設定
+    // Only run on client-side
+    if (typeof window === "undefined") return
+    
+    // Create a GSAP context specific to this component
     if (orbitRef.current && characterRefs.current.length === 4 && logoRef.current) {
-      // 回転アニメーションの設定
-      const radius = 180 // 回転の半径
-      const centerX = 0
-      const centerY = 0
-      const duration = 15 // 一周の時間（秒）
-
-      // 各キャラクターの初期位置を設定（90度ずつずらす）
-      gsap.set(characterRefs.current[0], {
-        x: centerX + radius,
-        y: centerY,
-        scale: 1,
-        zIndex: 20,
-      })
-      gsap.set(characterRefs.current[1], {
-        x: centerX,
-        y: centerY + radius,
-        scale: 0.8,
-        zIndex: 10,
-      })
-      gsap.set(characterRefs.current[2], {
-        x: centerX - radius,
-        y: centerY,
-        scale: 0.8,
-        zIndex: 10,
-      })
-      gsap.set(characterRefs.current[3], {
-        x: centerX,
-        y: centerY - radius,
-        scale: 0.8,
-        zIndex: 10,
-      })
-
-      // ロゴの初期アニメーション
-      gsap.fromTo(
-        logoRef.current,
-        { scale: 0.8, opacity: 0.5 },
-        { scale: 1, opacity: 1, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" },
-      )
-
-      // 各キャラクターを回転させるアニメーション
-      characterRefs.current.forEach((char, index) => {
-        if (!char) return
-
-        // 各キャラクターの開始角度（90度ずつずらす）
-        const startAngle = index * 90
-
-        // 回転アニメーション
-        gsap.to(char, {
-          duration: duration,
-          repeat: -1,
-          ease: "none",
-          onUpdate: function () {
-            // 現在の進行度（0〜1）
-            const progress = this.progress()
-            // 現在の角度（スタート角度 + 進行度に応じた角度）
-            const angle = startAngle + progress * 360
-            // ラジアンに変換
-            const radian = (angle * Math.PI) / 180
-
-            // 新しい位置を計算
-            const newX = centerX + Math.cos(radian) * radius
-            const newY = centerY + Math.sin(radian) * radius
-
-            // 位置を更新
-            gsap.set(char, { x: newX, y: newY })
-
-            // 奥行き感を出すためのスケールと透明度の調整
-            // 手前（下半分の円）にあるときは大きく、奥（上半分の円）にあるときは小さく
-            const scale = 0.8 + 0.2 * Math.sin(radian) // 0.8〜1.0の間で変化
-            const zIndex = Math.sin(radian) > 0 ? 20 : 10 // 下半分は手前、上半分は奥に
-
-            gsap.set(char, {
-              scale: scale,
-              zIndex: zIndex,
-              opacity: 0.8 + 0.2 * Math.sin(radian), // 0.8〜1.0の間で変化
-            })
-          },
+      // Create a GSAP context for this component
+      const ctx = gsap.context(() => {
+        // Animation setup for 3D orbit
+        const radius = 180 // orbit radius
+        const centerX = 0
+        const centerY = 0
+        const duration = 15 // time for one full rotation
+        
+        // Set initial positions for each character (offset by 90 degrees)
+        gsap.set(characterRefs.current[0], {
+          x: centerX + radius,
+          y: centerY,
+          scale: 1,
+          zIndex: 20,
         })
-      })
-    }
-
-    return () => {
-      // クリーンアップ
-      characterRefs.current.forEach((char) => {
-        if (char) gsap.killTweensOf(char)
-      })
-      if (logoRef.current) gsap.killTweensOf(logoRef.current)
+        gsap.set(characterRefs.current[1], {
+          x: centerX,
+          y: centerY + radius,
+          scale: 0.8,
+          zIndex: 10,
+        })
+        gsap.set(characterRefs.current[2], {
+          x: centerX - radius,
+          y: centerY,
+          scale: 0.8,
+          zIndex: 10,
+        })
+        gsap.set(characterRefs.current[3], {
+          x: centerX,
+          y: centerY - radius,
+          scale: 0.8,
+          zIndex: 10,
+        })
+        
+        // Logo animation
+        gsap.fromTo(
+          logoRef.current,
+          { scale: 0.8, opacity: 0.5 },
+          { 
+            scale: 1, 
+            opacity: 1, 
+            duration: 2, 
+            repeat: -1, 
+            yoyo: true, 
+            ease: "sine.inOut",
+            id: "heroLogoAnimation" // Add identifier for this animation
+          },
+        )
+        
+        // Rotate each character around the orbit
+        characterRefs.current.forEach((char, index) => {
+          if (!char) return
+          
+          // Starting angle for each character (offset by 90 degrees)
+          const startAngle = index * 90
+          
+          // Create rotation animation
+          gsap.to(char, {
+            duration: duration,
+            repeat: -1,
+            ease: "none",
+            id: `heroCharAnimation${index}`, // Add identifier for this animation
+            onUpdate: function () {
+              // Current progress (0-1)
+              const progress = this.progress()
+              // Current angle (start angle + progress angle)
+              const angle = startAngle + progress * 360
+              // Convert to radians
+              const radian = (angle * Math.PI) / 180
+              
+              // Calculate new position
+              const newX = centerX + Math.cos(radian) * radius
+              const newY = centerY + Math.sin(radian) * radius
+              
+              // Update position
+              gsap.set(char, { x: newX, y: newY })
+              
+              // Adjust scale and opacity for depth effect
+              // Closer (bottom half of circle) = larger, further (top half) = smaller
+              const scale = 0.8 + 0.2 * Math.sin(radian) // Range: 0.8-1.0
+              const zIndex = Math.sin(radian) > 0 ? 20 : 10 // Bottom half = front, top half = back
+              
+              gsap.set(char, {
+                scale: scale,
+                zIndex: zIndex,
+                opacity: 0.8 + 0.2 * Math.sin(radian), // Range: 0.8-1.0
+              })
+            },
+          })
+        })
+      }, orbitRef); // Scope to orbit element
+      
+      // Clean up when component unmounts
+      return () => {
+        // Revert all animations created in this context
+        ctx.revert();
+      }
     }
   }, [])
 

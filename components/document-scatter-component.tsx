@@ -1,25 +1,41 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 
-// Generate many more documents for a fuller effect
-const documents = Array.from({ length: 150 }, (_, i) => ({
-  id: i + 1,
-  type: ["paper", "folder", "note", "envelope", "certificate", "receipt", "contract"][
-    Math.floor(Math.random() * 7)
-  ] as string,
-  rotation: gsap.utils.random(-15, 15),
-  scale: gsap.utils.random(0.6, 1.3),
-  zIndex: Math.floor(gsap.utils.random(1, 10)),
-  opacity: gsap.utils.random(0.8, 1),
-}))
+// Array of document types
+const documentTypes = ["paper", "folder", "note", "envelope", "certificate", "receipt", "contract"]
 
 export function DocumentScatter() {
   const containerRef = useRef<HTMLDivElement>(null)
-
+  const [docs, setDocs] = useState<Array<{
+    id: number,
+    type: string,
+    rotation: number,
+    scale: number,
+    zIndex: number,
+    opacity: number,
+    xOffset: number, // window.innerWidthの代わりに使用する値
+  }>>([])
+  
+  // コンポーネントがマウントされた時に1回だけドキュメントを生成
   useEffect(() => {
-    // Animation is controlled from the parent component
+    if (typeof window !== "undefined") {
+      // クライアントサイドでのみドキュメントを生成
+      const docsArray = Array.from({ length: 150 }, (_, i) => ({
+        id: i + 1,
+        type: documentTypes[Math.floor(Math.random() * documentTypes.length)],
+        rotation: gsap.utils.random(-15, 15),
+        scale: gsap.utils.random(0.6, 1.3),
+        zIndex: Math.floor(gsap.utils.random(1, 10)),
+        opacity: gsap.utils.random(0.8, 1),
+        xOffset: gsap.utils.random(-500, 500), // window.innerWidthの代わりに固定範囲を使用
+      }))
+      
+      setDocs(docsArray)
+    }
+    
+    // クリーンアップ関数
     return () => {
       if (containerRef.current) {
         const documents = containerRef.current.querySelectorAll(".document")
@@ -27,10 +43,23 @@ export function DocumentScatter() {
       }
     }
   }, [])
+  
+  // このコンポーネント専用のコンテキストでGSAPを使用
+  useEffect(() => {
+    if (containerRef.current && docs.length > 0) {
+      // GSAPコンテキストを作成して、このコンポーネント専用のスコープを定義
+      const ctx = gsap.context(() => {
+        // このコンテキスト内で作成されたアニメーションはこのコンポーネントのスコープに限定される
+      }, containerRef);
+      
+      // クリーンアップ時にコンテキストを破棄
+      return () => ctx.revert();
+    }
+  }, [docs.length]);
 
   return (
     <div ref={containerRef} className="relative w-full h-full flex items-center justify-center overflow-visible">
-      {documents.map((doc) => (
+      {docs.map((doc) => (
         <div
           key={doc.id}
           className="document absolute"
@@ -38,8 +67,8 @@ export function DocumentScatter() {
             transformOrigin: "center center",
             zIndex: doc.zIndex,
             opacity: doc.opacity,
-            // Initially position documents off-screen at the top
-            transform: `translateY(-100vh) translateX(${gsap.utils.random(-window.innerWidth / 2, window.innerWidth / 2)}px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
+            // 初期位置：画面外の上部に配置（window参照なし）
+            transform: `translateY(-100vh) translateX(${doc.xOffset}px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
             willChange: "transform, opacity", // パフォーマンス最適化
           }}
         >
