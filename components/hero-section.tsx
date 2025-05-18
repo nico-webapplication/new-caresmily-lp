@@ -11,7 +11,7 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ onReplayAnimation }: HeroSectionProps) {
-  const characterRefs = useRef<(HTMLDivElement | null)[]>([])
+  const characterRefs = useRef<Array<HTMLDivElement | null>>([])
   const orbitRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLDivElement>(null)
 
@@ -190,13 +190,13 @@ export default function HeroSection({ onReplayAnimation }: HeroSectionProps) {
 
             {/* 左側の介護士 */}
             <div
-              ref={(el) => (characterRefs.current[0] = el)}
+              ref={(el) => { characterRefs.current[0] = el }}
               className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[250px]"
               style={{ transformOrigin: "center center" }}
             >
               <Image
                 src="/images/nurse-tablet.png"
-                alt="介護士"
+                alt="Care staff with tablet"
                 width={150}
                 height={250}
                 className="object-contain"
@@ -206,13 +206,13 @@ export default function HeroSection({ onReplayAnimation }: HeroSectionProps) {
 
             {/* 上側の高齢男性（車椅子） */}
             <div
-              ref={(el) => (characterRefs.current[1] = el)}
+              ref={(el) => { characterRefs.current[1] = el }}
               className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[250px]"
               style={{ transformOrigin: "center center" }}
             >
               <Image
                 src="/images/elderly-man-wheelchair.png"
-                alt="高齢者"
+                alt="Elderly man in wheelchair"
                 width={150}
                 height={250}
                 className="object-contain"
@@ -222,13 +222,13 @@ export default function HeroSection({ onReplayAnimation }: HeroSectionProps) {
 
             {/* 右側の介護士 */}
             <div
-              ref={(el) => (characterRefs.current[2] = el)}
+              ref={(el) => { characterRefs.current[2] = el }}
               className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[250px]"
               style={{ transformOrigin: "center center" }}
             >
               <Image
                 src="/images/caregiver-pink.png"
-                alt="介護士"
+                alt="Care staff in pink"
                 width={150}
                 height={250}
                 className="object-contain"
@@ -238,7 +238,7 @@ export default function HeroSection({ onReplayAnimation }: HeroSectionProps) {
 
             {/* 下側の高齢女性 */}
             <div
-              ref={(el) => (characterRefs.current[3] = el)}
+              ref={(el) => { characterRefs.current[3] = el }}
               className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[250px]"
               style={{ transformOrigin: "center center" }}
             >
