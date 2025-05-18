@@ -74,97 +74,187 @@ export default function FeaturesSection() {
   const cardTextRefs = useRef<(HTMLDivElement | null)[]>([])
   const sectionRef = useRef<HTMLDivElement>(null)
 
-  // カスタムイージングの設定
+  // クライアントサイドでのみ実行する処理を管理
+  const [isBrowser, setIsBrowser] = useState(false)
+  const [isInitialized, setIsInitialized] = useState(false)
+
+  // ブラウザ環境かどうかを検出
   useEffect(() => {
-    if (typeof window === "undefined") return
-    
-    if (gsap.registerEase) {
-      // カスタムイージングを登録
-      gsap.registerEase("cubic", (progress) => {
-        // 0.83, 0, 0.17, 1 のカスタムキュービックベジェの近似
-        return gsap.parseEase("power3.out")(progress)
-      })
-    }
+    setIsBrowser(true)
   }, [])
 
-  // テキスト分割とアニメーション準備
+  // カスタムイージングの設定（クライアントサイドのみ）
   useEffect(() => {
-    const splitTextInCards = () => {
-      if (!cardTextRefs.current) return
-      
-      cardTextRefs.current.forEach((textEl, idx) => {
-        if (!textEl) return
-        
-        const titleEl = textEl.querySelector('h3')
-        const descEl = textEl.querySelector('p')
-        
-        if (titleEl) {
-          const titleText = titleEl.textContent || ''
-          titleEl.innerHTML = titleText
-            .split('')
-            .map(char => char === ' ' 
-              ? '<span class="title-char">&nbsp;</span>' 
-              : `<span class="title-char">${char}</span>`)
-            .join('')
-        }
-        
-        if (descEl) {
-          const descText = descEl.textContent || ''
-          descEl.innerHTML = descText
-            .split(' ')
-            .map(word => `<span class="desc-word">${word}&nbsp;</span>`)
-            .join('')
-        }
-      })
+    if (!isBrowser) return
+
+    try {
+      // GSAPが利用可能なことを確認
+      if (typeof gsap !== 'undefined' && gsap.registerEase) {
+        // カスタムイージングを登録
+        gsap.registerEase("cubic", (progress) => {
+          // 0.83, 0, 0.17, 1 のカスタムキュービックベジェの近似
+          return gsap.parseEase("power3.out")(progress)
+        })
+        console.log("GSAP cubic ease registered")
+      }
+    } catch (error) {
+      console.error("GSAP initialization error:", error)
     }
-    
-    // 初期カードのアニメーション
-    const setupInitialCards = () => {
-      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[]
+  }, [isBrowser])
+
+  // テキスト分割とアニメーション準備（DOM操作後に実行）
+  useEffect(() => {
+    if (!isBrowser) return
+
+    // セットアップ済みなら早期リターン
+    if (isInitialized) return
+
+    try {
+      const splitTextInCards = () => {
+        if (!cardTextRefs.current) return false
+        
+        let success = true
+        
+        cardTextRefs.current.forEach((textEl, idx) => {
+          if (!textEl) {
+            success = false
+            return
+          }
+          
+          const titleEl = textEl.querySelector('h3')
+          const descEl = textEl.querySelector('p')
+          
+          if (titleEl) {
+            const titleText = titleEl.textContent || ''
+            if (!titleEl.innerHTML.includes('title-char')) {
+              titleEl.innerHTML = titleText
+                .split('')
+                .map(char => char === ' ' 
+                  ? '<span class="title-char">&nbsp;</span>' 
+                  : `<span class="title-char">${char}</span>`)
+                .join('')
+            }
+          } else {
+            success = false
+          }
+          
+          if (descEl) {
+            const descText = descEl.textContent || ''
+            if (!descEl.innerHTML.includes('desc-word')) {
+              descEl.innerHTML = descText
+                .split(' ')
+                .map(word => `<span class="desc-word">${word}&nbsp;</span>`)
+                .join('')
+            }
+          } else {
+            success = false
+          }
+        })
+        
+        return success
+      }
       
-      // 初期位置を設定
-      cards.forEach((card, idx) => {
-        if (idx === activeIndex) {
-          // アクティブカードの文字アニメーション
-          const titleChars = card.querySelectorAll('.title-char')
-          const descWords = card.querySelectorAll('.desc-word')
+      // DOM要素の準備ができているか確認して実行
+      const setupProcess = () => {
+        // テキスト分割を試みる
+        const textSplitSuccess = splitTextInCards()
+        
+        if (textSplitSuccess) {
+          // 初期カードのアニメーション
+          const setupInitialCards = () => {
+            const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[]
+            
+            if (cards.length === 0) return false
+            
+            // 初期位置を設定
+            cards.forEach((card, idx) => {
+              if (idx === activeIndex) {
+                // アクティブカードの文字アニメーション
+                const titleChars = card.querySelectorAll('.title-char')
+                const descWords = card.querySelectorAll('.desc-word')
+                
+                if (titleChars.length > 0 && descWords.length > 0) {
+                  gsap.fromTo(titleChars, 
+                    { y: 40, opacity: 0 },
+                    { 
+                      y: 0, 
+                      opacity: 1, 
+                      duration: 0.7, 
+                      stagger: 0.03, 
+                      ease: "power3.out" // fallback ease if custom ease fails
+                    }
+                  )
+                  
+                  gsap.fromTo(descWords,
+                    { y: 20, opacity: 0 },
+                    { 
+                      y: 0, 
+                      opacity: 1, 
+                      duration: 0.5, 
+                      stagger: 0.02,
+                      delay: 0.3,
+                      ease: "power3.out" 
+                    }
+                  )
+                }
+              } else {
+                // 非アクティブカードの文字は隠す
+                const titleChars = card.querySelectorAll('.title-char')
+                const descWords = card.querySelectorAll('.desc-word')
+                
+                if (titleChars.length > 0) {
+                  gsap.set(titleChars, { y: 40, opacity: 0 })
+                }
+                
+                if (descWords.length > 0) {
+                  gsap.set(descWords, { y: 20, opacity: 0 })
+                }
+              }
+            })
+            
+            return true
+          }
           
-          gsap.fromTo(titleChars, 
-            { y: 40, opacity: 0 },
-            { 
-              y: 0, 
-              opacity: 1, 
-              duration: 0.7, 
-              stagger: 0.03, 
-              ease: "cubic" 
-            }
-          )
+          const cardsSetupSuccess = setupInitialCards()
           
-          gsap.fromTo(descWords,
-            { y: 20, opacity: 0 },
-            { 
-              y: 0, 
-              opacity: 1, 
-              duration: 0.5, 
-              stagger: 0.02,
-              delay: 0.3,
-              ease: "cubic" 
-            }
-          )
-        } else {
-          // 非アクティブカードの文字は隠す
-          const titleChars = card.querySelectorAll('.title-char')
-          const descWords = card.querySelectorAll('.desc-word')
-          
-          gsap.set(titleChars, { y: 40, opacity: 0 })
-          gsap.set(descWords, { y: 20, opacity: 0 })
+          if (cardsSetupSuccess) {
+            // 全て成功したらフラグを立てる
+            setIsInitialized(true)
+            console.log("Feature cards animation initialized")
+            return true
+          }
         }
-      })
+        
+        return false
+      }
+      
+      // DOMの準備ができていない可能性があるので、少し遅延して試す
+      const attemptSetup = () => {
+        const success = setupProcess()
+        
+        if (!success) {
+          // 再試行（最大3回）
+          let attempts = 0
+          const maxAttempts = 3
+          
+          const retryInterval = setInterval(() => {
+            attempts++
+            const retrySuccess = setupProcess()
+            
+            if (retrySuccess || attempts >= maxAttempts) {
+              clearInterval(retryInterval)
+            }
+          }, 500) // 500ms間隔で再試行
+        }
+      }
+      
+      // 処理開始
+      setTimeout(attemptSetup, 100)
+      
+    } catch (error) {
+      console.error("Feature card animation setup error:", error)
     }
-    
-    splitTextInCards()
-    setupInitialCards()
-  }, [])
+  }, [isBrowser, activeIndex, isInitialized])
 
   // カードを前へ
   const handlePrev = () => {
@@ -186,67 +276,91 @@ export default function FeaturesSection() {
 
   // カード遷移のアニメーション
   const animateCardTransition = (nextIndex: number) => {
-    setIsAnimating(true)
-    
-    const currentCard = cardsRef.current[activeIndex]
-    const nextCard = cardsRef.current[nextIndex]
-    
-    if (!currentCard || !nextCard) {
+    if (!isBrowser) {
+      // ブラウザ環境でなければアニメーションなしで切り替え
       setActiveIndex(nextIndex)
-      setIsAnimating(false)
       return
     }
     
-    // 現在のカードのアニメーション（退場）
-    const currentTitleChars = currentCard.querySelectorAll('.title-char')
-    const currentDescWords = currentCard.querySelectorAll('.desc-word')
+    setIsAnimating(true)
     
-    gsap.to(currentTitleChars, {
-      y: nextIndex > activeIndex ? -40 : 40,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.02,
-      ease: "cubic"
-    })
-    
-    gsap.to(currentDescWords, {
-      y: nextIndex > activeIndex ? -20 : 20,
-      opacity: 0,
-      duration: 0.4,
-      stagger: 0.01,
-      ease: "cubic"
-    })
-    
-    // 次のカードのアニメーション（登場）
-    const nextTitleChars = nextCard.querySelectorAll('.title-char')
-    const nextDescWords = nextCard.querySelectorAll('.desc-word')
-    
-    gsap.fromTo(nextTitleChars, 
-      { y: nextIndex > activeIndex ? 40 : -40, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.7, 
-        stagger: 0.03, 
-        delay: 0.2,
-        ease: "cubic" 
+    try {
+      const currentCard = cardsRef.current[activeIndex]
+      const nextCard = cardsRef.current[nextIndex]
+      
+      if (!currentCard || !nextCard) {
+        setActiveIndex(nextIndex)
+        setIsAnimating(false)
+        return
       }
-    )
-    
-    gsap.fromTo(nextDescWords,
-      { y: nextIndex > activeIndex ? 20 : -20, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.5, 
-        stagger: 0.02,
-        delay: 0.4,
-        ease: "cubic",
-        onComplete: () => {
+      
+      // 現在のカードのアニメーション（退場）
+      const currentTitleChars = currentCard.querySelectorAll('.title-char')
+      const currentDescWords = currentCard.querySelectorAll('.desc-word')
+      
+      if (currentTitleChars.length > 0) {
+        gsap.to(currentTitleChars, {
+          y: nextIndex > activeIndex ? -40 : 40,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.02,
+          ease: "power3.out" // fallback ease
+        })
+      }
+      
+      if (currentDescWords.length > 0) {
+        gsap.to(currentDescWords, {
+          y: nextIndex > activeIndex ? -20 : 20,
+          opacity: 0,
+          duration: 0.4,
+          stagger: 0.01,
+          ease: "power3.out"
+        })
+      }
+      
+      // 次のカードのアニメーション（登場）
+      const nextTitleChars = nextCard.querySelectorAll('.title-char')
+      const nextDescWords = nextCard.querySelectorAll('.desc-word')
+      
+      if (nextTitleChars.length > 0) {
+        gsap.fromTo(nextTitleChars, 
+          { y: nextIndex > activeIndex ? 40 : -40, opacity: 0 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            duration: 0.7, 
+            stagger: 0.03, 
+            delay: 0.2,
+            ease: "power3.out" 
+          }
+        )
+      }
+      
+      if (nextDescWords.length > 0) {
+        gsap.fromTo(nextDescWords,
+          { y: nextIndex > activeIndex ? 20 : -20, opacity: 0 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            duration: 0.5, 
+            stagger: 0.02,
+            delay: 0.4,
+            ease: "power3.out",
+            onComplete: () => {
+              setIsAnimating(false)
+            }
+          }
+        )
+      } else {
+        // アニメーション完了コールバックが実行されない場合のフォールバック
+        setTimeout(() => {
           setIsAnimating(false)
-        }
+        }, 1000)
       }
-    )
+    } catch (error) {
+      console.error("Animation transition error:", error)
+      setIsAnimating(false)
+    }
     
     // インデックスを更新
     setActiveIndex(nextIndex)
@@ -278,7 +392,11 @@ export default function FeaturesSection() {
                   key={index}
                   className={`w-full h-full flex items-center justify-center px-4`}
                   style={{ flex: `0 0 ${100 / features.length}%` }}
-                  ref={el => cardsRef.current[index] = el}
+                  ref={(el) => {
+                    if (cardsRef.current) {
+                      cardsRef.current[index] = el;
+                    }
+                  }}
                 >
                   <div 
                     className={`w-[300px] h-[400px] ${feature.color} rounded-xl shadow-xl mx-auto transition-all duration-500`}
@@ -291,7 +409,11 @@ export default function FeaturesSection() {
                     {/* カード内容 */}
                     <div 
                       className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center text-white"
-                      ref={el => cardTextRefs.current[index] = el}
+                      ref={(el) => {
+                        if (cardTextRefs.current) {
+                          cardTextRefs.current[index] = el;
+                        }
+                      }}
                     >
                       <div className="mb-6 bg-white bg-opacity-20 p-4 rounded-full">{feature.icon}</div>
                       <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
