@@ -15,7 +15,7 @@ import {
   ChevronRight,
 } from "lucide-react"
 
-// 特徴カードの配列
+// 特徴カードの配列..
 const features = [
   {
     icon: <FileText className="h-12 w-12 text-white" />,
