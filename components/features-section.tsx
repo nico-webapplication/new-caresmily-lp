@@ -16,269 +16,154 @@ import {
   ChevronRight,
 } from "lucide-react"
 
+// 特徴カードの配列
+const features = [
+  {
+    icon: <FileText className="h-12 w-12 text-white" />,
+    title: "書類作成の自動化",
+    description: "AIが介護記録を自動で作成し、書類作成の時間を大幅に削減します。",
+    color: "bg-sky-600",
+  },
+  {
+    icon: <Clock className="h-12 w-12 text-white" />,
+    title: "時間の節約",
+    description: "管理業務の効率化により、より多くの時間を利用者様のケアに使えるようになります。",
+    color: "bg-indigo-600",
+  },
+  {
+    icon: <Smile className="h-12 w-12 text-white" />,
+    title: "利用者満足度の向上",
+    description: "より質の高いケアを提供することで、利用者様とその家族の満足度が向上します。",
+    color: "bg-green-600",
+  },
+  {
+    icon: <BarChart4 className="h-12 w-12 text-white" />,
+    title: "データ分析と改善",
+    description: "蓄積されたデータを分析し、サービスの質を継続的に改善します。",
+    color: "bg-amber-600",
+  },
+  {
+    icon: <Calendar className="h-12 w-12 text-white" />,
+    title: "スケジュール管理",
+    description: "ケアスタッフのシフトやサービス提供時間を最適化し、効率的な運営をサポートします。",
+    color: "bg-rose-600",
+  },
+  {
+    icon: <MessageSquare className="h-12 w-12 text-white" />,
+    title: "コミュニケーション強化",
+    description: "スタッフ間や家族との情報共有をスムーズにし、連携を強化します。",
+    color: "bg-blue-600",
+  },
+  {
+    icon: <ShieldCheck className="h-12 w-12 text-white" />,
+    title: "安全管理システム",
+    description: "利用者様の安全を守るためのリスク管理と事故防止機能を提供します。",
+    color: "bg-purple-600",
+  },
+  {
+    icon: <Lightbulb className="h-12 w-12 text-white" />,
+    title: "ケアプラン提案",
+    description: "AIが個々の利用者様に最適なケアプランを提案し、パーソナライズされたサービスを実現します。",
+    color: "bg-yellow-600",
+  },
+]
+
 export default function FeaturesSection() {
+  const [activeIndex, setActiveIndex] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
   const cardsContainerRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<Array<HTMLDivElement | null>>([])
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [scrollTriggerInstance, setScrollTriggerInstance] = useState<any>(null)
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
-  // 特徴カードの配列
-  const features = [
-    {
-      icon: <FileText className="h-12 w-12 text-white" />,
-      title: "書類作成の自動化",
-      description: "AIが介護記録を自動で作成し、書類作成の時間を大幅に削減します。",
-      color: "bg-sky-600",
-    },
-    {
-      icon: <Clock className="h-12 w-12 text-white" />,
-      title: "時間の節約",
-      description: "管理業務の効率化により、より多くの時間を利用者様のケアに使えるようになります。",
-      color: "bg-indigo-600",
-    },
-    {
-      icon: <Smile className="h-12 w-12 text-white" />,
-      title: "利用者満足度の向上",
-      description: "より質の高いケアを提供することで、利用者様とその家族の満足度が向上します。",
-      color: "bg-green-600",
-    },
-    {
-      icon: <BarChart4 className="h-12 w-12 text-white" />,
-      title: "データ分析と改善",
-      description: "蓄積されたデータを分析し、サービスの質を継続的に改善します。",
-      color: "bg-amber-600",
-    },
-    {
-      icon: <Calendar className="h-12 w-12 text-white" />,
-      title: "スケジュール管理",
-      description: "ケアスタッフのシフトやサービス提供時間を最適化し、効率的な運営をサポートします。",
-      color: "bg-rose-600",
-    },
-    {
-      icon: <MessageSquare className="h-12 w-12 text-white" />,
-      title: "コミュニケーション強化",
-      description: "スタッフ間や家族との情報共有をスムーズにし、連携を強化します。",
-      color: "bg-blue-600",
-    },
-    {
-      icon: <ShieldCheck className="h-12 w-12 text-white" />,
-      title: "安全管理システム",
-      description: "利用者様の安全を守るためのリスク管理と事故防止機能を提供します。",
-      color: "bg-purple-600",
-    },
-    {
-      icon: <Lightbulb className="h-12 w-12 text-white" />,
-      title: "ケアプラン提案",
-      description: "AIが個々の利用者様に最適なケアプランを提案し、パーソナライズされたサービスを実現します。",
-      color: "bg-yellow-600",
-    },
-  ]
-
-  // 前のカードに移動
+  // カードを前へ
   const handlePrev = () => {
     if (activeIndex > 0) {
       setActiveIndex(activeIndex - 1)
-
-      // ScrollTriggerの位置も更新
-      if (scrollTriggerInstance) {
-        const progress = (activeIndex - 1) / (features.length - 1)
-        scrollTriggerInstance.scroll(
-          scrollTriggerInstance.start + (scrollTriggerInstance.end - scrollTriggerInstance.start) * progress,
-        )
-      }
     }
   }
 
-  // 次のカードに移動
+  // カードを次へ
   const handleNext = () => {
     if (activeIndex < features.length - 1) {
       setActiveIndex(activeIndex + 1)
-
-      // ScrollTriggerの位置も更新
-      if (scrollTriggerInstance) {
-        const progress = (activeIndex + 1) / (features.length - 1)
-        scrollTriggerInstance.scroll(
-          scrollTriggerInstance.start + (scrollTriggerInstance.end - scrollTriggerInstance.start) * progress,
-        )
-      }
     }
   }
 
   // 特定のカードに移動
   const goToCard = (index: number) => {
-    if (index === activeIndex) return
-    setActiveIndex(index)
-
-    // ScrollTriggerの位置も更新
-    if (scrollTriggerInstance) {
-      const progress = index / (features.length - 1)
-      scrollTriggerInstance.scroll(
-        scrollTriggerInstance.start + (scrollTriggerInstance.end - scrollTriggerInstance.start) * progress,
-      )
+    if (index !== activeIndex) {
+      setActiveIndex(index)
     }
   }
 
+  // カード位置の更新
   useEffect(() => {
-    if (typeof window === "undefined") return
+    if (!cardsRef.current) return
 
-    // Register GSAP plugins
+    const cards = cardsRef.current.filter(Boolean)
+    cards.forEach((card, idx) => {
+      if (!card) return
+      
+      const position = idx - activeIndex
+      gsap.to(card, {
+        xPercent: position * 60,
+        z: position === 0 ? 0 : -100,
+        rotationY: position * 15,
+        opacity: position === 0 ? 1 : 0.7,
+        zIndex: features.length - Math.abs(position),
+        duration: 0.5,
+        ease: "power2.out",
+      })
+    })
+  }, [activeIndex])
+
+  // スクロールトリガーの設定
+  useEffect(() => {
+    if (typeof window === "undefined" || !sectionRef.current) return
+
     gsap.registerPlugin(ScrollTrigger)
+    
+    // 古いトリガーをクリーンアップ
+    ScrollTrigger.getAll().forEach(trigger => {
+      if (trigger.vars.id === "featuresPin") {
+        trigger.kill()
+      }
+    })
 
-    // Create a GSAP context specific to this component
-    const ctx = gsap.context(() => {
-      // Clean up existing ScrollTrigger instances with these IDs
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.id === "featuresScroll" || trigger.vars.id === "featuresPinning") {
+    // 新しいスクロールトリガーを作成
+    ScrollTrigger.create({
+      id: "featuresPin",
+      trigger: sectionRef.current,
+      start: "top center",
+      end: `+=${window.innerHeight}`,
+      pin: true,
+      pinSpacing: true,
+    })
+
+    // キーボード操作のイベントリスナー
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        handlePrev()
+      } else if (e.key === "ArrowRight") {
+        handleNext()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars.id === "featuresPin") {
           trigger.kill()
         }
       })
-
-      if (sectionRef.current && cardsContainerRef.current) {
-        // Get valid card elements
-        const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[]
-
-        // Function to update card appearance
-        const updateCardsAppearance = (currentIndex: number, progress: number) => {
-          cards.forEach((card, i) => {
-            // Distance from current card
-            const position = i - currentIndex
-
-            // Animate each card
-            gsap.to(card, {
-              xPercent: position * 60,
-              z: position === 0 ? 0 : -100,
-              rotationY: position * 15,
-              opacity: position === 0 ? 1 : 0.7,
-              zIndex: features.length - Math.abs(position),
-              duration: 0.5,
-              ease: "power2.out",
-              id: `featureCard${i}`, // Add unique identifier
-            })
-          })
-        }
-
-        // Create ScrollTrigger for card switching
-        const trigger = ScrollTrigger.create({
-          id: "featuresScroll",
-          trigger: sectionRef.current,
-          start: "top center", // Start when top of section reaches center of viewport
-          end: () => `+=${window.innerHeight * 1.5}`, // Scroll distance = 1.5x viewport height
-          pin: true, // Pin the section
-          pinSpacing: true, // Maintain space for pinned element
-          scrub: 1, // Smooth scrolling effect
-          onUpdate: (self) => {
-            // Update active card based on scroll position
-            const newIndex = Math.min(features.length - 1, Math.max(0, Math.round(self.progress * (features.length - 1))))
-
-            if (newIndex !== activeIndex) {
-              setActiveIndex(newIndex)
-            }
-
-            // Update card positions and rotations
-            updateCardsAppearance(newIndex, self.progress)
-          },
-          onEnter: () => {
-            // When section enters viewport
-            gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-          },
-          onLeave: () => {
-            // When section leaves viewport
-            gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-          },
-          onEnterBack: () => {
-            // When section re-enters viewport from below
-            gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-          },
-          onLeaveBack: () => {
-            // When section leaves viewport from above
-            gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0.5 })
-          },
-        })
-
-        setScrollTriggerInstance(trigger)
-
-        // Set initial state
-        updateCardsAppearance(0, 0)
-
-        // Add scroll indicator
-        const scrollIndicator = document.createElement("div")
-        scrollIndicator.className = "scroll-indicator"
-        scrollIndicator.style.cssText = `
-          position: absolute;
-          bottom: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 200px;
-          height: 4px;
-          background-color: rgba(0,0,0,0.1);
-          border-radius: 2px;
-          overflow: hidden;
-          z-index: 100;
-        `
-
-        const scrollProgress = document.createElement("div")
-        scrollProgress.style.cssText = `
-          height: 100%;
-          width: 0%;
-          background-color: #0ea5e9;
-          transition: width 0.3s;
-        `
-
-        scrollIndicator.appendChild(scrollProgress)
-        sectionRef.current.appendChild(scrollIndicator)
-
-        // Update scroll progress
-        trigger.vars.onUpdate = (self: any) => {
-          const newIndex = Math.min(features.length - 1, Math.max(0, Math.round(self.progress * (features.length - 1))))
-
-          if (newIndex !== activeIndex) {
-            setActiveIndex(newIndex)
-          }
-
-          // Update card positions and rotations
-          updateCardsAppearance(newIndex, self.progress)
-
-          // Update scroll indicator
-          scrollProgress.style.width = `${self.progress * 100}%`
-        }
-
-        // Handle keyboard navigation
-        const handleKeyDown = (e: KeyboardEvent) => {
-          if (e.key === "ArrowLeft") {
-            handlePrev()
-          } else if (e.key === "ArrowRight") {
-            handleNext()
-          }
-        }
-
-        window.addEventListener("keydown", handleKeyDown)
-
-        // Return cleanup function
-        return () => {
-          window.removeEventListener("keydown", handleKeyDown)
-          if (scrollIndicator.parentNode) {
-            scrollIndicator.parentNode.removeChild(scrollIndicator)
-          }
-        }
-      }
-    }, sectionRef); // Scope GSAP context to section element
-
-    // Return cleanup function for the entire effect
-    return () => {
-      ctx.revert(); // This automatically cleans up all animations created in this context
+      window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [activeIndex, features.length, handleNext, handlePrev])
+  }, [])
 
   return (
     <section
       ref={sectionRef}
       className="py-20 bg-white relative overflow-hidden"
-      style={{
-        visibility: "visible",
-        opacity: 1,
-        zIndex: 1,
-      }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
