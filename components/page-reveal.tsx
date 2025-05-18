@@ -38,13 +38,13 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
 
       // Page container appears with a smooth effect
       tl.to(containerRef.current, {
-        scale: 0.3, // 小さめのサイズから始める
+        scale: 0.3, // Start with a smaller size
         opacity: 1,
         duration: 0.8,
         ease: "back.out(1.2)",
       })
 
-        // 少し大きくなる - より滑らかに
+        // Grow slightly - more smoothly
         .to(containerRef.current, {
           scale: 0.4,
           duration: 0.6,
