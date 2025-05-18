@@ -4,16 +4,26 @@ import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 
 // Generate many more documents for a fuller effect
-const documents = Array.from({ length: 150 }, (_, i) => ({
-  id: i + 1,
-  type: ["paper", "folder", "note", "envelope", "certificate", "receipt", "contract"][
-    Math.floor(Math.random() * 7)
-  ] as string,
-  rotation: gsap.utils.random(-15, 15),
-  scale: gsap.utils.random(0.6, 1.3),
-  zIndex: Math.floor(gsap.utils.random(1, 10)),
-  opacity: gsap.utils.random(0.8, 1),
-}))
+// Use a seeded random sequence so server and client renders match
+const getSeededRandom = (seed: number, max: number) => {
+  const x = Math.sin(seed) * 10000;
+  return (x - Math.floor(x)) * max;
+};
+
+const documents = Array.from({ length: 150 }, (_, i) => {
+  // Using the index as seed for consistent random values between server and client
+  const typeIndex = Math.floor(getSeededRandom(i, 7));
+  const documentTypes = ["paper", "folder", "note", "envelope", "certificate", "receipt", "contract"];
+  
+  return {
+    id: i + 1,
+    type: documentTypes[typeIndex] as string,
+    rotation: getSeededRandom(i + 1000, 30) - 15, // -15 to 15
+    scale: 0.6 + getSeededRandom(i + 2000, 0.7), // 0.6 to 1.3
+    zIndex: Math.floor(getSeededRandom(i + 3000, 10)) + 1, // 1 to 10
+    opacity: 0.8 + getSeededRandom(i + 4000, 0.2), // 0.8 to 1
+  }
+})
 
 export function DocumentScatter() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -39,7 +49,8 @@ export function DocumentScatter() {
             zIndex: doc.zIndex,
             opacity: doc.opacity,
             // Initially position documents off-screen at the top
-            transform: `translateY(-100vh) translateX(${typeof window !== 'undefined' ? gsap.utils.random(-window.innerWidth / 2, window.innerWidth / 2) : 0}px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
+            // Using the seeded random value instead of window object for SSR compatibility
+            transform: `translateY(-100vh) translateX(${getSeededRandom(doc.id + 5000, 1000) - 500}px) rotate(${doc.rotation}deg) scale(${doc.scale})`,
             willChange: "transform, opacity", // パフォーマンス最適化
           }}
         >

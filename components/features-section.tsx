@@ -1,8 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useState } from "react"
 import {
   FileText,
   Clock,
@@ -70,101 +68,14 @@ const features = [
 
 export default function FeaturesSection() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const sectionRef = useRef<HTMLElement>(null)
-  const cardsContainerRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
-  // カードを前へ
-  const handlePrev = () => {
-    if (activeIndex > 0) {
-      setActiveIndex(activeIndex - 1)
-    }
-  }
-
-  // カードを次へ
-  const handleNext = () => {
-    if (activeIndex < features.length - 1) {
-      setActiveIndex(activeIndex + 1)
-    }
-  }
-
-  // 特定のカードに移動
-  const goToCard = (index: number) => {
-    if (index !== activeIndex) {
-      setActiveIndex(index)
-    }
-  }
-
-  // カード位置の更新
-  useEffect(() => {
-    if (!cardsRef.current) return
-
-    const cards = cardsRef.current.filter(Boolean)
-    cards.forEach((card, idx) => {
-      if (!card) return
-      
-      const position = idx - activeIndex
-      gsap.to(card, {
-        xPercent: position * 60,
-        z: position === 0 ? 0 : -100,
-        rotationY: position * 15,
-        opacity: position === 0 ? 1 : 0.7,
-        zIndex: features.length - Math.abs(position),
-        duration: 0.5,
-        ease: "power2.out",
-      })
-    })
-  }, [activeIndex])
-
-  // スクロールトリガーの設定
-  useEffect(() => {
-    if (typeof window === "undefined" || !sectionRef.current) return
-
-    gsap.registerPlugin(ScrollTrigger)
-    
-    // 古いトリガーをクリーンアップ
-    ScrollTrigger.getAll().forEach(trigger => {
-      if (trigger.vars.id === "featuresPin") {
-        trigger.kill()
-      }
-    })
-
-    // 新しいスクロールトリガーを作成
-    ScrollTrigger.create({
-      id: "featuresPin",
-      trigger: sectionRef.current,
-      start: "top center",
-      end: `+=${window.innerHeight}`,
-      pin: true,
-      pinSpacing: true,
-    })
-
-    // キーボード操作のイベントリスナー
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
-        handlePrev()
-      } else if (e.key === "ArrowRight") {
-        handleNext()
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-    
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.id === "featuresPin") {
-          trigger.kill()
-        }
-      })
-      window.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [])
+  // シンプルな関数でカードの移動
+  const handlePrev = () => activeIndex > 0 && setActiveIndex(activeIndex - 1)
+  const handleNext = () => activeIndex < features.length - 1 && setActiveIndex(activeIndex + 1)
+  const goToCard = (index: number) => index !== activeIndex && setActiveIndex(index)
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-20 bg-white relative overflow-hidden"
-    >
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-sky-600 mb-4">CareSmily の特徴</h2>
@@ -174,50 +85,42 @@ export default function FeaturesSection() {
         </div>
 
         {/* カードカルーセル */}
-        <div className="relative max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* カードコンテナ */}
           <div
-            ref={cardsContainerRef}
-            className="relative h-[450px] perspective-1000 mx-auto"
-            style={{ perspective: "1000px" }}
+            className="relative h-[450px] overflow-hidden"
           >
-            {features.map((feature, index) => {
-              // 表示するカードの範囲を制限（パフォーマンス向上のため）
-              const position = index - activeIndex
-              const isVisible = Math.abs(position) <= 2
-
-              if (!isVisible) return null
-
-              return (
+            <div 
+              className="flex transition-transform duration-500 h-full"
+              style={{ 
+                transform: `translateX(-${activeIndex * 100}%)`,
+                width: `${features.length * 100}%` 
+              }}
+            >
+              {features.map((feature, index) => (
                 <div
                   key={index}
-                  ref={(el) => { cardsRef.current[index] = el }}
-                  className={`absolute top-0 left-0 right-0 mx-auto w-[300px] h-[400px] ${feature.color} rounded-xl shadow-xl transition-all duration-500 ease-out`}
-                  style={{
-                    transform: `
-                      translateX(${position * 60}%) 
-                      translateZ(${position === 0 ? 0 : -100}px) 
-                      rotateY(${position * 15}deg)
-                    `,
-                    opacity: position === 0 ? 1 : 0.7,
-                    zIndex: features.length - Math.abs(position),
-                    WebkitBoxReflect: "below 10px linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.2))",
-                  }}
+                  className={`w-full h-full flex items-center justify-center px-4`}
+                  style={{ flex: `0 0 ${100 / features.length}%` }}
                 >
-                  {/* カード番号 */}
-                  <span className="absolute top-4 right-4 text-white text-opacity-50 text-xl font-bold">
-                    {index + 1}
-                  </span>
+                  <div 
+                    className={`w-[300px] h-[400px] ${feature.color} rounded-xl shadow-xl mx-auto`}
+                  >
+                    {/* カード番号 */}
+                    <span className="absolute top-4 right-4 text-white text-opacity-50 text-xl font-bold">
+                      {index + 1}
+                    </span>
 
-                  {/* カード内容 */}
-                  <div className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center text-white">
-                    <div className="mb-6 bg-white bg-opacity-20 p-4 rounded-full">{feature.icon}</div>
-                    <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                    <p className="text-white text-opacity-90">{feature.description}</p>
+                    {/* カード内容 */}
+                    <div className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center text-white">
+                      <div className="mb-6 bg-white bg-opacity-20 p-4 rounded-full">{feature.icon}</div>
+                      <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+                      <p className="text-white text-opacity-90">{feature.description}</p>
+                    </div>
                   </div>
                 </div>
-              )
-            })}
+              ))}
+            </div>
           </div>
 
           {/* ナビゲーションボタン */}
