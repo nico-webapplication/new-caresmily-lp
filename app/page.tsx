@@ -185,7 +185,7 @@ export default function Home() {
         <HeroSection onReplayAnimation={playAnimation} />
         <ServiceSection />
         <PointsSection />
-        <FeaturesSection />
+        {/* <FeaturesSection /> */}
         <TestimonialsSection />
         <AboutSection />
         <ContactSection />
