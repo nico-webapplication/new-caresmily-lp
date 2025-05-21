@@ -529,55 +529,12 @@ const HeroSectionComponent = () => {
                 {/* Hero image */}
                 <FloatingImage>
                   <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pYmB0RUGTP2903l3LdsnKif1ib8ybK.png"
+                    src="/images/CareSmily_ロゴ.png"
                     alt="CareSmily アプリ画面"
                   />
                 </FloatingImage>
 
-                {/* Floating highlight cards */}
-                <FloatingCard className="top-left">
-                  <IconCircle className="blue">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </IconCircle>
-                  <CardContent>
-                    <p className="label">記録作成時間</p>
-                    <p className="value blue">60%削減</p>
-                  </CardContent>
-                </FloatingCard>
 
-                <FloatingCard className="bottom-right">
-                  <IconCircle className="green">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                      />
-                    </svg>
-                  </IconCircle>
-                  <CardContent>
-                    <p className="label">文例データベース</p>
-                    <p className="value green">10万件以上</p>
-                  </CardContent>
-                </FloatingCard>
               </ImageContainer>
             </RightContent>
           </FlexContainer>
