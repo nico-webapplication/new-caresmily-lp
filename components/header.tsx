@@ -16,8 +16,16 @@ export default function Header() {
       >
         <div className="flex items-center">
           <Link href="/" className="flex items-center">
-            <div className="text-white font-bold text-xl">
-              CareSmily
+            <div className="h-10 relative">
+              <Image 
+                src="/images/caresmily-logo.png" 
+                alt="CareSmily" 
+                width={120} 
+                height={40} 
+                priority
+                style={{ width: 'auto', height: '100%' }}
+                className="object-contain"
+              />
             </div>
           </Link>
         </div>
