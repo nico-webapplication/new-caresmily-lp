@@ -16,14 +16,9 @@ export default function Header() {
       >
         <div className="flex items-center">
           <Link href="/" className="flex items-center">
-            <Image
-              src="/images/CareSmily_ロゴ.png"
-              alt="CareSmily"
-              width={150}
-              height={40}
-              priority
-              className="h-8 w-auto"
-            />
+            <div className="text-white font-bold text-xl">
+              CareSmily
+            </div>
           </Link>
         </div>
 
