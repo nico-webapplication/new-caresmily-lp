@@ -186,7 +186,15 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
 
             <h1 className="text-2xl font-bold mb-3 text-[#0a2540]">
-              おまかせケアサポート
+              <div className="relative h-8 w-48 mx-auto">
+                <Image
+                  src="/images/caresmily-logo.png"
+                  alt="CareSmily Logo"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  priority
+                />
+              </div>
             </h1>
           </div>
 
