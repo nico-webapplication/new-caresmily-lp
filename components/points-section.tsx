@@ -370,13 +370,26 @@ export default function PointsSection() {
               </div>
               <div className="relative w-44 md:w-96 bg-[#42a5d5] rounded-[3rem] flex items-center justify-center overflow-hidden">
                 <div className="relative w-full h-full flex items-center justify-center">
-                  <Image
-                    src="/images/search-document-icon.png"
-                    alt="高価格での買取保証"
-                    width={350}
-                    height={350}
-                    className="object-contain"
-                  />
+                  <div className="relative w-full h-full flex items-center justify-center p-6">
+                    <div className="relative w-56 h-56 rounded-full bg-white flex items-center justify-center">
+                      <div className="absolute w-24 h-24 rounded-full bg-[#ffec8a] -top-4 -left-4 flex items-center justify-center">
+                        <Image
+                          src="/images/car-service-points.png"
+                          alt="車アイコン"
+                          width={50}
+                          height={50}
+                          className="object-contain"
+                        />
+                      </div>
+                      <Image
+                        src="/images/elderly-woman-cane.png"
+                        alt="高価格での買取保証"
+                        width={150}
+                        height={150}
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -408,13 +421,26 @@ export default function PointsSection() {
               </div>
               <div className="relative w-44 md:w-96 bg-[#42a5d5] rounded-[3rem] flex items-center justify-center overflow-hidden">
                 <div className="relative w-full h-full flex items-center justify-center">
-                  <Image
-                    src="/images/qa-form-icon.png"
-                    alt="欲しいクルマが必ず見つかる"
-                    width={350}
-                    height={350}
-                    className="object-contain"
-                  />
+                  <div className="relative w-full h-full flex items-center justify-center p-6">
+                    <div className="relative w-56 h-56 rounded-full bg-white flex items-center justify-center">
+                      <div className="absolute w-24 h-24 rounded-full bg-[#ffec8a] -top-4 -right-4 flex items-center justify-center">
+                        <Image
+                          src="/images/car-service-points.png"
+                          alt="車アイコン"
+                          width={50}
+                          height={50}
+                          className="object-contain"
+                        />
+                      </div>
+                      <Image
+                        src="/images/nurse-tablet.png"
+                        alt="欲しいクルマが必ず見つかる"
+                        width={150}
+                        height={150}
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
