@@ -264,10 +264,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* 固定された枠 - 二重構造で隙間を埋める */}
-      <div className="fixed inset-0 bg-[rgb(10,37,64)] pointer-events-none z-30">
+      {/* 内側の白い背景を最背面に配置 */}
+      <div className="fixed inset-0 pointer-events-none z-10">
         <div className="absolute inset-[12px] bg-white rounded-[15px]"></div>
       </div>
+      
+      {/* 枠線 */}
+      <div className="fixed inset-0 border-[12px] border-[rgb(10,37,64)] pointer-events-none z-30"></div>
 
       {/* Animation container - always visible */}
       <div
