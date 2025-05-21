@@ -19,7 +19,9 @@ const nextConfig = {
     styledComponents: true,
   },
   experimental: {
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: ["localhost:3000"]
+    }
   }
 }
 
