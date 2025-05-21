@@ -9,9 +9,9 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <header className="fixed top-5 left-5 right-5 z-50">
+    <header className="fixed top-0 left-0 right-0 z-50">
       <div 
-        className="h-16 rounded-lg shadow-lg px-6 flex items-center justify-between"
+        className="h-16 px-6 flex items-center justify-between"
         style={{ backgroundColor: "rgb(10,37,64)" }}
       >
         <div className="flex items-center">
@@ -76,7 +76,7 @@ export default function Header() {
       {isOpen && (
         <div 
           id="mobile-menu"
-          className="md:hidden absolute top-full left-0 right-0 mt-2 rounded-lg shadow-lg py-4"
+          className="md:hidden absolute top-full left-0 right-0 shadow-lg py-4"
           style={{ backgroundColor: "rgb(10,37,64)" }}
         >
           <ul className="flex flex-col space-y-3 px-6">
