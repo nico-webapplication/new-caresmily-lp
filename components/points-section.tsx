@@ -290,189 +290,131 @@ export default function PointsSection() {
           </h2>
         </div>
 
-        <div ref={pointsRef} className="max-w-4xl mx-auto space-y-12">
+        <div ref={pointsRef} className="max-w-6xl mx-auto space-y-14">
           <TooltipProvider delayDuration={100}>
             {/* ポイント1 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">01</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">Expert Database!</span>
+            <div className="point-card bg-white rounded-[3rem] flex overflow-hidden shadow-lg h-80">
+              <div className="flex-1 py-10 px-10 md:px-14 flex flex-col justify-center">
+                <div className="flex items-start gap-5 mb-5">
+                  <span className="text-7xl font-bold text-[#42a5d5] leading-none">01</span>
+                  <span className="mt-5 text-yellow-400 italic font-light rotate-6 text-2xl">Leave it to us!</span>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-help">
-                      10万件超の専門家監修
+                    <h3 className="text-2xl md:text-4xl font-bold text-[#0a2540] mb-5 cursor-help leading-tight">
+                      配送から
                       <br />
-                      "文例データベース"
+                      書類手続きをおまかせ
                     </h3>
                   </TooltipTrigger>
-                  <TooltipContent className="max-w-sm p-4 bg-white text-gray-600 rounded-md shadow-lg border border-gray-200">
+                  <TooltipContent className="max-w-sm p-4 bg-white text-gray-700 rounded-md shadow-lg border border-gray-200">
                     <p>
-                      AI自動生成ではなく、法令・現場ニュアンスを踏まえた高品質文例を事前収録。デイサービス／訪問介護／ケアマネ業務など主要書類を網羅し、常に最新データへ更新される仕組みを採用しています。
+                      車の自宅集荷、自宅納車はもちろん、名義変更などの書類手続きまでを専門業者がまるっと代行します。
                     </p>
                   </TooltipContent>
                 </Tooltip>
+                <p className="text-gray-600 max-w-md text-sm">
+                  車の自宅集荷、自宅納車はもちろん、名義変更などの書類手続きまでを専門業者がまるっと代行します。
+                </p>
               </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-44 md:w-96 bg-[#42a5d5] rounded-[3rem] flex items-center justify-center overflow-hidden">
                 <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/database-100k-icon.png"
-                      alt="10万件超の専門家監修文例データベース"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
+                  <div className="relative w-full h-full flex items-center justify-center p-6">
+                    <div className="relative w-56 h-56 rounded-full bg-white flex items-center justify-center">
+                      <div className="absolute w-24 h-24 rounded-full bg-[#ffec8a] -top-4 -right-4 flex items-center justify-center">
+                        <Image
+                          src="/images/car-service-points.png"
+                          alt="車アイコン"
+                          width={50}
+                          height={50}
+                          className="object-contain"
+                        />
+                      </div>
+                      <Image
+                        src="/images/elderly-man-wheelchair.png"
+                        alt="配送から書類手続きをおまかせ"
+                        width={150}
+                        height={150}
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* ポイント2 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">02</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">Quick Copy & Paste!</span>
+            <div className="point-card bg-white rounded-[3rem] flex overflow-hidden shadow-lg flex-row-reverse h-80">
+              <div className="flex-1 py-10 px-10 md:px-14 flex flex-col justify-center">
+                <div className="flex items-start gap-5 mb-5">
+                  <span className="text-7xl font-bold text-[#42a5d5] leading-none">02</span>
+                  <span className="mt-5 text-yellow-400 italic font-light rotate-6 text-2xl">Higher price!</span>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-help">
-                      検索・カテゴリ選択 →
+                    <h3 className="text-2xl md:text-4xl font-bold text-[#0a2540] mb-5 cursor-help leading-tight">
+                      高価格での
                       <br />
-                      コピー＆ペーストで瞬時作成
+                      買取保証
                     </h3>
                   </TooltipTrigger>
-                  <TooltipContent className="max-w-sm p-4 bg-white text-gray-600 rounded-md shadow-lg border border-gray-200">
+                  <TooltipContent className="max-w-sm p-4 bg-white text-gray-700 rounded-md shadow-lg border border-gray-200">
                     <p>
-                      書類種類を選んでからキーワード検索・分類フィルタで欲しい表現を絞り込み、そのままコピペ。文章を一から考える作業を大幅に省き、書類作成時間を最大60%削減します。
+                      本サービスを通じて売却いただいた場合、買取専門店よりも必ず高い価格での売却を保証します。
                     </p>
                   </TooltipContent>
                 </Tooltip>
+                <p className="text-gray-600 max-w-md text-sm">
+                  本サービスを通じて売却いただいた場合、買取専門店よりも必ず高い価格での売却を保証します。
+                </p>
               </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-44 md:w-96 bg-[#42a5d5] rounded-[3rem] flex items-center justify-center overflow-hidden">
                 <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/search-document-icon.png"
-                      alt="検索・カテゴリ選択"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
-                  </div>
+                  <Image
+                    src="/images/search-document-icon.png"
+                    alt="高価格での買取保証"
+                    width={350}
+                    height={350}
+                    className="object-contain"
+                  />
                 </div>
               </div>
             </div>
 
             {/* ポイント3 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">03</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">Guided Builder!</span>
+            <div className="point-card bg-white rounded-[3rem] flex overflow-hidden shadow-lg h-80">
+              <div className="flex-1 py-10 px-10 md:px-14 flex flex-col justify-center">
+                <div className="flex items-start gap-5 mb-5">
+                  <span className="text-7xl font-bold text-[#42a5d5] leading-none">03</span>
+                  <span className="mt-5 text-yellow-400 italic font-light rotate-6 text-2xl">Perfect match!</span>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-help">
-                      "質問形式ビルダー"による
+                    <h3 className="text-2xl md:text-4xl font-bold text-[#0a2540] mb-5 cursor-help leading-tight">
+                      欲しいクルマが
                       <br />
-                      レコメンド挿入
+                      必ず見つかる
                     </h3>
                   </TooltipTrigger>
-                  <TooltipContent className="max-w-sm p-4 bg-white text-gray-600 rounded-md shadow-lg border border-gray-200">
+                  <TooltipContent className="max-w-sm p-4 bg-white text-gray-700 rounded-md shadow-lg border border-gray-200">
                     <p>
-                      利用者の身体状況や目標をQ&A方式で入力すると、条件に合った文例が自動提案されるガイド機能を搭載。記入漏れや表現ブレを防ぎ、新人でもプロ水準の書類を短時間で完成できます。
+                      全国の中古車から、あなたの予算・条件に合ったクルマを専門のコンシェルジュがご提案。好みのクルマが必ず見つかります。
                     </p>
                   </TooltipContent>
                 </Tooltip>
+                <p className="text-gray-600 max-w-md text-sm">
+                  全国の中古車から、あなたの予算・条件に合ったクルマを専門のコンシェルジュがご提案。好みのクルマが必ず見つかります。
+                </p>
               </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-44 md:w-96 bg-[#42a5d5] rounded-[3rem] flex items-center justify-center overflow-hidden">
                 <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/qa-form-icon.png"
-                      alt="質問形式ビルダー"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* ポイント4 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">04</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">All-in-One Solution!</span>
-                </div>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-help">
-                      書類テンプレ内での編集・
-                      <br />
-                      PDF／印刷までワンストップ
-                    </h3>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-sm p-4 bg-white text-gray-600 rounded-md shadow-lg border border-gray-200">
-                    <p>
-                      文例を差し込んだ後はアプリ内フォーマット上で微調整し、そのままPDF出力・印刷が可能。外部ソフトに書き出す手間なく、その場で紙提出用データまで完結します。
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/document-pdf-print-icon.png"
-                      alt="書類テンプレ内での編集・PDF／印刷"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* ポイント5 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">05</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">Cloud Access!</span>
-                </div>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-help">
-                      どこからでもアクセス可能な
-                      <br />
-                      クラウド基盤のアプリケーション
-                    </h3>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-sm p-4 bg-white text-gray-600 rounded-md shadow-lg border border-gray-200">
-                    <p>
-                      PCからブラウザでログインするだけ。インストールや複雑な設定は不要です。
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/cloud-computer-icon.png"
-                      alt="どこからでもアクセス可能なクラウド基盤"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
-                  </div>
+                  <Image
+                    src="/images/qa-form-icon.png"
+                    alt="欲しいクルマが必ず見つかる"
+                    width={350}
+                    height={350}
+                    className="object-contain"
+                  />
                 </div>
               </div>
             </div>
