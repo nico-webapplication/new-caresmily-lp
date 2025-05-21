@@ -92,7 +92,7 @@ const GlobalHeader = () => {
           <h1 className="relative">
             <Link href="/" className="block" aria-label="CareSmily">
               <Image 
-                src="/images/CareSmily_ロゴ.png" 
+                src="/images/caresmily-logo.png" 
                 alt="CareSmily" 
                 width={150} 
                 height={40} 
