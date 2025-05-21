@@ -1,638 +1,174 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React from "react";
+import { cn } from "@/lib/utils";
 
-// グローバルスタイル
-const GlobalStyle = createGlobalStyle`
-  :root {
-    --primary: #38bdf8;
-    --primary-dark: #0ea5e9;
-    --secondary: #4ade80;
-    --accent: #22c55e;
-    --tw-bg-opacity: 1;
-  }
-
-  body {
-    font-family: 'Noto Sans JP', sans-serif;
-    overflow-x: hidden;
-    background-color: rgb(168 224 255 / var(--tw-bg-opacity, 1));
-    margin: 0;
-    padding: 0;
-  }
-
-  @keyframes floating {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
-  }
-
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
-  }
-`;
-
-// スタイルコンポーネント
-const HeroSection = styled.section`
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 4rem 0;
-  overflow: hidden;
-`;
-
-const HeroBg = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    170deg,
-    rgb(168 224 255 / var(--tw-bg-opacity, 1)) 0%,
-    rgb(183 232 255 / var(--tw-bg-opacity, 1)) 100%
-  );
-  z-index: -2;
-`;
-
-const HeroShape = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.1) 0%,
-    rgba(74, 222, 128, 0.1) 100%
-  );
-  border-radius: 0 0 0 25rem;
-  z-index: 0;
-`;
-
-const Blob = styled.div`
-  position: absolute;
-  z-index: -1;
-  filter: blur(40px);
-  opacity: 0.4;
-  border-radius: 100%;
-
-  &.blue {
-    background-color: #93c5fd;
-    width: 24rem;
-    height: 24rem;
-    top: 5rem;
-    left: -8rem;
-  }
-
-  &.green {
-    background-color: #86efac;
-    width: 18rem;
-    height: 18rem;
-    bottom: 5rem;
-    right: 5rem;
-  }
-`;
-
-const Container = styled.div`
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  z-index: 10;
-`;
-
-const FlexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: 1024px) {
-    flex-direction: row;
-    align-items: center;
-  }
-`;
-
-const LeftContent = styled.div`
-  width: 100%;
-  margin-bottom: 3rem;
-
-  @media (min-width: 1024px) {
-    width: 50%;
-    margin-bottom: 0;
-  }
-`;
-
-const RightContent = styled.div`
-  width: 100%;
-  position: relative;
-
-  @media (min-width: 1024px) {
-    width: 50%;
-  }
-`;
-
-const HeadingSmall = styled.h5`
-  font-size: 1.125rem;
-  color: #3b82f6;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-`;
-
-const HeadingLarge = styled.h1`
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-  color: rgb(10, 37, 64);
-
-  @media (min-width: 768px) {
-    font-size: 3rem;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: 3.75rem;
-  }
-`;
-
-const TextGradient = styled.span`
-  background: linear-gradient(90deg, #38bdf8, #4ade80);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-`;
-
-const UnderlinedText = styled.span`
-  position: relative;
-  display: inline-block;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -0.5rem;
-    left: 0;
-    width: 100%;
-    height: 0.25rem;
-    background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
-  }
-`;
-
-const Description = styled.p`
-  color: #4b5563;
-  font-size: 1.125rem;
-  margin-bottom: 2rem;
-  max-width: 32rem;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  @media (min-width: 640px) {
-    flex-direction: row;
-  }
-`;
-
-const PrimaryButton = styled.a`
-  background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
-  color: white;
-  font-weight: 500;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: pulse 2s infinite;
-  text-decoration: none;
-
-  &:hover {
-    box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-
-  svg {
-    margin-left: 0.5rem;
-    height: 1.25rem;
-    width: 1.25rem;
-  }
-`;
-
-const SecondaryButton = styled.a`
-  border: 1px solid #60a5fa;
-  color: #3b82f6;
-  font-weight: 500;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-
-  &:hover {
-    background-color: #eff6ff;
-  }
-
-  svg {
-    margin-right: 0.5rem;
-    height: 1.25rem;
-    width: 1.25rem;
-  }
-`;
-
-const ImageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 36rem;
-  margin: 0 auto;
-`;
-
-const FloatingImage = styled.div`
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  padding: 0.5rem;
-  animation: floating 3s ease-in-out infinite;
-
-  img {
-    border-radius: 0.75rem;
-    width: 100%;
-  }
-`;
-
-const FloatingCard = styled.div`
-  position: absolute;
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  animation: floating 3s ease-in-out infinite;
-  display: flex;
-  align-items: center;
-
-  &.top-left {
-    top: -2.5rem;
-    left: -2.5rem;
-    width: 12rem;
-    animation-delay: 0.5s;
-  }
-
-  &.bottom-right {
-    bottom: -2.5rem;
-    right: 0;
-    width: 13rem;
-    animation-delay: 0.8s;
-  }
-`;
-
-const IconCircle = styled.div`
-  flex-shrink: 0;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &.blue {
-    background-color: #dbeafe;
-
-    svg {
-      color: #3b82f6;
-    }
-  }
-
-  &.green {
-    background-color: #dcfce7;
-
-    svg {
-      color: #22c55e;
-    }
-  }
-
-  svg {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
-`;
-
-const CardContent = styled.div`
-  margin-left: 0.75rem;
-
-  p.label {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #111827;
-  }
-
-  p.value {
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-
-  p.value.blue {
-    color: #3b82f6;
-  }
-
-  p.value.green {
-    color: #22c55e;
-  }
-`;
-
-const StatsGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-top: 4rem;
-
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-`;
-
-const StatCard = styled.div`
-  background-color: white;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
-  }
-`;
-
-const StatValue = styled.div`
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  font-variant-numeric: tabular-nums;
-
-  @media (min-width: 768px) {
-    font-size: 2.25rem;
-  }
-
-  &.blue {
-    color: #3b82f6;
-  }
-
-  &.green {
-    color: #22c55e;
-  }
-
-  &.teal {
-    color: #14b8a6;
-  }
-
-  &.cyan {
-    color: #06b6d4;
-  }
-
-  span {
-    font-size: 1.125rem;
-  }
-`;
-
-const StatLabel = styled.p`
-  color: #4b5563;
-`;
-
-const HeroSectionComponent = () => {
-  const countersRef = useRef([]);
-
-  useEffect(() => {
-    // AOSの初期化
-    AOS.init({
-      duration: 1000,
-      easing: "ease-out",
-      once: true,
-    });
-
-    // カウンターアニメーション
-    const counters = countersRef.current;
-    if (counters && counters.length > 0) {
-      counters.forEach((counter) => {
-        if (!counter) return;
-
-        const target = Number.parseFloat(counter.getAttribute("data-target"));
-        const suffix = counter.getAttribute("data-suffix") || "";
-        let count = 0;
-        const decimals = counter.getAttribute("data-target").includes(".")
-          ? 1
-          : 0;
-        const duration = 2000;
-        const increment = target / (duration / 16);
-
-        const updateCount = () => {
-          if (count < target) {
-            count += increment;
-            counter.innerText = count.toFixed(decimals) + suffix;
-            requestAnimationFrame(updateCount);
-          } else {
-            counter.innerText = target + suffix;
-          }
-        };
-
-        updateCount();
-      });
-    }
-  }, []);
-
+const HeroSection = () => {
   return (
-    <>
-      <GlobalStyle />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
-        rel="stylesheet"
+    <section className="relative min-h-screen flex items-center py-16 overflow-hidden">
+      {/* Background elements */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-sky-100 to-sky-50 z-[-2]"
+        style={{ backgroundColor: 'rgb(168 224 255)' }}
       />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-br from-sky-100/10 to-green-100/10 rounded-bl-[25rem] z-0" />
+      <div className="absolute top-20 -left-32 w-96 h-96 bg-blue-200 rounded-full opacity-40 blur-3xl z-[-1]" />
+      <div className="absolute bottom-20 right-20 w-72 h-72 bg-green-200 rounded-full opacity-40 blur-3xl z-[-1]" />
 
-      <HeroSection>
-        <HeroBg />
-        <HeroShape />
-        <Blob className="blue" />
-        <Blob className="green" />
+      <div className="container max-w-7xl mx-auto px-4 z-10">
+        <div className="flex flex-col lg:flex-row lg:items-center">
+          {/* Left content */}
+          <div className="w-full lg:w-1/2 mb-12 lg:mb-0">
+            <h5 className="text-lg text-blue-500 font-semibold mb-2">介護業務効率化アプリ</h5>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-slate-900">
+              膨大な
+              <span className="bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent">文例</span>×
+              <span className="bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent">選択</span>で<br />
+              <span className="relative inline-block after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-0 after:w-full after:h-1 after:bg-gradient-to-r after:from-sky-400 after:to-green-400">
+                あなたのケアプランが
+              </span><br />
+              <span className="relative inline-block after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-0 after:w-full after:h-1 after:bg-gradient-to-r after:from-sky-400 after:to-green-400">
+                瞬時に形になる
+              </span>
+            </h1>
 
-        <Container>
-          <FlexContainer>
-            {/* Left content */}
-            <LeftContent data-aos="fade-right">
-              <HeadingSmall>介護業務効率化アプリ</HeadingSmall>
-              <HeadingLarge>
-                膨大な<TextGradient>文例</TextGradient>×
-                <TextGradient>選択</TextGradient>で<br />
-                <UnderlinedText>あなたのケアプランが</UnderlinedText>
-                <br />
-                <UnderlinedText>瞬時に形になる</UnderlinedText>
-              </HeadingLarge>
+            <p className="text-lg text-gray-600 mb-8 max-w-lg">
+              介護現場の書類作成時間を<strong>60%削減</strong>する文例特化型アプリ。
+              <strong>10万件以上</strong>の専門家監修文例で、あなたの業務を革新します。
+            </p>
 
-              <Description>
-                介護現場の書類作成時間を<strong>60%削減</strong>
-                する文例特化型アプリ。
-                <strong>10万件以上</strong>
-                の専門家監修文例で、あなたの業務を革新します。
-              </Description>
-
-              <ButtonContainer>
-                <PrimaryButton href="#">
-                  無料トライアル開始
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </PrimaryButton>
-                <SecondaryButton href="#">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  資料請求はこちら
-                </SecondaryButton>
-              </ButtonContainer>
-            </LeftContent>
-
-            {/* Right content - Image */}
-            <RightContent data-aos="fade-left" data-aos-delay="200">
-              <ImageContainer>
-                {/* Hero image */}
-                <FloatingImage>
-                  <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pYmB0RUGTP2903l3LdsnKif1ib8ybK.png"
-                    alt="CareSmily アプリ画面"
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a 
+                href="#" 
+                className="bg-gradient-to-r from-sky-400 to-green-400 text-white font-medium py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center"
+              >
+                無料トライアル開始
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5 ml-2"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
                   />
-                </FloatingImage>
+                </svg>
+              </a>
+              <a 
+                href="#" 
+                className="border border-blue-400 text-blue-500 font-medium py-4 px-8 rounded-lg hover:bg-blue-50 transition-all flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5 mr-2"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                資料請求はこちら
+              </a>
+            </div>
+          </div>
 
-                {/* Floating highlight cards */}
-                <FloatingCard className="top-left">
-                  <IconCircle className="blue">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </IconCircle>
-                  <CardContent>
-                    <p className="label">記録作成時間</p>
-                    <p className="value blue">60%削減</p>
-                  </CardContent>
-                </FloatingCard>
+          {/* Right content - Image */}
+          <div className="w-full lg:w-1/2 relative">
+            <div className="relative w-full max-w-2xl mx-auto">
+              {/* Hero image */}
+              <div className="bg-white rounded-2xl shadow-2xl p-2">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pYmB0RUGTP2903l3LdsnKif1ib8ybK.png"
+                  alt="CareSmily アプリ画面"
+                  className="rounded-xl w-full"
+                />
+              </div>
 
-                <FloatingCard className="bottom-right">
-                  <IconCircle className="green">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                      />
-                    </svg>
-                  </IconCircle>
-                  <CardContent>
-                    <p className="label">文例データベース</p>
-                    <p className="value green">10万件以上</p>
-                  </CardContent>
-                </FloatingCard>
-              </ImageContainer>
-            </RightContent>
-          </FlexContainer>
+              {/* Floating highlight cards */}
+              <div className="absolute -top-10 -left-10 w-48 bg-white rounded-lg shadow-lg p-4 flex items-center">
+                <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#3b82f6"
+                    className="h-6 w-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm font-medium text-gray-900">記録作成時間</p>
+                  <p className="text-xl font-bold text-blue-500">60%削減</p>
+                </div>
+              </div>
 
-          {/* Stats section */}
-          <StatsGrid data-aos="fade-up">
-            <StatCard>
-              <StatValue
-                className="blue counter"
-                ref={(el) => (countersRef.current[0] = el)}
-                data-target="60"
-                data-suffix="%"
-              >
-                0%
-              </StatValue>
-              <StatLabel>記録作成時間削減</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatValue
-                className="green counter"
-                ref={(el) => (countersRef.current[1] = el)}
-                data-target="100000"
-                data-suffix="+"
-              >
-                0+
-              </StatValue>
-              <StatLabel>専門家監修文例数</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatValue
-                className="teal counter"
-                ref={(el) => (countersRef.current[2] = el)}
-                data-target="92"
-                data-suffix="%"
-              >
-                0%
-              </StatValue>
-              <StatLabel>利用者満足度</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatValue
-                className="cyan counter"
-                ref={(el) => (countersRef.current[3] = el)}
-                data-target="8"
-                data-suffix=""
-              >
-                0<span>時間/月</span>
-              </StatValue>
-              <StatLabel>残業時間削減</StatLabel>
-            </StatCard>
-          </StatsGrid>
-        </Container>
-      </HeroSection>
-    </>
+              <div className="absolute -bottom-10 right-0 w-52 bg-white rounded-lg shadow-lg p-4 flex items-center">
+                <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#22c55e"
+                    className="h-6 w-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm font-medium text-gray-900">文例データベース</p>
+                  <p className="text-xl font-bold text-green-500">10万件以上</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+          <div className="bg-white rounded-xl p-6 text-center transition-all duration-300 shadow-lg hover:-translate-y-1 hover:shadow-xl">
+            <div className="text-3xl md:text-4xl font-bold mb-2 text-blue-500 tabular-nums">
+              60%
+            </div>
+            <p className="text-gray-600">記録作成時間削減</p>
+          </div>
+          <div className="bg-white rounded-xl p-6 text-center transition-all duration-300 shadow-lg hover:-translate-y-1 hover:shadow-xl">
+            <div className="text-3xl md:text-4xl font-bold mb-2 text-green-500 tabular-nums">
+              10万+
+            </div>
+            <p className="text-gray-600">専門家監修文例数</p>
+          </div>
+          <div className="bg-white rounded-xl p-6 text-center transition-all duration-300 shadow-lg hover:-translate-y-1 hover:shadow-xl">
+            <div className="text-3xl md:text-4xl font-bold mb-2 text-teal-500 tabular-nums">
+              92%
+            </div>
+            <p className="text-gray-600">利用者満足度</p>
+          </div>
+          <div className="bg-white rounded-xl p-6 text-center transition-all duration-300 shadow-lg hover:-translate-y-1 hover:shadow-xl">
+            <div className="text-3xl md:text-4xl font-bold mb-2 text-cyan-500 tabular-nums">
+              8<span className="text-lg">時間/月</span>
+            </div>
+            <p className="text-gray-600">残業時間削減</p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default HeroSectionComponent;
+export default HeroSection;
