@@ -2,59 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 199 89% 48%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 142 71% 45%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 143 64% 45%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 199 89% 48%;
-    --radius: 0.5rem;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
-@layer base {
-  body {
-    background-color: rgb(168, 224, 255);
-    overflow-x: hidden;
-    font-family: 'Noto Sans JP', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-
-  @keyframes floating {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
-  }
-
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
-  }
-}
-
-.animate-floating {
-  animation: floating 3s ease-in-out infinite;
-}
-
-.animate-pulse {
-  animation: pulse 2s infinite;
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {

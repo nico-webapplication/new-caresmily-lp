@@ -1,22 +1,19 @@
 import type { Config } from "tailwindcss"
+import defaultConfig from "shadcn/ui/tailwind.config"
 
 const config: Config = {
-  darkMode: ["class"],
+  ...defaultConfig,
   content: [
+    ...defaultConfig.content,
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
+    ...defaultConfig.theme,
     extend: {
+      ...defaultConfig.theme.extend,
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
@@ -33,6 +30,7 @@ const config: Config = {
         },
       },
       colors: {
+        ...defaultConfig.theme.extend.colors,
         sky: {
           50: "#f0f9ff",
           100: "#e0f2fe",
@@ -90,7 +88,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [...defaultConfig.plugins, require("tailwindcss-animate")],
 }
 
 export default config
