@@ -174,7 +174,7 @@ const UnderlinedText = styled.span`
   &::after {
     content: "";
     position: absolute;
-    bottom: -0.5rem;
+    bottom: 0.2rem;
     left: 0;
     width: 100%;
     height: 0.25rem;
