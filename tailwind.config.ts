@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss"
-// shadcnからの直接importを避け、独自の設定を使用
-import { fontFamily } from "tailwindcss/defaultTheme"
+
+import defaultConfig from "shadcn/ui/tailwind.config"
 
 const config: Config = {
   ...defaultConfig,
