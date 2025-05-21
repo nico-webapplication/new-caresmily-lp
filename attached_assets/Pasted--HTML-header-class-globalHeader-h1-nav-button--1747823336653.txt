@@ -1,0 +1,94 @@
+観点	実装ポイント	補足
+構造 (HTML)	* <header class="globalHeader"> 内に
+ <h1> ロゴリンク・<nav>・ハンバーガー<button> を配置。*	デスクトップではロゴ＋横並びナビ、モバイルはハンバーガーでドロワーを開く構成。
+レイアウト (CSS)	* position: fixed; top:0; left:0; width:100%; z-index:1000;
+* 高さ 64-72 px、左右 24 px パディング。
+* Flex で中央揃え (display:flex; justify-content:space-between; align-items:center;)	上に常時固定し、ページを横スクロールしてもヘッダーは動かない。
+視認性	* 背景：background:rgba(255,255,255,.7); backdrop-filter:blur(8px);
+* テキスト＆アイコン：mix-blend-mode:difference; color:#fff;	グラスモーフィズム＋ブレンドモードにより、下地が白でも黒でもロゴ／文字は必ずコントラストが付く。
+インタラクション	1. スクロール連動ハイライト
+ gsap.registerPlugin(ScrollTrigger); で横スクロール各セクションを監視し、該当ナビに is-active クラスを付替え。
+2. ハンバーガー
+ aria-controls でドロワーをトグル、CSS で transform:translateX(100%) → translateX(0) 開閉。	横スクロール位置に応じてタブが自動で切り替わる。
+アクセシビリティ	* role="navigation", aria-label="グローバルナビゲーション"
+* ハンバーガーに aria-expanded を動的に付与	
+ビルド環境	- Nuxt 3 + Vite で静的書き出し（.hash.js が含まれる構成）。
+- CSS は PostCSS で autoprefix・minify 済み、クラス名は BEM 風をベースにハッシュが付与。	Mercari の他の LP と同じスタック。
+
+サンプルコード（要点のみ抜粋／可読化）
+html
+コピーする
+編集する
+<header class="globalHeader">
+  <div class="globalHeader_inner">
+    <h1 class="globalHeader_logo">
+      <a href="/">
+        <img src="/assets/logo.svg" alt="メルカリ おまかせクルマ取引">
+      </a>
+    </h1>
+
+    <nav class="globalHeader_nav" role="navigation" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="#about"  data-index="0">特長</a></li>
+        <li><a href="#flow"   data-index="1">取引の流れ</a></li>
+        <li><a href="#faq"    data-index="2">FAQ</a></li>
+        <li><a href="#entry"  class="cta" data-index="3">無料査定</a></li>
+      </ul>
+    </nav>
+
+    <button class="globalHeader_toggle" aria-controls="globalDrawer" aria-expanded="false">
+      <span class="sr-only">メニュー</span>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+scss
+コピーする
+編集する
+.globalHeader {
+  position: fixed; inset: 0 auto auto 0;
+  height: 72px; padding: 0 24px;
+  background: rgba(#fff, .7); backdrop-filter: blur(8px);
+  mix-blend-mode: difference;
+  pointer-events: none;       // ← ブレンドを優先しつつ…
+  & * { pointer-events: auto;} // …リンク操作は有効化
+}
+
+@media (max-width: 768px) {
+  .globalHeader { height: 64px; }
+  .globalHeader_nav { display:none; }
+}
+js
+コピーする
+編集する
+// gsap/ScrollTrigger で現在セクションに応じて .is-active 付替え
+import { gsap } from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
+const sections = document.querySelectorAll('[data-section]');
+const links    = document.querySelectorAll('.globalHeader_nav a');
+
+sections.forEach((sec, i) => {
+  ScrollTrigger.create({
+    trigger: sec,
+    start: 'left center',   // 横スクロールなので left
+    end:   'right center',
+    onEnter: () => setActive(i),
+    onEnterBack: () => setActive(i),
+  });
+});
+
+function setActive(index){
+  links.forEach((l,j)=>l.classList.toggle('is-active', j===index));
+}
+仕組みのキモ
+固定ヘッダー × mix-blend-mode:difference
+背景イラストが明るくても暗くてもロゴ・テキストが反転して常に可読。
+
+GSAP + ScrollTrigger で横スクロールに同期
+各セクションが transform: translateX() で流れる構造のため、縦スクロール用の start:'top center' ではなく left/right center を使ってトリガを張るのがポイント。
+
+Pointer Events 設計
+ブレンドモードをかけたままリンク操作できるよう、親要素に pointer-events:none → 子要素で auto。
+
