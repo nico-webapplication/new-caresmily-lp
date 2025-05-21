@@ -2,22 +2,13 @@
 
 import type React from "react"
 
-import { createContext, useContext, useEffect, useRef, useState, useCallback } from "react"
+import { createContext, useContext, useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-// スクロールトリガーコンテキストの型定義を拡張
-type ScrollTriggerContextType = {
-  scroller: string | null;
-  scrollTop: (value: number) => void;
-  getScrollTop: () => number;
-}
-
 // ScrollTriggerのコンテキストを作成
-const ScrollTriggerContext = createContext<ScrollTriggerContextType>({
+const ScrollTriggerContext = createContext<{ scroller: string | null }>({
   scroller: null,
-  scrollTop: () => {},
-  getScrollTop: () => 0,
 })
 
 // ScrollTriggerのコンテキストを使用するためのフック
@@ -26,20 +17,6 @@ export const useScrollTrigger = () => useContext(ScrollTriggerContext)
 // ScrollTriggerの設定を提供するプロバイダーコンポーネント
 export default function ScrollTriggerProvider({ children }: { children: React.ReactNode }) {
   const initialized = useRef(false)
-  
-  // スクロール位置を設定する関数
-  const scrollTop = useCallback((value: number) => {
-    const scrollElement = document.querySelector("#content-scroll")
-    if (scrollElement) {
-      scrollElement.scrollTop = value
-    }
-  }, [])
-  
-  // 現在のスクロール位置を取得する関数
-  const getScrollTop = useCallback(() => {
-    const scrollElement = document.querySelector("#content-scroll")
-    return scrollElement ? scrollElement.scrollTop : 0
-  }, [])
 
   useEffect(() => {
     if (!initialized.current) {
@@ -95,12 +72,6 @@ export default function ScrollTriggerProvider({ children }: { children: React.Re
   }, [])
 
   return (
-    <ScrollTriggerContext.Provider value={{ 
-      scroller: "#content-scroll",
-      scrollTop,
-      getScrollTop 
-    }}>
-      {children}
-    </ScrollTriggerContext.Provider>
+    <ScrollTriggerContext.Provider value={{ scroller: "#content-scroll" }}>{children}</ScrollTriggerContext.Provider>
   )
 }

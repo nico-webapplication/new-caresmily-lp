@@ -529,7 +529,7 @@ const HeroSectionComponent = () => {
                 {/* Hero image */}
                 <FloatingImage>
                   <img
-                    src="/images/caresmily-logo.png"
+                    src="/images/CareSmily_ロゴ.png"
                     alt="CareSmily アプリ画面"
                   />
                 </FloatingImage>
