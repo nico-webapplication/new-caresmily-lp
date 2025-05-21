@@ -75,3 +75,156 @@ body {
   height: 50%;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
 }
+
+/* カスタムスクロールバー - WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(10, 37, 64, 0.5);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(10, 37, 64, 0.7);
+}
+
+/* カスタムスクロールバー - Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(10, 37, 64, 0.5) transparent;
+}
+
+/* フレームロゴのスタイル */
+.frame-logo {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 80px;
+  text-decoration: none;
+  z-index: 100;
+  transform-origin: top left;
+}
+
+.frame-logo-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  background-color: white;
+  z-index: 1;
+  padding: 8px;
+}
+
+/* コーナースタイル */
+.corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  z-index: 2;
+}
+
+.corner::before,
+.corner::after {
+  content: "";
+  position: absolute;
+  background-color: rgb(10, 37, 64);
+}
+
+/* 外側のコーナー */
+.corner-outer.corner-top-right {
+  top: 0;
+  right: 0;
+}
+
+.corner-outer.corner-top-right::before {
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 12px;
+}
+
+.corner-outer.corner-top-right::after {
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 24px;
+}
+
+.corner-outer.corner-bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.corner-outer.corner-bottom-left::before {
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 12px;
+}
+
+.corner-outer.corner-bottom-left::after {
+  bottom: 0;
+  left: 0;
+  width: 12px;
+  height: 24px;
+}
+
+/* 内側のコーナー */
+.corner-inner {
+  z-index: 3;
+}
+
+.corner-inner.corner-top-right {
+  top: 12px;
+  right: 12px;
+}
+
+.corner-inner.corner-bottom-left {
+  bottom: 12px;
+  left: 12px;
+}
+
+.corner-white::before,
+.corner-white::after {
+  background-color: white;
+}
+
+.corner-inner.corner-top-right::before {
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.corner-inner.corner-top-right::after {
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.corner-inner.corner-bottom-left::before {
+  bottom: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.corner-inner.corner-bottom-left::after {
+  bottom: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+}

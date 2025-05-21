@@ -1,23 +1,28 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import Image from "next/image"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+// useScrollTriggerをインポート
+import { useScrollTrigger } from "@/components/scroll-trigger-provider";
 
+// useScrollTriggerを使用
 export default function TestimonialsSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const testimonialsRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
+  const { scroller } = useScrollTrigger();
 
   useEffect(() => {
     // ScrollTriggerを登録
     if (typeof window !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger)
+      gsap.registerPlugin(ScrollTrigger);
 
       if (sectionRef.current && testimonialsRef.current) {
-        const testimonials = testimonialsRef.current.querySelectorAll(".testimonial-card")
+        const testimonials =
+          testimonialsRef.current.querySelectorAll(".testimonial-card");
 
-        gsap.set(testimonials, { opacity: 0, y: 30 })
+        gsap.set(testimonials, { opacity: 0, y: 30 });
 
         ScrollTrigger.batch(testimonials, {
           onEnter: (elements) => {
@@ -27,17 +32,18 @@ export default function TestimonialsSection() {
               stagger: 0.2,
               duration: 0.8,
               ease: "power2.out",
-            })
+            });
           },
           start: "top 80%",
-        })
+          scroller: scroller || undefined,
+        });
       }
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-      }
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
     }
-  }, [])
+  }, [scroller]);
 
   const testimonials = [
     {
@@ -61,19 +67,24 @@ export default function TestimonialsSection() {
       role: "デイサービス経営者",
       image: "/placeholder.svg?height=100&width=100",
     },
-  ]
+  ];
 
   return (
     <section ref={sectionRef} className="py-20 px-4 md:px-6 bg-sky-50">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-sky-600 mb-4">お客様の声</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-sky-600 mb-4">
+            お客様の声
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             CareSmily を導入された施設様からいただいた声をご紹介します
           </p>
         </div>
 
-        <div ref={testimonialsRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          ref={testimonialsRef}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
@@ -89,7 +100,9 @@ export default function TestimonialsSection() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-sky-700">{testimonial.name}</h3>
+                  <h3 className="text-lg font-semibold text-sky-700">
+                    {testimonial.name}
+                  </h3>
                   <p className="text-gray-500">{testimonial.role}</p>
                 </div>
               </div>
@@ -99,5 +112,5 @@ export default function TestimonialsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

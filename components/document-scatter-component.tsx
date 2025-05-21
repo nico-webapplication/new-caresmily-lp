@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 // Generate many more documents for a fuller effect
 // Use a seeded random sequence so server and client renders match
@@ -13,8 +13,16 @@ const getSeededRandom = (seed: number, max: number) => {
 const documents = Array.from({ length: 150 }, (_, i) => {
   // Using the index as seed for consistent random values between server and client
   const typeIndex = Math.floor(getSeededRandom(i, 7));
-  const documentTypes = ["paper", "folder", "note", "envelope", "certificate", "receipt", "contract"];
-  
+  const documentTypes = [
+    "paper",
+    "folder",
+    "note",
+    "envelope",
+    "certificate",
+    "receipt",
+    "contract",
+  ];
+
   return {
     id: i + 1,
     type: documentTypes[typeIndex] as string,
@@ -22,24 +30,27 @@ const documents = Array.from({ length: 150 }, (_, i) => {
     scale: 0.6 + getSeededRandom(i + 2000, 0.7), // 0.6 to 1.3
     zIndex: Math.floor(getSeededRandom(i + 3000, 10)) + 1, // 1 to 10
     opacity: 0.8 + getSeededRandom(i + 4000, 0.2), // 0.8 to 1
-  }
-})
+  };
+});
 
 export function DocumentScatter() {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Animation is controlled from the parent component
     return () => {
       if (containerRef.current) {
-        const documents = containerRef.current.querySelectorAll(".document")
-        gsap.killTweensOf(documents)
+        const documents = containerRef.current.querySelectorAll(".document");
+        gsap.killTweensOf(documents);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full flex items-center justify-center overflow-visible">
+    <div
+      ref={containerRef}
+      className="relative w-full h-full flex items-center justify-center overflow-visible"
+    >
       {documents.map((doc) => (
         <div
           key={doc.id}
@@ -64,7 +75,7 @@ export function DocumentScatter() {
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 function PaperDocument() {
@@ -81,7 +92,7 @@ function PaperDocument() {
         <div className="w-3/4 h-2 bg-gray-100 rounded-sm"></div>
       </div>
     </div>
-  )
+  );
 }
 
 function FolderDocument() {
@@ -94,7 +105,7 @@ function FolderDocument() {
         <div className="w-full h-3 bg-amber-50 rounded-sm"></div>
       </div>
     </div>
-  )
+  );
 }
 
 function NoteDocument() {
@@ -108,7 +119,7 @@ function NoteDocument() {
         <div className="w-3/4 h-2 bg-yellow-50 rounded-sm"></div>
       </div>
     </div>
-  )
+  );
 }
 
 function EnvelopeDocument() {
@@ -123,7 +134,7 @@ function EnvelopeDocument() {
         <div className="w-12 h-4 bg-blue-200 rounded-full"></div>
       </div>
     </div>
-  )
+  );
 }
 
 function CertificateDocument() {
@@ -141,7 +152,7 @@ function CertificateDocument() {
         <div className="w-16 h-6 bg-green-100 rounded-sm"></div>
       </div>
     </div>
-  )
+  );
 }
 
 function ReceiptDocument() {
@@ -169,7 +180,7 @@ function ReceiptDocument() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function ContractDocument() {
@@ -180,7 +191,10 @@ function ContractDocument() {
       </div>
       <div className="flex-1 flex flex-col gap-2">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="w-full h-2 bg-indigo-50 border border-indigo-100 rounded-sm"></div>
+          <div
+            key={i}
+            className="w-full h-2 bg-indigo-50 border border-indigo-100 rounded-sm"
+          ></div>
         ))}
         <div className="w-full h-px bg-indigo-200 my-1"></div>
         <div className="flex justify-between items-center mt-2">
@@ -189,5 +203,5 @@ function ContractDocument() {
         </div>
       </div>
     </div>
-  )
+  );
 }

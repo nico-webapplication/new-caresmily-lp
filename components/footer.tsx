@@ -1,6 +1,6 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Facebook, Twitter, Instagram, Youtube } from "lucide-react"
+import Image from "next/image";
+import Link from "next/link";
+import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -23,41 +23,67 @@ export default function Footer() {
               革新的なサービス
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-sky-200 hover:text-white transition-colors"
+              >
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-sky-200 hover:text-white transition-colors"
+              >
                 <Twitter className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-sky-200 hover:text-white transition-colors"
+              >
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-sky-200 hover:text-white transition-colors"
+              >
                 <Youtube className="h-5 w-5" />
               </Link>
             </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-sky-100">サービス</h3>
+            <h3 className="text-lg font-semibold mb-4 text-sky-100">
+              サービス
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   書類作成支援
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   データ分析
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   業務効率化
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   研修サポート
                 </Link>
               </li>
@@ -65,25 +91,39 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-sky-100">会社情報</h3>
+            <h3 className="text-lg font-semibold mb-4 text-sky-100">
+              会社情報
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   会社概要
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   ミッション
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   チーム
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   採用情報
                 </Link>
               </li>
@@ -91,25 +131,39 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-sky-100">サポート</h3>
+            <h3 className="text-lg font-semibold mb-4 text-sky-100">
+              サポート
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   お問い合わせ
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   よくある質問
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   利用規約
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sky-200 hover:text-white transition-colors">
+                <Link
+                  href="#"
+                  className="text-sky-200 hover:text-white transition-colors"
+                >
                   プライバシーポリシー
                 </Link>
               </li>
@@ -122,5 +176,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

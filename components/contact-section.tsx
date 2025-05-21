@@ -1,102 +1,143 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Phone, Mail, MapPin } from "lucide-react"
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Phone, Mail, MapPin } from "lucide-react";
 
+// useScrollTriggerをインポート
+import { useScrollTrigger } from "@/components/scroll-trigger-provider";
+
+// useScrollTriggerを使用
 export default function ContactSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const formRef = useRef<HTMLFormElement>(null)
-  const infoRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+  const { scroller } = useScrollTrigger();
 
   useEffect(() => {
     // ScrollTriggerを登録
     if (typeof window !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger)
+      gsap.registerPlugin(ScrollTrigger);
 
       if (sectionRef.current && formRef.current && infoRef.current) {
-        gsap.set(formRef.current, { opacity: 0, x: -50 })
-        gsap.set(infoRef.current, { opacity: 0, x: 50 })
+        gsap.set(formRef.current, { opacity: 0, x: -50 });
+        gsap.set(infoRef.current, { opacity: 0, x: 50 });
 
         ScrollTrigger.create({
           trigger: sectionRef.current,
           start: "top 70%",
+          scroller: scroller || undefined,
           onEnter: () => {
             gsap.to(formRef.current, {
               opacity: 1,
               x: 0,
               duration: 0.8,
               ease: "power2.out",
-            })
+            });
             gsap.to(infoRef.current, {
               opacity: 1,
               x: 0,
               duration: 0.8,
               delay: 0.2,
               ease: "power2.out",
-            })
+            });
           },
-        })
+        });
       }
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-      }
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
     }
-  }, [])
+  }, [scroller]);
 
   return (
     <section ref={sectionRef} className="py-20 px-4 md:px-6 bg-white">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-sky-600 mb-4">お問い合わせ</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-sky-600 mb-4">
+            お問い合わせ
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            CareSmily についてのご質問や導入のご相談は、お気軽にお問い合わせください
+            CareSmily
+            についてのご質問や導入のご相談は、お気軽にお問い合わせください
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <form ref={formRef} className="space-y-6 bg-sky-50 p-8 rounded-xl shadow-sm">
+          <form
+            ref={formRef}
+            className="space-y-6 bg-sky-50 p-8 rounded-xl shadow-sm"
+          >
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 お名前
               </label>
               <Input id="name" placeholder="山田 太郎" className="w-full" />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 メールアドレス
               </label>
-              <Input id="email" type="email" placeholder="example@example.com" className="w-full" />
+              <Input
+                id="email"
+                type="email"
+                placeholder="example@example.com"
+                className="w-full"
+              />
             </div>
 
             <div>
-              <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="company"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 会社名・施設名
               </label>
-              <Input id="company" placeholder="株式会社〇〇" className="w-full" />
+              <Input
+                id="company"
+                placeholder="株式会社〇〇"
+                className="w-full"
+              />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 お問い合わせ内容
               </label>
-              <Textarea id="message" placeholder="ご質問やご要望をご記入ください" className="w-full min-h-[150px]" />
+              <Textarea
+                id="message"
+                placeholder="ご質問やご要望をご記入ください"
+                className="w-full min-h-[150px]"
+              />
             </div>
 
-            <Button className="w-full bg-sky-500 hover:bg-sky-600">送信する</Button>
+            <Button className="w-full bg-sky-500 hover:bg-sky-600">
+              送信する
+            </Button>
           </form>
 
           <div ref={infoRef} className="space-y-8">
             <div className="flex items-start">
               <Phone className="h-6 w-6 text-sky-500 mr-4 mt-1" />
               <div>
-                <h3 className="text-lg font-semibold text-sky-700 mb-2">お電話でのお問い合わせ</h3>
+                <h3 className="text-lg font-semibold text-sky-700 mb-2">
+                  お電話でのお問い合わせ
+                </h3>
                 <p className="text-gray-600">
                   03-XXXX-XXXX
                   <br />
@@ -108,7 +149,9 @@ export default function ContactSection() {
             <div className="flex items-start">
               <Mail className="h-6 w-6 text-sky-500 mr-4 mt-1" />
               <div>
-                <h3 className="text-lg font-semibold text-sky-700 mb-2">メールでのお問い合わせ</h3>
+                <h3 className="text-lg font-semibold text-sky-700 mb-2">
+                  メールでのお問い合わせ
+                </h3>
                 <p className="text-gray-600">
                   info@caresmily.example.com
                   <br />
@@ -120,7 +163,9 @@ export default function ContactSection() {
             <div className="flex items-start">
               <MapPin className="h-6 w-6 text-sky-500 mr-4 mt-1" />
               <div>
-                <h3 className="text-lg font-semibold text-sky-700 mb-2">所在地</h3>
+                <h3 className="text-lg font-semibold text-sky-700 mb-2">
+                  所在地
+                </h3>
                 <p className="text-gray-600">
                   〒XXX-XXXX
                   <br />
@@ -133,11 +178,13 @@ export default function ContactSection() {
 
             <div className="bg-gray-200 h-64 rounded-xl mt-6">
               {/* Google Map would go here */}
-              <div className="w-full h-full flex items-center justify-center text-gray-500">Google Map</div>
+              <div className="w-full h-full flex items-center justify-center text-gray-500">
+                Google Map
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

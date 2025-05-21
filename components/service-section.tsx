@@ -1,57 +1,65 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import Image from "next/image"
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+import { Youtube } from "lucide-react";
+// useScrollTriggerをインポート
+import { useScrollTrigger } from "@/components/scroll-trigger-provider";
 
+// useScrollTriggerを使用する部分を修正
 export default function ServiceSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const titleRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const marqueeRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const { scroller } = useScrollTrigger();
 
   useEffect(() => {
     // ScrollTriggerを登録
     if (typeof window !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger)
+      gsap.registerPlugin(ScrollTrigger);
 
       // マーキーアニメーション（右から左へ流れるテキスト）
       if (marqueeRef.current) {
-        const marqueeElements = marqueeRef.current.querySelectorAll(".marquee-content")
+        const marqueeElements =
+          marqueeRef.current.querySelectorAll(".marquee-content");
 
         gsap.to(marqueeElements, {
           xPercent: -100, // 左に100%移動（右から左へ流れる効果）
           repeat: -1, // 無限に繰り返す
           duration: 40, // アニメーションの時間（秒）- ゆっくり流す
           ease: "linear", // 一定速度で移動
-        })
+        });
       }
 
       // 画像のアニメーション
       if (imageRef.current) {
-        gsap.set(imageRef.current, { opacity: 0, y: 30 })
+        gsap.set(imageRef.current, { opacity: 0, y: 30 });
 
         ScrollTrigger.create({
           trigger: imageRef.current,
           start: "top 80%",
+          scroller: scroller || undefined,
           onEnter: () => {
             gsap.to(imageRef.current, {
               opacity: 1,
               y: 0,
               duration: 0.8,
               ease: "power2.out",
-            })
+            });
           },
-        })
+        });
       }
 
       // コンテンツのアニメーション
       if (contentRef.current) {
-        const contentElements = contentRef.current.querySelectorAll(".animate-item")
+        const contentElements =
+          contentRef.current.querySelectorAll(".animate-item");
 
-        gsap.set(contentElements, { opacity: 0, y: 30 })
+        gsap.set(contentElements, { opacity: 0, y: 30 });
 
         ScrollTrigger.batch(contentElements, {
           onEnter: (elements) => {
@@ -61,20 +69,24 @@ export default function ServiceSection() {
               stagger: 0.15,
               duration: 0.8,
               ease: "power2.out",
-            })
+            });
           },
           start: "top 80%",
-        })
+          scroller: scroller || undefined,
+        });
       }
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-      }
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
     }
-  }, [])
+  }, [scroller]);
 
   return (
-    <section ref={sectionRef} className="py-16 px-4 md:px-6 bg-white overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="py-8 px-4 md:px-6 bg-white overflow-hidden"
+    >
       {/* マーキーアニメーション部分 */}
       <div ref={marqueeRef} className="relative w-full overflow-hidden mb-12">
         <div className="flex whitespace-nowrap">
@@ -83,24 +95,43 @@ export default function ServiceSection() {
             <div className="flex items-center">
               {/* 多くのテキストを配置して途切れないようにする */}
               {Array.from({ length: 10 }).map((_, index) => (
-                <span key={index} className="text-[#0a2540] text-4xl md:text-5xl font-bold font-serif italic mr-12">
-                  About Our SERVICE?
-                </span>
+                <div
+                  key={index}
+                  className="relative h-24 md:h-32 w-96 md:w-[500px] mr-12"
+                >
+                  <Image
+                    src="/images/what-is-caresmily-tight.png"
+                    alt="What is CareSmily?"
+                    fill
+                    style={{ objectFit: "contain" }}
+                    priority={index < 3}
+                  />
+                </div>
               ))}
             </div>
           </div>
           <div className="marquee-content flex-shrink-0">
             <div className="flex items-center">
+              {/* 多くのテキストを配置して途切れないようにする */}
               {Array.from({ length: 10 }).map((_, index) => (
-                <span key={index} className="text-[#0a2540] text-4xl md:text-5xl font-bold font-serif italic mr-12">
-                  About Our SERVICE?
-                </span>
+                <div
+                  key={index}
+                  className="relative h-24 md:h-32 w-96 md:w-[500px] mr-12"
+                >
+                  <Image
+                    src="/images/what-is-caresmily-tight.png"
+                    alt="What is CareSmily?"
+                    fill
+                    style={{ objectFit: "contain" }}
+                    priority={index < 3}
+                  />
+                </div>
               ))}
             </div>
           </div>
         </div>
         {/* より大きな破線 */}
-        <div className="w-full h-8 mt-6 border-b-8 border-dashed border-[#0a2540] border-spacing-4"></div>
+        <div className="w-full h-8 border-b-8 border-dashed border-[#0a2540] border-spacing-4"></div>
       </div>
 
       {/* メインコンテンツ */}
@@ -130,22 +161,48 @@ export default function ServiceSection() {
 
           {/* 右側：テキストコンテンツ */}
           <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0a2540] animate-item">
-              おまかせケアサポート<span className="text-2xl md:text-3xl ml-2">とは？</span>
+            <h2 className="flex items-center font-bold text-[#0a2540] animate-item">
+              <div className="relative h-14 md:h-20 w-48 md:w-64">
+                <Image
+                  src="/images/caresmily-logo.png"
+                  alt="CareSmily"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  className="object-left"
+                  priority
+                />
+              </div>
+              <span className="text-2xl md:text-3xl ml-2">とは？</span>
             </h2>
-            <div className="space-y-4">
-              <p className="text-lg text-gray-700 animate-item">介護現場での書類作成や記録管理の負担を、</p>
-              <p className="text-lg text-gray-700 animate-item">AIと専門スタッフがサポートすることで、</p>
-              <p className="text-lg text-gray-700 animate-item">より質の高いケアの時間を生み出すサービスです。</p>
+            <div className="space-y-8">
+              <p
+                className="text-2xl md:text-3xl font-bold text-[#1a2b4a] animate-item"
+                style={{ lineHeight: "1.5em" }}
+              >
+                介護施設で多くの手間と時間がかかる
+                <br className="mb-6" />
+                書類作成を効率化するための、
+                <br className="mb-6" />
+                <span className="relative inline-block">
+                  <span className="text-[#1a2b4a]">文例特化型</span>
+                  <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow-300 opacity-80 z-[-1]"></span>
+                </span>
+                WEBアプリです。
+                <br className="mb-6" />
+                様々な書類に使用できる豊富な文例を
+                <br className="mb-6" />
+                ぜひお試しください。
+              </p>
             </div>
             <div className="pt-4 animate-item">
-              <button className="bg-[#42a5d5] hover:bg-[#3890bd] text-white px-6 py-3 rounded-md font-medium transition-colors">
-                詳しく見る
+              <button className="bg-[#FF0000] hover:bg-[#CC0000] text-white px-6 py-3 rounded-md font-medium transition-colors flex items-center shadow-md">
+                <Youtube className="w-5 h-5 mr-2" />
+                詳しい内容を動画でcheck！
               </button>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

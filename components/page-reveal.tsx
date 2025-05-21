@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { forwardRef, useEffect, useImperativeHandle, useRef } from "react"
-import { gsap } from "gsap"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { RefreshCw } from "lucide-react"
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import { gsap } from "gsap";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { RefreshCw } from "lucide-react";
 
 const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const characterRefs = useRef<(HTMLDivElement | null)[]>([])
-  const miniLogoRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const characterRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const miniLogoRef = useRef<HTMLDivElement>(null);
 
   // Expose the containerRef to parent components
-  useImperativeHandle(ref, () => containerRef.current!)
+  useImperativeHandle(ref, () => containerRef.current!);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -22,42 +22,42 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
         scale: 0.1,
         opacity: 0,
         y: 0,
-      })
+      });
 
       // Create timeline for page reveal animation
       const tl = gsap.timeline({
         onStart: () => {
           // Dispatch custom event when animation starts
-          window.dispatchEvent(new Event("pageRevealStart"))
+          window.dispatchEvent(new Event("pageRevealStart"));
         },
         onComplete: () => {
           // Dispatch custom event when animation completes
-          window.dispatchEvent(new Event("pageRevealComplete"))
+          window.dispatchEvent(new Event("pageRevealComplete"));
         },
-      })
+      });
 
       // Page container appears with a smooth effect
       tl.to(containerRef.current, {
-        scale: 0.3, // Start with a smaller size
+        scale: 0.3, // 小さめのサイズから始める
         opacity: 1,
         duration: 0.8,
         ease: "back.out(1.2)",
       })
 
-        // Grow slightly - more smoothly
+        // 少し大きくなる - より滑らかに
         .to(containerRef.current, {
           scale: 0.4,
           duration: 0.6,
           ease: "power1.inOut",
         })
 
-        // Brief pause
+        // 一瞬止まる
         .to(containerRef.current, {
           scale: 0.4,
           duration: 0.3,
         })
 
-        // Expand smoothly to cover the screen
+        // より滑らかに拡大して画面を覆う
         .to(containerRef.current, {
           scale: 1,
           width: "100vw",
@@ -72,70 +72,77 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
           opacity: 0,
           duration: 0.7,
           ease: "power2.inOut",
-        })
+        });
     }
 
-    // Miniature 3D animation
+    // ミニチュアの3Dアニメーション
     if (characterRefs.current.length === 4 && miniLogoRef.current) {
-      // Animation for drawing a small circle
-      const radius = 40 // Small radius
-      const centerX = 0
-      const centerY = 0
-      const duration = 8 // Time for one complete rotation (seconds)
+      // 小さな円を描くアニメーション
+      const radius = 40; // 小さな半径
+      const centerX = 0;
+      const centerY = 0;
+      const duration = 8; // 一周の時間（秒）
 
-      // Logo pulsing animation
+      // ロゴの脈動アニメーション
       gsap.fromTo(
         miniLogoRef.current,
         { scale: 0.8, opacity: 0.5 },
-        { scale: 1, opacity: 1, duration: 1.5, repeat: -1, yoyo: true, ease: "sine.inOut" },
-      )
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        },
+      );
 
-      // Rotate each character
+      // 各キャラクターを回転させる
       characterRefs.current.forEach((char, index) => {
-        if (!char) return
+        if (!char) return;
 
-        // Starting angle for each character (offset by 90 degrees)
-        const startAngle = index * 90
+        // 各キャラクターの開始角度（90度ずつずらす）
+        const startAngle = index * 90;
 
-        // Rotation animation
+        // 回転アニメーション
         gsap.to(char, {
           duration: duration,
           repeat: -1,
           ease: "none",
           onUpdate: function () {
-            const progress = this.progress()
-            const angle = startAngle + progress * 360
-            const radian = (angle * Math.PI) / 180
+            const progress = this.progress();
+            const angle = startAngle + progress * 360;
+            const radian = (angle * Math.PI) / 180;
 
-            const newX = centerX + Math.cos(radian) * radius
-            const newY = centerY + Math.sin(radian) * radius
+            const newX = centerX + Math.cos(radian) * radius;
+            const newY = centerY + Math.sin(radian) * radius;
 
-            gsap.set(char, { x: newX, y: newY })
+            gsap.set(char, { x: newX, y: newY });
 
-            // Depth effect (subtle for miniature)
-            const scale = 0.9 + 0.1 * Math.sin(radian)
-            const zIndex = Math.sin(radian) > 0 ? 20 : 10
+            // 奥行き感（ミニチュアなので控えめに）
+            const scale = 0.9 + 0.1 * Math.sin(radian);
+            const zIndex = Math.sin(radian) > 0 ? 20 : 10;
 
             gsap.set(char, {
               scale: scale,
               zIndex: zIndex,
               opacity: 0.9 + 0.1 * Math.sin(radian),
-            })
+            });
           },
-        })
-      })
+        });
+      });
     }
 
     return () => {
       if (containerRef.current) {
-        gsap.killTweensOf(containerRef.current)
+        gsap.killTweensOf(containerRef.current);
       }
       characterRefs.current.forEach((char) => {
-        if (char) gsap.killTweensOf(char)
-      })
-      if (miniLogoRef.current) gsap.killTweensOf(miniLogoRef.current)
-    }
-  }, [])
+        if (char) gsap.killTweensOf(char);
+      });
+      if (miniLogoRef.current) gsap.killTweensOf(miniLogoRef.current);
+    };
+  }, []);
 
   return (
     <div
@@ -157,21 +164,30 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
         <div className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 py-20">
           <div className="absolute top-4 left-4">
             <div className="relative w-20 h-6">
-              <Image src="/images/CareSmily_ロゴ.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
+              <Image
+                src="/images/CareSmily_ロゴ.png"
+                alt="CareSmily Logo"
+                fill
+                style={{ objectFit: "contain" }}
+              />
             </div>
           </div>
 
           <div className="max-w-5xl mx-auto text-center mt-8">
             <div className="text-center mb-2">
               <div className="inline-block relative">
-                <span className="text-sm font-medium text-[#0a2540]">専門スタッフのサポートで</span>
+                <span className="text-sm font-medium text-[#0a2540]">
+                  専門スタッフのサポートで
+                </span>
                 <div className="absolute -top-2 right-0 transform translate-x-[105%] bg-white rounded-full px-2 py-0.5 border border-[#0a2540] text-xs">
                   あんしん＆らくらく
                 </div>
               </div>
             </div>
 
-            <h1 className="text-2xl font-bold mb-3 text-[#0a2540]">おまかせケアサポート</h1>
+            <h1 className="text-2xl font-bold mb-3 text-[#0a2540]">
+              おまかせケアサポート
+            </h1>
           </div>
 
           <div className="relative w-full max-w-xs mx-auto h-32 mb-4">
@@ -183,7 +199,12 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
                 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30px] h-[30px] bg-white rounded-full shadow-sm flex items-center justify-center z-30"
               >
                 <div className="relative w-[80%] h-[80%]">
-                  <Image src="/images/CareSmily_ロゴ.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
+                  <Image
+                    src="/images/CareSmily_ロゴ.png"
+                    alt="CareSmily Logo"
+                    fill
+                    style={{ objectFit: "contain" }}
+                  />
                 </div>
               </div>
 
@@ -217,7 +238,10 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
           </p>
 
           <div className="flex flex-row gap-2 justify-center">
-            <Button size="sm" className="bg-[#42a5d5] hover:bg-[#3890bd] text-white text-xs">
+            <Button
+              size="sm"
+              className="bg-[#42a5d5] hover:bg-[#3890bd] text-white text-xs"
+            >
               今すぐ始める
             </Button>
             <Button
@@ -232,9 +256,9 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
         </div>
       </div>
     </div>
-  )
-})
+  );
+});
 
-PageReveal.displayName = "PageReveal"
+PageReveal.displayName = "PageReveal";
 
-export default PageReveal
+export default PageReveal;

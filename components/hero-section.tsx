@@ -1,298 +1,638 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { RefreshCw } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { gsap } from "gsap"
+import { useEffect, useRef } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-interface HeroSectionProps {
-  onReplayAnimation: () => void
-}
+// グローバルスタイル
+const GlobalStyle = createGlobalStyle`
+  :root {
+    --primary: #38bdf8;
+    --primary-dark: #0ea5e9;
+    --secondary: #4ade80;
+    --accent: #22c55e;
+    --tw-bg-opacity: 1;
+  }
 
-export default function HeroSection({ onReplayAnimation }: HeroSectionProps) {
-  const characterRefs = useRef<Array<HTMLDivElement | null>>([])
-  const orbitRef = useRef<HTMLDivElement>(null)
-  const logoRef = useRef<HTMLDivElement>(null)
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow-x: hidden;
+    background-color: rgb(168 224 255 / var(--tw-bg-opacity, 1));
+    margin: 0;
+    padding: 0;
+  }
+
+  @keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+  }
+`;
+
+// スタイルコンポーネント
+const HeroSection = styled.section`
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+  overflow: hidden;
+`;
+
+const HeroBg = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    170deg,
+    rgb(168 224 255 / var(--tw-bg-opacity, 1)) 0%,
+    rgb(183 232 255 / var(--tw-bg-opacity, 1)) 100%
+  );
+  z-index: -2;
+`;
+
+const HeroShape = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.1) 0%,
+    rgba(74, 222, 128, 0.1) 100%
+  );
+  border-radius: 0 0 0 25rem;
+  z-index: 0;
+`;
+
+const Blob = styled.div`
+  position: absolute;
+  z-index: -1;
+  filter: blur(40px);
+  opacity: 0.4;
+  border-radius: 100%;
+
+  &.blue {
+    background-color: #93c5fd;
+    width: 24rem;
+    height: 24rem;
+    top: 5rem;
+    left: -8rem;
+  }
+
+  &.green {
+    background-color: #86efac;
+    width: 18rem;
+    height: 18rem;
+    bottom: 5rem;
+    right: 5rem;
+  }
+`;
+
+const Container = styled.div`
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  z-index: 10;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
+const LeftContent = styled.div`
+  width: 100%;
+  margin-bottom: 3rem;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+    margin-bottom: 0;
+  }
+`;
+
+const RightContent = styled.div`
+  width: 100%;
+  position: relative;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+  }
+`;
+
+const HeadingSmall = styled.h5`
+  font-size: 1.125rem;
+  color: #3b82f6;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+`;
+
+const HeadingLarge = styled.h1`
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: rgb(10, 37, 64);
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 3.75rem;
+  }
+`;
+
+const TextGradient = styled.span`
+  background: linear-gradient(90deg, #38bdf8, #4ade80);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+`;
+
+const UnderlinedText = styled.span`
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 100%;
+    height: 0.25rem;
+    background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
+  }
+`;
+
+const Description = styled.p`
+  color: #4b5563;
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  max-width: 32rem;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+`;
+
+const PrimaryButton = styled.a`
+  background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
+  color: white;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+  text-decoration: none;
+
+  &:hover {
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  svg {
+    margin-left: 0.5rem;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+`;
+
+const SecondaryButton = styled.a`
+  border: 1px solid #60a5fa;
+  color: #3b82f6;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #eff6ff;
+  }
+
+  svg {
+    margin-right: 0.5rem;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+`;
+
+const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 36rem;
+  margin: 0 auto;
+`;
+
+const FloatingImage = styled.div`
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 0.5rem;
+  animation: floating 3s ease-in-out infinite;
+
+  img {
+    border-radius: 0.75rem;
+    width: 100%;
+  }
+`;
+
+const FloatingCard = styled.div`
+  position: absolute;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  animation: floating 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+
+  &.top-left {
+    top: -2.5rem;
+    left: -2.5rem;
+    width: 12rem;
+    animation-delay: 0.5s;
+  }
+
+  &.bottom-right {
+    bottom: -2.5rem;
+    right: 0;
+    width: 13rem;
+    animation-delay: 0.8s;
+  }
+`;
+
+const IconCircle = styled.div`
+  flex-shrink: 0;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.blue {
+    background-color: #dbeafe;
+
+    svg {
+      color: #3b82f6;
+    }
+  }
+
+  &.green {
+    background-color: #dcfce7;
+
+    svg {
+      color: #22c55e;
+    }
+  }
+
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+`;
+
+const CardContent = styled.div`
+  margin-left: 0.75rem;
+
+  p.label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #111827;
+  }
+
+  p.value {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  p.value.blue {
+    color: #3b82f6;
+  }
+
+  p.value.green {
+    color: #22c55e;
+  }
+`;
+
+const StatsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 4rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+`;
+
+const StatCard = styled.div`
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
+  }
+`;
+
+const StatValue = styled.div`
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums;
+
+  @media (min-width: 768px) {
+    font-size: 2.25rem;
+  }
+
+  &.blue {
+    color: #3b82f6;
+  }
+
+  &.green {
+    color: #22c55e;
+  }
+
+  &.teal {
+    color: #14b8a6;
+  }
+
+  &.cyan {
+    color: #06b6d4;
+  }
+
+  span {
+    font-size: 1.125rem;
+  }
+`;
+
+const StatLabel = styled.p`
+  color: #4b5563;
+`;
+
+const HeroSectionComponent = () => {
+  const countersRef = useRef([]);
 
   useEffect(() => {
-    // Only run on client-side
-    if (typeof window === "undefined") return
-    
-    // Create a GSAP context specific to this component
-    if (orbitRef.current && characterRefs.current.length === 4 && logoRef.current) {
-      // Create a GSAP context for this component
-      const ctx = gsap.context(() => {
-        // Animation setup for 3D orbit
-        const radius = 180 // orbit radius
-        const centerX = 0
-        const centerY = 0
-        const duration = 15 // time for one full rotation
-        
-        // Set initial positions for each character (offset by 90 degrees)
-        gsap.set(characterRefs.current[0], {
-          x: centerX + radius,
-          y: centerY,
-          scale: 1,
-          zIndex: 20,
-        })
-        gsap.set(characterRefs.current[1], {
-          x: centerX,
-          y: centerY + radius,
-          scale: 0.8,
-          zIndex: 10,
-        })
-        gsap.set(characterRefs.current[2], {
-          x: centerX - radius,
-          y: centerY,
-          scale: 0.8,
-          zIndex: 10,
-        })
-        gsap.set(characterRefs.current[3], {
-          x: centerX,
-          y: centerY - radius,
-          scale: 0.8,
-          zIndex: 10,
-        })
-        
-        // Logo animation
-        gsap.fromTo(
-          logoRef.current,
-          { scale: 0.8, opacity: 0.5 },
-          { 
-            scale: 1, 
-            opacity: 1, 
-            duration: 2, 
-            repeat: -1, 
-            yoyo: true, 
-            ease: "sine.inOut",
-            id: "heroLogoAnimation" // Add identifier for this animation
-          },
-        )
-        
-        // Rotate each character around the orbit
-        characterRefs.current.forEach((char, index) => {
-          if (!char) return
-          
-          // Starting angle for each character (offset by 90 degrees)
-          const startAngle = index * 90
-          
-          // Create rotation animation
-          gsap.to(char, {
-            duration: duration,
-            repeat: -1,
-            ease: "none",
-            id: `heroCharAnimation${index}`, // Add identifier for this animation
-            onUpdate: function () {
-              // Current progress (0-1)
-              const progress = this.progress()
-              // Current angle (start angle + progress angle)
-              const angle = startAngle + progress * 360
-              // Convert to radians
-              const radian = (angle * Math.PI) / 180
-              
-              // Calculate new position
-              const newX = centerX + Math.cos(radian) * radius
-              const newY = centerY + Math.sin(radian) * radius
-              
-              // Update position
-              gsap.set(char, { x: newX, y: newY })
-              
-              // Adjust scale and opacity for depth effect
-              // Closer (bottom half of circle) = larger, further (top half) = smaller
-              const scale = 0.8 + 0.2 * Math.sin(radian) // Range: 0.8-1.0
-              const zIndex = Math.sin(radian) > 0 ? 20 : 10 // Bottom half = front, top half = back
-              
-              gsap.set(char, {
-                scale: scale,
-                zIndex: zIndex,
-                opacity: 0.8 + 0.2 * Math.sin(radian), // Range: 0.8-1.0
-              })
-            },
-          })
-        })
-      }, orbitRef); // Scope to orbit element
-      
-      // Clean up when component unmounts
-      return () => {
-        // Revert all animations created in this context
-        ctx.revert();
-      }
+    // AOSの初期化
+    AOS.init({
+      duration: 1000,
+      easing: "ease-out",
+      once: true,
+    });
+
+    // カウンターアニメーション
+    const counters = countersRef.current;
+    if (counters && counters.length > 0) {
+      counters.forEach((counter) => {
+        if (!counter) return;
+
+        const target = Number.parseFloat(counter.getAttribute("data-target"));
+        const suffix = counter.getAttribute("data-suffix") || "";
+        let count = 0;
+        const decimals = counter.getAttribute("data-target").includes(".")
+          ? 1
+          : 0;
+        const duration = 2000;
+        const increment = target / (duration / 16);
+
+        const updateCount = () => {
+          if (count < target) {
+            count += increment;
+            counter.innerText = count.toFixed(decimals) + suffix;
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.innerText = target + suffix;
+          }
+        };
+
+        updateCount();
+      });
     }
-  }, [])
+  }, []);
 
   return (
-    <section className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-20 relative bg-[#a8e0ff]">
-      <div className="absolute top-6 left-6">
-        <div className="relative w-40 h-12">
-          <Image src="/images/CareSmily_ロゴ.png" alt="CareSmily Logo" fill style={{ objectFit: "contain" }} />
-        </div>
-      </div>
+    <>
+      <GlobalStyle />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet"
+      />
 
-      <div className="absolute top-6 right-6 bg-[#0a2540] text-white rounded-full p-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide lucide-help-circle"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-          <path d="M12 17h.01" />
-        </svg>
-      </div>
+      <HeroSection>
+        <HeroBg />
+        <HeroShape />
+        <Blob className="blue" />
+        <Blob className="green" />
 
-      <div className="max-w-5xl mx-auto text-center mt-16">
-        <div className="flex flex-col items-center mb-8">
-          <div className="text-center mb-2">
-            <div className="inline-block relative">
-              <span className="text-lg font-medium text-[#0a2540]">専門スタッフのサポートで</span>
-              <div className="absolute -top-3 right-0 transform translate-x-[105%] bg-white rounded-full px-3 py-1 border border-[#0a2540] text-sm">
-                あんしん＆らくらく
-              </div>
-            </div>
-          </div>
+        <Container>
+          <FlexContainer>
+            {/* Left content */}
+            <LeftContent data-aos="fade-right">
+              <HeadingSmall>介護業務効率化アプリ</HeadingSmall>
+              <HeadingLarge>
+                膨大な<TextGradient>文例</TextGradient>×
+                <TextGradient>選択</TextGradient>で<br />
+                <UnderlinedText>あなたのケアプランが</UnderlinedText>
+                <br />
+                <UnderlinedText>瞬時に形になる</UnderlinedText>
+              </HeadingLarge>
 
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#0a2540]">おまかせケアサポート</h1>
-        </div>
+              <Description>
+                介護現場の書類作成時間を<strong>60%削減</strong>
+                する文例特化型アプリ。
+                <strong>10万件以上</strong>
+                の専門家監修文例で、あなたの業務を革新します。
+              </Description>
 
-        <div className="relative w-full max-w-5xl mx-auto h-96 mb-8">
-          {/* 3Dアニメーションのための軌道 */}
-          <div
-            ref={orbitRef}
-            className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full"
-            style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
-          >
-            {/* 中央のロゴマーク */}
-            <div
-              ref={logoRef}
-              className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] bg-white rounded-full shadow-lg flex items-center justify-center z-30"
-            >
-              <div className="relative w-[80%] h-[80%]">
-                <Image
-                  src="/images/CareSmily_ロゴ.png"
-                  alt="CareSmily Logo"
-                  fill
-                  style={{ objectFit: "contain" }}
-                  priority
-                />
-              </div>
-            </div>
+              <ButtonContainer>
+                <PrimaryButton href="#">
+                  無料トライアル開始
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </PrimaryButton>
+                <SecondaryButton href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  資料請求はこちら
+                </SecondaryButton>
+              </ButtonContainer>
+            </LeftContent>
 
-            {/* 接続線 - 中央の薄い円 */}
-            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] rounded-full bg-[#42a5d5]/10 z-0"></div>
+            {/* Right content - Image */}
+            <RightContent data-aos="fade-left" data-aos-delay="200">
+              <ImageContainer>
+                {/* Hero image */}
+                <FloatingImage>
+                  <img
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pYmB0RUGTP2903l3LdsnKif1ib8ybK.png"
+                    alt="CareSmily アプリ画面"
+                  />
+                </FloatingImage>
 
-            {/* 左側の介護士 */}
-            <div
-              ref={(el) => { characterRefs.current[0] = el }}
-              className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[250px]"
-              style={{ transformOrigin: "center center" }}
-            >
-              <Image
-                src="/images/nurse-tablet.png"
-                alt="Care staff with tablet"
-                width={150}
-                height={250}
-                className="object-contain"
-                priority
-              />
-            </div>
+                {/* Floating highlight cards */}
+                <FloatingCard className="top-left">
+                  <IconCircle className="blue">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </IconCircle>
+                  <CardContent>
+                    <p className="label">記録作成時間</p>
+                    <p className="value blue">60%削減</p>
+                  </CardContent>
+                </FloatingCard>
 
-            {/* 上側の高齢男性（車椅子） */}
-            <div
-              ref={(el) => { characterRefs.current[1] = el }}
-              className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[250px]"
-              style={{ transformOrigin: "center center" }}
-            >
-              <Image
-                src="/images/elderly-man-wheelchair.png"
-                alt="Elderly man in wheelchair"
-                width={150}
-                height={250}
-                className="object-contain"
-                priority
-              />
-            </div>
+                <FloatingCard className="bottom-right">
+                  <IconCircle className="green">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      />
+                    </svg>
+                  </IconCircle>
+                  <CardContent>
+                    <p className="label">文例データベース</p>
+                    <p className="value green">10万件以上</p>
+                  </CardContent>
+                </FloatingCard>
+              </ImageContainer>
+            </RightContent>
+          </FlexContainer>
 
-            {/* 右側の介護士 */}
-            <div
-              ref={(el) => { characterRefs.current[2] = el }}
-              className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[250px]"
-              style={{ transformOrigin: "center center" }}
-            >
-              <Image
-                src="/images/caregiver-pink.png"
-                alt="Care staff in pink"
-                width={150}
-                height={250}
-                className="object-contain"
-                priority
-              />
-            </div>
+          {/* Stats section */}
+          <StatsGrid data-aos="fade-up">
+            <StatCard>
+              <StatValue
+                className="blue counter"
+                ref={(el) => (countersRef.current[0] = el)}
+                data-target="60"
+                data-suffix="%"
+              >
+                0%
+              </StatValue>
+              <StatLabel>記録作成時間削減</StatLabel>
+            </StatCard>
+            <StatCard>
+              <StatValue
+                className="green counter"
+                ref={(el) => (countersRef.current[1] = el)}
+                data-target="100000"
+                data-suffix="+"
+              >
+                0+
+              </StatValue>
+              <StatLabel>専門家監修文例数</StatLabel>
+            </StatCard>
+            <StatCard>
+              <StatValue
+                className="teal counter"
+                ref={(el) => (countersRef.current[2] = el)}
+                data-target="92"
+                data-suffix="%"
+              >
+                0%
+              </StatValue>
+              <StatLabel>利用者満足度</StatLabel>
+            </StatCard>
+            <StatCard>
+              <StatValue
+                className="cyan counter"
+                ref={(el) => (countersRef.current[3] = el)}
+                data-target="8"
+                data-suffix=""
+              >
+                0<span>時間/月</span>
+              </StatValue>
+              <StatLabel>残業時間削減</StatLabel>
+            </StatCard>
+          </StatsGrid>
+        </Container>
+      </HeroSection>
+    </>
+  );
+};
 
-            {/* 下側の高齢女性 */}
-            <div
-              ref={(el) => { characterRefs.current[3] = el }}
-              className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[250px]"
-              style={{ transformOrigin: "center center" }}
-            >
-              <Image
-                src="/images/elderly-woman-cane.png"
-                alt="高齢者"
-                width={150}
-                height={250}
-                className="object-contain"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-
-        <p className="text-xl md:text-2xl text-[#0a2540] mb-10 max-w-2xl mx-auto">
-          CareSmily は、ケアの現場に笑顔をもたらす革新的なサービスです。
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <Button size="lg" className="bg-[#42a5d5] hover:bg-[#3890bd] text-white px-8 py-6 text-lg">
-            今すぐ始める
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-[#42a5d5] text-[#42a5d5] hover:bg-[#e6f4fa] px-8 py-6 text-lg bg-white"
-            onClick={onReplayAnimation}
-          >
-            <RefreshCw className="mr-2 h-5 w-5" />
-            アニメーションを再生
-          </Button>
-        </div>
-      </div>
-
-      <div className="absolute bottom-4 right-4 text-xs text-[#0a2540]">
-        <button className="flex items-center gap-2 bg-[#0a2540] text-white px-4 py-2 rounded-md">
-          GO NEXT
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-chevron-down"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </button>
-      </div>
-    </section>
-  )
-}
+export default HeroSectionComponent;
