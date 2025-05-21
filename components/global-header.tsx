@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useScrollTrigger } from "./scroll-trigger-provider"
 import { Menu, X } from "lucide-react"
 import styled from "styled-components"
 
@@ -181,7 +180,6 @@ const GlobalHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const headerRef = useRef<HTMLElement>(null);
-  const scrollContext = useScrollTrigger();
 
   // GSAPでスクロールトリガーを設定
   useEffect(() => {

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import GlobalHeader from "@/components/global-header"
 import HeroSection from "@/components/hero-section"
 import ServiceSection from "@/components/service-section"
 import PointsSection from "@/components/points-section"
@@ -266,6 +267,9 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       {/* 固定された枠 */}
       <div className="fixed inset-0 border-[12px] border-[rgb(10,37,64)] rounded-[15px] pointer-events-none z-30"></div>
+      
+      {/* グローバルヘッダー */}
+      <GlobalHeader />
 
       {/* Animation container - always visible */}
       <div
@@ -279,13 +283,27 @@ export default function Home() {
 
       {/* Landing page content - スクロール可能 */}
       <div ref={contentRef} id="content-scroll" className="relative z-20 h-screen overflow-auto">
-        <HeroSection />
-        <ServiceSection />
-        <PointsSection />
-        <FeaturesSection />
-        <ServiceContentSection />
-        <ServiceCountSection />
-        <FAQSection />
+        <div id="hero">
+          <HeroSection />
+        </div>
+        <div id="service">
+          <ServiceSection />
+        </div>
+        <div id="points">
+          <PointsSection />
+        </div>
+        <div id="features">
+          <FeaturesSection />
+        </div>
+        <div id="content">
+          <ServiceContentSection />
+        </div>
+        <div id="count">
+          <ServiceCountSection />
+        </div>
+        <div id="faq">
+          <FAQSection />
+        </div>
         <Footer />
       </div>
     </main>
