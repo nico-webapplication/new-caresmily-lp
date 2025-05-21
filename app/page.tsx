@@ -1,35 +1,35 @@
-"use client";
+"use client"
 
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import HeroSection from "@/components/hero-section";
-import ServiceSection from "@/components/service-section";
-import PointsSection from "@/components/points-section";
-import ServiceContentSection from "@/components/service-content-section";
-import FeaturesSection from "@/components/features-section";
-import FAQSection from "@/components/faq-section";
-import ServiceCountSection from "@/components/service-count-section";
-import Footer from "@/components/footer";
-import { DocumentScatter } from "@/components/document-scatter-component";
+import { useEffect, useRef, useState } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import HeroSection from "@/components/hero-section"
+import ServiceSection from "@/components/service-section"
+import PointsSection from "@/components/points-section"
+import ServiceContentSection from "@/components/service-content-section"
+import FeaturesSection from "@/components/features-section"
+import FAQSection from "@/components/faq-section"
+import ServiceCountSection from "@/components/service-count-section"
+import Footer from "@/components/footer"
+import { DocumentScatter } from "@/components/document-scatter-component"
 
 export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const documentsRef = useRef<HTMLElement[]>([]);
-  const frameLogoRef = useRef<HTMLAnchorElement>(null);
-  const [animationComplete, setAnimationComplete] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const documentsRef = useRef<HTMLElement[]>([])
+  const frameLogoRef = useRef<HTMLAnchorElement>(null)
+  const [animationComplete, setAnimationComplete] = useState(false)
 
   // Register GSAP plugins
   useEffect(() => {
     if (typeof window !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollTrigger)
     }
-  }, []);
+  }, [])
 
   // Frame logo animation
   useEffect(() => {
-    if (!frameLogoRef.current || !contentRef.current) return;
+    if (!frameLogoRef.current || !contentRef.current) return
 
     // Create scroll trigger for frame logo animation
     ScrollTrigger.create({
@@ -45,39 +45,35 @@ export default function Home() {
             scale: 1 - self.progress * 0.2,
             duration: 0.1,
             overwrite: true,
-          });
+          })
         }
       },
-    });
+    })
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
 
   const playAnimation = () => {
     if (containerRef.current && contentRef.current) {
-      const documents = containerRef.current.querySelectorAll(".document");
+      const documents = containerRef.current.querySelectorAll(".document")
 
       // Store documents for later use
-      documentsRef.current = Array.from(documents) as HTMLElement[];
+      documentsRef.current = Array.from(documents) as HTMLElement[]
 
       // Hide content initially
       gsap.set(contentRef.current, {
         opacity: 0,
         y: "100%", // Start from bottom
         display: "block",
-      });
+      })
 
-      setAnimationComplete(false);
+      setAnimationComplete(false)
 
       // Reset positions to top of screen with random X positions
       gsap.to(documents, {
-        x: () =>
-          gsap.utils.random(
-            -window.innerWidth / 2 + 100,
-            window.innerWidth / 2 - 100,
-          ),
+        x: () => gsap.utils.random(-window.innerWidth / 2 + 100, window.innerWidth / 2 - 100),
         y: -window.innerHeight,
         rotation: () => gsap.utils.random(-30, 30),
         scale: () => gsap.utils.random(0.7, 1.2),
@@ -100,16 +96,8 @@ export default function Home() {
                 // Scatter documents widely but keep them more in the center/bottom area
                 // so they can be pushed by the rising LP
                 gsap.to(documents, {
-                  x: () =>
-                    gsap.utils.random(
-                      -window.innerWidth * 0.6,
-                      window.innerWidth * 0.6,
-                    ),
-                  y: () =>
-                    gsap.utils.random(
-                      -window.innerHeight * 0.3,
-                      window.innerHeight * 0.5,
-                    ), // More documents in lower half
+                  x: () => gsap.utils.random(-window.innerWidth * 0.6, window.innerWidth * 0.6),
+                  y: () => gsap.utils.random(-window.innerHeight * 0.3, window.innerHeight * 0.5), // More documents in lower half
                   rotation: () => gsap.utils.random(-180, 180),
                   scale: () => gsap.utils.random(0.6, 1.3),
                   opacity: () => gsap.utils.random(0.8, 1),
@@ -119,25 +107,25 @@ export default function Home() {
                   onComplete: () => {
                     // After documents are scattered, animate the content coming up
                     // and pushing documents away
-                    animateContentAndPushDocuments();
+                    animateContentAndPushDocuments()
                   },
-                });
-              });
+                })
+              })
             },
-          });
+          })
         },
-      });
+      })
     }
-  };
+  }
 
   // Improved function to animate content and push documents
   const animateContentAndPushDocuments = () => {
-    if (!contentRef.current || documentsRef.current.length === 0) return;
+    if (!contentRef.current || documentsRef.current.length === 0) return
 
     // Create timeline for coordinated animation
     const tl = gsap.timeline({
       onComplete: () => setAnimationComplete(true),
-    });
+    })
 
     // Animate content coming up from bottom - SLOWER
     tl.to(
@@ -149,43 +137,43 @@ export default function Home() {
         ease: "power1.inOut", // Smoother easing
       },
       0,
-    );
+    )
 
     // Prepare documents for more realistic physics
     // Group documents by their vertical position
-    const bottomDocs = [];
-    const middleDocs = [];
-    const topDocs = [];
+    const bottomDocs = []
+    const middleDocs = []
+    const topDocs = []
 
     documentsRef.current.forEach((doc) => {
-      const rect = doc.getBoundingClientRect();
-      const centerY = rect.top + rect.height / 2;
-      const windowHeight = window.innerHeight;
+      const rect = doc.getBoundingClientRect()
+      const centerY = rect.top + rect.height / 2
+      const windowHeight = window.innerHeight
 
       if (centerY > windowHeight * 0.7) {
-        bottomDocs.push(doc); // Bottom 30%
+        bottomDocs.push(doc) // Bottom 30%
       } else if (centerY > windowHeight * 0.4) {
-        middleDocs.push(doc); // Middle 30%
+        middleDocs.push(doc) // Middle 30%
       } else {
-        topDocs.push(doc); // Top 40%
+        topDocs.push(doc) // Top 40%
       }
-    });
+    })
 
     // Bottom documents - pushed up first and fastest
     tl.to(
       bottomDocs,
       {
         y: (i, el) => {
-          const rect = el.getBoundingClientRect();
-          const centerY = rect.top + rect.height / 2;
+          const rect = el.getBoundingClientRect()
+          const centerY = rect.top + rect.height / 2
           // Push up and slightly to sides
-          return centerY - window.innerHeight * 1.2;
+          return centerY - window.innerHeight * 1.2
         },
         x: (i, el) => {
-          const rect = el.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const direction = centerX > window.innerWidth / 2 ? 1 : -1;
-          return `+=${direction * gsap.utils.random(100, 300)}`;
+          const rect = el.getBoundingClientRect()
+          const centerX = rect.left + rect.width / 2
+          const direction = centerX > window.innerWidth / 2 ? 1 : -1
+          return `+=${direction * gsap.utils.random(100, 300)}`
         },
         rotation: () => gsap.utils.random(-720, 720),
         scale: () => gsap.utils.random(0.4, 0.8),
@@ -198,22 +186,22 @@ export default function Home() {
         ease: "power2.out",
       },
       0.1, // Start slightly after content begins rising
-    );
+    )
 
     // Middle documents - pushed up with slight delay
     tl.to(
       middleDocs,
       {
         y: (i, el) => {
-          const rect = el.getBoundingClientRect();
-          const centerY = rect.top + rect.height / 2;
-          return centerY - window.innerHeight * 1;
+          const rect = el.getBoundingClientRect()
+          const centerY = rect.top + rect.height / 2
+          return centerY - window.innerHeight * 1
         },
         x: (i, el) => {
-          const rect = el.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const direction = centerX > window.innerWidth / 2 ? 1 : -1;
-          return `+=${direction * gsap.utils.random(150, 350)}`;
+          const rect = el.getBoundingClientRect()
+          const centerX = rect.left + rect.width / 2
+          const direction = centerX > window.innerWidth / 2 ? 1 : -1
+          return `+=${direction * gsap.utils.random(150, 350)}`
         },
         rotation: () => gsap.utils.random(-540, 540),
         scale: () => gsap.utils.random(0.4, 0.7),
@@ -226,22 +214,22 @@ export default function Home() {
         ease: "power2.out",
       },
       0.4, // Delayed start
-    );
+    )
 
     // Top documents - pushed up last and least
     tl.to(
       topDocs,
       {
         y: (i, el) => {
-          const rect = el.getBoundingClientRect();
-          const centerY = rect.top + rect.height / 2;
-          return centerY - window.innerHeight * 0.7;
+          const rect = el.getBoundingClientRect()
+          const centerY = rect.top + rect.height / 2
+          return centerY - window.innerHeight * 0.7
         },
         x: (i, el) => {
-          const rect = el.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const direction = centerX > window.innerWidth / 2 ? 1 : -1;
-          return `+=${direction * gsap.utils.random(100, 250)}`;
+          const rect = el.getBoundingClientRect()
+          const centerX = rect.left + rect.width / 2
+          const direction = centerX > window.innerWidth / 2 ? 1 : -1
+          return `+=${direction * gsap.utils.random(100, 250)}`
         },
         rotation: () => gsap.utils.random(-360, 360),
         scale: () => gsap.utils.random(0.3, 0.6),
@@ -254,30 +242,30 @@ export default function Home() {
         ease: "power1.out",
       },
       0.7, // Even more delayed
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     // Play animation on initial load
-    playAnimation();
+    playAnimation()
 
     // Handle window resize
     const handleResize = () => {
       if (containerRef.current) {
-        const documents = containerRef.current.querySelectorAll(".document");
-        gsap.killTweensOf(documents);
-        playAnimation();
+        const documents = containerRef.current.querySelectorAll(".document")
+        gsap.killTweensOf(documents)
+        playAnimation()
       }
-    };
+    }
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   return (
     <main className="min-h-screen bg-white">
-      {/* 固定された枠 - 二重構造で隙間を埋める */}
-      <div className="fixed inset-0 bg-[rgb(10,37,64)] pointer-events-none z-30"></div>
+      {/* 固定された枠 */}
+      <div className="fixed inset-0 border-[12px] border-[rgb(10,37,64)] rounded-[15px] pointer-events-none z-30"></div>
 
       {/* Animation container - always visible */}
       <div
@@ -290,11 +278,7 @@ export default function Home() {
       </div>
 
       {/* Landing page content - スクロール可能 */}
-      <div
-        ref={contentRef}
-        id="content-scroll"
-        className="relative z-20 h-screen overflow-auto"
-      >
+      <div ref={contentRef} id="content-scroll" className="relative z-20 h-screen overflow-auto">
         <HeroSection />
         <ServiceSection />
         <PointsSection />
@@ -305,5 +289,5 @@ export default function Home() {
         <Footer />
       </div>
     </main>
-  );
+  )
 }
