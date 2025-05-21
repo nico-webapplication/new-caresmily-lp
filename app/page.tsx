@@ -264,8 +264,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[rgb(10,37,64)]">
-      {/* 固定された枠 */}
-      <div className="fixed inset-0 border-[12px] border-[rgb(10,37,64)] rounded-[15px] pointer-events-none z-30"></div>
+      {/* 固定された枠 - 外側は背景色、内側は白色 */}
+      <div className="fixed inset-0 border-[12px] border-[rgb(10,37,64)] pointer-events-none z-30"></div>
+      
+      {/* 丸い白色の背景 - LPの背景となる */}
+      <div className="fixed inset-[12px] bg-white rounded-[15px] z-20 pointer-events-none"></div>
 
       {/* Animation container - always visible */}
       <div
@@ -278,7 +281,7 @@ export default function Home() {
       </div>
 
       {/* Landing page content - スクロール可能 */}
-      <div ref={contentRef} id="content-scroll" className="relative z-20 h-screen overflow-auto">
+      <div ref={contentRef} id="content-scroll" className="relative z-[25] h-screen overflow-auto">
         <HeroSection />
         <ServiceSection />
         <PointsSection />
