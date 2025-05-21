@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import MercariHeader from "@/components/mercari-header"
+import Header from "@/components/header"
 import HeroSection from "@/components/hero-section"
 import ServiceSection from "@/components/service-section"
 import PointsSection from "@/components/points-section"
@@ -269,7 +269,7 @@ export default function Home() {
       <div className="fixed inset-0 border-[12px] border-[rgb(10,37,64)] rounded-[15px] pointer-events-none z-30"></div>
       
       {/* Mercariスタイルのヘッダー */}
-      <MercariHeader />
+      <Header />
 
       {/* Animation container - always visible */}
       <div
