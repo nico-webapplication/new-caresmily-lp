@@ -73,17 +73,19 @@ export default function PointsSection() {
         if (leftContainer) {
           // コンテナ内の高さを取得するために一時的に表示
           gsap.set(leftContainer, { visibility: "visible" })
-          const leftHeight = leftContainer.scrollHeight
+          
+          // 最初のコンテナを一番下に配置して、クローンを作成
           const leftContainerHeight = leftBorderRef.current.clientHeight
-
-          // 最初のコンテナを一番下に配置
-          gsap.set(leftContainer, { y: leftContainerHeight })
-
-          // 下から上に流す無限ループアニメーション
+          const leftContentHeight = leftContainer.scrollHeight / 2  // 実際のコンテンツの高さ（重複を考慮）
+          
+          // 開始位置を設定（一番下から始まる）
+          gsap.set(leftContainer, { y: 0 })
+          
+          // 下から上に流す無限ループアニメーション - 途切れないよう調整
           gsap.to(leftContainer, {
-            y: -leftHeight + leftContainerHeight,
+            y: -leftContentHeight,
             repeat: -1,
-            duration: 20,
+            duration: 30,
             ease: "linear",
             repeatDelay: 0, // 繰り返し時の遅延なし
           })
@@ -95,17 +97,19 @@ export default function PointsSection() {
         if (rightContainer) {
           // コンテナ内の高さを取得するために一時的に表示
           gsap.set(rightContainer, { visibility: "visible" })
-          const rightHeight = rightContainer.scrollHeight
+          
+          // 最初のコンテナを一番下に配置して、クローンを作成
           const rightContainerHeight = rightBorderRef.current.clientHeight
-
-          // 最初のコンテナを一番下に配置
-          gsap.set(rightContainer, { y: rightContainerHeight })
-
-          // 下から上に流す無限ループアニメーション
+          const rightContentHeight = rightContainer.scrollHeight / 2  // 実際のコンテンツの高さ（重複を考慮）
+          
+          // 開始位置を設定（一番下から始まる）
+          gsap.set(rightContainer, { y: 0 })
+          
+          // 下から上に流す無限ループアニメーション - 途切れないよう調整
           gsap.to(rightContainer, {
-            y: -rightHeight + rightContainerHeight,
+            y: -rightContentHeight,
             repeat: -1,
-            duration: 20,
+            duration: 30,
             ease: "linear",
             repeatDelay: 0, // 繰り返し時の遅延なし
           })
@@ -242,18 +246,18 @@ export default function PointsSection() {
       </div>
 
       {/* 上部の縁 */}
-      <div className="absolute top-0 left-0 right-0 h-8 bg-[#0a2540] z-10"></div>
+      <div className="absolute top-0 left-0 right-0 h-12 bg-[#0a2540] z-10"></div>
 
       {/* 下部の縁 */}
-      <div className="absolute bottom-0 left-0 right-0 h-8 bg-[#0a2540] z-10"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-12 bg-[#0a2540] z-10"></div>
 
       {/* 左側の縁 */}
-      <div ref={leftBorderRef} className="absolute left-0 top-8 bottom-8 w-8 bg-[#0a2540] overflow-hidden z-10">
+      <div ref={leftBorderRef} className="absolute left-0 top-12 bottom-12 w-16 bg-[#0a2540] overflow-hidden z-10">
         <div className="text-loop-container absolute left-0 w-full visibility-hidden">
           {borderTexts.map((text, index) => (
             <div
               key={`left-${index}`}
-              className="text-white text-xs font-bold py-4 text-center writing-vertical"
+              className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
               style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
             >
               {text}
@@ -263,12 +267,12 @@ export default function PointsSection() {
       </div>
 
       {/* 右側の縁 */}
-      <div ref={rightBorderRef} className="absolute right-0 top-8 bottom-8 w-8 bg-[#0a2540] overflow-hidden z-10">
+      <div ref={rightBorderRef} className="absolute right-0 top-12 bottom-12 w-16 bg-[#0a2540] overflow-hidden z-10">
         <div className="text-loop-container absolute left-0 w-full visibility-hidden">
           {borderTexts.map((text, index) => (
             <div
               key={`right-${index}`}
-              className="text-white text-xs font-bold py-4 text-center writing-vertical"
+              className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
               style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
             >
               {text}
