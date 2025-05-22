@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="relative h-16 w-48">
               <Image
-                src="/images/CareSmily_ロゴ.png"
+                src="/images/caresmily-logo.png"
                 alt="CareSmily Logo"
                 fill
                 style={{ objectFit: "contain" }}

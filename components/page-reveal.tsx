@@ -165,7 +165,7 @@ const PageReveal = forwardRef<HTMLDivElement>((props, ref) => {
           <div className="absolute top-4 left-4">
             <div className="relative w-20 h-6">
               <Image
-                src="/images/CareSmily_ロゴ.png"
+                src="/images/caresmily-logo.png"
                 alt="CareSmily Logo"
                 fill
                 style={{ objectFit: "contain" }}
