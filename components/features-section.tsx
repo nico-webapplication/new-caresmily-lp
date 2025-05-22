@@ -233,13 +233,33 @@ export default function FeaturesSection() {
   }, [activeIndex, benefits.length, scroller])
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gray-50 overflow-hidden">
+    <section 
+      ref={sectionRef} 
+      className="py-20 overflow-hidden"
+      style={{
+        background: `conic-gradient(
+          from var(--primary-light-angle) at 50% 50%,
+          rgba(255, 255, 255, 1),
+          rgba(255, 255, 255, 0.2) 5% 40%,
+          rgba(255, 255, 255, 1) 50%,
+          rgba(255, 255, 255, 0.2) 60% 95%,
+          rgba(255, 255, 255, 1)
+        ),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5))`
+      }}
+    >
       <div className="container mx-auto px-4">
         <div ref={titleRef} className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">CareSmilyを導入するメリット</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            介護現場の課題を解決し、より良いケアを実現するための機能を提供します
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-CxDKyWyFLUJpYjsos7CqXF39Z3qVT4.png"
+              alt="CareSmilyを導入するメリット"
+              width={800}
+              height={100}
+              className="h-auto mx-auto"
+              quality={95}
+            />
+          </h2>
         </div>
 
         {/* 3Dカルーセル */}
