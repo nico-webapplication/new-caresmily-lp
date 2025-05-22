@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -31,42 +32,61 @@ export default function Header() {
         </div>
 
         {/* デスクトップナビゲーション */}
-        <nav className="hidden md:block">
-          <ul className="flex space-x-8">
-            <li>
-              <Link 
-                href="#about" 
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                サービス概要
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="#features" 
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                特徴
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="#services" 
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                サービス内容
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="#contact" 
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                お問い合わせ
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <div className="hidden md:flex items-center space-x-8">
+          <nav>
+            <ul className="flex space-x-8">
+              <li>
+                <Link 
+                  href="/news" 
+                  className="text-white hover:text-gray-300 transition-colors"
+                >
+                  お知らせ
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/column" 
+                  className="text-white hover:text-gray-300 transition-colors"
+                >
+                  コラム
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/media" 
+                  className="text-white hover:text-gray-300 transition-colors"
+                >
+                  メディア情報
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <Button
+            onClick={() =>
+              (window.location.href = "https://app.caresmily.com")
+            }
+            variant="outline"
+            className="font-bold px-6 py-3 border-2 border-primary text-primary hover:bg-primary/10 transition-all duration-300 flex items-center gap-2 text-lg"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-log-in"
+            >
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" x2="3" y1="12" y2="12" />
+            </svg>
+            ログイン
+          </Button>
+        </div>
 
         {/* モバイルメニューボタン */}
         <button 
@@ -90,41 +110,60 @@ export default function Header() {
           <ul className="flex flex-col space-y-3 px-6">
             <li>
               <Link 
-                href="#about" 
+                href="/news" 
                 className="block text-white hover:text-gray-300 transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
-                サービス概要
+                お知らせ
               </Link>
             </li>
             <li>
               <Link 
-                href="#features" 
+                href="/column" 
                 className="block text-white hover:text-gray-300 transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
-                特徴
+                コラム
               </Link>
             </li>
             <li>
               <Link 
-                href="#services" 
+                href="/media" 
                 className="block text-white hover:text-gray-300 transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
-                サービス内容
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="#contact" 
-                className="block text-white hover:text-gray-300 transition-colors py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                お問い合わせ
+                メディア情報
               </Link>
             </li>
           </ul>
+          <div className="px-6 pt-4">
+            <Button
+              onClick={() => {
+                window.location.href = "https://app.caresmily.com";
+                setIsOpen(false);
+              }}
+              variant="outline"
+              className="w-full font-bold px-6 py-3 border-2 border-primary text-primary hover:bg-primary/10 transition-all duration-300 flex items-center justify-center gap-2 text-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-log-in"
+              >
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                <polyline points="10 17 15 12 10 7" />
+                <line x1="15" x2="3" y1="12" y2="12" />
+              </svg>
+              ログイン
+            </Button>
+          </div>
         </div>
       )}
     </header>
