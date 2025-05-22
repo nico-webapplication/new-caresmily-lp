@@ -225,8 +225,7 @@ export default function ServiceContentSection() {
                 CareSmily <span className="text-[#42a5d5]">デイサービス</span>
               </h2>
               <p className="text-lg text-gray-700 mb-4">
-                通所介護（デイサービス）事業所で発生する連絡帳・通所介護計画書・アセスメントなどの書類作成を高速化する"文例データベース特化"クラウド
-                SaaS。
+                通所介護（デイサービス）事業所で発生する連絡帳・通所介護計画書・個別機能訓練計画などの書類作成を高速化する"文例データベース特化"サービス。
               </p>
               <div className="inline-block bg-[#42a5d5] text-white px-4 py-2 rounded-full text-sm font-medium">
                 2025年4月正式リリース
@@ -237,41 +236,12 @@ export default function ServiceContentSection() {
                 <div className="absolute inset-0 bg-[#42a5d5] rounded-full opacity-10 animate-pulse"></div>
                 <div className="absolute inset-2 bg-white rounded-full shadow-lg flex items-center justify-center">
                   <Image
-                    src="/daycare-service.png"
+                    src="/images/daycare.svg"
                     alt="デイサービスイラスト"
                     width={200}
                     height={200}
                     className="p-4"
                   />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 思想セクション */}
-        <div className="mb-16 anim-element">
-          <div className="bg-white rounded-2xl shadow-lg p-6 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-full bg-[#42a5d5]"></div>
-            <h3 className="text-xl font-bold text-[#0a2540] mb-4 pl-4">思想</h3>
-            <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-2/3 pl-4">
-                <p className="text-gray-700 mb-4">
-                  AI自動生成に頼らず、主任ケアマネ・看護師らが監修した10万件規模の定型文を「選んで貼るだけ」で活用する"非AI型"アプローチを採用。
-                </p>
-                <div className="flex items-center text-[#42a5d5] font-medium">
-                  <span>確実性・操作性・時短効果を同時に実現</span>
-                  <ChevronRight className="w-5 h-5 ml-1" />
-                </div>
-              </div>
-              <div className="md:w-1/3 flex justify-center mt-6 md:mt-0">
-                <div className="icon-container relative w-32 h-32 bg-[#e6f7ff] rounded-full flex items-center justify-center">
-                  <Database className="w-16 h-16 text-[#42a5d5]" />
-                  <div className="absolute -top-2 -right-2 bg-white rounded-full p-2 shadow-md">
-                    <span className="text-xs font-bold text-[#42a5d5]">
-                      10万件
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -286,223 +256,51 @@ export default function ServiceContentSection() {
           {[
             {
               title: "連絡帳",
-              desc: "利用者のADL変化・レクリエーション状況・食事/排泄コメント等",
-              icon: <FileText className="w-8 h-8 text-white" />,
+              desc: "レクリエーション活動・生活相談・食事/排泄/入浴コメント等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
               color: "#42a5d5",
             },
             {
               title: "通所介護計画書",
-              desc: "生活課題・長期短期目標・支援内容・評価文例",
-              icon: <ClipboardList className="w-8 h-8 text-white" />,
-              color: "#4299e1",
+              desc: "利用者本人/家族の希望・長期短期目標・健康状態等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#42a5d5",
             },
             {
               title: "個別機能訓練計画",
-              desc: "身体機能・活動/参加目標・訓練プログラム文例",
-              icon: <Users2 className="w-8 h-8 text-white" />,
-              color: "#3182ce",
+              desc: "身体機能・活動/参加目標・訓練プログラム等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#42a5d5",
+            },
+            {
+              title: "状況報告書",
+              desc: "家族との連携情報共有・薬の内服/服薬時管理・利用者の意向/目標の確認等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#42a5d5",
+            },
+            {
+              title: "FAX・メール",
+              desc: "ケアマネージャー宛・行事/イベントのお知らせ・人事/運営上の連絡等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#42a5d5",
             },
             {
               title: "アセスメントシート",
-              desc: "生活環境・家族背景・医学的情報の聞き取り文例",
-              icon: <CheckCircle className="w-8 h-8 text-white" />,
-              color: "#2b6cb0",
-            },
-            {
-              title: "モニタリング／月次報告",
-              desc: "経過・課題・評価コメント文例",
-              icon: <BarChart3 className="w-8 h-8 text-white" />,
-              color: "#2c5282",
-            },
-            {
-              title: "その他",
-              desc: "総計80k〜100k超をカテゴリ／キーワードで横断検索",
+              desc: "ADL・IADL・認知機能/心理/行動面等の文例",
               icon: <Database className="w-8 h-8 text-white" />,
-              color: "#2a4365",
+              color: "#42a5d5",
+            },
+            {
+              title: "サービス担当者会議",
+              desc: "各ケアに対する、背景/経過・具体的な相談事項・他担当者への要望の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#42a5d5",
             },
           ].map((item, index) => (
             <div
               key={index}
               className="feature-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="p-4" style={{ backgroundColor: item.color }}>
-                <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-                  {item.icon}
-                </div>
-              </div>
-              <div className="p-5">
-                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* 主要機能セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
-          主要機能（デイサービス特化）
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {[
-            {
-              title: "高速検索 & フィルタ",
-              desc: "書類種別→キーワード／タグで瞬時に絞り込み、ワンクリックでコピー。",
-              icon: <Zap className="w-6 h-6 text-white" />,
-              color: "#42a5d5",
-            },
-            {
-              title: "チーム共有",
-              desc: "ベテランが選んだ文例セットを新人と共有し、文書品質を平準化。",
-              icon: <Users className="w-6 h-6 text-white" />,
-              color: "#42a5d5",
-            },
-            {
-              title: "カスタム文例登録",
-              desc: "事業所独自の言い回しや自治体様式向け文例を一元管理。",
-              icon: <FileText className="w-6 h-6 text-white" />,
-              color: "#42a5d5",
-            },
-            {
-              title: "PDF出力／印刷",
-              desc: "アプリ内で微調整後、そのままPDF生成・プリントアウトまで完結。",
-              icon: <FileText className="w-6 h-6 text-white" />,
-              color: "#42a5d5",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="feature-card flex bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]"
-            >
-              <div
-                className="w-16 flex-shrink-0 flex items-center justify-center"
-                style={{ backgroundColor: item.color }}
-              >
-                {item.icon}
-              </div>
-              <div className="p-5 flex-1">
-                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* 導入効果セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
-          導入効果（公開ベンチマーク）
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {[
-            {
-              title: "書類作成時間削減",
-              value: "最大60%",
-              subtext: "平均5分/件の短縮",
-              icon: <Clock className="w-8 h-8 text-[#42a5d5]" />,
-            },
-            {
-              title: "残業削減",
-              value: "月8時間減",
-              subtext: "より多くの時間を利用者様に",
-              icon: <Clock className="w-8 h-8 text-[#42a5d5]" />,
-            },
-            {
-              title: "利用者／家族満足度",
-              value: "92%",
-              subtext: "に向上",
-              icon: <Users className="w-8 h-8 text-[#42a5d5]" />,
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="stat-item bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="w-16 h-16 mx-auto bg-[#e6f7ff] rounded-full flex items-center justify-center mb-4">
-                {item.icon}
-              </div>
-              <h4 className="font-medium text-gray-600 mb-2">{item.title}</h4>
-              <div className="text-3xl font-bold text-[#42a5d5] mb-1">
-                {item.value}
-              </div>
-              <p className="text-sm text-gray-500">{item.subtext}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* 技術・運用面セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
-          技術・運用面
-        </h3>
-        <div className="bg-white rounded-xl shadow-md p-6 mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "クラウド対応",
-                desc: "100%クラウド（S3＋CloudFront／Lambda＋PostgreSQL）でPC・タブレット・スマホに対応、インストール不要。",
-                icon: <Cloud className="w-8 h-8 text-[#42a5d5]" />,
-              },
-              {
-                title: "セキュリティ",
-                desc: "HTTPS通信＋JWT認証でデータを国内リージョンに暗号化保存。",
-                icon: <Shield className="w-8 h-8 text-[#42a5d5]" />,
-              },
-              {
-                title: "料金体系",
-                desc: "最低6か月契約・月額15,000円のサブスクモデル（資料請求時提示）。（価格は2025年5月時点）",
-                icon: <CreditCard className="w-8 h-8 text-[#42a5d5]" />,
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center text-center p-4"
-              >
-                <div className="icon-container w-16 h-16 bg-[#e6f7ff] rounded-full flex items-center justify-center mb-4">
-                  {item.icon}
-                </div>
-                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 利用シーン例セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
-          利用シーン例
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {[
-            {
-              title: "連絡帳作成の効率化",
-              desc: "送迎後40名分の連絡帳を30→12分に短縮し利用者との会話時間を1.5倍確保。",
-              image:
-                "/placeholder.svg?height=120&width=120&query=daycare communication",
-            },
-            {
-              title: "新人研修の効率化",
-              desc: "新人職員研修で「正しい記録表現」を文例から学習し、指導コストを低減。",
-              image:
-                "/placeholder.svg?height=120&width=120&query=staff training",
-            },
-            {
-              title: "根拠ある記録",
-              desc: "行政・家族に確実な根拠を説明できるためAI生成文のブラックボックス問題を回避。",
-              image:
-                "/placeholder.svg?height=120&width=120&query=document verification",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="feature-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="h-32 bg-[#e6f7ff] flex items-center justify-center">
-                <Image
-                  src={item.image || "/placeholder.svg"}
-                  alt={item.title}
-                  width={120}
-                  height={120}
-                  className="object-contain"
-                />
-              </div>
               <div className="p-5">
                 <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
                 <p className="text-sm text-gray-600">{item.desc}</p>
@@ -552,8 +350,7 @@ export default function ServiceContentSection() {
                 CareSmily <span className="text-[#ff5a5a]">訪問介護</span>
               </h2>
               <p className="text-lg text-gray-700 mb-4">
-                訪問介護事業所で発生するサービス提供記録・訪問介護計画書・アセスメントなどの書類作成を高速化する"文例データベース特化"クラウド
-                SaaS。
+                訪問介護事業所で発生するサービス提供記録・訪問介護計画書・アセスメントなどの書類作成を高速化する"文例データベース特化"サービス。
               </p>
               <div className="inline-block bg-[#ff5a5a] text-white px-4 py-2 rounded-full text-sm font-medium">
                 2025年4月正式リリース
@@ -564,41 +361,12 @@ export default function ServiceContentSection() {
                 <div className="absolute inset-0 bg-[#ff5a5a] rounded-full opacity-10 animate-pulse"></div>
                 <div className="absolute inset-2 bg-white rounded-full shadow-lg flex items-center justify-center">
                   <Image
-                    src="/placeholder.svg?height=200&width=200&query=home care service illustration"
+                    src="/images/homecare.svg"
                     alt="訪問介護イラスト"
                     width={200}
                     height={200}
                     className="p-4"
                   />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 思想セクション */}
-        <div className="mb-16 anim-element">
-          <div className="bg-white rounded-2xl shadow-lg p-6 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-full bg-[#ff5a5a]"></div>
-            <h3 className="text-xl font-bold text-[#0a2540] mb-4 pl-4">思想</h3>
-            <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-2/3 pl-4">
-                <p className="text-gray-700 mb-4">
-                  AI自動生成に頼らず、主任ケアマネ・訪問介護専門家らが監修した10万件規模の定型文を「選んで貼るだけ」で活用する"非AI型"アプローチを採用。
-                </p>
-                <div className="flex items-center text-[#ff5a5a] font-medium">
-                  <span>確実性・操作性・時短効果を同時に実現</span>
-                  <ChevronRight className="w-5 h-5 ml-1" />
-                </div>
-              </div>
-              <div className="md:w-1/3 flex justify-center mt-6 md:mt-0">
-                <div className="icon-container relative w-32 h-32 bg-[#fff0f0] rounded-full flex items-center justify-center">
-                  <Database className="w-16 h-16 text-[#ff5a5a]" />
-                  <div className="absolute -top-2 -right-2 bg-white rounded-full p-2 shadow-md">
-                    <span className="text-xs font-bold text-[#ff5a5a]">
-                      10万件
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -612,224 +380,64 @@ export default function ServiceContentSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {[
             {
-              title: "サービス提供記録",
-              desc: "身体介護・生活援助の詳細記録、利用者状態変化、対応内容等",
-              icon: <FileText className="w-8 h-8 text-white" />,
+              title: "連絡帳",
+              desc: "生活支援・身体介護に関するの文例",
+              icon: <Database className="w-8 h-8 text-white" />,
               color: "#ff5a5a",
             },
             {
               title: "訪問介護計画書",
-              desc: "生活課題・長期短期目標・支援内容・評価文例",
-              icon: <ClipboardList className="w-8 h-8 text-white" />,
-              color: "#f56565",
+              desc: "利用者本人/家族の希望・訪問介護ADL・健康状態等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#ff5a5a",
+            },
+            {
+              title: "状況報告書",
+              desc: "家族との連携情報共有・薬の内服/服薬時管理・利用者の意向/目標の確認等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#ff5a5a",
+            },
+            {
+              title: "FAX",
+              desc: "ケアマネージャー宛・人事/運営上の連絡・感染症/災害時の連絡等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#ff5a5a",
             },
             {
               title: "アセスメントシート",
-              desc: "在宅環境・家族状況・医学的情報の聞き取り文例",
-              icon: <CheckCircle className="w-8 h-8 text-white" />,
-              color: "#e53e3e",
-            },
-            {
-              title: "モニタリング記録",
-              desc: "経過・課題・評価コメント文例",
-              icon: <BarChart3 className="w-8 h-8 text-white" />,
-              color: "#c53030",
-            },
-            {
-              title: "ヘルパー申し送り",
-              desc: "引継ぎ事項・注意点・変更点の記録文例",
+              desc: "ADL・IADL・認知機能/心理/行動面等の文例",
               icon: <Users2 className="w-8 h-8 text-white" />,
-              color: "#9b2c2c",
+              color: "#ff5a5a",
             },
             {
-              title: "その他",
-              desc: "総計80k〜100k超をカテゴリ／キーワードで横断検索",
+              title: "サービス担当者会議",
+              desc: "各ケアに対する、背景/経過・具体的な相談事項・他担当者への要望の文例",
               icon: <Database className="w-8 h-8 text-white" />,
-              color: "#742a2a",
+              color: "#ff5a5a",
             },
+      {
+        title: "介護記録",
+        desc: "記録作成/報告手続き・訪問前準備/移動・苦情/要望への対応等の文例",
+        icon: <Database className="w-8 h-8 text-white" />,
+        color: "#ff5a5a",
+      },
+      {
+        title: "ご家族への報告書(お手紙)",
+        desc: "ご家族へのお願い・スタッフからのお知らせ・事業所運営情報等の文例",
+        icon: <Database className="w-8 h-8 text-white" />,
+        color: "#ff5a5a",
+      },
+      {
+        title: "緊急時対応報告書",
+        desc: "感染症・急性疾患・訪問中の事故/異常時等の対応についての文例",
+        icon: <Database className="w-8 h-8 text-white" />,
+        color: "#ff5a5a",
+      },
           ].map((item, index) => (
             <div
               key={index}
               className="feature-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="p-4" style={{ backgroundColor: item.color }}>
-                <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-                  {item.icon}
-                </div>
-              </div>
-              <div className="p-5">
-                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* 主要機能セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
-          主要機能（訪問介護特化）
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {[
-            {
-              title: "高速検索 & フィルタ",
-              desc: "書類種別→キーワード／タグで瞬時に絞り込み、ワンクリックでコピー。",
-              icon: <Zap className="w-6 h-6 text-white" />,
-              color: "#ff5a5a",
-            },
-            {
-              title: "チーム共有",
-              desc: "ベテランが選んだ文例セットを新人と共有し、文書品質を平準化。",
-              icon: <Users className="w-6 h-6 text-white" />,
-              color: "#ff5a5a",
-            },
-            {
-              title: "カスタム文例登録",
-              desc: "事業所独自の言い回しや自治体様式向け文例を一元管理。",
-              icon: <FileText className="w-6 h-6 text-white" />,
-              color: "#ff5a5a",
-            },
-            {
-              title: "PDF出力／印刷",
-              desc: "アプリ内で微調整後、そのままPDF生成・プリントアウトまで完結。",
-              icon: <FileText className="w-6 h-6 text-white" />,
-              color: "#ff5a5a",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="feature-card flex bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]"
-            >
-              <div
-                className="w-16 flex-shrink-0 flex items-center justify-center"
-                style={{ backgroundColor: item.color }}
-              >
-                {item.icon}
-              </div>
-              <div className="p-5 flex-1">
-                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* 導入効果セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
-          導入効果（公開ベンチマーク）
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {[
-            {
-              title: "書類作成時間削減",
-              value: "最大60%",
-              subtext: "平均5分/件の短縮",
-              icon: <Clock className="w-8 h-8 text-[#ff5a5a]" />,
-            },
-            {
-              title: "残業削減",
-              value: "月8時間減",
-              subtext: "より多くの時間を利用者様に",
-              icon: <Clock className="w-8 h-8 text-[#ff5a5a]" />,
-            },
-            {
-              title: "利用者／家族満足度",
-              value: "92%",
-              subtext: "に向上",
-              icon: <Users className="w-8 h-8 text-[#ff5a5a]" />,
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="stat-item bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="w-16 h-16 mx-auto bg-[#fff0f0] rounded-full flex items-center justify-center mb-4">
-                {item.icon}
-              </div>
-              <h4 className="font-medium text-gray-600 mb-2">{item.title}</h4>
-              <div className="text-3xl font-bold text-[#ff5a5a] mb-1">
-                {item.value}
-              </div>
-              <p className="text-sm text-gray-500">{item.subtext}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* 技術・運用面セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
-          技術・運用面
-        </h3>
-        <div className="bg-white rounded-xl shadow-md p-6 mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "クラウド対応",
-                desc: "100%クラウド（S3＋CloudFront／Lambda＋PostgreSQL）でPC・タブレット・スマホに対応、インストール不要。",
-                icon: <Cloud className="w-8 h-8 text-[#ff5a5a]" />,
-              },
-              {
-                title: "セキュリティ",
-                desc: "HTTPS通信＋JWT認証でデータを国内リージョンに暗号化保存。",
-                icon: <Shield className="w-8 h-8 text-[#ff5a5a]" />,
-              },
-              {
-                title: "料金体系",
-                desc: "最低6か月契約・月額15,000円のサブスクモデル（資料請求時提示）。（価格は2025年5月時点）",
-                icon: <CreditCard className="w-8 h-8 text-[#ff5a5a]" />,
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center text-center p-4"
-              >
-                <div className="icon-container w-16 h-16 bg-[#fff0f0] rounded-full flex items-center justify-center mb-4">
-                  {item.icon}
-                </div>
-                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 利用シーン例セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
-          利用シーン例
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {[
-            {
-              title: "記録作成の効率化",
-              desc: "1日20件のサービス提供記録を40→15分に短縮し、次の訪問への移動時間を確保。",
-              image:
-                "/placeholder.svg?height=120&width=120&query=home care record",
-            },
-            {
-              title: "新人研修の効率化",
-              desc: "新人ヘルパー研修で「適切な記録表現」を文例から学習し、指導コストを低減。",
-              image:
-                "/placeholder.svg?height=120&width=120&query=caregiver training",
-            },
-            {
-              title: "根拠ある記録",
-              desc: "行政・家族に確実な根拠を説明できるためAI生成文のブラックボックス問題を回避。",
-              image:
-                "/placeholder.svg?height=120&width=120&query=document verification",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="feature-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="h-32 bg-[#fff0f0] flex items-center justify-center">
-                <Image
-                  src={item.image || "/placeholder.svg"}
-                  alt={item.title}
-                  width={120}
-                  height={120}
-                  className="object-contain"
-                />
-              </div>
               <div className="p-5">
                 <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
                 <p className="text-sm text-gray-600">{item.desc}</p>
@@ -882,89 +490,24 @@ export default function ServiceContentSection() {
           </div>
 
           <p className="text-2xl text-[#0a2540] mb-8 font-medium">
-            介護記録サービスは現在開発中です
+            介護記録サービスは現在準備中です
           </p>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
             より使いやすく、効率的な介護記録システムを提供するために準備を進めています。
             最新の技術と専門家の知見を組み合わせた革新的なサービスにご期待ください。
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                title: "簡単操作",
-                desc: "直感的なインターフェースで誰でも簡単に使えます",
-                icon: <TouchApp className="w-12 h-12 text-[#50c878]" />,
-              },
-              {
-                title: "時間短縮",
-                desc: "記録作成時間を大幅に削減し、ケアに集中できます",
-                icon: <Clock className="w-12 h-12 text-[#50c878]" />,
-              },
-              {
-                title: "データ活用",
-                desc: "蓄積されたデータを分析し、ケアの質向上に役立てます",
-                icon: <BarChart3 className="w-12 h-12 text-[#50c878]" />,
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="feature-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center"
-              >
-                <div className="w-20 h-20 bg-[#e6f9ee] rounded-full flex items-center justify-center mb-4">
-                  {item.icon}
-                </div>
-                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-600 text-center">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-
           <div className="mt-12">
             <button className="bg-[#50c878] text-white px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
-              リリース情報を受け取る
+              内容について問い合わせる
             </button>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-8 anim-element">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/3 mb-6 md:mb-0">
-              <Image
-                src="/placeholder.svg?height=300&width=300&query=care records app interface"
-                alt="介護記録アプリイメージ"
-                width={300}
-                height={300}
-                className="rounded-lg"
-              />
-            </div>
-            <div className="md:w-2/3 md:pl-8">
-              <h3 className="text-2xl font-bold text-[#0a2540] mb-4">
-                開発中の機能
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  "AIによる音声入力と文字起こし",
-                  "写真・動画の記録添付機能",
-                  "バイタルデータの自動グラフ化",
-                  "多職種間の情報共有機能",
-                  "カスタマイズ可能なテンプレート",
-                  "オフライン記録と自動同期",
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-[#50c878] mr-2 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
   );
 
-  // 居宅支援の内容（Coming Soon）
+  // ケアマネージャーの内容（Coming Soon）
   const supportContent = (
     <div className="py-8">
       <div className="max-w-5xl mx-auto">
@@ -985,82 +528,17 @@ export default function ServiceContentSection() {
           </div>
 
           <p className="text-2xl text-[#0a2540] mb-8 font-medium">
-            居宅支援サービスは現在開発中です
+            ケアマネージャーサービスは現在準備中です
           </p>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
-            より充実した居宅支援サービスを提供するために準備を進めています。
-            ケアマネジャーの業務効率化と質の高いケアプラン作成をサポートする機能を開発中です。
+            より充実したケアマネージャーサービスを提供するために準備を進めています。
+            ケアマネジャーの業務効率化と質の高いケアプラン作成をサポートする機能を準備中です。
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                title: "ケアプラン作成支援",
-                desc: "専門家監修の文例を活用した質の高いケアプラン作成",
-                icon: <ClipboardList className="w-12 h-12 text-[#ffb347]" />,
-              },
-              {
-                title: "業務効率化",
-                desc: "書類作成時間を短縮し、利用者様との時間を確保",
-                icon: <Clock className="w-12 h-12 text-[#ffb347]" />,
-              },
-              {
-                title: "多職種連携",
-                desc: "関係者間の情報共有をスムーズに行える連携機能",
-                icon: <Users2 className="w-12 h-12 text-[#ffb347]" />,
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="feature-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center"
-              >
-                <div className="w-20 h-20 bg-[#fff8e6] rounded-full flex items-center justify-center mb-4">
-                  {item.icon}
-                </div>
-                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-600 text-center">{item.desc}</p>
-              </div>
-            ))}
-          </div>
 
           <div className="mt-12">
             <button className="bg-[#ffb347] text-white px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
-              リリース情報を受け取る
+              内容について問い合わせる
             </button>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-8 anim-element">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/3 mb-6 md:mb-0">
-              <Image
-                src="/placeholder.svg?height=300&width=300&query=care management app interface"
-                alt="居宅支援アプリイメージ"
-                width={300}
-                height={300}
-                className="rounded-lg"
-              />
-            </div>
-            <div className="md:w-2/3 md:pl-8">
-              <h3 className="text-2xl font-bold text-[#0a2540] mb-4">
-                開発中の機能
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  "ケアプラン文例データベース",
-                  "アセスメント支援機能",
-                  "モニタリング記録の効率化",
-                  "サービス担当者会議の議事録作成",
-                  "給付管理業務の効率化",
-                  "地域資源情報の統合管理",
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-[#ffb347] mr-2 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1180,7 +658,6 @@ export default function ServiceContentSection() {
         className="relative overflow-hidden transition-all duration-500"
         style={{
           backgroundColor: tabs[activeTab].bgColor,
-          minHeight: contentHeight > 0 ? `${contentHeight}px` : "auto",
         }}
       >
         <div

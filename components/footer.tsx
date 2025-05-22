@@ -1,180 +1,109 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import Link from "next/link"
+import Image from "next/image"
 
 export default function Footer() {
   return (
-    <footer className="bg-sky-900 text-white py-12 px-4 md:px-6">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <div className="relative h-16 w-48">
-              <Image
-                src="/images/CareSmily_ロゴ.png"
-                alt="CareSmily Logo"
-                fill
-                style={{ objectFit: "contain" }}
-                className="brightness-0 invert"
-              />
-            </div>
-            <p className="text-sky-200">
-              介護現場に笑顔をもたらす
-              <br />
-              革新的なサービス
-            </p>
-            <div className="flex space-x-4">
-              <Link
-                href="#"
-                className="text-sky-200 hover:text-white transition-colors"
-              >
-                <Facebook className="h-5 w-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-sky-200 hover:text-white transition-colors"
-              >
-                <Twitter className="h-5 w-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-sky-200 hover:text-white transition-colors"
-              >
-                <Instagram className="h-5 w-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-sky-200 hover:text-white transition-colors"
-              >
-                <Youtube className="h-5 w-5" />
-              </Link>
-            </div>
-          </div>
-
+    <footer className="bg-gradient-to-b from-[#EBF5FF] to-white text-gray-700">
+      <div className="container mx-auto px-4 py-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {/* Product Information */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-sky-100">
-              サービス
-            </h3>
-            <ul className="space-y-2">
+            <h3 className="text-2xl font-bold mb-6">製品情報</h3>
+            <ul className="space-y-4">
               <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  書類作成支援
+                <Link href="/features" className="text-gray-700 hover:text-primary transition-colors">
+                  機能一覧
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  データ分析
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  業務効率化
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  研修サポート
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-sky-100">
-              会社情報
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
+                  href="https://nico-inc.net/"
+                  className="text-gray-700 hover:text-primary transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   会社概要
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  ミッション
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  チーム
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  採用情報
-                </Link>
-              </li>
             </ul>
           </div>
 
+          {/* Support */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-sky-100">
-              サポート
-            </h3>
-            <ul className="space-y-2">
+            <h3 className="text-2xl font-bold mb-6">サポート</h3>
+            <ul className="space-y-4">
               <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  お問い合わせ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
+                <Link href="/faq" className="text-gray-700 hover:text-primary transition-colors">
                   よくある質問
                 </Link>
               </li>
               <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  利用規約
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sky-200 hover:text-white transition-colors"
-                >
-                  プライバシーポリシー
+                <Link href="/contact" className="text-gray-700 hover:text-primary transition-colors">
+                  お問い合わせ
                 </Link>
               </li>
             </ul>
           </div>
+
+          {/* Contact Information */}
+          <div>
+            <h3 className="text-2xl font-bold mb-6">お問い合わせ</h3>
+            <div className="space-y-4 text-gray-700">
+              <p>平日 10:00〜18:00</p>
+              <p>電話：050-5799-0339</p>
+              <p>メール：support@caresmily.com</p>
+            </div>
+          </div>
         </div>
 
-        <div className="border-t border-sky-800 mt-12 pt-8 text-center text-sky-300">
-          <p>© {new Date().getFullYear()} CareSmily All Rights Reserved.</p>
+        {/* Bottom Section with Logo and Company Info */}
+        <div className="border-t border-gray-200 pt-8">
+          <div className="flex flex-col space-y-6 md:space-y-4 px-4 md:px-0">
+            <Link href="/" className="block mx-auto md:mx-0">
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jVeMJ5tX4JZKgYTrc25BRjeVRy2gLs.png"
+                alt="CareSmily"
+                width={200}
+                height={56}
+                className="h-14 w-auto mx-auto md:mx-0"
+              />
+            </Link>
+            <p className="text-gray-700 text-sm mt-2 text-center md:text-left">
+              "膨大な文例×選択"
+              <br />
+              あなただけのケアプランが瞬時に形になる
+            </p>
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+              <p className="text-gray-700 text-sm text-center md:text-left">
+                株式会社Nico
+                <br />
+                〒759-5331山口県下関市豊北町神田3489-2
+              </p>
+              <div className="flex justify-center gap-4 text-sm">
+                <Link href="/privacy-policy" className="text-gray-700 hover:text-primary transition-colors">
+                  プライバシーポリシー
+                </Link>
+                <Link
+                  href="https://nico-inc.net/"
+                  className="text-gray-700 hover:text-primary transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  運営会社
+                </Link>
+                <Link href="/terms" className="text-gray-700 hover:text-primary transition-colors">
+                  利用規約
+                </Link>
+                <Link href="/legal" className="text-gray-700 hover:text-primary transition-colors">
+                  特定商取引法に基づく表示
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }
+

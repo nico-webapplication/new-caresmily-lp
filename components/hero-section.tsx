@@ -493,7 +493,7 @@ const HeroSectionComponent = () => {
 
               <ButtonContainer>
                 <PrimaryButton href="#">
-                  無料トライアル開始
+                  オンライン面談を予約
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"

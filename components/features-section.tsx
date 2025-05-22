@@ -270,15 +270,6 @@ export default function FeaturesSection() {
                     <div className="icon-container w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
                       {benefit.icon}
                     </div>
-                    <div className="w-24 h-24 relative card-image">
-                      <Image
-                        src={benefit.image || "/placeholder.svg"}
-                        alt={benefit.title}
-                        width={200}
-                        height={200}
-                        className="object-contain"
-                      />
-                    </div>
                   </div>
                 </div>
 
@@ -286,9 +277,6 @@ export default function FeaturesSection() {
                   <h3 className="card-title text-xl font-bold text-[#0a2540] mb-1">{benefit.title}</h3>
                   <p className="card-subtitle text-lg font-medium text-gray-600 mb-4">{benefit.subtitle}</p>
                   <p className="card-description text-gray-600 mb-6">{benefit.description}</p>
-                  <button className="card-button flex items-center text-[#42a5d5] font-medium hover:text-[#2980b9] transition-colors">
-                    詳細を見る <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
                 </div>
               </div>
             ))}
