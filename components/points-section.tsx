@@ -263,15 +263,15 @@ export default function PointsSection() {
       </div>
 
       {/* 上部の縁 */}
-      <div className="absolute top-0 left-0 right-0 h-12 bg-[#0a2540] z-10"></div>
+      <div className="absolute top-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div>
 
       {/* 下部の縁 */}
-      <div className="absolute bottom-0 left-0 right-0 h-12 bg-[#0a2540] z-10"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div>
 
       {/* 左側の縁 */}
       <div
         ref={leftBorderRef}
-        className="absolute left-0 top-12 bottom-12 w-16 bg-[#0a2540] overflow-hidden z-10"
+        className="absolute left-0 top-12 bottom-12 w-12 bg-[#0a2540] overflow-hidden z-10"
       >
         <div className="text-loop-container absolute left-0 w-full visibility-hidden">
           {borderTexts.map((text, index) => (
@@ -292,7 +292,7 @@ export default function PointsSection() {
       {/* 右側の縁 */}
       <div
         ref={rightBorderRef}
-        className="absolute right-0 top-12 bottom-12 w-16 bg-[#0a2540] overflow-hidden z-10"
+        className="absolute right-0 top-12 bottom-12 w-12 bg-[#0a2540] overflow-hidden z-10"
       >
         <div className="text-loop-container absolute left-0 w-full visibility-hidden">
           {borderTexts.map((text, index) => (
@@ -314,7 +314,7 @@ export default function PointsSection() {
         <div ref={titleRef} className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-[#0a2540]">
             <span className="inline-block text-2xl md:text-3xl font-normal mb-2">
-              <div className="relative h-8 w-48 mx-auto">
+              <div className="relative h-12 w-48 mx-auto">
                 <Image
                   src="/images/caresmily-logo.png"
                   alt="CareSmily Logo"
@@ -325,7 +325,7 @@ export default function PointsSection() {
               </div>
             </span>
             <br />
-            <span className="inline-block">3つのポイント</span>
+            <span className="inline-block">5つのポイント</span>
           </h2>
         </div>
 
