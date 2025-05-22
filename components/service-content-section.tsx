@@ -221,18 +221,9 @@ export default function ServiceContentSection() {
 
           <div className="relative z-10 flex flex-col md:flex-row items-center">
             <div className="md:w-2/3 mb-6 md:mb-0 md:pr-8">
-              <div className="flex items-center mb-4">
-                <div className="relative h-12 w-32 mr-4">
-                  <Image
-                    src="/images/caresmily-logo.png"
-                    alt="CareSmily Logo"
-                    fill
-                    style={{ objectFit: "contain" }}
-                    className="object-contain"
-                  />
-                </div>
-                <span className="text-3xl md:text-4xl font-bold text-[#42a5d5]">デイサービス</span>
-              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
+                CareSmily <span className="text-[#42a5d5]">デイサービス</span>
+              </h2>
               <p className="text-lg text-gray-700 mb-4">
                 通所介護（デイサービス）事業所で発生する連絡帳・通所介護計画書・アセスメントなどの書類作成を高速化する"文例データベース特化"クラウド
                 SaaS。
@@ -557,18 +548,9 @@ export default function ServiceContentSection() {
 
           <div className="relative z-10 flex flex-col md:flex-row items-center">
             <div className="md:w-2/3 mb-6 md:mb-0 md:pr-8">
-              <div className="flex items-center mb-4">
-                <div className="relative h-12 w-32 mr-4">
-                  <Image
-                    src="/images/caresmily-logo.png"
-                    alt="CareSmily Logo"
-                    fill
-                    style={{ objectFit: "contain" }}
-                    className="object-contain"
-                  />
-                </div>
-                <span className="text-3xl md:text-4xl font-bold text-[#ff5a5a]">訪問介護</span>
-              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
+                CareSmily <span className="text-[#ff5a5a]">訪問介護</span>
+              </h2>
               <p className="text-lg text-gray-700 mb-4">
                 訪問介護事業所で発生するサービス提供記録・訪問介護計画書・アセスメントなどの書類作成を高速化する"文例データベース特化"クラウド
                 SaaS。
