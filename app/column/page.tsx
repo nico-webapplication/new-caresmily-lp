@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -196,6 +197,7 @@ const columns = [
 ]
 
 export default function ColumnPage() {
+  const router = useRouter()
   const [activeCategory, setActiveCategory] = useState("all")
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6
@@ -242,7 +244,11 @@ export default function ColumnPage() {
         {/* コラムカードグリッド */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {paginatedColumns.map((column) => (
-            <Card key={column.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group">
+            <Card 
+              key={column.id} 
+              className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
+              onClick={() => router.push(`/column/${column.id}`)}
+            >
               {/* サムネイル画像エリア */}
               <div className="relative h-48 overflow-hidden">
                 {/* 背景画像 */}
