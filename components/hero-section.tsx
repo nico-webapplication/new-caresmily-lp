@@ -492,7 +492,7 @@ const HeroSectionComponent = () => {
               </Description>
 
               <ButtonContainer>
-                <PrimaryButton href="#">
+                <PrimaryButton href="/online-meeting">
                   オンライン面談を予約
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
