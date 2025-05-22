@@ -245,20 +245,56 @@ export default function ColumnPage() {
             <Card key={column.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group">
               {/* サムネイル画像エリア */}
               <div className="relative h-48 overflow-hidden">
-                <div className={`absolute inset-0 ${column.bgColor}`} />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {/* サムネイル代替表示 */}
-                  <div className="w-full h-full bg-gradient-to-br from-white/20 to-transparent flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-16 h-16 mx-auto mb-2 bg-white/30 rounded-lg flex items-center justify-center">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                        </svg>
+                {/* 背景画像 */}
+                {column.image ? (
+                  <img 
+                    src={column.image} 
+                    alt={column.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // 画像読み込みエラー時の代替表示
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML = `
+                          <div class="absolute inset-0 ${column.bgColor}"></div>
+                          <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-full h-full bg-gradient-to-br from-white/20 to-transparent flex items-center justify-center">
+                              <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-2 bg-white/30 rounded-lg flex items-center justify-center">
+                                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                  </svg>
+                                </div>
+                                <p class="text-white/80 text-xs font-medium">サムネイル</p>
+                              </div>
+                            </div>
+                          </div>
+                        `;
+                      }
+                    }}
+                  />
+                ) : (
+                  <>
+                    <div className={`absolute inset-0 ${column.bgColor}`} />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-full h-full bg-gradient-to-br from-white/20 to-transparent flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="w-16 h-16 mx-auto mb-2 bg-white/30 rounded-lg flex items-center justify-center">
+                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                            </svg>
+                          </div>
+                          <p className="text-white/80 text-xs font-medium">サムネイル</p>
+                        </div>
                       </div>
-                      <p className="text-white/80 text-xs font-medium">サムネイル</p>
                     </div>
-                  </div>
-                </div>
+                  </>
+                )}
+                
+                {/* オーバーレイ（テキストの可読性向上） */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 
                 {/* カテゴリーバッジ */}
                 <div className="absolute top-4 left-4 z-10">
