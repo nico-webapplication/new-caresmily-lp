@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 // ScrollTriggerProviderをインポート
 import ScrollTriggerProvider from "@/components/scroll-trigger-provider";
+import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   description: "介護文例特化型Webアプリケーション",
 };
 
-// RootLayoutのbodyにScrollTriggerProviderを追加
+// RootLayoutのbodyにScrollTriggerProviderとHeaderを追加
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <ScrollTriggerProvider>{children}</ScrollTriggerProvider>
+        <Header />
+        <main className="pt-16">
+          <ScrollTriggerProvider>{children}</ScrollTriggerProvider>
+        </main>
       </body>
     </html>
   );
