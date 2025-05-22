@@ -176,46 +176,46 @@ export default function PointsSection() {
 
   // 縁の中に表示する文字の配列（繰り返し表示用に複数回書く）
   const borderTexts = [
-    "EASY",
-    "SIMPLE",
-    "SAFE",
-    "RELIABLE",
-    "FAST",
-    "SECURE",
-    "TRUSTED",
-    "CONVENIENT",
-    "EASY",
-    "SIMPLE",
-    "SAFE",
-    "RELIABLE",
-    "FAST",
-    "SECURE",
-    "TRUSTED",
-    "CONVENIENT",
-    "EASY",
-    "SIMPLE",
-    "SAFE",
-    "RELIABLE",
-    "FAST",
-    "SECURE",
-    "TRUSTED",
-    "CONVENIENT",
-    "EASY",
-    "SIMPLE",
-    "SAFE",
-    "RELIABLE",
-    "FAST",
-    "SECURE",
-    "TRUSTED",
-    "CONVENIENT",
-    "EASY",
-    "SIMPLE",
-    "SAFE",
-    "RELIABLE",
-    "FAST",
-    "SECURE",
-    "TRUSTED",
-    "CONVENIENT",
+    "CARE",
+    "CARING",
+    "CAREGIVING",
+    "ELDERCARE",
+    "DAY-SERVICE",
+    "DAY-CARE",
+    "RESPITE",
+    "WELLBEING",
+    "PERSON-CENTERED",
+    "DIGNITY",
+    "SUPPORT",
+    "INDEPENDENCE",
+    "QUALITY-OF-LIFE",
+    "WORKFLOW",
+    "EFFICIENCY",
+    "STREAMLINING",
+    "TIME-SAVING",
+    "PAPERWORK-REDUCTION",
+    "TEMPLATE-DRIVEN",
+    "DOCUMENTATION",
+    "CARE-PLAN",
+    "SERVICE-PLAN",
+    "TRAINING-PLAN",
+    "PROGRESS-NOTE",
+    "DAILY-LOG",
+    "INCIDENT-REPORT",
+    "ASSESSMENT",
+    "EVALUATION",
+    "INTAKE-FORM",
+    "DISCHARGE-SUMMARY",
+    "SOAP-NOTE",
+    "CHECKLIST",
+    "KPI-SHEET",
+    "CONSENT-FORM",
+    "QUESTIONNAIRE",
+    "HANDOVER-SHEET",
+    "ROSTER",
+    "ATTENDANCE-RECORD",
+    "SCHEDULE",
+    "REPORT-GENERATOR"
   ];
 
   return (
@@ -271,13 +271,13 @@ export default function PointsSection() {
       {/* 左側の縁 */}
       <div
         ref={leftBorderRef}
-        className="absolute left-0 top-12 bottom-12 w-12 bg-[#0a2540] overflow-hidden z-10"
+        className="absolute left-0 top-4 bottom-4 w-12 bg-[#0a2540] overflow-hidden z-10"
       >
-        <div className="text-loop-container absolute left-0 w-full visibility-hidden">
+        <div className="text-loop-container absolute left-5 w-8 visibility-hidden">
           {borderTexts.map((text, index) => (
             <div
               key={`left-${index}`}
-              className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
+              className="text-white text-sm md:text-base font-bold py-3 text-center writing-vertical"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(180deg)",
@@ -292,7 +292,7 @@ export default function PointsSection() {
       {/* 右側の縁 */}
       <div
         ref={rightBorderRef}
-        className="absolute right-0 top-12 bottom-12 w-12 bg-[#0a2540] overflow-hidden z-10"
+        className="absolute right-0 top-4 bottom-4 w-12 bg-[#0a2540] overflow-hidden z-10"
       >
         <div className="text-loop-container absolute left-0 w-full visibility-hidden">
           {borderTexts.map((text, index) => (
