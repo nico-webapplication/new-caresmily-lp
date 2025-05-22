@@ -233,21 +233,7 @@ export default function FeaturesSection() {
   }, [activeIndex, benefits.length, scroller])
 
   return (
-    <section 
-      ref={sectionRef} 
-      className="py-20 overflow-hidden"
-      style={{
-        background: `conic-gradient(
-          from var(--primary-light-angle) at 50% 50%,
-          rgba(255, 255, 255, 1),
-          rgba(255, 255, 255, 0.2) 5% 40%,
-          rgba(255, 255, 255, 1) 50%,
-          rgba(255, 255, 255, 0.2) 60% 95%,
-          rgba(255, 255, 255, 1)
-        ),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5))`
-      }}
-    >
+    <section ref={sectionRef} className="py-20 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <div ref={titleRef} className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
