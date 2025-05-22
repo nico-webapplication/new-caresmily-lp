@@ -1,33 +1,38 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { MotionPathPlugin } from "gsap/MotionPathPlugin"
-import Image from "next/image"
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import Image from "next/image";
 // useScrollTriggerをインポート
-import { useScrollTrigger } from "@/components/scroll-trigger-provider"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { useScrollTrigger } from "@/components/scroll-trigger-provider";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 // useScrollTriggerを使用する部分を修正
 export default function PointsSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const titleRef = useRef<HTMLDivElement>(null)
-  const pointsRef = useRef<HTMLDivElement>(null)
-  const leftBorderRef = useRef<HTMLDivElement>(null)
-  const rightBorderRef = useRef<HTMLDivElement>(null)
-  const wheelchairRef = useRef<HTMLDivElement>(null)
-  const svgPathRef = useRef<SVGPathElement>(null)
-  const { scroller } = useScrollTrigger()
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const pointsRef = useRef<HTMLDivElement>(null);
+  const leftBorderRef = useRef<HTMLDivElement>(null);
+  const rightBorderRef = useRef<HTMLDivElement>(null);
+  const wheelchairRef = useRef<HTMLDivElement>(null);
+  const svgPathRef = useRef<SVGPathElement>(null);
+  const { scroller } = useScrollTrigger();
 
   useEffect(() => {
     // GSAPプラグインを登録
     if (typeof window !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
+      gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
       // タイトルのアニメーション
       if (titleRef.current) {
-        gsap.set(titleRef.current, { opacity: 0, y: -30 })
+        gsap.set(titleRef.current, { opacity: 0, y: -30 });
 
         ScrollTrigger.create({
           trigger: titleRef.current,
@@ -39,16 +44,16 @@ export default function PointsSection() {
               y: 0,
               duration: 0.8,
               ease: "power2.out",
-            })
+            });
           },
-        })
+        });
       }
 
       // ポイントカードのアニメーション
       if (pointsRef.current) {
-        const points = pointsRef.current.querySelectorAll(".point-card")
+        const points = pointsRef.current.querySelectorAll(".point-card");
 
-        gsap.set(points, { opacity: 0, y: 50 })
+        gsap.set(points, { opacity: 0, y: 50 });
 
         ScrollTrigger.batch(points, {
           onEnter: (elements) => {
@@ -58,29 +63,31 @@ export default function PointsSection() {
               stagger: 0.2,
               duration: 0.8,
               ease: "power2.out",
-            })
+            });
           },
           start: "top 80%",
           scroller: scroller || undefined,
-        })
+        });
       }
 
       // 左右の縁の文字アニメーション - 下から上へ流す
       if (leftBorderRef.current && rightBorderRef.current) {
         // 左側の文字コンテナ
-        const leftContainer = leftBorderRef.current.querySelector(".text-loop-container")
+        const leftContainer = leftBorderRef.current.querySelector(
+          ".text-loop-container",
+        );
 
         if (leftContainer) {
           // コンテナ内の高さを取得するために一時的に表示
-          gsap.set(leftContainer, { visibility: "visible" })
-          
+          gsap.set(leftContainer, { visibility: "visible" });
+
           // 最初のコンテナを一番下に配置して、クローンを作成
-          const leftContainerHeight = leftBorderRef.current.clientHeight
-          const leftContentHeight = leftContainer.scrollHeight / 2  // 実際のコンテンツの高さ（重複を考慮）
-          
+          const leftContainerHeight = leftBorderRef.current.clientHeight;
+          const leftContentHeight = leftContainer.scrollHeight / 2; // 実際のコンテンツの高さ（重複を考慮）
+
           // 開始位置を設定（一番下から始まる）
-          gsap.set(leftContainer, { y: 0 })
-          
+          gsap.set(leftContainer, { y: 0 });
+
           // 下から上に流す無限ループアニメーション - 途切れないよう調整
           gsap.to(leftContainer, {
             y: -leftContentHeight,
@@ -88,23 +95,25 @@ export default function PointsSection() {
             duration: 30,
             ease: "linear",
             repeatDelay: 0, // 繰り返し時の遅延なし
-          })
+          });
         }
 
         // 右側の文字コンテナ
-        const rightContainer = rightBorderRef.current.querySelector(".text-loop-container")
+        const rightContainer = rightBorderRef.current.querySelector(
+          ".text-loop-container",
+        );
 
         if (rightContainer) {
           // コンテナ内の高さを取得するために一時的に表示
-          gsap.set(rightContainer, { visibility: "visible" })
-          
+          gsap.set(rightContainer, { visibility: "visible" });
+
           // 最初のコンテナを一番下に配置して、クローンを作成
-          const rightContainerHeight = rightBorderRef.current.clientHeight
-          const rightContentHeight = rightContainer.scrollHeight / 2  // 実際のコンテンツの高さ（重複を考慮）
-          
+          const rightContainerHeight = rightBorderRef.current.clientHeight;
+          const rightContentHeight = rightContainer.scrollHeight / 2; // 実際のコンテンツの高さ（重複を考慮）
+
           // 開始位置を設定（一番下から始まる）
-          gsap.set(rightContainer, { y: 0 })
-          
+          gsap.set(rightContainer, { y: 0 });
+
           // 下から上に流す無限ループアニメーション - 途切れないよう調整
           gsap.to(rightContainer, {
             y: -rightContentHeight,
@@ -112,7 +121,7 @@ export default function PointsSection() {
             duration: 30,
             ease: "linear",
             repeatDelay: 0, // 繰り返し時の遅延なし
-          })
+          });
         }
       }
 
@@ -123,11 +132,11 @@ export default function PointsSection() {
           opacity: 0.95,
           scale: 0.8,
           transformOrigin: "50% 50%",
-        })
+        });
 
         // 車いすの回転を制御する関数
-        let prevDirection = 0
-        const rotateTo = gsap.quickTo(wheelchairRef.current, "rotation")
+        let prevDirection = 0;
+        const rotateTo = gsap.quickTo(wheelchairRef.current, "rotation");
 
         // スクロールに連動した車いすのアニメーション
         gsap.to(wheelchairRef.current, {
@@ -140,8 +149,8 @@ export default function PointsSection() {
             onUpdate: (self) => {
               if (prevDirection !== self.direction) {
                 // 方向が変わったときだけ実行
-                rotateTo(self.direction === 1 ? 0 : -180)
-                prevDirection = self.direction
+                rotateTo(self.direction === 1 ? 0 : -180);
+                prevDirection = self.direction;
               }
             },
           },
@@ -153,17 +162,17 @@ export default function PointsSection() {
             alignOrigin: [0.5, 0.5],
             autoRotate: 90,
           },
-        })
+        });
       }
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         if (wheelchairRef.current) {
-          gsap.killTweensOf(wheelchairRef.current)
+          gsap.killTweensOf(wheelchairRef.current);
         }
-      }
+      };
     }
-  }, [scroller])
+  }, [scroller]);
 
   // 縁の中に表示する文字の配列（繰り返し表示用に複数回書く）
   const borderTexts = [
@@ -207,10 +216,13 @@ export default function PointsSection() {
     "SECURE",
     "TRUSTED",
     "CONVENIENT",
-  ]
+  ];
 
   return (
-    <section ref={sectionRef} className="w-full py-16 bg-[#a8e0ff] overflow-hidden relative">
+    <section
+      ref={sectionRef}
+      className="w-full py-16 bg-[#a8e0ff] overflow-hidden relative"
+    >
       {/* SVGパス（非表示） */}
       <svg
         className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-0"
@@ -236,7 +248,12 @@ export default function PointsSection() {
         }}
       >
         <div className="relative w-full h-full">
-          <Image src="/images/wheelchair_no_background.png" alt="車いす" fill style={{ objectFit: "contain" }} />
+          <Image
+            src="/images/wheelchair_no_background.png"
+            alt="車いす"
+            fill
+            style={{ objectFit: "contain" }}
+          />
           {/* 車いすの影 */}
           <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4/5 h-1/6 bg-black opacity-20 rounded-full blur-md"
@@ -252,13 +269,19 @@ export default function PointsSection() {
       <div className="absolute bottom-0 left-0 right-0 h-12 bg-[#0a2540] z-10"></div>
 
       {/* 左側の縁 */}
-      <div ref={leftBorderRef} className="absolute left-0 top-12 bottom-12 w-16 bg-[#0a2540] overflow-hidden z-10">
+      <div
+        ref={leftBorderRef}
+        className="absolute left-0 top-12 bottom-12 w-16 bg-[#0a2540] overflow-hidden z-10"
+      >
         <div className="text-loop-container absolute left-0 w-full visibility-hidden">
           {borderTexts.map((text, index) => (
             <div
               key={`left-${index}`}
               className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
-              style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              style={{
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+              }}
             >
               {text}
             </div>
@@ -267,13 +290,19 @@ export default function PointsSection() {
       </div>
 
       {/* 右側の縁 */}
-      <div ref={rightBorderRef} className="absolute right-0 top-12 bottom-12 w-16 bg-[#0a2540] overflow-hidden z-10">
+      <div
+        ref={rightBorderRef}
+        className="absolute right-0 top-12 bottom-12 w-16 bg-[#0a2540] overflow-hidden z-10"
+      >
         <div className="text-loop-container absolute left-0 w-full visibility-hidden">
           {borderTexts.map((text, index) => (
             <div
               key={`right-${index}`}
               className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
-              style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              style={{
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+              }}
             >
               {text}
             </div>
@@ -284,7 +313,17 @@ export default function PointsSection() {
       <div className="container mx-auto px-12 md:px-16 py-8 relative z-10">
         <div ref={titleRef} className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-[#0a2540]">
-            <span className="inline-block text-2xl md:text-3xl font-normal mb-2">おまかせクルマ取引</span>
+            <span className="inline-block text-2xl md:text-3xl font-normal mb-2">
+              <div className="relative h-8 w-48 mx-auto">
+                <Image
+                  src="/images/caresmily-logo.png"
+                  alt="CareSmily Logo"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  priority
+                />
+              </div>
+            </span>
             <br />
             <span className="inline-block">3つのポイント</span>
           </h2>
@@ -297,7 +336,9 @@ export default function PointsSection() {
               <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
                 <div className="flex items-center mb-4">
                   <span className="text-5xl font-bold text-[#42a5d5]">01</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">Expert Database!</span>
+                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                    Expert Database!
+                  </span>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -334,7 +375,9 @@ export default function PointsSection() {
               <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
                 <div className="flex items-center mb-4">
                   <span className="text-5xl font-bold text-[#42a5d5]">02</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">Quick Copy & Paste!</span>
+                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                    Quick Copy & Paste!
+                  </span>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -371,7 +414,9 @@ export default function PointsSection() {
               <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
                 <div className="flex items-center mb-4">
                   <span className="text-5xl font-bold text-[#42a5d5]">03</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">Guided Builder!</span>
+                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                    Guided Builder!
+                  </span>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -408,7 +453,9 @@ export default function PointsSection() {
               <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
                 <div className="flex items-center mb-4">
                   <span className="text-5xl font-bold text-[#42a5d5]">04</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">All-in-One Solution!</span>
+                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                    All-in-One Solution!
+                  </span>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -445,7 +492,9 @@ export default function PointsSection() {
               <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
                 <div className="flex items-center mb-4">
                   <span className="text-5xl font-bold text-[#42a5d5]">05</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">Cloud Access!</span>
+                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                    Cloud Access!
+                  </span>
                 </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -480,5 +529,5 @@ export default function PointsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
