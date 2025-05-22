@@ -219,7 +219,7 @@ export default function PointsSection() {
     "ROSTER",
     "ATTENDANCE-RECORD",
     "SCHEDULE",
-    "REPORT-GENERATOR"
+    "REPORT-GENERATOR",
   ];
 
   return (
@@ -334,400 +334,416 @@ export default function PointsSection() {
         </div>
 
         <div ref={pointsRef} className="max-w-4xl mx-auto space-y-12">
-            {/* ポイント1 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">01</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
-                    Expert Database!
-                  </span>
-                </div>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
-                      10万件超の専門家監修
-                      <br />
-                      "文例データベース"
-                    </h3>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
-                    <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
-                      <div className="bg-white p-6 sm:p-8">
-                        <DialogHeader className="pb-4 border-b border-gray-100">
-                          <div className="flex items-center gap-4">
-                            <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
-                              <span className="text-3xl font-bold text-[#42a5d5]">01</span>
-                            </div>
-                            <DialogTitle className="text-3xl font-bold text-[#0a2540]">
-                              10万件超の専門家監修文例データベース
-                            </DialogTitle>
-                          </div>
-                        </DialogHeader>
-                        
-                        <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
-                          <div>
-                            <DialogDescription className="text-base text-gray-600 leading-relaxed">
-                              AI自動生成ではなく、法令・現場ニュアンスを踏まえた高品質文例を事前収録。デイサービス／訪問介護／ケアマネ業務など主要書類を網羅し、常に最新データへ更新される仕組みを採用しています。
-                            </DialogDescription>
-                            <div className="mt-4 flex justify-end">
-                              <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
-                                <span className="font-bold">POINT:</span> 法令に準拠した高品質文例が常に最新状態で利用可能
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/database-100k-icon.png"
-                              alt="10万件超の専門家監修文例データベース"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
-                          </div>
-                        </div>
-                        
-                        <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
-                          <DialogClose asChild>
-                            <Button variant="outline">閉じる</Button>
-                          </DialogClose>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+          {/* ポイント1 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
+            <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
+              <div className="flex items-center mb-4">
+                <span className="text-5xl font-bold text-[#42a5d5]">01</span>
+                <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                  Expert Database!
+                </span>
               </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/database-100k-icon.png"
-                      alt="10万件超の専門家監修文例データベース"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    10万件超の専門家監修
+                    <br />
+                    "文例データベース"
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              01
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            10万件超の専門家監修文例データベース
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
 
-            {/* ポイント2 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">02</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
-                    Quick Copy & Paste!
-                  </span>
-                </div>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
-                      検索・カテゴリ選択 →
-                      <br />
-                      コピー＆ペーストで瞬時作成
-                    </h3>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
-                    <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
-                      <div className="bg-white p-6 sm:p-8">
-                        <DialogHeader className="pb-4 border-b border-gray-100">
-                          <div className="flex items-center gap-4">
-                            <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
-                              <span className="text-3xl font-bold text-[#42a5d5]">02</span>
-                            </div>
-                            <DialogTitle className="text-3xl font-bold text-[#0a2540]">
-                              検索・カテゴリ選択 → コピー＆ペーストで瞬時作成
-                            </DialogTitle>
-                          </div>
-                        </DialogHeader>
-                        
-                        <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
-                          <div>
-                            <DialogDescription className="text-base text-gray-600 leading-relaxed">
-                              書類種類を選んでからキーワード検索・分類フィルタで欲しい表現を絞り込み、そのままコピペ。文章を一から考える作業を大幅に省き、書類作成時間を最大60%削減します。
-                            </DialogDescription>
-                            <div className="mt-4 flex justify-end">
-                              <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
-                                <span className="font-bold">POINT:</span> 書類作成時間を最大60%削減
-                              </div>
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            AI自動生成ではなく、法令・現場ニュアンスを踏まえた高品質文例を事前収録。デイサービス／訪問介護／ケアマネ業務など主要書類を網羅し、常に最新データへ更新される仕組みを採用しています。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              法令に準拠した高品質文例が常に最新状態で利用可能
                             </div>
                           </div>
-                          
-                          <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/search-document-icon.png"
-                              alt="検索・カテゴリ選択"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
-                          </div>
                         </div>
-                        
-                        <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
-                          <DialogClose asChild>
-                            <Button variant="outline">閉じる</Button>
-                          </DialogClose>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/search-document-icon.png"
-                      alt="検索・カテゴリ選択"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            {/* ポイント3 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">03</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
-                    Guided Builder!
-                  </span>
-                </div>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
-                      "質問形式ビルダー"による
-                      <br />
-                      レコメンド挿入
-                    </h3>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
-                    <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
-                      <div className="bg-white p-6 sm:p-8">
-                        <DialogHeader className="pb-4 border-b border-gray-100">
-                          <div className="flex items-center gap-4">
-                            <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
-                              <span className="text-3xl font-bold text-[#42a5d5]">03</span>
-                            </div>
-                            <DialogTitle className="text-3xl font-bold text-[#0a2540]">
-                              "質問形式ビルダー"によるレコメンド挿入
-                            </DialogTitle>
-                          </div>
-                        </DialogHeader>
-                        
-                        <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
-                          <div>
-                            <DialogDescription className="text-base text-gray-600 leading-relaxed">
-                              利用者の身体状況や目標をQ&A方式で入力すると、条件に合った文例が自動提案されるガイド機能を搭載。記入漏れや表現ブレを防ぎ、新人でもプロ水準の書類を短時間で完成できます。
-                            </DialogDescription>
-                            <div className="mt-4 flex justify-end">
-                              <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
-                                <span className="font-bold">POINT:</span> 新人でもプロ水準の記録が作成可能
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/qa-form-icon.png"
-                              alt="質問形式ビルダー"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
-                          </div>
-                        </div>
-                        
-                        <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
-                          <DialogClose asChild>
-                            <Button variant="outline">閉じる</Button>
-                          </DialogClose>
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/database-100k-icon.png"
+                            alt="10万件超の専門家監修文例データベース"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
                         </div>
                       </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/qa-form-icon.png"
-                      alt="質問形式ビルダー"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            {/* ポイント4 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">04</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
-                    All-in-One Solution!
-                  </span>
-                </div>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
-                      書類テンプレ内での編集・
-                      <br />
-                      PDF／印刷までワンストップ
-                    </h3>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
-                    <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
-                      <div className="bg-white p-6 sm:p-8">
-                        <DialogHeader className="pb-4 border-b border-gray-100">
-                          <div className="flex items-center gap-4">
-                            <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
-                              <span className="text-3xl font-bold text-[#42a5d5]">04</span>
-                            </div>
-                            <DialogTitle className="text-3xl font-bold text-[#0a2540]">
-                              書類テンプレ内での編集・PDF／印刷までワンストップ
-                            </DialogTitle>
-                          </div>
-                        </DialogHeader>
-                        
-                        <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
-                          <div>
-                            <DialogDescription className="text-base text-gray-600 leading-relaxed">
-                              文例を差し込んだ後はアプリ内フォーマット上で微調整し、そのままPDF出力・印刷が可能。外部ソフトに書き出す手間なく、その場で紙提出用データまで完結します。
-                            </DialogDescription>
-                            <div className="mt-4 flex justify-end">
-                              <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
-                                <span className="font-bold">POINT:</span> 編集からPDF出力・印刷まで一貫して対応
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/document-template-icon.png"
-                              alt="書類テンプレート内での編集"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
-                          </div>
-                        </div>
-                        
-                        <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
-                          <DialogClose asChild>
-                            <Button variant="outline">閉じる</Button>
-                          </DialogClose>
-                        </div>
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
                       </div>
                     </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/document-template-icon.png"
-                      alt="書類テンプレート内での編集"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
                   </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/database-100k-icon.png"
+                    alt="10万件超の専門家監修文例データベース"
+                    width={200}
+                    height={200}
+                    className="object-contain"
+                  />
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* ポイント5 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">05</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
-                    Team Collaboration!
-                  </span>
-                </div>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
-                      チーム共有・
-                      <br />
-                      事業所全体の質を底上げ
-                    </h3>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
-                    <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
-                      <div className="bg-white p-6 sm:p-8">
-                        <DialogHeader className="pb-4 border-b border-gray-100">
-                          <div className="flex items-center gap-4">
-                            <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
-                              <span className="text-3xl font-bold text-[#42a5d5]">05</span>
-                            </div>
-                            <DialogTitle className="text-3xl font-bold text-[#0a2540]">
-                              チーム共有・事業所全体の質を底上げ
-                            </DialogTitle>
+          {/* ポイント2 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-64">
+            <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
+              <div className="flex items-center mb-4">
+                <span className="text-5xl font-bold text-[#42a5d5]">02</span>
+                <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                  Quick Copy & Paste!
+                </span>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    検索・カテゴリ選択 →
+                    <br />
+                    コピー＆ペーストで瞬時作成
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              02
+                            </span>
                           </div>
-                        </DialogHeader>
-                        
-                        <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
-                          <div>
-                            <DialogDescription className="text-base text-gray-600 leading-relaxed">
-                              施設アカウントで複数人が同時利用可能。個人の文例をチーム内でストック・共有し、ノウハウを蓄積。管理者は記録の品質チェックもでき、事業所全体のレベルアップにつながります。
-                            </DialogDescription>
-                            <div className="mt-4 flex justify-end">
-                              <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
-                                <span className="font-bold">POINT:</span> 組織全体の記録品質向上を実現
-                              </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            検索・カテゴリ選択 → コピー＆ペーストで瞬時作成
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            書類種類を選んでからキーワード検索・分類フィルタで欲しい表現を絞り込み、そのままコピペ。文章を一から考える作業を大幅に省き、書類作成時間を最大60%削減します。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              書類作成時間を最大60%削減
                             </div>
-                          </div>
-                          
-                          <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/team-share-icon.png"
-                              alt="チーム共有"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
                           </div>
                         </div>
-                        
-                        <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
-                          <DialogClose asChild>
-                            <Button variant="outline">閉じる</Button>
-                          </DialogClose>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/search-document-icon.png"
+                            alt="検索・カテゴリ選択"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
                         </div>
                       </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
                     </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-              <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/team-share-icon.png"
-                      alt="チーム共有"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
                   </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/search-document-icon.png"
+                    alt="検索・カテゴリ選択"
+                    width={200}
+                    height={200}
+                    className="object-contain"
+                  />
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* ポイント3 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
+            <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
+              <div className="flex items-center mb-4">
+                <span className="text-5xl font-bold text-[#42a5d5]">03</span>
+                <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                  Guided Builder!
+                </span>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    "質問形式ビルダー"による
+                    <br />
+                    レコメンド挿入
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              03
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            "質問形式ビルダー"によるレコメンド挿入
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            利用者の身体状況や目標をQ&A方式で入力すると、条件に合った文例が自動提案されるガイド機能を搭載。記入漏れや表現ブレを防ぎ、新人でもプロ水準の書類を短時間で完成できます。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              新人でもプロ水準の記録が作成可能
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/qa-form-icon.png"
+                            alt="質問形式ビルダー"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/qa-form-icon.png"
+                    alt="質問形式ビルダー"
+                    width={200}
+                    height={200}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ポイント4 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-64">
+            <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
+              <div className="flex items-center mb-4">
+                <span className="text-5xl font-bold text-[#42a5d5]">04</span>
+                <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                  All-in-One Solution!
+                </span>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    書類テンプレ内での編集・
+                    <br />
+                    PDF／印刷までワンストップ
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              04
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            書類テンプレ内での編集・PDF／印刷までワンストップ
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            文例を差し込んだ後はアプリ内フォーマット上で微調整し、そのままPDF出力・印刷が可能。外部ソフトに書き出す手間なく、その場で紙提出用データまで完結します。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              編集からPDF出力・印刷まで一貫して対応
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/document-pdf-print-icon.png"
+                            alt="書類テンプレート内での編集"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/document-pdf-print-icon.png"
+                    alt="書類テンプレート内での編集"
+                    width={200}
+                    height={200}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ポイント5 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
+            <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
+              <div className="flex items-center mb-4">
+                <span className="text-5xl font-bold text-[#42a5d5]">05</span>
+                <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+                  Cloud Access!
+                </span>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                     簡単にアクセス可能で
+                    <br />
+                    シンプルなアプリケーション
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              05
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            簡単にアクセス可能でシンプルなアプリケーション
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            PCからブラウザでログインするだけ。インストールや複雑な設定は不要です。
+                            PCが不慣れな方でも使いやすいアプリケーションとなっております。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              誰でも簡単利用
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/cloud-computer-icon.png"
+                            alt="チーム共有"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/cloud-computer-icon.png"
+                    alt="チーム共有"
+                    width={200}
+                    height={200}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
