@@ -59,6 +59,14 @@ export default function Header() {
                   メディア情報
                 </Link>
               </li>
+              <li>
+                <Link 
+                  href="/contact" 
+                  className="text-white hover:text-gray-300 transition-colors"
+                >
+                  お問い合わせ
+                </Link>
+              </li>
             </ul>
           </nav>
           <Button
@@ -133,6 +141,15 @@ export default function Header() {
                 onClick={() => setIsOpen(false)}
               >
                 メディア情報
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/contact" 
+                className="block text-white hover:text-gray-300 transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                お問い合わせ
               </Link>
             </li>
           </ul>
