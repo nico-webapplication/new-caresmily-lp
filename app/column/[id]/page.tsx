@@ -83,61 +83,18 @@ export default function ColumnDetailPage({ params }: PageProps) {
 
   const loadColumnContent = async (id: string) => {
     try {
-      // 個別のコンテンツファイルを読み込み（将来的に実装）
-      // const response = await fetch(`/api/column-content/${id}`)
-      // const contentData = await response.text()
-      // setContent(contentData)
-      
-      // 現在はサンプルコンテンツ
-      setContent(getSampleContent(id))
+      // HTMLファイルから直接コンテンツを読み込み
+      const response = await fetch(`/content/columns/${id}.html`)
+      if (response.ok) {
+        const htmlContent = await response.text()
+        setContent(htmlContent)
+      } else {
+        setContent("<p>コンテンツが見つかりません。</p>")
+      }
     } catch (error) {
       console.error("コンテンツの読み込みに失敗しました:", error)
-      setContent("コンテンツの読み込みに失敗しました。")
+      setContent("<p>コンテンツの読み込みに失敗しました。</p>")
     }
-  }
-
-  const getSampleContent = (id: string): string => {
-    const sampleContents: { [key: string]: string } = {
-      "1": `
-        <h2>CareTEX福岡への出展について</h2>
-        <p>この度、マリンメッセ福岡A館で開催されるCareTEX福岡に出展することになりました。</p>
-        
-        <h3>出展内容</h3>
-        <ul>
-          <li>最新の介護支援システムのデモンストレーション</li>
-          <li>業務効率化ソリューションの紹介</li>
-          <li>専門スタッフによる個別相談</li>
-        </ul>
-        
-        <h3>開催概要</h3>
-        <p><strong>日程：</strong>5月25日（土）〜26日（日）</p>
-        <p><strong>会場：</strong>マリンメッセ福岡A館</p>
-        <p><strong>ブース番号：</strong>A-15</p>
-        
-        <p>皆様のご来場を心よりお待ちしております。</p>
-      `,
-      "2": `
-        <h2>Care-wingの新サービスについて</h2>
-        <p>業務効率化を実現する革新的な新機能をリリースしました。</p>
-        
-        <h3>主な新機能</h3>
-        <ul>
-          <li>AI搭載スケジュール最適化</li>
-          <li>リアルタイム情報共有システム</li>
-          <li>モバイル対応の業務管理ツール</li>
-        </ul>
-        
-        <h3>期待される効果</h3>
-        <p>これらの新機能により、以下の改善が期待されます：</p>
-        <ul>
-          <li>業務時間の30%短縮</li>
-          <li>情報共有の効率化</li>
-          <li>ヒューマンエラーの削減</li>
-        </ul>
-      `
-    }
-    
-    return sampleContents[id] || "<p>コンテンツが見つかりません。</p>"
   }
 
   if (loading) {
@@ -239,8 +196,15 @@ export default function ColumnDetailPage({ params }: PageProps) {
               
               {/* コンテンツエリア */}
               <div 
-                className="prose prose-lg max-w-none"
+                className="prose prose-lg max-w-none prose-headings:text-gray-800 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-700 prose-ul:text-gray-700 prose-li:text-gray-700"
                 dangerouslySetInnerHTML={{ __html: content }}
+                style={{
+                  "--tw-prose-body": "rgb(55 65 81)",
+                  "--tw-prose-headings": "rgb(31 41 55)",
+                  "--tw-prose-links": "rgb(6 182 212)",
+                  "--tw-prose-bold": "rgb(31 41 55)",
+                  "--tw-prose-bullets": "rgb(6 182 212)"
+                } as React.CSSProperties}
               />
               
               {/* 関連情報 */}
