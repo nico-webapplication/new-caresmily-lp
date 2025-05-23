@@ -127,13 +127,13 @@ export default function Home() {
       onComplete: () => setAnimationComplete(true),
     })
 
-    // Animate content coming up from bottom - FASTER
+    // Animate content coming up from bottom - MODERATE SPEED
     tl.to(
       contentRef.current,
       {
         y: "0%",
         opacity: 1,
-        duration: 1.5, // Faster rise for better synchronization
+        duration: 2.0, // Moderate speed for better visual effect
         ease: "power2.out", // More dynamic easing
       },
       0,
