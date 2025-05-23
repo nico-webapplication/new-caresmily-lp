@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation"
 import { X } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+// CareSmilyポップアップ画像のパス
+const careSmilyPopupImageSrc = "/caresmily-popup.png"
 
 export default function SlideInPopup() {
   const [isVisible, setIsVisible] = useState(false)
@@ -87,36 +89,21 @@ export default function SlideInPopup() {
           e.stopPropagation()
           handleClose()
         }}
-        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors duration-200 z-10"
+        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors duration-200 z-10 shadow-lg"
         aria-label="ポップアップを閉じる"
       >
         <X size={14} />
       </button>
 
-      {/* Popup content */}
-      <div className="bg-white rounded-lg shadow-2xl border border-gray-200 p-4 max-w-sm">
-        <div className="flex items-center space-x-3">
-          {/* Icon or image placeholder - you can replace this with your attached image */}
-          <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-            📋
-          </div>
-          
-          <div className="flex-1">
-            <h3 className="font-semibold text-gray-900 text-sm">
-              資料請求はこちら
-            </h3>
-            <p className="text-xs text-gray-600 mt-1">
-              詳しい情報をお送りします
-            </p>
-          </div>
-        </div>
-        
-        {/* Call to action */}
-        <div className="mt-3 text-center">
-          <div className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition-colors duration-200">
-            今すぐ資料請求 →
-          </div>
-        </div>
+      {/* CareSmilyポップアップ画像 */}
+      <div className="relative">
+        <img 
+          src={careSmilyPopupImageSrc} 
+          alt="CareSmily 文例数100,000例以上！介護ドキュメントDX No.1 無料ご紹介資料はこちら" 
+          className="w-80 h-auto rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-300"
+        />
+        {/* ホバー時の透明度調整のためのオーバーレイ */}
+        <div className="absolute inset-0 bg-transparent rounded-lg"></div>
       </div>
     </div>
   )

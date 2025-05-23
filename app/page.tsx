@@ -10,6 +10,7 @@ import ServiceContentSection from "@/components/service-content-section"
 import FeaturesSection from "@/components/features-section"
 import FAQSection from "@/components/faq-section"
 import ServiceCountSection from "@/components/service-count-section"
+import SlideInPopup from "@/components/slide-in-popup"
 
 import { DocumentScatter } from "@/components/document-scatter-component"
 
@@ -458,8 +459,10 @@ export default function Home() {
         <ServiceContentSection />
         <ServiceCountSection />
         <FAQSection />
-
       </div>
+
+      {/* SlideInPopup - ヒーローセクションを出るとスライドイン */}
+      <SlideInPopup />
     </main>
   )
 }
