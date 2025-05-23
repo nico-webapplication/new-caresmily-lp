@@ -71,7 +71,7 @@ export default function Header() {
           </nav>
           <Button
             onClick={() =>
-              (window.location.href = "https://app.caresmily.com")
+              (window.open("https://app.caresmily.com", '_blank'))
             }
             variant="outline"
             className="font-bold px-6 py-3 border-2 border-primary text-primary hover:bg-primary/10 transition-all duration-300 flex items-center gap-2 text-lg"
@@ -154,14 +154,14 @@ export default function Header() {
             </li>
           </ul>
           <div className="px-6 pt-4">
-            <Button
+            <Button            
               onClick={() => {
-                window.location.href = "https://app.caresmily.com";
                 setIsOpen(false);
               }}
               variant="outline"
               className="w-full font-bold px-6 py-3 border-2 border-primary text-primary hover:bg-primary/10 transition-all duration-300 flex items-center justify-center gap-2 text-lg"
             >
+              <Link href="https://app.caresmily.com" target="_blank" rel="noopener noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -179,6 +179,7 @@ export default function Header() {
                 <line x1="15" x2="3" y1="12" y2="12" />
               </svg>
               ログイン
+                </Link>
             </Button>
           </div>
         </div>

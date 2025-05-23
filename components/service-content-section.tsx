@@ -524,9 +524,10 @@ export default function ServiceContentSection() {
           </p>
 
           <div className="mt-12">
-            <button className="bg-[#50c878] text-white px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+              <a href="/contact" className="bg-[#50c878] text-white px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors"
+              >
               内容について問い合わせる
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -562,9 +563,9 @@ export default function ServiceContentSection() {
           </p>
 
           <div className="mt-12">
-            <button className="bg-[#ffb347] text-white px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+              <a href="/contact"  className="bg-[#ffb347] text-white px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
               内容について問い合わせる
-            </button>
+            </a>
           </div>
         </div>
       </div>

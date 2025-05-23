@@ -9,42 +9,26 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {/* Product Information */}
           <div>
-            <h3 className="text-2xl font-bold mb-6">製品情報</h3>
+            <h3 className="text-2xl font-bold mb-6">各種情報</h3>
             <ul className="space-y-4">
               <li>
-                <Link href="/features" className="text-gray-700 hover:text-primary transition-colors">
-                  機能一覧
+                <Link href="/news" className="text-gray-700 hover:text-primary transition-colors">
+                  お知らせ
                 </Link>
               </li>
               <li>
-                <Link
-                  href="https://nico-inc.net/"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  会社概要
+                <Link href="/column" className="text-gray-700 hover:text-primary transition-colors">
+                  コラム
+                </Link>
+              </li>
+              <li>
+                <Link href="/media" className="text-gray-700 hover:text-primary transition-colors">
+                  メディア情報
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Support */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6">サポート</h3>
-            <ul className="space-y-4">
-              <li>
-                <Link href="/faq" className="text-gray-700 hover:text-primary transition-colors">
-                  よくある質問
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-gray-700 hover:text-primary transition-colors">
-                  お問い合わせ
-                </Link>
-              </li>
-            </ul>
-          </div>
 
           {/* Contact Information */}
           <div>

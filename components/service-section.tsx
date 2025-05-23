@@ -195,7 +195,11 @@ export default function ServiceSection() {
               </p>
             </div>
             <div className="pt-4 animate-item">
-              <button className="bg-[#FF0000] hover:bg-[#CC0000] text-white px-6 py-3 rounded-md font-medium transition-colors flex items-center shadow-md">
+              <button className="bg-[#FF0000] hover:bg-[#CC0000] text-white px-6 py-3 rounded-md font-medium transition-colors flex items-center shadow-md"
+                onClick={() => {
+                  (window.open("https://www.youtube.com/@CareSmily", '_blank'))
+                }}
+                >
                 <Youtube className="w-5 h-5 mr-2" />
                 詳しい内容を動画でcheck！
               </button>
