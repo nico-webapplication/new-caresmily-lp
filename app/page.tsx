@@ -20,6 +20,7 @@ export default function Home() {
   const frameLogoRef = useRef<HTMLAnchorElement>(null)
   const messageImageRef = useRef<HTMLImageElement>(null)
   const [animationComplete, setAnimationComplete] = useState(false)
+  const [scrollDisabled, setScrollDisabled] = useState(true)
 
   // Register GSAP plugins
   useEffect(() => {
@@ -160,7 +161,10 @@ export default function Home() {
 
     // Create timeline for coordinated animation
     const tl = gsap.timeline({
-      onComplete: () => setAnimationComplete(true),
+      onComplete: () => {
+        setAnimationComplete(true)
+        setScrollDisabled(false) // アニメーション完了時にスクロールを有効にする
+      },
     })
 
     // Animate content coming up from bottom - SLOWER SPEED
@@ -280,6 +284,49 @@ export default function Home() {
       2.0, // Start when LP is almost at the top
     )
   }
+
+  // スクロール無効化のためのイベントハンドラー
+  useEffect(() => {
+    if (scrollDisabled) {
+      // スクロールを無効にする関数
+      const preventScroll = (e: Event) => {
+        e.preventDefault()
+        e.stopPropagation()
+        return false
+      }
+
+      const preventTouchMove = (e: TouchEvent) => {
+        e.preventDefault()
+      }
+
+      const preventKeyScroll = (e: KeyboardEvent) => {
+        // スペース、ページアップ/ダウン、矢印キーなどのスクロールキーを無効化
+        const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40]
+        if (scrollKeys.includes(e.keyCode)) {
+          e.preventDefault()
+          return false
+        }
+      }
+
+      // document.bodyのスクロールを無効化
+      document.body.style.overflow = 'hidden'
+      
+      // 各種スクロールイベントを無効化
+      window.addEventListener('wheel', preventScroll, { passive: false })
+      window.addEventListener('touchmove', preventTouchMove, { passive: false })
+      window.addEventListener('keydown', preventKeyScroll, false)
+      document.addEventListener('scroll', preventScroll, { passive: false })
+
+      return () => {
+        // クリーンアップ
+        document.body.style.overflow = ''
+        window.removeEventListener('wheel', preventScroll)
+        window.removeEventListener('touchmove', preventTouchMove)
+        window.removeEventListener('keydown', preventKeyScroll)
+        document.removeEventListener('scroll', preventScroll)
+      }
+    }
+  }, [scrollDisabled])
 
   useEffect(() => {
     // Play animation on initial load
