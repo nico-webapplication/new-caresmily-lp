@@ -59,6 +59,12 @@ export default function Home() {
 
   const playAnimation = () => {
     if (containerRef.current && contentRef.current) {
+      // 必ずページの先頭に戻す
+      window.scrollTo(0, 0)
+      
+      // スクロールを無効化
+      setScrollDisabled(true)
+      
       const documents = containerRef.current.querySelectorAll(".document")
 
       // Store documents for later use
@@ -288,15 +294,23 @@ export default function Home() {
   // スクロール無効化のためのイベントハンドラー
   useEffect(() => {
     if (scrollDisabled) {
+      // 現在のスクロール位置を記録（常に0,0にリセット）
+      const savedScrollX = 0
+      const savedScrollY = 0
+
       // スクロールを無効にする関数
       const preventScroll = (e: Event) => {
         e.preventDefault()
         e.stopPropagation()
+        // 強制的にページトップに戻す
+        window.scrollTo(0, 0)
         return false
       }
 
       const preventTouchMove = (e: TouchEvent) => {
         e.preventDefault()
+        // タッチ後も強制的にページトップに戻す
+        setTimeout(() => window.scrollTo(0, 0), 0)
       }
 
       const preventKeyScroll = (e: KeyboardEvent) => {
@@ -304,26 +318,55 @@ export default function Home() {
         const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40]
         if (scrollKeys.includes(e.keyCode)) {
           e.preventDefault()
+          // キー操作後も強制的にページトップに戻す
+          setTimeout(() => window.scrollTo(0, 0), 0)
           return false
         }
       }
 
-      // document.bodyのスクロールを無効化
+      // 強制的にスクロール位置をリセットする関数
+      const forceScrollReset = () => {
+        window.scrollTo(0, 0)
+      }
+
+      // document.bodyとhtmlのスクロールを無効化
       document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.top = '0'
+      document.body.style.left = '0'
+      document.body.style.width = '100%'
+      document.body.style.height = '100%'
       
       // 各種スクロールイベントを無効化
       window.addEventListener('wheel', preventScroll, { passive: false })
       window.addEventListener('touchmove', preventTouchMove, { passive: false })
       window.addEventListener('keydown', preventKeyScroll, false)
       document.addEventListener('scroll', preventScroll, { passive: false })
+      
+      // 定期的にスクロール位置をリセット
+      const scrollResetInterval = setInterval(forceScrollReset, 16) // 60fps
+      
+      // 初回も強制リセット
+      forceScrollReset()
 
       return () => {
         // クリーンアップ
+        clearInterval(scrollResetInterval)
         document.body.style.overflow = ''
+        document.documentElement.style.overflow = ''
+        document.body.style.position = ''
+        document.body.style.top = ''
+        document.body.style.left = ''
+        document.body.style.width = ''
+        document.body.style.height = ''
         window.removeEventListener('wheel', preventScroll)
         window.removeEventListener('touchmove', preventTouchMove)
         window.removeEventListener('keydown', preventKeyScroll)
         document.removeEventListener('scroll', preventScroll)
+        
+        // 最終的にページトップに戻す
+        window.scrollTo(0, 0)
       }
     }
   }, [scrollDisabled])
