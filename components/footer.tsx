@@ -1,5 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
+import { FaYoutube } from "react-icons/fa"
+import { FaXTwitter } from "react-icons/fa6"
 
 export default function Footer() {
   return (
@@ -58,6 +60,29 @@ export default function Footer() {
               <br />
               あなただけのケアプランが瞬時に形になる
             </p>
+            
+            {/* Social Media Icons */}
+            <div className="flex justify-center md:justify-start gap-4 my-6">
+              <Link
+                href="https://youtube.com/@yourchannelname"
+                className="group bg-white rounded-full p-3 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+              >
+                <FaYoutube className="w-6 h-6 text-red-600 group-hover:text-red-700 transition-colors" />
+              </Link>
+              <Link
+                href="https://twitter.com/yourusername"
+                className="group bg-white rounded-full p-3 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X (Twitter)"
+              >
+                <FaXTwitter className="w-6 h-6 text-gray-800 group-hover:text-black transition-colors" />
+              </Link>
+            </div>
+
             <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
               <p className="text-gray-700 text-sm text-center md:text-left">
                 株式会社Nico
