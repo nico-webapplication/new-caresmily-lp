@@ -22,6 +22,7 @@ export default function Home() {
   const [animationComplete, setAnimationComplete] = useState(false)
   const [showScrollPrompt, setShowScrollPrompt] = useState(false)
   const [scrollTriggered, setScrollTriggered] = useState(false)
+  const [lpFullyVisible, setLpFullyVisible] = useState(false)
 
   // Register GSAP plugins
   useEffect(() => {
@@ -292,17 +293,32 @@ export default function Home() {
         
         // Once LP is fully visible, prevent scrolling back up to animation area
         if (scrollProgress >= 1) {
-          const minScrollY = window.innerHeight
-          if (window.scrollY < minScrollY) {
-            window.scrollTo(0, minScrollY)
-          }
+          setLpFullyVisible(true)
         }
       }
+      
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [showScrollPrompt, scrollTriggered])
+
+  // Separate effect for scroll restriction
+  useEffect(() => {
+    const handleScrollRestriction = () => {
+      if (lpFullyVisible) {
+        const minScrollY = window.innerHeight
+        if (window.scrollY < minScrollY) {
+          window.scrollTo(0, minScrollY)
+        }
+      }
+    }
+
+    if (lpFullyVisible) {
+      window.addEventListener('scroll', handleScrollRestriction)
+      return () => window.removeEventListener('scroll', handleScrollRestriction)
+    }
+  }, [lpFullyVisible])
 
   useEffect(() => {
     // Disable scroll during opening animation
