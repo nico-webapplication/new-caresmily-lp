@@ -289,7 +289,6 @@ export default function Home() {
         
         contentRef.current.style.transform = `translateY(${translateY}%)`
         contentRef.current.style.opacity = `${scrollProgress}`
-        
       }
     }
 
