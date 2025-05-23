@@ -10,8 +10,7 @@ import ServiceContentSection from "@/components/service-content-section"
 import FeaturesSection from "@/components/features-section"
 import FAQSection from "@/components/faq-section"
 import ServiceCountSection from "@/components/service-count-section"
-import Footer from "@/components/footer"
-import Header from "@/components/header"
+
 import { DocumentScatter } from "@/components/document-scatter-component"
 
 export default function Home() {
@@ -268,9 +267,6 @@ export default function Home() {
       {/* 固定された枠 */}
       <div className="fixed inset-0 border-[12px] border-[rgb(10,37,64)] rounded-[15px] pointer-events-none z-30"></div>
       
-      {/* ヘッダー */}
-      <Header />
-
       {/* Animation container - always visible */}
       <div
         ref={containerRef}
@@ -290,7 +286,7 @@ export default function Home() {
         <ServiceContentSection />
         <ServiceCountSection />
         <FAQSection />
-        <Footer />
+
       </div>
     </main>
   )
