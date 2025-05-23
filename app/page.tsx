@@ -273,8 +273,12 @@ export default function Home() {
 
   // Setup scroll trigger with gradual LP movement
   useEffect(() => {
+    let lastScrollY = 0
+    
     const handleScroll = () => {
-      if (!scrollTriggered && showScrollPrompt && window.scrollY > 50) {
+      const currentScrollY = window.scrollY
+      
+      if (!scrollTriggered && showScrollPrompt && currentScrollY > 50) {
         setScrollTriggered(true)
         setShowScrollPrompt(false)
         
@@ -284,12 +288,20 @@ export default function Home() {
       
       // Gradual LP movement based on scroll position
       if (scrollTriggered && contentRef.current) {
-        const scrollProgress = Math.min(window.scrollY / window.innerHeight, 1)
+        const scrollProgress = Math.min(currentScrollY / window.innerHeight, 1)
         const translateY = (1 - scrollProgress) * 100
+        
+        // Prevent upward scrolling during LP rise animation
+        if (scrollProgress < 1 && currentScrollY < lastScrollY) {
+          window.scrollTo(0, lastScrollY)
+          return
+        }
         
         contentRef.current.style.transform = `translateY(${translateY}%)`
         contentRef.current.style.opacity = `${scrollProgress}`
       }
+      
+      lastScrollY = currentScrollY
     }
 
     window.addEventListener('scroll', handleScroll)
