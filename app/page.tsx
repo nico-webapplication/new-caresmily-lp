@@ -18,10 +18,7 @@ export default function Home() {
   const contentRef = useRef<HTMLDivElement>(null)
   const documentsRef = useRef<HTMLElement[]>([])
   const frameLogoRef = useRef<HTMLAnchorElement>(null)
-  const scrollPromptRef = useRef<HTMLDivElement>(null)
   const [animationComplete, setAnimationComplete] = useState(false)
-  const [showScrollPrompt, setShowScrollPrompt] = useState(false)
-  const [scrollTriggered, setScrollTriggered] = useState(false)
 
   // Register GSAP plugins
   useEffect(() => {
@@ -108,8 +105,9 @@ export default function Home() {
                   stagger: 0.005,
                   ease: "power3.out",
                   onComplete: () => {
-                    // After documents are scattered, show scroll prompt
-                    showScrollPromptMessage()
+                    // After documents are scattered, animate the content coming up
+                    // and pushing documents away
+                    animateContentAndPushDocuments()
                   },
                 })
               })
@@ -117,30 +115,6 @@ export default function Home() {
           })
         },
       })
-    }
-  }
-
-  // Function to show scroll prompt message
-  const showScrollPromptMessage = () => {
-    setShowScrollPrompt(true)
-    
-    // Enable scrolling when prompt appears
-    document.body.style.overflow = 'auto'
-    
-    if (scrollPromptRef.current) {
-      gsap.fromTo(
-        scrollPromptRef.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          ease: "power2.out",
-        }
-      )
     }
   }
 
@@ -271,47 +245,7 @@ export default function Home() {
     )
   }
 
-  // Setup scroll trigger with gradual LP movement
   useEffect(() => {
-    let lastScrollY = 0
-    
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      if (!scrollTriggered && showScrollPrompt && currentScrollY > 50) {
-        setScrollTriggered(true)
-        setShowScrollPrompt(false)
-        
-        // Start the animation process
-        animateContentAndPushDocuments()
-      }
-      
-      // Gradual LP movement based on scroll position
-      if (scrollTriggered && contentRef.current) {
-        const scrollProgress = Math.min(currentScrollY / window.innerHeight, 1)
-        const translateY = (1 - scrollProgress) * 100
-        
-        // Prevent upward scrolling during LP rise animation
-        if (scrollProgress < 1 && currentScrollY < lastScrollY) {
-          window.scrollTo(0, lastScrollY)
-          return
-        }
-        
-        contentRef.current.style.transform = `translateY(${translateY}%)`
-        contentRef.current.style.opacity = `${scrollProgress}`
-      }
-      
-      lastScrollY = currentScrollY
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [showScrollPrompt, scrollTriggered])
-
-  useEffect(() => {
-    // Disable scroll during opening animation
-    document.body.style.overflow = 'hidden'
-    
     // Play animation on initial load
     playAnimation()
 
@@ -343,38 +277,8 @@ export default function Home() {
         <DocumentScatter />
       </div>
 
-      {/* Scroll prompt message */}
-      {showScrollPrompt && (
-        <div
-          ref={scrollPromptRef}
-          className="fixed inset-0 z-20 flex flex-col items-center justify-center text-center pointer-events-none"
-        >
-          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-8 shadow-lg border border-gray-200 max-w-md mx-4">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              大量の書類を効率よく作成したくないですか...？
-            </h2>
-            <div className="flex flex-col items-center space-y-3">
-              <div className="text-gray-600">下にスクロールして解決策を見る</div>
-              <div className="animate-bounce">
-                <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Landing page content */}
-      <div 
-        ref={contentRef} 
-        className="relative z-20"
-        style={{ 
-          transform: 'translateY(100%)', 
-          opacity: 0,
-          transition: 'none' // Disable CSS transitions for scroll control
-        }}
-      >
+      <div ref={contentRef} className="relative z-20">
         <HeroSection />
         <ServiceSection />
         <PointsSection />
