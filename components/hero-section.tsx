@@ -475,7 +475,13 @@ const HeroSectionComponent = () => {
           <FlexContainer>
             {/* Left content */}
             <LeftContent data-aos="fade-right">
-              <HeadingSmall>介護業務効率化アプリ</HeadingSmall>
+              <FloatingImage>
+                <img
+                  src="/images/fukidashi.png"
+                  alt="吹き出し"
+                  style={{ width: '200px', height: 'auto' }}
+                />
+              </FloatingImage>
               <HeadingLarge>
                 膨大な<TextGradient>文例</TextGradient>×
                 <TextGradient>選択</TextGradient>で<br />
@@ -533,8 +539,6 @@ const HeroSectionComponent = () => {
                     alt="CareSmily アプリ画面"
                   />
                 </FloatingImage>
-
-
               </ImageContainer>
             </RightContent>
           </FlexContainer>
