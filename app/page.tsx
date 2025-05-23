@@ -20,7 +20,8 @@ export default function Home() {
   const frameLogoRef = useRef<HTMLAnchorElement>(null)
   const messageImageRef = useRef<HTMLImageElement>(null)
   const [animationComplete, setAnimationComplete] = useState(false)
-  const [scrollDisabled, setScrollDisabled] = useState(true)
+  const [scrollDisabled, setScrollDisabled] = useState(false)
+  const [hasPlayedInitialAnimation, setHasPlayedInitialAnimation] = useState(false)
 
   // Register GSAP plugins
   useEffect(() => {
@@ -170,6 +171,7 @@ export default function Home() {
       onComplete: () => {
         setAnimationComplete(true)
         setScrollDisabled(false) // アニメーション完了時にスクロールを有効にする
+        setHasPlayedInitialAnimation(true) // 初回アニメーション完了フラグを設定
       },
     })
 
@@ -372,21 +374,43 @@ export default function Home() {
   }, [scrollDisabled])
 
   useEffect(() => {
-    // Play animation on initial load
-    playAnimation()
+    // 初回アクセス時のみアニメーションを再生
+    if (!hasPlayedInitialAnimation) {
+      playAnimation()
+    } else {
+      // 既にアニメーションが再生済みの場合、コンテンツを即座に表示
+      if (contentRef.current) {
+        gsap.set(contentRef.current, {
+          opacity: 1,
+          y: "0%",
+          display: "block",
+        })
+      }
+      setAnimationComplete(true)
+      setScrollDisabled(false)
+    }
 
-    // Handle window resize
+    // ウィンドウリサイズ時はアニメーションを再生しない（レイアウト調整のみ）
     const handleResize = () => {
-      if (containerRef.current) {
+      if (containerRef.current && hasPlayedInitialAnimation) {
+        // アニメーション再生済みの場合は、ドキュメントの位置をリセットするだけ
         const documents = containerRef.current.querySelectorAll(".document")
         gsap.killTweensOf(documents)
-        playAnimation()
+        // ドキュメントを非表示にしてコンテンツを表示状態に保つ
+        gsap.set(documents, { opacity: 0 })
+        if (contentRef.current) {
+          gsap.set(contentRef.current, {
+            opacity: 1,
+            y: "0%",
+            display: "block",
+          })
+        }
       }
     }
 
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
-  }, [])
+  }, [hasPlayedInitialAnimation])
 
   return (
     <main className="min-h-screen bg-white">
