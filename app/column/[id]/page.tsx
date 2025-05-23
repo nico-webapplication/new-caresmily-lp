@@ -179,14 +179,15 @@ export default function ColumnDetailPage({ params }: PageProps) {
         {/* サムネイル画像 */}
         <div className="mb-8">
           {columnData.image ? (
-            <img 
-              src={columnData.image} 
-              alt={columnData.title}
-              className="w-full h-auto rounded-lg shadow-lg"
-              style={{ maxHeight: '400px', objectFit: 'cover' }}
-            />
+            <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
+              <img 
+                src={columnData.image} 
+                alt={columnData.title}
+                className="w-full h-full object-cover object-center rounded-lg shadow-lg"
+              />
+            </div>
           ) : (
-            <div className={`w-full h-64 rounded-lg ${columnData.bgColor} flex items-center justify-center`}>
+            <div className={`w-full rounded-lg ${columnData.bgColor} flex items-center justify-center`} style={{ aspectRatio: '16/9' }}>
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-2 bg-white/30 rounded-lg flex items-center justify-center">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
