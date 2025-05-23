@@ -10,17 +10,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // カテゴリーデータ
 const categories = [
   { id: "all", name: "すべて", active: true },
-  { id: "knowledge", name: "知識" },
-  { id: "bcp", name: "BCP" },
-  { id: "disaster-prevention", name: "減災防災対策" },
-  { id: "association", name: "組合会" },
-  { id: "exhibition", name: "出展情報" },
+  // { id: "knowledge", name: "知識" },
+  // { id: "bcp", name: "BCP" },
+  // { id: "disaster-prevention", name: "減災防災対策" },
+  // { id: "association", name: "組合会" },
+  // { id: "exhibition", name: "出展情報" },
   { id: "service", name: "サービス" },
-  { id: "development", name: "開発" },
-  { id: "care", name: "介護業界" },
-  { id: "ict", name: "ICT" },
-  { id: "efficiency", name: "業務効率化" },
-  { id: "system-setting", name: "制機改定" },
+  // { id: "development", name: "開発" },
+  // { id: "care", name: "介護業界" },
+  // { id: "ict", name: "ICT" },
+  // { id: "efficiency", name: "業務効率化" },
+  // { id: "system-setting", name: "制機改定" },
 ];
 
 // コラムデータ
@@ -230,8 +230,22 @@ export default function ColumnPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gray-50">
+      <div className="bg-gradient-to-r from-primary to-[#55C6F5] py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-4 relative">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <h1 className="text-3xl md:text-4xl font-bold mb-6">
+              コラム
+            </h1>
+            <p className="text-lg md:text-xl opacity-90">
+              CareSmilyに関することはもちろん、介護に関わる役立つ情報を配信
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 py-8">
         {/* ヘッダー */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">カテゴリー</h1>

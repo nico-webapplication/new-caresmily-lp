@@ -150,7 +150,29 @@ export default function ColumnDetailPage({ params }: PageProps) {
           </Button>
           
           <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => {
+                if (navigator.share) {
+                  // ネイティブシェア機能が利用可能な場合
+                  navigator.share({
+                    title: columnData.title,
+                    text: columnData.description,
+                    url: window.location.href
+                  }).catch(err => console.log('シェアがキャンセルされました'));
+                } else {
+                  // フォールバック: URLをクリップボードにコピー
+                  navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('記事のURLをクリップボードにコピーしました！');
+                  }).catch(() => {
+                    // さらなるフォールバック: Twitter シェア
+                    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(columnData.title)}&url=${encodeURIComponent(window.location.href)}`;
+                    window.open(twitterUrl, '_blank');
+                  });
+                }
+              }}
+            >
               <Share2 className="w-4 h-4 mr-2" />
               シェア
             </Button>
