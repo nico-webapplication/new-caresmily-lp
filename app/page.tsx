@@ -277,8 +277,8 @@ export default function Home() {
         <DocumentScatter />
       </div>
 
-      {/* Landing page content - スクロール可能 */}
-      <div ref={contentRef} id="content-scroll" className="relative z-20 h-screen overflow-auto">
+      {/* Landing page content */}
+      <div ref={contentRef} id="content-scroll" className="relative z-20">
         <HeroSection />
         <ServiceSection />
         <PointsSection />
