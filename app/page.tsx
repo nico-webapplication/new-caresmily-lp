@@ -124,6 +124,9 @@ export default function Home() {
   const showScrollPromptMessage = () => {
     setShowScrollPrompt(true)
     
+    // Enable scrolling when prompt appears
+    document.body.style.overflow = 'auto'
+    
     if (scrollPromptRef.current) {
       gsap.fromTo(
         scrollPromptRef.current,
@@ -268,13 +271,24 @@ export default function Home() {
     )
   }
 
-  // Setup scroll trigger
+  // Setup scroll trigger with gradual LP movement
   useEffect(() => {
     const handleScroll = () => {
-      if (!scrollTriggered && showScrollPrompt && window.scrollY > 100) {
+      if (!scrollTriggered && showScrollPrompt && window.scrollY > 50) {
         setScrollTriggered(true)
         setShowScrollPrompt(false)
+        
+        // Start the animation process
         animateContentAndPushDocuments()
+      }
+      
+      // Gradual LP movement based on scroll position
+      if (scrollTriggered && contentRef.current) {
+        const scrollProgress = Math.min(window.scrollY / window.innerHeight, 1)
+        const translateY = (1 - scrollProgress) * 100
+        
+        contentRef.current.style.transform = `translateY(${translateY}%)`
+        contentRef.current.style.opacity = `${scrollProgress}`
       }
     }
 
@@ -283,6 +297,9 @@ export default function Home() {
   }, [showScrollPrompt, scrollTriggered])
 
   useEffect(() => {
+    // Disable scroll during opening animation
+    document.body.style.overflow = 'hidden'
+    
     // Play animation on initial load
     playAnimation()
 
@@ -341,8 +358,9 @@ export default function Home() {
         ref={contentRef} 
         className="relative z-20"
         style={{ 
-          transform: scrollTriggered ? 'translateY(0%)' : 'translateY(100%)', 
-          opacity: scrollTriggered ? 1 : 0 
+          transform: 'translateY(100%)', 
+          opacity: 0,
+          transition: 'none' // Disable CSS transitions for scroll control
         }}
       >
         <HeroSection />
