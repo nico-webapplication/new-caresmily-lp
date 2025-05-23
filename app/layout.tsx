@@ -5,6 +5,7 @@ import "./globals.css";
 // ScrollTriggerProviderをインポート
 import ScrollTriggerProvider from "@/components/scroll-trigger-provider";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   description: "介護文例特化型Webアプリケーション",
 };
 
-// RootLayoutのbodyにScrollTriggerProviderとHeaderを追加
+// RootLayoutのbodyにScrollTriggerProvider、Header、Footerを追加
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,6 +27,7 @@ export default function RootLayout({
         <main className="pt-16">
           <ScrollTriggerProvider>{children}</ScrollTriggerProvider>
         </main>
+        <Footer />
       </body>
     </html>
   );
