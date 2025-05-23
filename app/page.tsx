@@ -18,6 +18,7 @@ export default function Home() {
   const contentRef = useRef<HTMLDivElement>(null)
   const documentsRef = useRef<HTMLElement[]>([])
   const frameLogoRef = useRef<HTMLAnchorElement>(null)
+  const messageImageRef = useRef<HTMLImageElement>(null)
   const [animationComplete, setAnimationComplete] = useState(false)
 
   // Register GSAP plugins
@@ -69,6 +70,15 @@ export default function Home() {
         display: "block",
       })
 
+      // Hide message image initially
+      if (messageImageRef.current) {
+        gsap.set(messageImageRef.current, {
+          opacity: 0,
+          scale: 0.8,
+          y: 20,
+        })
+      }
+
       setAnimationComplete(false)
 
       // Reset positions to top of screen with random X positions
@@ -105,9 +115,35 @@ export default function Home() {
                   stagger: 0.005,
                   ease: "power3.out",
                   onComplete: () => {
-                    // After documents are scattered, animate the content coming up
-                    // and pushing documents away
-                    animateContentAndPushDocuments()
+                    // After documents are scattered, show the message image with fade-in
+                    if (messageImageRef.current) {
+                      gsap.to(messageImageRef.current, {
+                        opacity: 1,
+                        scale: 1,
+                        y: 0,
+                        duration: 1.5,
+                        ease: "power2.out",
+                        onComplete: () => {
+                          // Wait a moment to let user read the message, then start LP animation
+                          gsap.delayedCall(2.0, () => {
+                            // Fade out the message image before LP animation
+                            gsap.to(messageImageRef.current, {
+                              opacity: 0,
+                              scale: 0.9,
+                              duration: 0.8,
+                              ease: "power2.in",
+                              onComplete: () => {
+                                // After message fades out, animate the content coming up
+                                animateContentAndPushDocuments()
+                              },
+                            })
+                          })
+                        },
+                      })
+                    } else {
+                      // Fallback if message image is not available
+                      animateContentAndPushDocuments()
+                    }
                   },
                 })
               })
@@ -275,6 +311,19 @@ export default function Home() {
         }`}
       >
         <DocumentScatter />
+        
+        {/* Message Image - appears after documents scatter */}
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          <img
+            ref={messageImageRef}
+            src="/images/message.png"
+            alt="介護現場の大量の書類作業、困っていませんか？"
+            className="max-w-[80%] max-h-[80%] md:max-w-[60%] md:max-h-[60%] object-contain opacity-0"
+            style={{
+              filter: "drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3))",
+            }}
+          />
+        </div>
       </div>
 
       {/* Landing page content */}
