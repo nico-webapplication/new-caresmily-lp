@@ -290,13 +290,6 @@ export default function Home() {
         contentRef.current.style.transform = `translateY(${translateY}%)`
         contentRef.current.style.opacity = `${scrollProgress}`
         
-        // Once LP is fully visible, prevent scrolling back up to animation area
-        if (scrollProgress >= 1) {
-          const minScrollY = window.innerHeight
-          if (window.scrollY < minScrollY) {
-            window.scrollTo(0, minScrollY)
-          }
-        }
       }
     }
 
