@@ -529,8 +529,8 @@ const HeroSectionComponent = () => {
                 {/* Hero image */}
                 <FloatingImage>
                   <img
-                    src="/attached_assets/ChatGPT Image 2025年5月23日 12_15_12.png"
-                    alt="文例特化型Webアプリケーション"
+                    src="/images/CareSmily_ロゴ.png"
+                    alt="CareSmily アプリ画面"
                   />
                 </FloatingImage>
 
