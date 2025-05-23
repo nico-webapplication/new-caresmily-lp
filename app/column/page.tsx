@@ -273,7 +273,7 @@ export default function ColumnPage() {
                   <img
                     src={column.image}
                     alt={column.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                     onError={(e) => {
                       // 画像読み込みエラー時の代替表示
                       const target = e.target as HTMLImageElement;
