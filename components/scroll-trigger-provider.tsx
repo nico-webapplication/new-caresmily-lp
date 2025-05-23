@@ -23,42 +23,12 @@ export default function ScrollTriggerProvider({ children }: { children: React.Re
       // GSAPとScrollTriggerを登録
       gsap.registerPlugin(ScrollTrigger)
 
-      // スクロールコンテナを設定
-      ScrollTrigger.defaults({ scroller: "#content-scroll" })
-
-      // スクロールコンテナの更新を監視
-      ScrollTrigger.scrollerProxy("#content-scroll", {
-        scrollTop(value) {
-          if (arguments.length) {
-            const scrollElement = document.querySelector("#content-scroll")
-            if (scrollElement) {
-              scrollElement.scrollTop = value as number
-            }
-          }
-          const scrollElement = document.querySelector("#content-scroll")
-          return scrollElement ? scrollElement.scrollTop : 0
-        },
-        getBoundingClientRect() {
-          return {
-            top: 0,
-            left: 0,
-            width: window.innerWidth,
-            height: window.innerHeight,
-            right: window.innerWidth,
-            bottom: window.innerHeight,
-          }
-        },
-      })
-
       // リサイズ時にScrollTriggerを更新
       const resizeObserver = new ResizeObserver(() => {
         ScrollTrigger.refresh()
       })
 
-      const scrollElement = document.querySelector("#content-scroll")
-      if (scrollElement) {
-        resizeObserver.observe(scrollElement)
-      }
+      resizeObserver.observe(document.body)
 
       initialized.current = true
 
@@ -72,6 +42,6 @@ export default function ScrollTriggerProvider({ children }: { children: React.Re
   }, [])
 
   return (
-    <ScrollTriggerContext.Provider value={{ scroller: "#content-scroll" }}>{children}</ScrollTriggerContext.Provider>
+    <ScrollTriggerContext.Provider value={{ scroller: null }}>{children}</ScrollTriggerContext.Provider>
   )
 }

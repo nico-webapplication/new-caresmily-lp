@@ -278,7 +278,7 @@ export default function Home() {
       </div>
 
       {/* Landing page content */}
-      <div ref={contentRef} id="content-scroll" className="relative z-20">
+      <div ref={contentRef} className="relative z-20">
         <HeroSection />
         <ServiceSection />
         <PointsSection />
