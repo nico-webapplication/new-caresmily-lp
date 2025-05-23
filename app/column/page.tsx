@@ -267,7 +267,7 @@ export default function ColumnPage() {
               onClick={() => router.push(`/column/${column.id}`)}
             >
               {/* サムネイル画像エリア */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
                 {/* 背景画像 */}
                 {column.image ? (
                   <img
