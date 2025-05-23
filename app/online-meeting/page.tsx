@@ -165,12 +165,12 @@ export default function OnlineMeeting() {
                               <Button
                                 variant={"outline"}
                                 className={cn(
-                                  "w-full pl-3 text-left font-normal justify-start",
+                                  "w-full pl-3 text-left font-normal",
                                   !field.value && "text-muted-foreground",
                                 )}
                               >
                                 {field.value ? (
-                                  format(field.value, "yyyy年MM月dd日", { locale: ja })
+                                  format(field.value, "PPP", { locale: ja })
                                 ) : (
                                   <span>日付を選択してください</span>
                                 )}
@@ -183,11 +183,7 @@ export default function OnlineMeeting() {
                               mode="single"
                               selected={field.value}
                               onSelect={field.onChange}
-                              disabled={(date) => {
-                                const today = new Date();
-                                today.setHours(0, 0, 0, 0);
-                                return date < today || date.getDay() === 0 || date.getDay() === 6;
-                              }}
+                              disabled={(date) => date < new Date() || date.getDay() === 0 || date.getDay() === 6}
                               initialFocus
                             />
                           </PopoverContent>
