@@ -24,8 +24,8 @@ export default function Home() {
   const [hasPlayedInitialAnimation, setHasPlayedInitialAnimation] = useState(() => {
     // サーバーサイドレンダリング時はfalseを返す
     if (typeof window === 'undefined') return false
-    // localStorageから初回アニメーション再生状態を取得
-    return localStorage.getItem('hasPlayedInitialAnimation') === 'true'
+    // sessionStorageから初回アニメーション再生状態を取得（セッション中のみ保持）
+    return sessionStorage.getItem('hasPlayedInitialAnimation') === 'true'
   })
 
   // Register GSAP plugins
@@ -177,9 +177,9 @@ export default function Home() {
         setAnimationComplete(true)
         setScrollDisabled(false) // アニメーション完了時にスクロールを有効にする
         setHasPlayedInitialAnimation(true) // 初回アニメーション完了フラグを設定
-        // localStorageに状態を保存
+        // sessionStorageに状態を保存（セッション中のみ保持）
         if (typeof window !== 'undefined') {
-          localStorage.setItem('hasPlayedInitialAnimation', 'true')
+          sessionStorage.setItem('hasPlayedInitialAnimation', 'true')
         }
       },
     })
