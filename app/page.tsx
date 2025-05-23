@@ -20,12 +20,21 @@ export default function Home() {
   const frameLogoRef = useRef<HTMLAnchorElement>(null)
   const messageImageRef = useRef<HTMLImageElement>(null)
   const [animationComplete, setAnimationComplete] = useState(false)
-  const [scrollDisabled, setScrollDisabled] = useState(true)
+  const [scrollDisabled, setScrollDisabled] = useState(false)
+  const [hasPlayedOpeningAnimation, setHasPlayedOpeningAnimation] = useState(false)
 
-  // Register GSAP plugins
+  // Register GSAP plugins and check if opening animation has been played
   useEffect(() => {
     if (typeof window !== "undefined") {
       gsap.registerPlugin(ScrollTrigger)
+      
+      // Check if opening animation has been played in this session
+      const hasPlayed = sessionStorage.getItem('hasPlayedOpeningAnimation')
+      if (hasPlayed === 'true') {
+        setHasPlayedOpeningAnimation(true)
+        setAnimationComplete(true)
+        setScrollDisabled(false)
+      }
     }
   }, [])
 
@@ -164,6 +173,11 @@ export default function Home() {
       onComplete: () => {
         setAnimationComplete(true)
         setScrollDisabled(false) // アニメーション完了時にスクロールを有効にする
+        // Mark opening animation as played
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem('hasPlayedOpeningAnimation', 'true')
+          setHasPlayedOpeningAnimation(true)
+        }
       },
     })
 
@@ -329,12 +343,27 @@ export default function Home() {
   }, [scrollDisabled])
 
   useEffect(() => {
-    // Play animation on initial load
-    playAnimation()
+    // Only play animation on initial load if it hasn't been played in this session
+    if (!hasPlayedOpeningAnimation) {
+      setScrollDisabled(true)
+      playAnimation()
+    } else {
+      // Skip animation, show content immediately
+      if (contentRef.current) {
+        gsap.set(contentRef.current, {
+          opacity: 1,
+          y: "0%",
+          display: "block",
+        })
+        setAnimationComplete(true)
+      }
+    }
+  }, [hasPlayedOpeningAnimation])
 
-    // Handle window resize
+  // Separate useEffect for resize handling
+  useEffect(() => {
     const handleResize = () => {
-      if (containerRef.current) {
+      if (containerRef.current && !hasPlayedOpeningAnimation) {
         const documents = containerRef.current.querySelectorAll(".document")
         gsap.killTweensOf(documents)
         playAnimation()
@@ -343,7 +372,7 @@ export default function Home() {
 
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
-  }, [])
+  }, [hasPlayedOpeningAnimation])
 
   return (
     <main className="min-h-screen bg-white">
