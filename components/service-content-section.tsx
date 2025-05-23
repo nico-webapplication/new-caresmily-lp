@@ -34,6 +34,8 @@ export default function ServiceContentSection() {
   const [contentHeight, setContentHeight] = useState<number>(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const { scroller } = useScrollTrigger();
+  // ScrollTriggerの参照を保存
+  const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
 
   const handleTabChange = (
     tab: "dayservice" | "homecare" | "records" | "support",
@@ -65,8 +67,11 @@ export default function ServiceContentSection() {
                 });
               }
 
-              // スクロール位置を復元
-              window.scrollTo(0, scrollPosition);
+              // スクロール位置を復元（ScrollTrigger再計算のために少し遅延）
+              setTimeout(() => {
+                window.scrollTo(0, scrollPosition);
+                ScrollTrigger.refresh();
+              }, 100);
             }, 50);
           },
         });
@@ -98,9 +103,13 @@ export default function ServiceContentSection() {
     if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
 
+    // 既存のScrollTriggerをクリーンアップ
+    scrollTriggersRef.current.forEach((trigger) => trigger.kill());
+    scrollTriggersRef.current = [];
+
     if (sectionRef.current) {
       gsap.set(sectionRef.current, { opacity: 0, y: 30 });
-      ScrollTrigger.create({
+      const sectionTrigger = ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top 80%",
         scroller: scroller || undefined,
@@ -112,6 +121,7 @@ export default function ServiceContentSection() {
             ease: "power2.out",
           }),
       });
+      scrollTriggersRef.current.push(sectionTrigger);
     }
 
     // タブ選択時のアニメーション
@@ -122,7 +132,7 @@ export default function ServiceContentSection() {
           const isActive = tabKeys[index] === activeTab;
           gsap.to(tabRef, {
             width: isActive ? "40%" : "20%",
-            duration: 0.6, // アニメーション時間を長くして滑らかに
+            duration: 0.6,
             ease: "power2.inOut",
           });
         }
@@ -145,8 +155,8 @@ export default function ServiceContentSection() {
       gsap.set(stats, { scale: 0.9, opacity: 0 });
       gsap.set(icons, { scale: 0.8, opacity: 0, rotation: -5 });
 
-      // スクロールトリガーでアニメーション
-      ScrollTrigger.batch(animElements, {
+      // 各要素のScrollTriggerを作成して参照を保存
+      const animTrigger = ScrollTrigger.batch(animElements, {
         onEnter: (elements) => {
           gsap.to(elements, {
             y: 0,
@@ -160,7 +170,7 @@ export default function ServiceContentSection() {
         scroller: scroller || undefined,
       });
 
-      ScrollTrigger.batch(cards, {
+      const cardTrigger = ScrollTrigger.batch(cards, {
         onEnter: (elements) => {
           gsap.to(elements, {
             y: 0,
@@ -174,7 +184,7 @@ export default function ServiceContentSection() {
         scroller: scroller || undefined,
       });
 
-      ScrollTrigger.batch(stats, {
+      const statTrigger = ScrollTrigger.batch(stats, {
         onEnter: (elements) => {
           gsap.to(elements, {
             scale: 1,
@@ -188,7 +198,7 @@ export default function ServiceContentSection() {
         scroller: scroller || undefined,
       });
 
-      ScrollTrigger.batch(icons, {
+      const iconTrigger = ScrollTrigger.batch(icons, {
         onEnter: (elements) => {
           gsap.to(elements, {
             scale: 1,
@@ -202,10 +212,26 @@ export default function ServiceContentSection() {
         start: "top 85%",
         scroller: scroller || undefined,
       });
+
+      // 作成されたtriggerを配列で保存
+      if (Array.isArray(animTrigger)) {
+        scrollTriggersRef.current.push(...animTrigger);
+      }
+      if (Array.isArray(cardTrigger)) {
+        scrollTriggersRef.current.push(...cardTrigger);
+      }
+      if (Array.isArray(statTrigger)) {
+        scrollTriggersRef.current.push(...statTrigger);
+      }
+      if (Array.isArray(iconTrigger)) {
+        scrollTriggersRef.current.push(...iconTrigger);
+      }
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      // このコンポーネントのScrollTriggerのみクリーンアップ
+      scrollTriggersRef.current.forEach((trigger) => trigger.kill());
+      scrollTriggersRef.current = [];
     };
   }, [activeTab, scroller]);
 
