@@ -20,17 +20,13 @@ export default function SlideInPopup() {
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger)
 
-    // Check if popup was already dismissed in this session
-    const dismissed = sessionStorage.getItem('popupDismissed') === 'true'
-    if (dismissed) {
-      setIsDismissed(true)
-      return
-    }
+    // ページ読み込み時は常にポップアップを表示可能にする
+    // sessionStorageは使用せず、ページ更新で再度表示される
 
-    // Create scroll trigger to show popup when leaving hero section
+    // Create scroll trigger to show popup slightly before leaving hero section
     const trigger = ScrollTrigger.create({
       trigger: "body",
-      start: "top -100px", // When scrolled past hero section
+      start: "top -50vh", // Show popup when scrolled about half the viewport height
       onEnter: () => {
         if (!isDismissed) {
           setIsVisible(true)
@@ -44,8 +40,18 @@ export default function SlideInPopup() {
         }
       },
       onLeaveBack: () => {
-        // Optional: hide when scrolling back to top
-        // setIsVisible(false)
+        // Hide when scrolling back to hero section
+        if (isVisible && !isDismissed) {
+          if (popupRef.current) {
+            gsap.to(popupRef.current, {
+              x: "100%",
+              opacity: 0,
+              duration: 0.4,
+              ease: "power2.in",
+              onComplete: () => setIsVisible(false)
+            })
+          }
+        }
       }
     })
 
@@ -65,7 +71,7 @@ export default function SlideInPopup() {
         onComplete: () => {
           setIsVisible(false)
           setIsDismissed(true)
-          sessionStorage.setItem('popupDismissed', 'true')
+          // sessionStorageは使用しない（ページ更新で再表示される）
         }
       })
     }
