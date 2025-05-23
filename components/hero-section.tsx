@@ -259,7 +259,7 @@ const ImageContainer = styled.div`
 `;
 
 const FloatingImage = styled.div`
-  background-color: white;
+  background-color: transparent;
   border-radius: 1rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   padding: 0.5rem;
