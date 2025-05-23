@@ -158,75 +158,37 @@ export default function OnlineMeeting() {
                     name="date"
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel className="text-gray-700 font-medium">面談希望日</FormLabel>
+                        <FormLabel>面談希望日</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
                               <Button
                                 variant={"outline"}
                                 className={cn(
-                                  "w-full justify-start pl-3 text-left font-normal h-10 border-gray-300 hover:border-blue-400 transition-colors",
-                                  !field.value && "text-gray-500",
-                                  field.value && "text-gray-900"
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground",
                                 )}
                               >
                                 {field.value ? (
-                                  <span className="flex items-center">
-                                    <CalendarIcon className="mr-2 h-4 w-4 text-blue-500" />
-                                    {format(field.value, "yyyy年M月d日(E)", { locale: ja })}
-                                  </span>
+                                  format(field.value, "PPP", { locale: ja })
                                 ) : (
-                                  <span className="flex items-center">
-                                    <CalendarIcon className="mr-2 h-4 w-4 text-gray-400" />
-                                    日付を選択してください
-                                  </span>
+                                  <span>日付を選択してください</span>
                                 )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0 shadow-lg border-gray-200" align="start">
+                          <PopoverContent className="w-auto p-0" align="start">
                             <Calendar
                               mode="single"
                               selected={field.value}
                               onSelect={field.onChange}
-                              disabled={(date) => {
-                                const today = new Date();
-                                today.setHours(0, 0, 0, 0);
-                                return date < today || date.getDay() === 0 || date.getDay() === 6;
-                              }}
+                              disabled={(date) => date < new Date() || date.getDay() === 0 || date.getDay() === 6}
                               initialFocus
-                              className="rounded-md border-0"
-                              classNames={{
-                                months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
-                                month: "space-y-4",
-                                caption: "flex justify-center pt-1 relative items-center mb-4",
-                                caption_label: "text-sm font-semibold text-gray-900",
-                                nav: "space-x-1 flex items-center",
-                                nav_button: cn(
-                                  "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-blue-50 rounded-md transition-all"
-                                ),
-                                nav_button_previous: "absolute left-1",
-                                nav_button_next: "absolute right-1",
-                                table: "w-full border-collapse space-y-1",
-                                head_row: "flex",
-                                head_cell: "text-gray-500 rounded-md w-9 font-medium text-[0.8rem] text-center",
-                                row: "flex w-full mt-2",
-                                cell: "h-9 w-9 text-center text-sm p-0 relative hover:bg-blue-50 rounded-md transition-colors focus-within:relative focus-within:z-20",
-                                day: cn(
-                                  "h-9 w-9 p-0 font-normal rounded-md hover:bg-blue-50 hover:text-blue-600 transition-all"
-                                ),
-                                day_selected: "bg-blue-500 text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white",
-                                day_today: "bg-blue-100 text-blue-600 font-semibold",
-                                day_outside: "text-gray-400 opacity-50",
-                                day_disabled: "text-gray-300 opacity-30 cursor-not-allowed hover:bg-transparent",
-                                day_range_middle: "aria-selected:bg-blue-50 aria-selected:text-blue-600",
-                                day_hidden: "invisible",
-                              }}
                             />
                           </PopoverContent>
                         </Popover>
                         <FormMessage />
-                        <p className="text-xs text-gray-500 mt-1">※ 平日のみ選択可能です</p>
                       </FormItem>
                     )}
                   />
