@@ -127,14 +127,14 @@ export default function Home() {
       onComplete: () => setAnimationComplete(true),
     })
 
-    // Animate content coming up from bottom - SLOWER
+    // Animate content coming up from bottom - FASTER
     tl.to(
       contentRef.current,
       {
         y: "0%",
         opacity: 1,
-        duration: 2.5, // Much slower rise (was 1.2)
-        ease: "power1.inOut", // Smoother easing
+        duration: 1.5, // Faster rise for better synchronization
+        ease: "power2.out", // More dynamic easing
       },
       0,
     )
@@ -178,14 +178,14 @@ export default function Home() {
         rotation: () => gsap.utils.random(-720, 720),
         scale: () => gsap.utils.random(0.4, 0.8),
         opacity: 0.4,
-        duration: 2,
+        duration: 1.5,
         stagger: {
-          amount: 0.5,
+          amount: 0.3,
           from: "center",
         },
         ease: "power2.out",
       },
-      0.1, // Start slightly after content begins rising
+      0.5, // Start when LP content is about 1/3 up
     )
 
     // Middle documents - pushed up with slight delay
@@ -206,14 +206,14 @@ export default function Home() {
         rotation: () => gsap.utils.random(-540, 540),
         scale: () => gsap.utils.random(0.4, 0.7),
         opacity: 0.3,
-        duration: 1.8,
+        duration: 1.3,
         stagger: {
-          amount: 0.6,
+          amount: 0.4,
           from: "center",
         },
         ease: "power2.out",
       },
-      0.4, // Delayed start
+      0.7, // Start when LP is about halfway up
     )
 
     // Top documents - pushed up last and least
@@ -234,14 +234,14 @@ export default function Home() {
         rotation: () => gsap.utils.random(-360, 360),
         scale: () => gsap.utils.random(0.3, 0.6),
         opacity: 0.2,
-        duration: 1.5,
+        duration: 1.0,
         stagger: {
-          amount: 0.7,
+          amount: 0.3,
           from: "center",
         },
-        ease: "power1.out",
+        ease: "power2.out",
       },
-      0.7, // Even more delayed
+      0.9, // Start when LP is almost at the top
     )
   }
 
