@@ -259,7 +259,7 @@ const ImageContainer = styled.div`
 `;
 
 const FloatingImage = styled.div`
-  background-color: transparent;
+  background-color: white;
   border-radius: 1rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   padding: 0.5rem;
@@ -475,13 +475,11 @@ const HeroSectionComponent = () => {
           <FlexContainer>
             {/* Left content */}
             <LeftContent data-aos="fade-right">
-              <FloatingImage>
                 <img
                   src="/images/fukidashi.png"
                   alt="吹き出し"
-                  style={{ width: '200px', height: 'auto' }}
+                  style={{ width: '200px', height: 'auto' ,animation: 'floating 3s ease-in-out infinite'}}
                 />
-              </FloatingImage>
               <HeadingLarge>
                 膨大な<TextGradient>文例</TextGradient>×
                 <TextGradient>選択</TextGradient>で<br />
@@ -533,12 +531,11 @@ const HeroSectionComponent = () => {
             <RightContent data-aos="fade-left" data-aos-delay="200">
               <ImageContainer>
                 {/* Hero image */}
-                <FloatingImage>
                   <img
                     src="/images/CareSmily_ロゴ.png"
                     alt="CareSmily アプリ画面"
+                    style={{ animation: 'floating 3s ease-in-out infinite'}}
                   />
-                </FloatingImage>
               </ImageContainer>
             </RightContent>
           </FlexContainer>
