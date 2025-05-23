@@ -183,11 +183,7 @@ export default function OnlineMeeting() {
                               mode="single"
                               selected={field.value}
                               onSelect={field.onChange}
-                              disabled={(date) => {
-                                const today = new Date()
-                                today.setHours(0, 0, 0, 0)
-                                return date < today || date.getDay() === 0 || date.getDay() === 6
-                              }}
+                              disabled={(date) => date < new Date() || date.getDay() === 0 || date.getDay() === 6}
                               initialFocus
                             />
                           </PopoverContent>
