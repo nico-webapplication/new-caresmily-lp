@@ -127,14 +127,14 @@ export default function Home() {
       onComplete: () => setAnimationComplete(true),
     })
 
-    // Animate content coming up from bottom - MODERATE SPEED
+    // Animate content coming up from bottom - SLOWER SPEED
     tl.to(
       contentRef.current,
       {
         y: "0%",
         opacity: 1,
-        duration: 2.0, // Moderate speed for better visual effect
-        ease: "power2.out", // More dynamic easing
+        duration: 3.0, // Much slower for more elegant effect
+        ease: "power1.out", // Gentler easing
       },
       0,
     )
@@ -178,14 +178,14 @@ export default function Home() {
         rotation: () => gsap.utils.random(-720, 720),
         scale: () => gsap.utils.random(0.4, 0.8),
         opacity: 0.4,
-        duration: 1.5,
+        duration: 2.5,
         stagger: {
-          amount: 0.3,
+          amount: 0.8,
           from: "center",
         },
-        ease: "power2.out",
+        ease: "power1.out",
       },
-      0.5, // Start when LP content is about 1/3 up
+      1.0, // Start when LP content is about 1/3 up
     )
 
     // Middle documents - pushed up with slight delay
@@ -206,14 +206,14 @@ export default function Home() {
         rotation: () => gsap.utils.random(-540, 540),
         scale: () => gsap.utils.random(0.4, 0.7),
         opacity: 0.3,
-        duration: 1.3,
+        duration: 2.2,
         stagger: {
-          amount: 0.4,
+          amount: 0.7,
           from: "center",
         },
-        ease: "power2.out",
+        ease: "power1.out",
       },
-      0.7, // Start when LP is about halfway up
+      1.5, // Start when LP is about halfway up
     )
 
     // Top documents - pushed up last and least
@@ -234,14 +234,14 @@ export default function Home() {
         rotation: () => gsap.utils.random(-360, 360),
         scale: () => gsap.utils.random(0.3, 0.6),
         opacity: 0.2,
-        duration: 1.0,
+        duration: 2.0,
         stagger: {
-          amount: 0.3,
+          amount: 0.6,
           from: "center",
         },
-        ease: "power2.out",
+        ease: "power1.out",
       },
-      0.9, // Start when LP is almost at the top
+      2.0, // Start when LP is almost at the top
     )
   }
 
