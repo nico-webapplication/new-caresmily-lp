@@ -631,7 +631,9 @@ export default function ServiceContentSection() {
             return (
               <div
                 key={tabKey}
-                ref={(el) => (tabRefs.current[index] = el)}
+                ref={(el) => {
+                  tabRefs.current[index] = el;
+                }}
                 className="h-[80px] md:h-[100px] flex items-center justify-center cursor-pointer relative transition-all duration-300"
                 style={{
                   width: isActive ? "40%" : "20%", // 初期幅設定
@@ -657,10 +659,20 @@ export default function ServiceContentSection() {
                     }}
                   />
                 </div>
-                <div className="relative flex items-center justify-center">
-                  <div className="flex items-center text-white font-bold text-sm md:text-base lg:text-lg">
-                    {tab.icon}
-                    <span className="truncate">{tab.label}</span>
+                <div className="relative flex items-center justify-center px-2">
+                  <div className="flex items-center text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg">
+                    <div className="hidden sm:flex">
+                      {tab.icon}
+                    </div>
+                    <span className="truncate max-w-full text-center sm:text-left">
+                      <span className="hidden sm:inline">{tab.label}</span>
+                      <span className="sm:hidden">
+                        {tabKey === "dayservice" ? "デイサービス" :
+                         tabKey === "homecare" ? "訪問介護" :
+                         tabKey === "records" ? "介護記録" :
+                         "居宅支援"}
+                      </span>
+                    </span>
                   </div>
                 </div>
                 {isActive && (
