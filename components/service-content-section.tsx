@@ -348,7 +348,7 @@ export default function ServiceContentSection() {
                 CareSmily〈デイサービス〉
               </h3>
               <p className="mb-4">
-                "文例を選ぶだけ"に焦点を絞り、確実性・操作性・時短効果を同時に実現したピンポイント型DXツールです。今後は放課後等デイや訪問看護版へ拡張予定で、デイサービス領域のノウハウを横展開する構想が示されています。
+                "文例を選ぶだけ"に焦点を絞り、確実性・操作性・時短効果を同時に実現したピンポイント型DXツールです。今後は放課後デイ等にも拡張予定で、デイサービス領域のノウハウを横展開する構想を進めております。
               </p>
               <a href="/document-request" className="bg-white text-[#42a5d5] px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors inline-block">
                 資料請求はこちら
@@ -483,7 +483,7 @@ export default function ServiceContentSection() {
             <div className="md:w-3/4 md:pl-8">
               <h3 className="text-2xl font-bold mb-4">CareSmily〈訪問介護〉</h3>
               <p className="mb-4">
-                "文例を選ぶだけ"に焦点を絞り、確実性・操作性・時短効果を同時に実現したピンポイント型DXツールです。今後は訪問看護や居宅介護支援版へ拡張予定で、訪問介護領域のノウハウを横展開する構想が示されています。
+                "文例を選ぶだけ"に焦点を絞り、確実性・操作性・時短効果を同時に実現したピンポイント型DXツールです。今後は訪問看護等にも拡張予定で、訪問介護領域のノウハウを横展開する構想を進めております。
               </p>
               <a href="/document-request" className="bg-white text-[#ff5a5a] px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors inline-block">
                 資料請求はこちら
