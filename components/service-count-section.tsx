@@ -111,7 +111,7 @@ export default function ServiceCountSection() {
     let startTimestamp: number | null = null
     const duration = 3000 // 3秒間
     const startValue = 0
-    const endValue = 100000
+    const endValue = serviceData.reduce((sum, { count = 0 }) => sum + count, 0)
 
     const step = (timestamp: number) => {
       if (!startTimestamp) startTimestamp = timestamp
@@ -155,14 +155,14 @@ export default function ServiceCountSection() {
       label: "デイサービス",
       sublabel1: "通所介護計画書・送迎",
       sublabel2: "様子",
-      count: 32450,
+      count: 76239,
       isCalculating: false,
     },
     {
       label: "訪問介護",
       sublabel1: "訪問介護計画書・サー",
       sublabel2: "ビス提供記録",
-      count: 28750,
+      count: 77861,
       isCalculating: false,
     },
     {
