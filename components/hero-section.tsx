@@ -109,24 +109,32 @@ const Container = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
+  min-height: 70vh;
 
   @media (min-width: 1024px) {
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
   }
 `;
 
 const LeftContent = styled.div`
   width: 100%;
   margin-bottom: 3rem;
-  padding-left: 0;
+  padding-left: 2rem;
+  max-width: 60%;
 
   @media (min-width: 1024px) {
-    width: 100%;
+    width: 60%;
     margin-bottom: 0;
-    padding-left: 2rem;
+    padding-left: 4rem;
+    max-width: none;
+  }
+
+  @media (min-width: 1280px) {
+    padding-left: 6rem;
   }
 `;
 
