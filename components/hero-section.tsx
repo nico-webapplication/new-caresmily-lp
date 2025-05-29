@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow-x: hidden;
-    background-color: rgb(168 224 255 / var(--tw-bg-opacity, 1));
+    background-color: white;
     margin: 0;
     padding: 0;
   }
@@ -65,11 +65,7 @@ const HeroShape = styled.div`
   right: 0;
   width: 50%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.1) 0%,
-    rgba(74, 222, 128, 0.1) 100%
-  );
+  background: transparent;
   border-radius: 0 0 0 25rem;
   z-index: 0;
 `;
