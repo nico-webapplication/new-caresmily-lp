@@ -160,9 +160,9 @@ const ButtonContainer = styled.div`
 `;
 
 const PrimaryButton = styled.a`
-  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
   color: white;
-  font-weight: 600;
+  font-weight: 500;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   box-shadow:
@@ -176,7 +176,6 @@ const PrimaryButton = styled.a`
   text-decoration: none;
 
   &:hover {
-    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
     box-shadow:
       0 20px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
