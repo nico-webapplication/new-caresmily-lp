@@ -1,0 +1,40 @@
+/* ------------------------------------------------------------------
+   FeaturesSection.css
+   ------------------------------------------------------------------
+   FeaturesSection 専用のグローバル追加スタイル。
+   Tailwind ユーティリティだけでは実現しづらい部分を補完します。
+------------------------------------------------------------------- */
+
+/* 数値強調フォントサイズを画面サイズで可変に */
+:root {
+  --feature-num-size: 3.75rem; /* 60px 相当 */
+}
+@media (min-width: 768px) {
+  :root {
+    --feature-num-size: 4.25rem; /* 68px 相当 */
+  }
+}
+
+/* .num クラスは内容文字のみ大きくする用途で利用 */
+.num {
+  font-size: var(--feature-num-size);
+  line-height: 1;
+  font-weight: 800;
+  display: inline-block;
+}
+
+/* 中央 About カードを左右が膨らんだ楕円形に。
+   Safari など clip-path 非対応環境では border‑radius fallback  */
+.about-card {
+  clip-path: ellipse(48% 50% at 50% 50%);
+}
+@supports not (clip-path: ellipse(50% 50% at 50% 50%)) {
+  .about-card {
+    border-radius: 220px / 160px; /* 同等の pill 形 */
+  }
+}
+
+/* 三角吹き出しの影調整（疑似要素用） */
+.feature-card-triangle {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}

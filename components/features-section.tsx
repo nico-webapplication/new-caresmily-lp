@@ -1,343 +1,199 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Clock, Users, BookOpen, Share2, TrendingDown, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
-import { useScrollTrigger } from "@/components/scroll-trigger-provider"
+import Image from "next/image";
+import {
+  GraduationCap,
+  BookOpen,
+  Users,
+  Briefcase,
+  Award,
+  ShieldCheck,
+  HelpCircle,
+} from "lucide-react";
 
 export default function FeaturesSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const cardsContainerRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
-  const titleRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null)
-  const { scroller } = useScrollTrigger()
-
-  // メリットデータ
-  const benefits = [
-    {
-      icon: <Clock className="h-12 w-12 text-white" />,
-      title: "書類作成時間60%削減",
-      subtitle: "現場へリソースを再集中",
-      description:
-        "キーワード検索と文例活用で計画書の約70%が完成。時間のかかる作成プロセスを一気に短縮し、スタッフは利用者に寄り添うケアへスムーズに戻れます。",
-      color: "bg-gradient-to-r from-sky-500 to-blue-600",
-      image: "/time-saving-document.png",
-    },
-    {
-      icon: <Users className="h-12 w-12 text-white" />,
-      title: "初心者もプロ級×個別ケア",
-      subtitle: "高品質プランを迅速作成",
-      description:
-        "専門家が監修した文章を活用し、最も利用者に近いスタッフでも気軽に計画書を作成可能。個々の背景や希望を的確に反映し、より質の高いケアを実現します。",
-      color: "bg-gradient-to-r from-purple-500 to-indigo-600",
-      image: "/placeholder-82q5d.png",
-    },
-    {
-      icon: <BookOpen className="h-12 w-12 text-white" />,
-      title: "学びながら作る",
-      subtitle: "計画書がそのまま教育教材に",
-      description:
-        "ケアマネジメントサイクルを意識した文例に触れるだけで、実務をこなしながら専門知識を身に付けられます。新人スタッフの育成にも効果的です。",
-      color: "bg-gradient-to-r from-amber-500 to-orange-600",
-      image: "/learning-at-work.png",
-    },
-    {
-      icon: <Share2 className="h-12 w-12 text-white" />,
-      title: "チーム連携強化",
-      subtitle: "業務時間を有効活用",
-      description:
-        "計画書作成の時間短縮により、利用者の書類管理にかける負担を軽減。浮いたリソースを多職種や家族との連携に注力できるため、情報共有が深まり、より質の高いケアを実現します。",
-      color: "bg-gradient-to-r from-green-500 to-emerald-600",
-      image: "/team-collaboration.png",
-    },
-    {
-      icon: <TrendingDown className="h-12 w-12 text-white" />,
-      title: "人件費の最適化",
-      subtitle: "業務効率アップでコストダウン",
-      description:
-        "作成作業の効率化でスタッフ配置を柔軟に調整でき、無駄な残業や重複業務を削減。結果として人件費の圧縮につながり、組織の経営基盤を強化します。",
-      color: "bg-gradient-to-r from-rose-500 to-red-600",
-      image: "/placeholder-gqo9l.png",
-    },
-  ]
-
-  // 自動再生タイマーをクリア
-  const clearAutoPlayTimer = () => {
-    if (autoPlayTimerRef.current) {
-      clearTimeout(autoPlayTimerRef.current)
-      autoPlayTimerRef.current = null
-    }
-  }
-
-  // 自動再生タイマーをセット
-  const startAutoPlayTimer = () => {
-    clearAutoPlayTimer()
-    autoPlayTimerRef.current = setTimeout(() => {
-      if (!isAnimating) {
-        goToNextCard()
-      }
-    }, 5000)
-  }
-
-  // 次のカードへ移動する関数
-  const goToNextCard = () => {
-    if (isAnimating) return
-
-    setIsAnimating(true)
-    clearAutoPlayTimer()
-
-    const newIndex = (activeIndex + 1) % benefits.length
-    setActiveIndex(newIndex)
-
-    // アニメーション完了後に自動再生を再開
-    setTimeout(() => {
-      setIsAnimating(false)
-      startAutoPlayTimer()
-    }, 800) // アニメーション時間と同じにする
-  }
-
-  // 前のカードへ移動する関数
-  const goToPrevCard = () => {
-    if (isAnimating) return
-
-    setIsAnimating(true)
-    clearAutoPlayTimer()
-
-    const newIndex = (activeIndex - 1 + benefits.length) % benefits.length
-    setActiveIndex(newIndex)
-
-    // アニメーション完了後に自動再生を再開
-    setTimeout(() => {
-      setIsAnimating(false)
-      startAutoPlayTimer()
-    }, 800) // アニメーション時間と同じにする
-  }
-
-  // 特定のカードへ移動する関数
-  const goToCard = (index: number) => {
-    if (isAnimating || index === activeIndex) return
-
-    setIsAnimating(true)
-    clearAutoPlayTimer()
-
-    setActiveIndex(index)
-
-    // アニメーション完了後に自動再生を再開
-    setTimeout(() => {
-      setIsAnimating(false)
-      startAutoPlayTimer()
-    }, 800) // アニメーション時間と同じにする
-  }
-
-  // タイトルのアニメーション
-  useEffect(() => {
-    if (typeof window === "undefined") return
-
-    gsap.registerPlugin(ScrollTrigger)
-
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 80%",
-            scroller: scroller || undefined,
-          },
-        },
-      )
-    }
-
-    // コンポーネントのアンマウント時にクリーンアップ
-    return () => {
-      clearAutoPlayTimer()
-    }
-  }, [scroller])
-
-  // カードアニメーションの更新
-  useEffect(() => {
-    if (typeof window === "undefined" || !cardsContainerRef.current) return
-
-    const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[]
-    if (cards.length === 0) return
-
-    // 全てのカードのアニメーションをキル
-    gsap.killTweensOf(cards)
-
-    // カードの初期表示設定
-    cards.forEach((card) => {
-      gsap.set(card, { display: "block" })
-    })
-
-    // 楕円形の軌道に沿ったカードの配置
-    const radiusX = 400 // X軸方向の半径（横方向）を大きく
-    const radiusZ = 200 // Z軸方向の半径（奥行き）を小さく
-    const totalCards = benefits.length
-    const angleStep = (2 * Math.PI) / totalCards // カード間の角度
-
-    // 各カードのアニメーション
-    cards.forEach((card, index) => {
-      // アクティブインデックスからの相対位置を計算
-      const relativeIndex = (index - activeIndex + totalCards) % totalCards
-
-      // 円周上の角度を計算（アクティブカードが正面=0度）
-      const angle = relativeIndex * angleStep
-
-      // 楕円形の軌道上の座標を計算
-      const x = Math.sin(angle) * radiusX
-      const z = Math.cos(angle) * radiusZ - radiusZ // 奥行き（正面が最も手前）
-
-      // 不透明度と表示順を計算
-      const opacity = Math.cos(angle) * 0.5 + 0.5 // 正面が最も不透明
-      const zIndex = Math.round(50 - relativeIndex * 10) // 正面が最も前面
-
-      // カードの回転角度（楕円の接線に沿って回転）
-      // 楕円の接線に基づいた回転角度の計算
-      const rotationY = (angle * 180) / Math.PI // ラジアンから度に変換
-
-      // 楕円の形状に合わせてスケールを調整
-      // 側面のカードをより小さく表示
-      const scale = 0.6 + Math.cos(angle) * 0.4
-
-      // カードのアニメーション
-      gsap.to(card, {
-        x: x,
-        z: z,
-        rotationY: rotationY,
-        scale: scale,
-        opacity: opacity,
-        zIndex: zIndex,
-        duration: 0.8,
-        ease: "power2.out",
-        immediateRender: false,
-      })
-    })
-
-    // 自動再生タイマーを開始
-    startAutoPlayTimer()
-
-    // クリーンアップ
-    return () => {
-      clearAutoPlayTimer()
-      gsap.killTweensOf(cards)
-    }
-  }, [activeIndex, benefits.length, scroller])
-
   return (
-    <section ref={sectionRef} className="py-20 bg-gray-50 overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div ref={titleRef} className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-CxDKyWyFLUJpYjsos7CqXF39Z3qVT4.png"
-              alt="CareSmilyを導入するメリット"
-              width={800}
-              height={100}
-              className="h-auto mx-auto"
-              quality={95}
-            />
-          </h2>
-        </div>
-
-        {/* 3Dカルーセル */}
-        <div className="relative h-[600px] md:h-[500px] mb-8">
-          <div
-            ref={cardsContainerRef}
-            className="cards-container w-full h-full flex items-center justify-center perspective-1500"
-          >
-            {benefits.map((benefit, index) => (
-              <div
-                key={index}
-                ref={(el) => (cardsRef.current[index] = el)}
-                className="feature-card absolute w-full max-w-md bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 opacity-0"
-                style={{
-                  display: "none",
-                  transformStyle: "preserve-3d",
-                  transformOrigin: "center center",
-                }}
-              >
-                <div className={`p-6 ${benefit.color}`}>
-                  <div className="flex justify-between items-start">
-                    <div className="icon-container w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                      {benefit.icon}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="card-title text-xl font-bold text-[#0a2540] mb-1">{benefit.title}</h3>
-                  <p className="card-subtitle text-lg font-medium text-gray-600 mb-4">{benefit.subtitle}</p>
-                  <p className="card-description text-gray-600 mb-6">{benefit.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* ナビゲーションボタン */}
-          <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-4 mt-8">
-            <button
-              className="prev-button h-12 w-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors z-50"
-              onClick={goToPrevCard}
-              disabled={isAnimating}
-              aria-label="前のカードを表示"
-            >
-              <ChevronLeft className="h-6 w-6 text-[#0a2540]" />
-            </button>
-            <button
-              className="next-button h-12 w-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors z-50"
-              onClick={goToNextCard}
-              disabled={isAnimating}
-              aria-label="次のカードを表示"
-            >
-              <ChevronRight className="h-6 w-6 text-[#0a2540]" />
-            </button>
-          </div>
-        </div>
-
-        {/* インジケーター */}
-        <div className="flex justify-center gap-2 mt-4">
-          {benefits.map((_, index) => (
-            <button
-              key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === activeIndex ? "bg-[#42a5d5] w-6" : "bg-gray-300 w-2"
-              }`}
-              onClick={() => goToCard(index)}
-              disabled={isAnimating}
-              aria-label={`カード${index + 1}を表示`}
-              aria-current={index === activeIndex ? "true" : "false"}
-            />
-          ))}
-        </div>
+    <section className="relative bg-white py-20">
+      {/* Vertical side text (desktop only) */}
+      <div className="hidden xl:block absolute top-0 left-0 h-full pointer-events-none select-none">
+        <p className="whitespace-nowrap text-[110px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-left ml-[-84px]">
+          MEDIA ARTS IN THE DATA  SEE MEDIA ARTS IN THE DATA
+        </p>
+      </div>
+      <div className="hidden xl:block absolute top-0 right-0 h-full pointer-events-none select-none">
+        <p className="whitespace-nowrap text-[110px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-right mr-[-84px]">
+          MEDIA ARTS IN THE DATA  SEE MEDIA ARTS IN THE DATA
+        </p>
       </div>
 
-      <style jsx global>{`
-        .perspective-1500 {
-          perspective: 1500px;
-          perspective-origin: 50% 50%;
-        }
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* GRID */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 auto-rows-fr gap-6 place-items-stretch"
+        >
+          {/* 1. 就職率 */}
+          <FeatureCard
+            color="orange"
+            icon={() => <span className="text-3xl">😊</span>}
+            headerLines={[
+              "個性を仕事に。",
+              "就職率 <span class='text-[64px] leading-none font-extrabold text-orange-500'>95.2%</span>",
+              "徹底した就職サポート",
+            ]}
+            footnote="2025年3月 卒業生実績"
+          />
 
-        .feature-card {
-          backface-visibility: hidden;
-          transform-style: preserve-3d;
-          will-change: transform, opacity;
-          transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
+          {/* 2. 授業料免除 */}
+          <FeatureCard
+            color="yellow"
+            icon={() => (
+              <Image
+                src="/icons/money-bag.svg"
+                alt="money"
+                width={32}
+                height={32}
+              />
+            )}
+            headerLines={[
+              "2年間の授業料 <br/><span class='text-[64px] leading-none font-extrabold text-orange-500'>最大124万円</span> 免除",
+              "独自の学費サポートで進学を応援します!!",
+            ]}
+          />
 
-        button:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-        }
-      `}</style>
+          {/* 3. 産学官連携 */}
+          <FeatureCard
+            color="blue"
+            icon={() => <span className="text-3xl">💡</span>}
+            headerLines={[
+              "産学官連携で現場がわかる!",
+              "<span class='text-[64px] leading-none font-extrabold text-orange-500'>100</span> 件",
+              "企業コラボ数  年間",
+            ]}
+          />
+
+          {/* 4. 創立49年 */}
+          <FeatureCard
+            color="red"
+            icon={() => <span className="text-3xl">❤️</span>}
+            headerLines={[
+              "<span class='text-[64px] leading-none font-extrabold text-orange-500'>49</span> 年",
+              "創立",
+              "地元に根付き、地域の人々に愛される場所であること",
+            ]}
+          />
+
+          {/* CENTRE About Us */}
+          <AboutCard />
+
+          {/* 5. 国家資格合格率 */}
+          <FeatureCard
+            color="pink"
+            icon={() => <span className="text-3xl">🎉</span>}
+            headerLines={[
+              "国家資格2級建築士製図試験",
+              "<span class='text-[64px] leading-none font-extrabold text-orange-500'>100%</span>",
+              "資格合格率",
+            ]}
+            footnote="2024年3月 卒業生実績"
+          />
+
+          {/* 6. 卒業生 */}
+          <FeatureCard
+            color="indigo"
+            icon={() => <span className="text-3xl">👨‍🎓</span>}
+            headerLines={[
+              "各業界の最前線で頼れる卒業生が活躍中!!",
+              "<span class='text-[64px] leading-none font-extrabold text-orange-500'>2,913</span> 人",
+              "卒業生のべ",
+            ]}
+            footnote="2024年3月 卒業生実績"
+          />
+        </div>
+      </div>
     </section>
-  )
+  );
+}
+
+/* --------------------------------------------------------------------- */
+
+interface FeatureCardProps {
+  color: "orange" | "yellow" | "red" | "blue" | "pink" | "indigo";
+  icon: () => React.ReactNode;
+  headerLines: string[]; // Strings can include basic HTML span for inline sizes/colours.
+  footnote?: string;
+}
+
+function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardProps) {
+  const bg = {
+    orange: "bg-[#F8F5F2]",
+    yellow: "bg-[#F8F5F2]",
+    red: "bg-[#F8F5F2]",
+    blue: "bg-[#F8F5F2]",
+    pink: "bg-[#F8F5F2]",
+    indigo: "bg-[#F8F5F2]",
+  }[color];
+
+  return (
+    <div className={`relative rounded-2xl p-8 ${bg} flex flex-col justify-between`}>
+      {/* floating icon */}
+      <div className="absolute -top-5 -left-5 bg-white shadow-md rounded-full p-2">
+        {Icon()}
+      </div>
+
+      {/* body */}
+      <div className="space-y-2">
+        {headerLines.map((line, idx) => (
+          <p
+            key={idx}
+            className="text-gray-900 font-bold leading-snug"
+            dangerouslySetInnerHTML={{ __html: line }}
+          />
+        ))}
+      </div>
+
+      {footnote && (
+        <p className="text-xs text-gray-400 mt-4" dangerouslySetInnerHTML={{ __html: footnote }} />
+      )}
+    </div>
+  );
+}
+
+function AboutCard() {
+  return (
+    <div className="relative bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-12 md:row-span-2 md:col-span-1">
+      {/* orange accent squares */}
+      <div className="absolute top-4 left-4 w-4 h-4 bg-orange-500 rounded"></div>
+      <div className="absolute bottom-4 right-4 w-4 h-4 bg-orange-500 rounded"></div>
+
+      {/* child holding laptop */}
+      <div className="relative w-40 h-40 rounded-full overflow-hidden shadow-xl -mt-24 mb-6">
+        <Image src="/about-us-boy.png" alt="boy" fill className="object-cover" />
+      </div>
+
+      <h3 className="text-3xl font-extrabold text-gray-900 mb-2">About Us</h3>
+      <p className="text-sm uppercase tracking-widest text-orange-500 mb-6">メディア・アーツについて</p>
+      <p className="text-center text-gray-600 max-w-xs">
+        丁寧な個別指導のもと、1人1人のきめ細かい個性を育む「好きなコト」を探す豊かな環境をサポートします。溢れを取り入れながら、オリジナルの魅力を伸ばす手助けを心がけています。
+      </p>
+      <button className="mt-6 inline-flex items-center gap-1 text-orange-500 font-semibold hover:underline">
+        View More
+        <ChevronRightIcon />
+      </button>
+    </div>
+  );
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      className="w-4 h-4"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  );
 }
