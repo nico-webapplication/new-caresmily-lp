@@ -41,8 +41,8 @@ const HeroSection = styled.section`
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: flex-start;
-  padding: 8rem 0 4rem 0;
+  align-items: center;
+  padding: 4rem 0;
   overflow: hidden;
 `;
 
@@ -102,7 +102,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1rem 0 0.5rem;
+  padding: 0 1rem;
   z-index: 10;
 `;
 
@@ -126,8 +126,7 @@ const LeftContent = styled.div`
   @media (min-width: 1024px) {
     width: 100%;
     margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 2;
+    padding-left: 2rem;
   }
 `;
 
