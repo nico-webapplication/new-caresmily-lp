@@ -109,6 +109,8 @@ const Container = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   @media (min-width: 1024px) {
     flex-direction: row;
@@ -119,20 +121,17 @@ const FlexContainer = styled.div`
 const LeftContent = styled.div`
   width: 100%;
   margin-bottom: 3rem;
+  padding-left: 0;
 
   @media (min-width: 1024px) {
-    width: 50%;
+    width: 100%;
     margin-bottom: 0;
+    padding-left: 2rem;
   }
 `;
 
 const RightContent = styled.div`
-  width: 100%;
-  position: relative;
-
-  @media (min-width: 1024px) {
-    width: 50%;
-  }
+  display: none;
 `;
 
 const HeadingSmall = styled.h5`
