@@ -59,44 +59,7 @@ const HeroBg = styled.div`
   z-index: -2;
 `;
 
-const HeroShape = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.1) 0%,
-    rgba(74, 222, 128, 0.1) 100%
-  );
-  border-radius: 0 0 0 25rem;
-  z-index: 0;
-`;
 
-const Blob = styled.div`
-  position: absolute;
-  z-index: -1;
-  filter: blur(40px);
-  opacity: 0.4;
-  border-radius: 100%;
-
-  &.blue {
-    background-color: #93c5fd;
-    width: 24rem;
-    height: 24rem;
-    top: 5rem;
-    left: -8rem;
-  }
-
-  &.green {
-    background-color: #86efac;
-    width: 18rem;
-    height: 18rem;
-    bottom: 5rem;
-    right: 5rem;
-  }
-`;
 
 const Container = styled.div`
   width: 100%;
@@ -473,9 +436,6 @@ const HeroSectionComponent = () => {
 
       <HeroSection>
         <HeroBg />
-        <HeroShape />
-        <Blob className="blue" />
-        <Blob className="green" />
 
         <Container>
           <FlexContainer>
