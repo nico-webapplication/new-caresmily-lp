@@ -102,7 +102,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1rem 0 3rem;
+  padding: 0 1rem 0 0.5rem;
   z-index: 10;
 `;
 
@@ -127,6 +127,7 @@ const LeftContent = styled.div`
     width: 100%;
     margin-bottom: 0;
     padding-left: 0;
+    padding-right: 2;
   }
 `;
 
