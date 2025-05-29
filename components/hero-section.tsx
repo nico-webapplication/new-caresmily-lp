@@ -74,30 +74,38 @@ const FlexContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  min-height: 70vh;
+  min-height: 80vh;
+  padding: 2rem 0;
 
   @media (min-width: 1024px) {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    padding: 4rem 0;
   }
 `;
 
 const LeftContent = styled.div`
   width: 100%;
   margin-bottom: 3rem;
-  padding-left: 2rem;
-  max-width: 60%;
+  padding: 0 2rem;
+  max-width: 90%;
+
+  @media (min-width: 768px) {
+    padding: 0 3rem;
+    max-width: 70%;
+  }
 
   @media (min-width: 1024px) {
-    width: 60%;
+    width: 65%;
     margin-bottom: 0;
-    padding-left: 4rem;
+    padding: 0 5rem;
     max-width: none;
   }
 
   @media (min-width: 1280px) {
-    padding-left: 6rem;
+    padding: 0 8rem;
+    width: 60%;
   }
 `;
 
