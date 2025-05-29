@@ -52,11 +52,10 @@ const HeroBg = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    170deg,
-    rgb(168 224 255 / var(--tw-bg-opacity, 1)) 0%,
-    rgb(183 232 255 / var(--tw-bg-opacity, 1)) 100%
-  );
+  background-image: url('/images/hero-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index: -2;
 `;
 
