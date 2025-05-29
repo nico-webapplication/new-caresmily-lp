@@ -59,7 +59,44 @@ const HeroBg = styled.div`
   z-index: -2;
 `;
 
+const HeroShape = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.1) 0%,
+    rgba(74, 222, 128, 0.1) 100%
+  );
+  border-radius: 0 0 0 25rem;
+  z-index: 0;
+`;
 
+const Blob = styled.div`
+  position: absolute;
+  z-index: -1;
+  filter: blur(40px);
+  opacity: 0.4;
+  border-radius: 100%;
+
+  &.blue {
+    background-color: #93c5fd;
+    width: 24rem;
+    height: 24rem;
+    top: 5rem;
+    left: -8rem;
+  }
+
+  &.green {
+    background-color: #86efac;
+    width: 18rem;
+    height: 18rem;
+    bottom: 5rem;
+    right: 5rem;
+  }
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -72,37 +109,30 @@ const Container = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 70vh;
 
   @media (min-width: 1024px) {
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
   }
 `;
 
 const LeftContent = styled.div`
   width: 100%;
   margin-bottom: 3rem;
-  padding-left: 2rem;
-  max-width: 60%;
 
   @media (min-width: 1024px) {
-    width: 60%;
+    width: 50%;
     margin-bottom: 0;
-    padding-left: 4rem;
-    max-width: none;
-  }
-
-  @media (min-width: 1280px) {
-    padding-left: 6rem;
   }
 `;
 
 const RightContent = styled.div`
-  display: none;
+  width: 100%;
+  position: relative;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+  }
 `;
 
 const HeadingSmall = styled.h5`
@@ -436,6 +466,9 @@ const HeroSectionComponent = () => {
 
       <HeroSection>
         <HeroBg />
+        <HeroShape />
+        <Blob className="blue" />
+        <Blob className="green" />
 
         <Container>
           <FlexContainer>
