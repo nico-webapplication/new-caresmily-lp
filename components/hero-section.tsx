@@ -41,8 +41,8 @@ const HeroSection = styled.section`
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  padding: 4rem 0;
+  align-items: flex-start;
+  padding: 8rem 0 4rem 0;
   overflow: hidden;
 `;
 
@@ -101,8 +101,8 @@ const Blob = styled.div`
 const Container = styled.div`
   width: 100%;
   max-width: 1280px;
-  margin: 0;
-  padding: 0 1rem 0 0;
+  margin: 0 auto;
+  padding: 0 1rem 0 3rem;
   z-index: 10;
 `;
 
