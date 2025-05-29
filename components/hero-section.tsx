@@ -59,41 +59,6 @@ const HeroBg = styled.div`
   z-index: -2;
 `;
 
-const HeroShape = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: transparent;
-  border-radius: 0 0 0 25rem;
-  z-index: 0;
-`;
-
-const Blob = styled.div`
-  position: absolute;
-  z-index: -1;
-  filter: blur(40px);
-  opacity: 0.4;
-  border-radius: 100%;
-
-  &.blue {
-    background-color: #93c5fd;
-    width: 24rem;
-    height: 24rem;
-    top: 5rem;
-    left: -8rem;
-  }
-
-  &.green {
-    background-color: #86efac;
-    width: 18rem;
-    height: 18rem;
-    bottom: 5rem;
-    right: 5rem;
-  }
-`;
-
 const Container = styled.div`
   width: 100%;
   max-width: 1280px;
@@ -195,9 +160,9 @@ const ButtonContainer = styled.div`
 `;
 
 const PrimaryButton = styled.a`
-  background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
   color: white;
-  font-weight: 500;
+  font-weight: 600;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   box-shadow:
@@ -211,6 +176,7 @@ const PrimaryButton = styled.a`
   text-decoration: none;
 
   &:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
     box-shadow:
       0 20px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -462,9 +428,6 @@ const HeroSectionComponent = () => {
 
       <HeroSection>
         <HeroBg />
-        <HeroShape />
-        <Blob className="blue" />
-        <Blob className="green" />
 
         <Container>
           <FlexContainer>
