@@ -534,53 +534,7 @@ const HeroSectionComponent = () => {
             </RightContent>
           </FlexContainer>
 
-          {/* Stats section */}
-          <StatsGrid data-aos="fade-up">
-            <StatCard>
-              <StatValue
-                className="blue counter"
-                ref={(el) => (countersRef.current[0] = el)}
-                data-target="60"
-                data-suffix="%"
-              >
-                0%
-              </StatValue>
-              <StatLabel>記録作成時間削減</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatValue
-                className="green counter"
-                ref={(el) => (countersRef.current[1] = el)}
-                data-target="100000"
-                data-suffix="+"
-              >
-                0+
-              </StatValue>
-              <StatLabel>専門家監修文例数</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatValue
-                className="teal counter"
-                ref={(el) => (countersRef.current[2] = el)}
-                data-target="92"
-                data-suffix="%"
-              >
-                0%
-              </StatValue>
-              <StatLabel>利用者満足度</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatValue
-                className="cyan counter"
-                ref={(el) => (countersRef.current[3] = el)}
-                data-target="8"
-                data-suffix=""
-              >
-                0<span>時間/月</span>
-              </StatValue>
-              <StatLabel>残業時間削減</StatLabel>
-            </StatCard>
-          </StatsGrid>
+          {/* Stats section removed */}
         </Container>
       </HeroSection>
     </>
