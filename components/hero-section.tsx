@@ -101,8 +101,8 @@ const Blob = styled.div`
 const Container = styled.div`
   width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin: 0;
+  padding: 0 1rem 0 0;
   z-index: 10;
 `;
 
@@ -126,7 +126,7 @@ const LeftContent = styled.div`
   @media (min-width: 1024px) {
     width: 100%;
     margin-bottom: 0;
-    padding-left: 2rem;
+    padding-left: 0;
   }
 `;
 
