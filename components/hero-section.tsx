@@ -529,12 +529,7 @@ const HeroSectionComponent = () => {
             {/* Right content - Image */}
             <RightContent data-aos="fade-left" data-aos-delay="200">
               <ImageContainer>
-                {/* Hero image */}
-                  <img
-                    src="/images/CareSmily_ロゴ.png"
-                    alt="CareSmily アプリ画面"
-                    style={{ animation: 'floating 3s ease-in-out infinite'}}
-                  />
+                {/* Hero image removed */}
               </ImageContainer>
             </RightContent>
           </FlexContainer>
