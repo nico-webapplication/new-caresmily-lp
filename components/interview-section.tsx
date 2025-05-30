@@ -118,7 +118,7 @@ export default function InterviewSection() {
       ref={sectionRef}
       className="relative py-20 overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #ff8c42 0%, #ff6b1a 100%)"
+        background: "rgb(143 207 234)"
       }}
     >
       {/* 背景パターン */}
@@ -150,32 +150,32 @@ export default function InterviewSection() {
             className="lg:w-1/3 text-white text-center lg:text-left"
           >
             <h2 className="text-6xl lg:text-8xl font-black mb-4 leading-tight">
-              Interview
+              Notice
             </h2>
             <h3 className="text-xl lg:text-2xl font-medium mb-6 opacity-90">
-              インタビュー
+              お知らせ
             </h3>
             <p className="text-lg opacity-80 leading-relaxed">
-              在校生、卒業生、保護者の方に<br />
-              メディア・アーツについて<br />
-              聞いてみました！
+              CareSmiliyについての<br />
+              最新の情報を
+              お届けします！
             </p>
           </div>
 
           {/* 右側：スマートフォン風インタビューカード */}
           <div className="lg:w-1/2 relative flex justify-center">
             {/* スマートフォンフレーム */}
-            <div className="relative mx-auto max-w-md">
+            <div className="relative mx-auto max-w-lg">
               {/* スマートフォンの外枠 */}
-              <div className="bg-gray-900 rounded-[3rem] p-4 shadow-2xl">
+              <div className="bg-gray-900 rounded-[3rem] p-5 shadow-2xl">
                 {/* スマートフォンの画面 */}
-                <div className="rounded-[2.5rem] p-5 relative overflow-hidden" style={{ backgroundColor: '#FEF3E2' }}>
+                <div className="rounded-[2.5rem] p-6 relative overflow-hidden w-80" style={{ backgroundColor: '#FEF3E2' }}>
                   {/* スマートフォンのノッチ */}
-                  <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gray-700 rounded-full"></div>
+                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-28 h-2 bg-gray-700 rounded-full"></div>
                   
                   {/* スクロール可能なチャット領域 */}
                   <div 
-                    className="h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent pt-8"
+                    className="h-[700px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent pt-10"
                     style={{
                       scrollbarWidth: 'thin',
                       scrollbarColor: '#9CA3AF transparent'
