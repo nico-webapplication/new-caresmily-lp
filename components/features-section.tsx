@@ -22,7 +22,7 @@ export default function FeaturesSection() {
         <div className="relative w-full max-w-6xl mx-auto hidden md:block">
           
           {/* 6つのカードのグリッド配置 */}
-          <div className="grid grid-cols-2 gap-x-1">
+          <div className="grid grid-cols-2 gap-x-1 ">
             
             {/* 左列 */}
             <div className="space-y-8">
@@ -227,50 +227,41 @@ function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardPr
 
 function AboutCard() {
   return (
-    <div className="relative w-72 h-72 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-orange-100">
-      {/* Orange circular ring at top */}
-      <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-        <div className="w-12 h-12 rounded-full border-4 border-orange-500 bg-white flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full bg-orange-500"></div>
-        </div>
-      </div>
+    <div 
+      className="relative bg-white shadow-xl flex flex-col items-center justify-center p-6 w-64 h-140 border-2 border-orange-200"
+      style={{
+        clipPath: 'ellipse(50% 65% at 50% 50%)',
+        borderRadius: '50%'
+      }}
+    >
+      {/* decorative elements */}
+      <div className="absolute top-4 left-4 w-3 h-3 bg-orange-500 rounded"></div>
+      <div className="absolute bottom-4 right-4 w-3 h-3 bg-orange-500 rounded"></div>
+      <div className="absolute top-4 right-4 w-4 h-4 bg-yellow-400 rounded transform rotate-12"></div>
+      <div className="absolute bottom-4 left-4 w-2 h-4 bg-blue-500 rounded"></div>
 
-      {/* Decorative elements around the circle */}
-      <div className="absolute top-8 right-8 w-3 h-3 bg-yellow-400 rounded transform rotate-45"></div>
-      <div className="absolute bottom-8 left-8 w-4 h-4 bg-blue-500 rounded-full"></div>
-      <div className="absolute top-12 left-6 w-2 h-6 bg-red-500 rounded"></div>
-      <div className="absolute bottom-12 right-6 w-3 h-3 bg-green-500 rounded"></div>
-
-      {/* Central image with orange background */}
-      <div className="relative w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center mb-4 overflow-hidden">
-        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center">
+      {/* circular background for image */}
+      <div className="relative w-24 h-24 rounded-full bg-orange-500 flex items-center justify-center mb-3 overflow-hidden">
+        <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center">
           <Image 
             src="/about-us-boy.png" 
             alt="Student with laptop" 
-            width={40} 
-            height={40}
+            width={50} 
+            height={50}
             className="object-contain"
           />
         </div>
-        {/* Speech bubble */}
-        <div className="absolute -top-2 -right-2 bg-yellow-400 text-black text-[8px] px-1.5 py-1 rounded-full font-bold leading-tight whitespace-nowrap">
+        <div className="absolute -top-1 -right-1 bg-yellow-400 text-black text-xs px-1.5 py-0.5 rounded-full font-bold leading-tight text-center">
           設備が<br/>整ってる
         </div>
       </div>
 
-      {/* Title */}
-      <h3 className="text-2xl font-extrabold text-gray-900 mb-1">About Us</h3>
-      
-      {/* Subtitle */}
-      <p className="text-sm text-orange-500 mb-4 font-medium">メディア・アーツについて</p>
-      
-      {/* Description text */}
-      <p className="text-center text-gray-700 text-sm max-w-48 leading-relaxed px-4 mb-4">
+      <h3 className="text-xl font-extrabold text-gray-900 mb-1">About Us</h3>
+      <p className="text-xs uppercase tracking-widest text-orange-500 mb-3">メディア・アーツについて</p>
+      <p className="text-center text-gray-600 text-xs max-w-xs leading-relaxed px-2">
         丁寧な個別指導で、1人1人がもっと自分らしい個性を育む「好きなコト」を全力でお手伝いします。
       </p>
-      
-      {/* View More button */}
-      <button className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:text-orange-600 transition-colors bg-orange-50 hover:bg-orange-100 px-4 py-2 rounded-full text-sm border border-orange-200">
+      <button className="mt-3 inline-flex items-center gap-1 text-orange-500 font-semibold hover:underline bg-orange-100 px-3 py-1 rounded-full text-xs">
         View More
         <ChevronRightIcon />
       </button>
