@@ -22,7 +22,7 @@ export default function FeaturesSection() {
         <div className="relative w-full max-w-6xl mx-auto hidden md:block">
           
           {/* 6つのカードのグリッド配置 */}
-          <div className="grid grid-cols-2 gap-x-16 gap-y-8">
+          <div className="grid grid-cols-2 gap-x-1">
             
             {/* 左列 */}
             <div className="space-y-8">

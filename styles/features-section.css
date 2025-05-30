@@ -1,40 +1,119 @@
-/* ------------------------------------------------------------------
-   FeaturesSection.css
-   ------------------------------------------------------------------
-   FeaturesSection 専用のグローバル追加スタイル。
-   Tailwind ユーティリティだけでは実現しづらい部分を補完します。
-------------------------------------------------------------------- */
-
-/* 数値強調フォントサイズを画面サイズで可変に */
-:root {
-  --feature-num-size: 3.75rem; /* 60px 相当 */
+/* ===== common tokens ===== */
+.feature-card {
+  position: relative;
+  width: 340px;
+  height: 320px;
+  padding: 34px 32px;
+  border-radius: 24px;
+  background: #f8f5f2; /* very light ivory */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-@media (min-width: 768px) {
-  :root {
-    --feature-num-size: 4.25rem; /* 68px 相当 */
-  }
+.feature-card .emoji-badge {
+  position: absolute;
+  top: -22px;
+  left: -22px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 28px;
+  line-height: 56px;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* .num クラスは内容文字のみ大きくする用途で利用 */
-.num {
-  font-size: var(--feature-num-size);
-  line-height: 1;
+/* 強調数値 */
+.feature-card .accent {
+  font-size: 48px;
   font-weight: 800;
-  display: inline-block;
+  color: #ff7700; /* Tailwind の orange-500 に近い */
+  line-height: 1;
 }
 
-/* 中央 About カードを左右が膨らんだ楕円形に。
-   Safari など clip-path 非対応環境では border‑radius fallback  */
-.about-card {
-  clip-path: ellipse(48% 50% at 50% 50%);
-}
-@supports not (clip-path: ellipse(50% 50% at 50% 50%)) {
-  .about-card {
-    border-radius: 220px / 160px; /* 同等の pill 形 */
-  }
+/* ===== about card ===== */
+.about-wrapper {
+  position: absolute;
+  /* grid の中央にオーバレイさせる */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -54%);
+  width: 300px;
+  height: 370px;
+  padding: 26px 30px;
+  background: #ffffff;
+  border: 2px solid #ffe3c8;
+  border-radius: 50%;
+  clip-path: ellipse(50% 64% at 50% 50%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* 三角吹き出しの影調整（疑似要素用） */
-.feature-card-triangle {
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+/* boy photo & orange background */
+.boy-wrapper {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: #ff8000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.boy-wrapper img {
+  object-fit: contain;
+  transform: translateY(8px); /* slight offset like original */
+}
+.boy-wrapper .tag {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.1;
+  background: #ffd600;
+  padding: 2px 6px;
+  border-radius: 12px;
+  text-align: center;
+  color: #000000;
+}
+
+/* copy area */
+.about-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin-top: 4px;
+}
+.about-sub {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #ff7700;
+  margin: 4px 0 10px;
+}
+.about-txt {
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.5;
+  color: #555555;
+}
+.about-btn {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ff7700;
+  background: #fff5ec;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  transition: background 0.15s;
+}
+.about-btn:hover {
+  background: #ffe3c8;
 }
