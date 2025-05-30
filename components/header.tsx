@@ -16,10 +16,10 @@ export default function Header() {
         style={{ backgroundColor: "rgb(10,37,64)" }}
       >
         <div className="flex items-center">
-          <Link href="/" className="frame-logo">
-            <div className="frame-logo-inner">
+          <Link href="/" className="flex items-center">
+            <div className="h-10 relative">
               <Image 
-                src="/images/caresmily-logo.png"
+                src="/images/caresmily-logo.png" 
                 alt="CareSmily" 
                 width={120} 
                 height={40} 
@@ -28,12 +28,6 @@ export default function Header() {
                 className="object-contain"
               />
             </div>
-            {/* 外側のコーナー */}
-            <div className="corner corner-outer corner-top-right"></div>
-            <div className="corner corner-outer corner-bottom-left"></div>
-            {/* 内側のコーナー */}
-            <div className="corner corner-inner corner-top-right"></div>
-            <div className="corner corner-inner corner-bottom-left"></div>
           </Link>
         </div>
 
