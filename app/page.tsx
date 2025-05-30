@@ -8,6 +8,7 @@ import ServiceSection from "@/components/service-section"
 import PointsSection from "@/components/points-section"
 import ServiceContentSection from "@/components/service-content-section"
 import FeaturesSection from "@/components/features-section"
+import InterviewSection from "@/components/interview-section"
 import FAQSection from "@/components/faq-section"
 import ServiceCountSection from "@/components/service-count-section"
 import SlideInPopup from "@/components/slide-in-popup"
@@ -199,9 +200,9 @@ export default function Home() {
 
     // Prepare documents for more realistic physics
     // Group documents by their vertical position
-    const bottomDocs = []
-    const middleDocs = []
-    const topDocs = []
+    const bottomDocs: HTMLElement[] = []
+    const middleDocs: HTMLElement[] = []
+    const topDocs: HTMLElement[] = []
 
     documentsRef.current.forEach((doc) => {
       const rect = doc.getBoundingClientRect()
@@ -457,6 +458,7 @@ export default function Home() {
         <PointsSection />
         <FeaturesSection />
         <ServiceContentSection />
+        <InterviewSection />
         <ServiceCountSection />
         <FAQSection />
       </div>
