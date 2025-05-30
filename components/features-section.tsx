@@ -4,35 +4,35 @@ import Image from "next/image";
 
 export default function FeaturesSection() {
   return (
-    <section className="relative bg-white py-20">
+    <section className="relative bg-white py-25">
       {/* Vertical side text (desktop only) */}
       <div className="hidden xl:block absolute top-0 left-0 h-full pointer-events-none select-none">
-        <p className="whitespace-nowrap text-[110px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-left ml-[-84px]">
+        <p className="whitespace-nowrap text-[138px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-left ml-[-105px]">
           MEDIA ARTS IN THE DATA  SEE MEDIA ARTS IN THE DATA
         </p>
       </div>
       <div className="hidden xl:block absolute top-0 right-0 h-full pointer-events-none select-none">
-        <p className="whitespace-nowrap text-[110px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-right mr-[-84px]">
+        <p className="whitespace-nowrap text-[138px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-right mr-[-105px]">
           MEDIA ARTS IN THE DATA  SEE MEDIA ARTS IN THE DATA
         </p>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-8xl px-5 sm:px-8 lg:px-10">
         {/* 2列3行グリッドレイアウト */}
-        <div className="relative w-full max-w-4xl mx-auto hidden md:block">
+        <div className="relative w-full max-w-5xl mx-auto hidden md:block">
           
           {/* 6つのカードのグリッド配置 */}
-          <div className="grid grid-cols-2 gap-x-1">
+          <div className="grid grid-cols-2 gap-x-1.5">
             
             {/* 左列 */}
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               {/* 左上 - 就職率 */}
               <FeatureCard
                 color="orange"
                 icon={() => <span className="text-3xl">😊</span>}
                 headerLines={[
                   "個性を仕事に。",
-                  "就職率 <span class='text-[48px] leading-none font-extrabold text-orange-500'>95.2%</span>",
+                  "就職率 <span class='text-[60px] leading-none font-extrabold text-orange-500'>95.2%</span>",
                   "徹底した就職サポート",
                 ]}
                 footnote="2025年3月 卒業生実績"
@@ -44,7 +44,7 @@ export default function FeaturesSection() {
                 icon={() => <span className="text-3xl">❤️</span>}
                 headerLines={[
                   "創立",
-                  "<span class='text-[48px] leading-none font-extrabold text-orange-500'>49</span> 年",
+                  "<span class='text-[60px] leading-none font-extrabold text-orange-500'>49</span> 年",
                   "地元に根付き、地域の人々に愛される場所であること",
                 ]}
               />
@@ -56,21 +56,21 @@ export default function FeaturesSection() {
                 headerLines={[
                   "各業界の最前線で頼れる卒業生が活躍中!!",
                   "卒業生のべ",
-                  "<span class='text-[48px] leading-none font-extrabold text-orange-500'>2,913</span> 人",
+                  "<span class='text-[60px] leading-none font-extrabold text-orange-500'>2,913</span> 人",
                 ]}
                 footnote="2024年3月 卒業生実績"
               />
             </div>
 
             {/* 右列 */}
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               {/* 右上 - 授業料免除 */}
               <FeatureCard
                 color="yellow"
                 icon={() => <span className="text-3xl">📚</span>}
                 headerLines={[
                   "2年間の授業料",
-                  "<span class='text-[48px] leading-none font-extrabold text-orange-500'>最大124万円</span> 免除",
+                  "<span class='text-[60px] leading-none font-extrabold text-orange-500'>最大124万円</span> 免除",
                   "独自の学費サポートで進学を応援します!!",
                 ]}
               />
@@ -82,7 +82,7 @@ export default function FeaturesSection() {
                 headerLines={[
                   "産学官連携で現場がわかる!",
                   "企業コラボ数 年間",
-                  "<span class='text-[48px] leading-none font-extrabold text-orange-500'>100</span> 件",
+                  "<span class='text-[60px] leading-none font-extrabold text-orange-500'>100</span> 件",
                 ]}
               />
 
@@ -93,7 +93,7 @@ export default function FeaturesSection() {
                 headerLines={[
                   "少人数ならではのサポート体制!",
                   "国家資格2級建築士製図試験",
-                  "資格合格率 <span class='text-[48px] leading-none font-extrabold text-orange-500'>100%</span>",
+                  "資格合格率 <span class='text-[60px] leading-none font-extrabold text-orange-500'>100%</span>",
                 ]}
                 footnote="2024年3月 卒業生実績"
               />
@@ -108,8 +108,8 @@ export default function FeaturesSection() {
         </div>
 
         {/* モバイル用の縦積みレイアウト */}
-        <div className="md:hidden space-y-6">
-          <div className="mx-auto max-w-sm">
+        <div className="md:hidden space-y-8">
+          <div className="mx-auto max-w-md">
             <AboutCard />
           </div>
           
@@ -118,7 +118,7 @@ export default function FeaturesSection() {
             icon={() => <span className="text-3xl">😊</span>}
             headerLines={[
               "個性を仕事に。",
-              "就職率 <span class='text-[64px] leading-none font-extrabold text-orange-500'>95.2%</span>",
+              "就職率 <span class='text-[80px] leading-none font-extrabold text-orange-500'>95.2%</span>",
               "徹底した就職サポート",
             ]}
             footnote="2025年3月 卒業生実績"
@@ -129,7 +129,7 @@ export default function FeaturesSection() {
             icon={() => <span className="text-3xl">📚</span>}
             headerLines={[
               "2年間の授業料",
-              "<span class='text-[64px] leading-none font-extrabold text-orange-500'>最大124万円</span> 免除",
+              "<span class='text-[80px] leading-none font-extrabold text-orange-500'>最大124万円</span> 免除",
               "独自の学費サポートで進学を応援します!!",
             ]}
           />
@@ -140,7 +140,7 @@ export default function FeaturesSection() {
             headerLines={[
               "産学官連携で現場がわかる!",
               "企業コラボ数 年間",
-              "<span class='text-[64px] leading-none font-extrabold text-orange-500'>100</span> 件",
+              "<span class='text-[80px] leading-none font-extrabold text-orange-500'>100</span> 件",
             ]}
           />
 
