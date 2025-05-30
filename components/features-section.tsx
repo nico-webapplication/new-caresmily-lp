@@ -11,110 +11,53 @@ export default function FeaturesSection() {
   useEffect(() => {
     if (!svgRef.current || !sectionRef.current) return;
 
-    // Initialize GSAP animation
+    // Set initial state - make SVG visible
     gsap.set(svgRef.current, {
       opacity: 1,
       rotation: -20,
       transformOrigin: "center center"
     });
 
-    let tl = gsap.timeline();
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
 
-    // More specific targeting for GSAP elements
-    const leftGroup = svgRef.current.querySelector(".left");
-    const rightGroup = svgRef.current.querySelector(".right");
-    const crossElements = svgRef.current.querySelectorAll(".cross");
-    const gsapElements = svgRef.current.querySelectorAll(".gsap");
-    const webflowElements = svgRef.current.querySelectorAll(".webflow");
+    // Create simple floating animation for the background elements
+    tl.to(".animated-bg-rect", {
+      y: "+=20",
+      rotation: "+=5",
+      duration: 2,
+      ease: "sine.inOut",
+      stagger: 0.2
+    })
+    .to(".animated-bg-circle", {
+      scale: 1.1,
+      opacity: 0.8,
+      duration: 1.5,
+      ease: "power2.inOut",
+      stagger: 0.1
+    }, 0)
+    .to(".animated-bg-cross", {
+      rotation: "+=180",
+      duration: 3,
+      ease: "power2.inOut"
+    }, 0)
+    .to(".animated-bg-rect", {
+      y: "-=20",
+      rotation: "-=5",
+      duration: 2,
+      ease: "sine.inOut",
+      stagger: 0.2
+    })
+    .to(".animated-bg-circle", {
+      scale: 1,
+      opacity: 1,
+      duration: 1.5,
+      ease: "power2.inOut",
+      stagger: 0.1
+    });
 
-    if (leftGroup && rightGroup) {
-      tl.from(
-        [leftGroup, rightGroup],
-        {
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          stagger: 0.06
-        },
-        0
-      )
-        .from(
-          crossElements,
-          {
-            rotation: -800,
-            opacity: 0,
-            scale: 0,
-            transformOrigin: "center center",
-            ease: "expo.out",
-            stagger: 0.01
-          },
-          0
-        )
-        .from(
-          leftGroup,
-          {
-            xPercent: -20,
-            duration: 12,
-            ease: "expo.out"
-          },
-          0
-        )
-        .from(
-          rightGroup,
-          {
-            xPercent: 20,
-            duration: 12,
-            ease: "expo.out"
-          },
-          0
-        )
-        .to(
-          crossElements,
-          {
-            rotation: 360,
-            opacity: 0,
-            transformOrigin: "center center",
-            ease: "expo.out",
-            stagger: {
-              from: "center",
-              amount: 0.3
-            }
-          },
-          1.5
-        )
-        .to(
-          webflowElements,
-          {
-            opacity: 0,
-            scale: 0.8,
-            transformOrigin: "center",
-            duration: 0.3,
-            stagger: {
-              from: "end",
-              amount: 0.4
-            }
-          },
-          1.5
-        );
-      tl.to(
-        gsapElements,
-        {
-          opacity: 0,
-          scale: 0.8,
-          transformOrigin: "center",
-          duration: 0.3,
-          stagger: {
-            from: "start",
-            amount: 0.4
-          }
-        },
-        1.5
-      );
-    }
-
-    // Add click event to restart animation
+    // Click to restart
     const handleClick = () => {
-      tl.timeScale(0.7).play(0);
+      tl.restart();
     };
 
     sectionRef.current.addEventListener("click", handleClick);
@@ -123,50 +66,44 @@ export default function FeaturesSection() {
       if (sectionRef.current) {
         sectionRef.current.removeEventListener("click", handleClick);
       }
+      tl.kill();
     };
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative bg-black py-20 overflow-hidden">
+    <section ref={sectionRef} className="relative bg-gray-50 py-20 overflow-hidden">
       {/* Animated SVG Background */}
       <svg 
         ref={svgRef}
-        className="fixed -left-1/2 -top-2/5 w-[250vw] opacity-0 pointer-events-none"
+        className="absolute -left-1/2 -top-2/5 w-[250vw] opacity-100 pointer-events-none z-0"
         xmlns="http://www.w3.org/2000/svg" 
-        viewBox="0 0 17664 6582" 
+        viewBox="0 0 2000 600" 
         fill="none"
       >
-        <g className="left">
-          <g className="gsap">
-            <rect x="500" y="100" width="100" height="400" fill="#0AE448" opacity="0.3" />
-            <rect x="700" y="150" width="80" height="350" fill="#0AE448" opacity="0.4" />
-            <rect x="900" y="200" width="120" height="300" fill="#0AE448" opacity="0.5" />
-          </g>
-          <g className="webflow">
-            <circle cx="600" cy="300" r="50" fill="#146EF5" opacity="0.6" />
-            <circle cx="800" cy="350" r="40" fill="#146EF5" opacity="0.7" />
-            <circle cx="1000" cy="250" r="60" fill="#146EF5" opacity="0.5" />
-          </g>
-          <g className="cross" stroke="#fff" strokeWidth="8">
-            <path d="M700 100v400" />
-            <path d="M500 300h400" />
-          </g>
+        <rect className="animated-bg-rect" x="200" y="100" width="80" height="300" fill="#0AE448" opacity="0.2" />
+        <rect className="animated-bg-rect" x="400" y="150" width="60" height="250" fill="#0AE448" opacity="0.3" />
+        <rect className="animated-bg-rect" x="600" y="80" width="90" height="320" fill="#0AE448" opacity="0.25" />
+        
+        <circle className="animated-bg-circle" cx="300" cy="200" r="40" fill="#146EF5" opacity="0.3" />
+        <circle className="animated-bg-circle" cx="500" cy="250" r="30" fill="#146EF5" opacity="0.4" />
+        <circle className="animated-bg-circle" cx="700" cy="180" r="50" fill="#146EF5" opacity="0.25" />
+        
+        <g className="animated-bg-cross" stroke="#E5E7EB" strokeWidth="4" opacity="0.3">
+          <path d="M350 100v300" />
+          <path d="M200 250h300" />
         </g>
-        <g className="right">
-          <g className="gsap">
-            <rect x="1400" y="120" width="90" height="380" fill="#0AE448" opacity="0.4" />
-            <rect x="1600" y="170" width="110" height="330" fill="#0AE448" opacity="0.3" />
-            <rect x="1800" y="220" width="100" height="280" fill="#0AE448" opacity="0.5" />
-          </g>
-          <g className="webflow">
-            <circle cx="1500" cy="320" r="45" fill="#146EF5" opacity="0.6" />
-            <circle cx="1700" cy="370" r="35" fill="#146EF5" opacity="0.7" />
-            <circle cx="1900" cy="270" r="55" fill="#146EF5" opacity="0.5" />
-          </g>
-          <g className="cross" stroke="#fff" strokeWidth="8">
-            <path d="M1600 120v380" />
-            <path d="M1400 320h400" />
-          </g>
+        
+        <rect className="animated-bg-rect" x="1200" y="120" width="70" height="280" fill="#0AE448" opacity="0.2" />
+        <rect className="animated-bg-rect" x="1400" y="90" width="85" height="310" fill="#0AE448" opacity="0.3" />
+        <rect className="animated-bg-rect" x="1600" y="160" width="75" height="240" fill="#0AE448" opacity="0.25" />
+        
+        <circle className="animated-bg-circle" cx="1300" cy="220" r="35" fill="#146EF5" opacity="0.3" />
+        <circle className="animated-bg-circle" cx="1500" cy="270" r="45" fill="#146EF5" opacity="0.4" />
+        <circle className="animated-bg-circle" cx="1700" cy="190" r="40" fill="#146EF5" opacity="0.25" />
+        
+        <g className="animated-bg-cross" stroke="#E5E7EB" strokeWidth="4" opacity="0.3">
+          <path d="M1350 120v280" />
+          <path d="M1200 260h400" />
         </g>
       </svg>
 
