@@ -149,7 +149,7 @@ export default function FeaturesSection() {
             icon={() => <span className="text-3xl">❤️</span>}
             headerLines={[
               "創立",
-              "<span class='text-[64px] leading-none font-extrabold text-orange-500'>49</span> 年",
+              "<span class='text-[80px] leading-none font-extrabold text-orange-500'>49</span> 年",
               "地元に根付き、地域の人々に愛される場所であること",
             ]}
           />
@@ -160,7 +160,7 @@ export default function FeaturesSection() {
             headerLines={[
               "少人数ならではのサポート体制!",
               "国家資格2級建築士製図試験",
-              "資格合格率 <span class='text-[64px] leading-none font-extrabold text-orange-500'>100%</span>",
+              "資格合格率 <span class='text-[80px] leading-none font-extrabold text-orange-500'>100%</span>",
             ]}
             footnote="2024年3月 卒業生実績"
           />
@@ -171,7 +171,7 @@ export default function FeaturesSection() {
             headerLines={[
               "各業界の最前線で頼れる卒業生が活躍中!!",
               "卒業生のべ",
-              "<span class='text-[64px] leading-none font-extrabold text-orange-500'>2,913</span> 人",
+              "<span class='text-[80px] leading-none font-extrabold text-orange-500'>2,913</span> 人",
             ]}
             footnote="2024年3月 卒業生実績"
           />
@@ -201,25 +201,25 @@ function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardPr
   }[color];
 
   return (
-    <div className={`relative rounded-2xl p-6 ${bg} flex flex-col justify-between w-full min-h-[340px]`}>
+    <div className={`relative rounded-2xl p-8 ${bg} flex flex-col justify-between w-full min-h-[425px]`}>
       {/* floating icon */}
-      <div className="absolute -top-3 -left-3 bg-white shadow-md rounded-full p-2">
+      <div className="absolute -top-4 -left-4 bg-white shadow-md rounded-full p-3 text-4xl">
         {Icon()}
       </div>
 
       {/* body */}
-      <div className="space-y-2">
+      <div className="space-y-3">
         {headerLines.map((line, idx) => (
           <p
             key={idx}
-            className="text-gray-900 font-bold leading-tight text-sm"
+            className="text-gray-900 font-bold leading-tight text-base"
             dangerouslySetInnerHTML={{ __html: line }}
           />
         ))}
       </div>
 
       {footnote && (
-        <p className="text-xs text-gray-400 mt-3" dangerouslySetInnerHTML={{ __html: footnote }} />
+        <p className="text-sm text-gray-400 mt-4" dangerouslySetInnerHTML={{ __html: footnote }} />
       )}
     </div>
   );
@@ -227,33 +227,33 @@ function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardPr
 
 function AboutCard() {
   return (
-    <div className="relative w-72 h-[640px] bg-white rounded-full flex flex-col items-center justify-top">
+    <div className="relative w-90 h-[800px] bg-white rounded-full flex flex-col items-center justify-top">
 
       {/* Central image with orange background */}
-      <div className="relative w-40 h-40 rounded-full bg-orange-500 flex items-center justify-center mb-8 overflow-hidden">     
+      <div className="relative w-50 h-50 rounded-full bg-orange-500 flex items-center justify-center mb-10 overflow-hidden">     
           <Image 
             src="/about-us-boy.png" 
             alt="Student with laptop" 
-            width={40} 
-            height={40}
+            width={50} 
+            height={50}
             className="object-contain"
           />
         {/* Speech bubble */}
-        <div className="absolute -top-2 -right-2 bg-yellow-400 text-black text-[8px] px-1.5 py-1 rounded-full font-bold leading-tight whitespace-nowrap">
+        <div className="absolute -top-3 -right-3 bg-yellow-400 text-black text-[10px] px-2 py-1.5 rounded-full font-bold leading-tight whitespace-nowrap">
           設備が<br/>整ってる
         </div>
       </div>
 
       {/* Title */}
-      <h3 className="text-4xl font-extrabold text-gray-900 mb-1">Advantages </h3>
-      <h3 className="text-4xl font-extrabold text-gray-900 mb-1">of</h3>
-      <h3 className="text-4xl font-extrabold text-gray-900 mb-1">Introduction</h3>
+      <h3 className="text-5xl font-extrabold text-gray-900 mb-1.5">Advantages </h3>
+      <h3 className="text-5xl font-extrabold text-gray-900 mb-1.5">of</h3>
+      <h3 className="text-5xl font-extrabold text-gray-900 mb-1.5">Introduction</h3>
       
       {/* Subtitle */}
-      <p className="text-xl text-orange-500 mb-8 font-medium">導入メリット</p>
+      <p className="text-2xl text-orange-500 mb-10 font-medium">導入メリット</p>
       
       {/* Description text */}
-      <p className="text-center text-gray-700 text-base max-w-48 leading-relaxed px-4 mb-4">
+      <p className="text-center text-gray-700 text-lg max-w-60 leading-relaxed px-5 mb-5">
         CareSmilyを導入することは、介護現場にたくさんのメリットをもたらします。
       </p>
       
