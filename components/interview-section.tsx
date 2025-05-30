@@ -148,74 +148,105 @@ export default function InterviewSection() {
             </p>
           </div>
 
-          {/* 右側：チャットボット風インタビューカード */}
+          {/* 右側：スマートフォン風インタビューカード */}
           <div className="lg:w-2/3 relative">
-            <div className="space-y-4">
-              {interviewData.map((interview, index) => (
-                <div
-                  key={interview.id}
-                  ref={(el) => {
-                    if (el) cardsRef.current[index] = el;
-                  }}
-                  className={`flex ${interview.isRight ? 'justify-end' : 'justify-start'}`}
-                >
+            {/* スマートフォンフレーム */}
+            <div className="relative mx-auto max-w-sm">
+              {/* スマートフォンの外枠 */}
+              <div className="bg-gray-900 rounded-[3rem] p-3 shadow-2xl">
+                {/* スマートフォンの画面 */}
+                <div className="bg-black rounded-[2.5rem] p-4 relative overflow-hidden">
+                  {/* スマートフォンのノッチ */}
+                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gray-700 rounded-full"></div>
+                  
+                  {/* スクロール可能なチャット領域 */}
                   <div 
-                    className={`max-w-md ${interview.isRight ? 'order-2' : 'order-1'}`}
+                    className="h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent pt-6"
+                    style={{
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: '#4B5563 transparent'
+                    }}
                   >
-                    {/* チャットボット風のカード */}
-                    <div className={`flex gap-3 ${interview.isRight ? 'flex-row-reverse' : 'flex-row'}`}>
-                      {/* アバター */}
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-orange-300 rounded-full overflow-hidden border-2 border-white shadow-md">
-                          <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-400"></div>
-                        </div>
-                      </div>
-
-                      {/* メッセージバブル */}
-                      <div className="flex flex-col">
-                        {/* 名前とタイトル */}
-                        <div className={`text-xs text-white mb-1 ${interview.isRight ? 'text-right' : 'text-left'}`}>
-                          <div className="font-semibold">{interview.name}</div>
-                          <div className="opacity-80">{interview.role}</div>
-                          <div className="opacity-80">{interview.school}</div>
-                        </div>
-
-                        {/* メッセージバブル */}
-                        <div 
-                          className={`
-                            bg-white rounded-2xl p-4 shadow-lg relative max-w-sm
-                            ${interview.isRight 
-                              ? 'rounded-br-md' 
-                              : 'rounded-bl-md'
-                            }
-                          `}
+                    <div className="space-y-4 pb-4">
+                      {interviewData.map((interview, index) => (
+                        <div
+                          key={interview.id}
+                          ref={(el) => {
+                            if (el) cardsRef.current[index] = el;
+                          }}
+                          className={`flex ${interview.isRight ? 'justify-end' : 'justify-start'} px-2`}
                         >
-                          {/* バブルの尻尾 */}
                           <div 
-                            className={`
-                              absolute top-4 w-0 h-0 
-                              ${interview.isRight 
-                                ? 'right-0 translate-x-full border-l-[12px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent' 
-                                : 'left-0 -translate-x-full border-r-[12px] border-r-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent'
-                              }
-                            `}
-                          />
-                          
-                          <p className="text-gray-800 text-sm leading-relaxed mb-3">
-                            {interview.message}
-                          </p>
-                          
-                          {/* アイコン */}
-                          <div className="flex gap-2">
-                            <span className="text-lg">❤️</span>
-                            <span className="text-lg">✨</span>
+                            className={`max-w-[85%] ${interview.isRight ? 'order-2' : 'order-1'}`}
+                          >
+                            {/* チャットボット風のカード */}
+                            <div className={`flex gap-2 ${interview.isRight ? 'flex-row-reverse' : 'flex-row'}`}>
+                              {/* アバター */}
+                              <div className="flex-shrink-0">
+                                <div className="w-8 h-8 bg-orange-300 rounded-full overflow-hidden border border-white shadow-sm">
+                                  <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-400"></div>
+                                </div>
+                              </div>
+
+                              {/* メッセージバブル */}
+                              <div className="flex flex-col">
+                                {/* 名前とタイトル */}
+                                <div className={`text-[10px] text-gray-300 mb-1 ${interview.isRight ? 'text-right' : 'text-left'}`}>
+                                  <div className="font-semibold">{interview.name}</div>
+                                  <div className="opacity-70">{interview.role}</div>
+                                  <div className="opacity-70">{interview.school}</div>
+                                </div>
+
+                                {/* メッセージバブル */}
+                                <div 
+                                  className={`
+                                    bg-white rounded-2xl p-3 shadow-sm relative max-w-xs
+                                    ${interview.isRight 
+                                      ? 'rounded-br-md' 
+                                      : 'rounded-bl-md'
+                                    }
+                                  `}
+                                >
+                                  {/* バブルの尻尾 */}
+                                  <div 
+                                    className={`
+                                      absolute top-3 w-0 h-0 
+                                      ${interview.isRight 
+                                        ? 'right-0 translate-x-full border-l-[8px] border-l-white border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent' 
+                                        : 'left-0 -translate-x-full border-r-[8px] border-r-white border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent'
+                                      }
+                                    `}
+                                  />
+                                  
+                                  <p className="text-gray-800 text-xs leading-relaxed mb-2">
+                                    {interview.message}
+                                  </p>
+                                  
+                                  {/* アイコン */}
+                                  <div className="flex gap-1">
+                                    <span className="text-sm">❤️</span>
+                                    <span className="text-sm">✨</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* チャット入力欄 */}
+                  <div className="absolute bottom-2 left-4 right-4 bg-gray-800 rounded-full px-4 py-2 flex items-center gap-2">
+                    <div className="flex-1 text-gray-400 text-xs">メッセージを入力...</div>
+                    <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                      </svg>
                     </div>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
 
             {/* 右側のナビゲーションボタン */}
