@@ -128,6 +128,20 @@ export default function InterviewSection() {
         }} />
       </div>
 
+      {/* 流れるCARESMILYテキスト - 上部 */}
+      <div className="absolute top-8 left-0 w-full overflow-hidden opacity-20">
+        <div className="animate-marquee whitespace-nowrap text-8xl lg:text-9xl font-black text-white">
+          CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY
+        </div>
+      </div>
+
+      {/* 流れるCARESMILYテキスト - 下部 */}
+      <div className="absolute bottom-8 left-0 w-full overflow-hidden opacity-20">
+        <div className="animate-marquee-reverse whitespace-nowrap text-8xl lg:text-9xl font-black text-white">
+          CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           {/* 左側：タイトルセクション */}

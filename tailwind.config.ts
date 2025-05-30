@@ -25,11 +25,21 @@ const config: Config = {
         "spin-slow": "spin 30s linear infinite", 
         pulse: "pulse 3s ease-in-out infinite",
         float: "float 3s ease-in-out infinite",
+        marquee: "marquee 15s linear infinite",
+        "marquee-reverse": "marquee-reverse 15s linear infinite",
       },
       keyframes: {
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        "marquee-reverse": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
         },
       },
       colors: {
