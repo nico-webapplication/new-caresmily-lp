@@ -1,18 +1,183 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export default function FeaturesSection() {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!svgRef.current || !sectionRef.current) return;
+
+    // Initialize GSAP animation
+    gsap.set(svgRef.current, {
+      opacity: 1,
+      rotation: -20,
+      transformOrigin: "center center"
+    });
+
+    let tl = gsap.timeline();
+
+    // More specific targeting for GSAP elements
+    const leftGroup = svgRef.current.querySelector(".left");
+    const rightGroup = svgRef.current.querySelector(".right");
+    const crossElements = svgRef.current.querySelectorAll(".cross");
+    const gsapElements = svgRef.current.querySelectorAll(".gsap");
+    const webflowElements = svgRef.current.querySelectorAll(".webflow");
+
+    if (leftGroup && rightGroup) {
+      tl.from(
+        [leftGroup, rightGroup],
+        {
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.06
+        },
+        0
+      )
+        .from(
+          crossElements,
+          {
+            rotation: -800,
+            opacity: 0,
+            scale: 0,
+            transformOrigin: "center center",
+            ease: "expo.out",
+            stagger: 0.01
+          },
+          0
+        )
+        .from(
+          leftGroup,
+          {
+            xPercent: -20,
+            duration: 12,
+            ease: "expo.out"
+          },
+          0
+        )
+        .from(
+          rightGroup,
+          {
+            xPercent: 20,
+            duration: 12,
+            ease: "expo.out"
+          },
+          0
+        )
+        .to(
+          crossElements,
+          {
+            rotation: 360,
+            opacity: 0,
+            transformOrigin: "center center",
+            ease: "expo.out",
+            stagger: {
+              from: "center",
+              amount: 0.3
+            }
+          },
+          1.5
+        )
+        .to(
+          webflowElements,
+          {
+            opacity: 0,
+            scale: 0.8,
+            transformOrigin: "center",
+            duration: 0.3,
+            stagger: {
+              from: "end",
+              amount: 0.4
+            }
+          },
+          1.5
+        );
+      tl.to(
+        gsapElements,
+        {
+          opacity: 0,
+          scale: 0.8,
+          transformOrigin: "center",
+          duration: 0.3,
+          stagger: {
+            from: "start",
+            amount: 0.4
+          }
+        },
+        1.5
+      );
+    }
+
+    // Add click event to restart animation
+    const handleClick = () => {
+      tl.timeScale(0.7).play(0);
+    };
+
+    sectionRef.current.addEventListener("click", handleClick);
+
+    return () => {
+      if (sectionRef.current) {
+        sectionRef.current.removeEventListener("click", handleClick);
+      }
+    };
+  }, []);
+
   return (
-    <section className="relative bg-white py-20">
+    <section ref={sectionRef} className="relative bg-black py-20 overflow-hidden">
+      {/* Animated SVG Background */}
+      <svg 
+        ref={svgRef}
+        className="fixed -left-1/2 -top-2/5 w-[250vw] opacity-0 pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 17664 6582" 
+        fill="none"
+      >
+        <g className="left">
+          <g className="gsap">
+            <rect x="500" y="100" width="100" height="400" fill="#0AE448" opacity="0.3" />
+            <rect x="700" y="150" width="80" height="350" fill="#0AE448" opacity="0.4" />
+            <rect x="900" y="200" width="120" height="300" fill="#0AE448" opacity="0.5" />
+          </g>
+          <g className="webflow">
+            <circle cx="600" cy="300" r="50" fill="#146EF5" opacity="0.6" />
+            <circle cx="800" cy="350" r="40" fill="#146EF5" opacity="0.7" />
+            <circle cx="1000" cy="250" r="60" fill="#146EF5" opacity="0.5" />
+          </g>
+          <g className="cross" stroke="#fff" strokeWidth="8">
+            <path d="M700 100v400" />
+            <path d="M500 300h400" />
+          </g>
+        </g>
+        <g className="right">
+          <g className="gsap">
+            <rect x="1400" y="120" width="90" height="380" fill="#0AE448" opacity="0.4" />
+            <rect x="1600" y="170" width="110" height="330" fill="#0AE448" opacity="0.3" />
+            <rect x="1800" y="220" width="100" height="280" fill="#0AE448" opacity="0.5" />
+          </g>
+          <g className="webflow">
+            <circle cx="1500" cy="320" r="45" fill="#146EF5" opacity="0.6" />
+            <circle cx="1700" cy="370" r="35" fill="#146EF5" opacity="0.7" />
+            <circle cx="1900" cy="270" r="55" fill="#146EF5" opacity="0.5" />
+          </g>
+          <g className="cross" stroke="#fff" strokeWidth="8">
+            <path d="M1600 120v380" />
+            <path d="M1400 320h400" />
+          </g>
+        </g>
+      </svg>
+
       {/* Vertical side text (desktop only) */}
-      <div className="hidden xl:block absolute top-0 left-0 h-full pointer-events-none select-none">
-        <p className="whitespace-nowrap text-[110px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-left ml-[-84px]">
+      <div className="hidden xl:block absolute top-0 left-0 h-full pointer-events-none select-none z-10">
+        <p className="whitespace-nowrap text-[110px] tracking-[0.2em] font-extrabold text-gray-800 rotate-90 origin-top-left ml-[-84px]">
           MEDIA ARTS IN THE DATA  SEE MEDIA ARTS IN THE DATA
         </p>
       </div>
-      <div className="hidden xl:block absolute top-0 right-0 h-full pointer-events-none select-none">
-        <p className="whitespace-nowrap text-[110px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-right mr-[-84px]">
+      <div className="hidden xl:block absolute top-0 right-0 h-full pointer-events-none select-none z-10">
+        <p className="whitespace-nowrap text-[110px] tracking-[0.2em] font-extrabold text-gray-800 rotate-90 origin-top-right mr-[-84px]">
           MEDIA ARTS IN THE DATA  SEE MEDIA ARTS IN THE DATA
         </p>
       </div>
@@ -192,18 +357,27 @@ interface FeatureCardProps {
 
 function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardProps) {
   const bg = {
-    orange: "bg-[#F8F5F2]",
-    yellow: "bg-[#F8F5F2]",
-    red: "bg-[#F8F5F2]",
-    blue: "bg-[#F8F5F2]",
-    pink: "bg-[#F8F5F2]",
-    indigo: "bg-[#F8F5F2]",
+    orange: "bg-white/95 backdrop-blur-sm border border-orange-200",
+    yellow: "bg-white/95 backdrop-blur-sm border border-yellow-200",
+    red: "bg-white/95 backdrop-blur-sm border border-red-200",
+    blue: "bg-white/95 backdrop-blur-sm border border-blue-200",
+    pink: "bg-white/95 backdrop-blur-sm border border-pink-200",
+    indigo: "bg-white/95 backdrop-blur-sm border border-indigo-200",
+  }[color];
+
+  const iconBg = {
+    orange: "bg-orange-500",
+    yellow: "bg-yellow-500",
+    red: "bg-red-500",
+    blue: "bg-blue-500",
+    pink: "bg-pink-500",
+    indigo: "bg-indigo-500",
   }[color];
 
   return (
-    <div className={`relative rounded-2xl p-6 ${bg} flex flex-col justify-between w-full min-h-[340px]`}>
+    <div className={`relative rounded-2xl p-6 ${bg} flex flex-col justify-between w-full min-h-[340px] shadow-lg hover:shadow-xl transition-all duration-300`}>
       {/* floating icon */}
-      <div className="absolute -top-3 -left-3 bg-white shadow-md rounded-full p-2">
+      <div className={`absolute -top-3 -left-3 ${iconBg} shadow-md rounded-full p-2`}>
         {Icon()}
       </div>
 
@@ -219,7 +393,7 @@ function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardPr
       </div>
 
       {footnote && (
-        <p className="text-xs text-gray-400 mt-3" dangerouslySetInnerHTML={{ __html: footnote }} />
+        <p className="text-xs text-gray-500 mt-3" dangerouslySetInnerHTML={{ __html: footnote }} />
       )}
     </div>
   );
@@ -227,10 +401,10 @@ function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardPr
 
 function AboutCard() {
   return (
-    <div className="relative w-72 h-[640px] bg-white rounded-full flex flex-col items-center justify-top">
+    <div className="relative w-72 h-[640px] bg-white/95 backdrop-blur-sm border border-gray-200 rounded-full flex flex-col items-center justify-top shadow-2xl">
 
       {/* Central image with orange background */}
-      <div className="relative w-40 h-40 rounded-full bg-orange-500 flex items-center justify-center mb-8 overflow-hidden">     
+      <div className="relative w-40 h-40 rounded-full bg-orange-500 flex items-center justify-center mb-8 overflow-hidden mt-8">     
           <Image 
             src="/about-us-boy.png" 
             alt="Student with laptop" 
