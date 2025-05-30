@@ -151,20 +151,20 @@ export default function InterviewSection() {
           {/* 右側：スマートフォン風インタビューカード */}
           <div className="lg:w-2/3 relative">
             {/* スマートフォンフレーム */}
-            <div className="relative mx-auto max-w-sm">
+            <div className="relative mx-auto max-w-md">
               {/* スマートフォンの外枠 */}
-              <div className="bg-gray-900 rounded-[3rem] p-3 shadow-2xl">
+              <div className="bg-gray-900 rounded-[3rem] p-4 shadow-2xl">
                 {/* スマートフォンの画面 */}
-                <div className="bg-black rounded-[2.5rem] p-4 relative overflow-hidden">
+                <div className="rounded-[2.5rem] p-5 relative overflow-hidden" style={{ backgroundColor: '#FEF3E2' }}>
                   {/* スマートフォンのノッチ */}
-                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gray-700 rounded-full"></div>
+                  <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gray-700 rounded-full"></div>
                   
                   {/* スクロール可能なチャット領域 */}
                   <div 
-                    className="h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent pt-6"
+                    className="h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent pt-8"
                     style={{
                       scrollbarWidth: 'thin',
-                      scrollbarColor: '#4B5563 transparent'
+                      scrollbarColor: '#9CA3AF transparent'
                     }}
                   >
                     <div className="space-y-4 pb-4">
