@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronDown } from "lucide-react";
+import Image from "next/image"
 
 interface InterviewCard {
   id: number;
@@ -32,7 +33,7 @@ const interviewData: InterviewCard[] = [
     school: "",
     message: "CareSmilyについてのプレスリリース①を掲載しました！CareSmilyについての魅力がよくわかる内容となっておりますので是非ご覧ください！詳細は「メディア情報」をCheck！",
     avatar: "/images/student2.jpg",
-    isRight: true
+    isRight: false
   },
   {
     id: 3,
@@ -197,9 +198,16 @@ export default function InterviewSection() {
                             <div className={`flex gap-2 ${interview.isRight ? 'flex-row-reverse' : 'flex-row'}`}>
                               {/* アバター */}
                               <div className="flex-shrink-0">
-                                <div className="w-8 h-8 bg-orange-300 rounded-full overflow-hidden border border-white shadow-sm">
-                                  <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-400"></div>
+                                <div className="w-10 h-10 bg-white rounded-full overflow-hidden border border-white shadow-sm">
+                                  <Image 
+                                    src="/images/CareSmily_ロゴ.png" 
+                                    alt="CareSmily" 
+                                    width={120} 
+                                    height={50} 
+                                    className="object-contain"
+                                  />
                                 </div>
+                                
                               </div>
 
                               {/* メッセージバブル */}

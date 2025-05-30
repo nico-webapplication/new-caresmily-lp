@@ -205,12 +205,13 @@ export default function FAQSection() {
               {/* 質問 */}
               <div className="flex items-start faq-question">
                 <div className="flex-shrink-0 mr-4">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-white">
-                    <Image
-                      src={item.buyerAvatar || "/placeholder.svg"}
-                      alt="質問者"
-                      fill
-                      style={{ objectFit: "cover" }}
+                  <div className="relative w-12 h-12 bg-[#FEF3E2] rounded-full overflow-hidden border-2 border-[#FEF3E2]">
+                    <Image 
+                      src="/images/CareSmily_ロゴ.png" 
+                      alt="CareSmily" 
+                      width={120} 
+                      height={70} 
+                      className="object-contain"
                     />
                   </div>
                 </div>
