@@ -18,28 +18,28 @@ interface InterviewCard {
 const interviewData: InterviewCard[] = [
   {
     id: 1,
-    name: "伊澤クリストファーさん",
-    role: "ビジュアルデザイン科2年",
-    school: "作新学院高等学校出身",
-    message: "Webデザインの会社で働いて、将来は独立したい！幅広く学ぶことができて、自分の進みたい道以外にも様々な才能を伸ばすことができるのが魅力！",
+    name: "CareSmily",
+    role: "株式会社Nico",
+    school: "",
+    message: "「CareSmily デイサービス」がリリースされました！ぜひお試しください！",
     avatar: "/images/student1.jpg",
     isRight: false
   },
   {
     id: 2,
-    name: "愛澤花音さん",
-    role: "放送・映像・音響分野を学べる",
-    school: "宮城県高等学校出身",
-    message: "栃木県内で放送・映像・音響分野を学べる唯一の学校！機材が学ぶ環境が整っていて、先生達も業界の最前線で働いている",
+    name: "CareSmily",
+    role: "株式会社Nico",
+    school: "",
+    message: "CareSmilyについてのプレスリリース①を掲載しました！CareSmilyについての魅力がよくわかる内容となっておりますので是非ご覧ください！詳細は「メディア情報」をCheck！",
     avatar: "/images/student2.jpg",
     isRight: true
   },
   {
     id: 3,
-    name: "芝田涼美さん",
-    role: "ビジュアルデザイン科2年",
-    school: "上三川高等学校出身",
-    message: "入学当初はイラストレーターになりたかっただけど、デザインを学ぶうちに楽しくなって今はグラフィックデザイナーを目指しています！",
+    name: "CareSmily",
+    role: "株式会社Nico",
+    school: "",
+    message: "CareSmilyについてのプレスリリース①を掲載しました！AI時代にCareSmilyが「非AI」であるべき理由とは...詳細は「メディア情報」をCheck！",
     avatar: "/images/student3.jpg",
     isRight: false
   }
@@ -129,11 +129,11 @@ export default function InterviewSection() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row items-start gap-12">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           {/* 左側：タイトルセクション */}
           <div 
             ref={titleRef}
-            className="lg:w-1/3 text-white"
+            className="lg:w-1/3 text-white text-center lg:text-left"
           >
             <h2 className="text-6xl lg:text-8xl font-black mb-4 leading-tight">
               Interview
@@ -149,7 +149,7 @@ export default function InterviewSection() {
           </div>
 
           {/* 右側：スマートフォン風インタビューカード */}
-          <div className="lg:w-2/3 relative">
+          <div className="lg:w-1/2 relative flex justify-center">
             {/* スマートフォンフレーム */}
             <div className="relative mx-auto max-w-md">
               {/* スマートフォンの外枠 */}
@@ -191,8 +191,8 @@ export default function InterviewSection() {
                               {/* メッセージバブル */}
                               <div className="flex flex-col">
                                 {/* 名前とタイトル */}
-                                <div className={`text-[10px] text-gray-300 mb-1 ${interview.isRight ? 'text-right' : 'text-left'}`}>
-                                  <div className="font-semibold">{interview.name}</div>
+                                <div className={`text-[10px] text-black-400 mb-1 ${interview.isRight ? 'text-right' : 'text-left'}`}>
+                                  <div className="font-bold">{interview.name}</div>
                                   <div className="opacity-70">{interview.role}</div>
                                   <div className="opacity-70">{interview.school}</div>
                                 </div>
@@ -218,7 +218,7 @@ export default function InterviewSection() {
                                     `}
                                   />
                                   
-                                  <p className="text-gray-800 text-xs leading-relaxed mb-2">
+                                  <p className="text-gray-800 text-base leading-relaxed mb-2">
                                     {interview.message}
                                   </p>
                                   
@@ -249,27 +249,6 @@ export default function InterviewSection() {
               </div>
             </div>
 
-            {/* 右側のナビゲーションボタン */}
-            <div className="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2 hidden lg:block">
-              <div className="flex flex-col gap-2">
-                <button className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-lg transition-all duration-300">
-                  <span className="block text-sm font-medium">在校生</span>
-                </button>
-                <button className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-lg transition-all duration-300">
-                  <span className="block text-sm font-medium">卒業生</span>
-                </button>
-                <button className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-lg transition-all duration-300">
-                  <span className="block text-sm font-medium">保護者</span>
-                </button>
-              </div>
-            </div>
-
-            {/* 下矢印ボタン */}
-            <div className="absolute bottom-0 right-8 transform translate-y-full">
-              <button className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-lg transition-all duration-300">
-                <ChevronDown className="w-6 h-6" />
-              </button>
-            </div>
           </div>
         </div>
       </div>
