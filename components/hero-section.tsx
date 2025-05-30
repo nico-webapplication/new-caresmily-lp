@@ -80,6 +80,7 @@ const FlexContainer = styled.div`
 const LeftContent = styled.div`
   width: 100%;
   margin-bottom: 3rem;
+  text-align: left;
 
   @media (min-width: 1024px) {
     width: 50%;
@@ -110,6 +111,7 @@ const HeadingLarge = styled.h1`
   line-height: 1.2;
   letter-spacing: -0.025em;
   color: rgb(10, 37, 64);
+  text-align: left;
 
   @media (min-width: 768px) {
     font-size: 3rem;
@@ -147,6 +149,7 @@ const Description = styled.p`
   font-size: 1.125rem;
   margin-bottom: 2rem;
   max-width: 32rem;
+  text-align: left;
 `;
 
 const ButtonContainer = styled.div`
@@ -377,7 +380,7 @@ const StatLabel = styled.p`
 `;
 
 const HeroSectionComponent = () => {
-  const countersRef = useRef([]);
+  const countersRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     // AOSの初期化
@@ -390,15 +393,16 @@ const HeroSectionComponent = () => {
     // カウンターアニメーション
     const counters = countersRef.current;
     if (counters && counters.length > 0) {
-      counters.forEach((counter) => {
+      counters.forEach((counter: HTMLElement) => {
         if (!counter) return;
 
-        const target = Number.parseFloat(counter.getAttribute("data-target"));
+        const targetAttr = counter.getAttribute("data-target");
+        if (!targetAttr) return;
+
+        const target = Number.parseFloat(targetAttr);
         const suffix = counter.getAttribute("data-suffix") || "";
         let count = 0;
-        const decimals = counter.getAttribute("data-target").includes(".")
-          ? 1
-          : 0;
+        const decimals = targetAttr.includes(".") ? 1 : 0;
         const duration = 2000;
         const increment = target / (duration / 16);
 
