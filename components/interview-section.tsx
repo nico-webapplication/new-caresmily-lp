@@ -12,7 +12,7 @@ interface InterviewCard {
   school: string;
   message: string;
   avatar: string;
-  bgColor: string;
+  isRight?: boolean;
 }
 
 const interviewData: InterviewCard[] = [
@@ -23,7 +23,7 @@ const interviewData: InterviewCard[] = [
     school: "作新学院高等学校出身",
     message: "Webデザインの会社で働いて、将来は独立したい！幅広く学ぶことができて、自分の進みたい道以外にも様々な才能を伸ばすことができるのが魅力！",
     avatar: "/images/student1.jpg",
-    bgColor: "bg-gray-100"
+    isRight: false
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const interviewData: InterviewCard[] = [
     school: "宮城県高等学校出身",
     message: "栃木県内で放送・映像・音響分野を学べる唯一の学校！機材が学ぶ環境が整っていて、先生達も業界の最前線で働いている",
     avatar: "/images/student2.jpg",
-    bgColor: "bg-orange-50"
+    isRight: true
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const interviewData: InterviewCard[] = [
     school: "上三川高等学校出身",
     message: "入学当初はイラストレーターになりたかっただけど、デザインを学ぶうちに楽しくなって今はグラフィックデザイナーを目指しています！",
     avatar: "/images/student3.jpg",
-    bgColor: "bg-gray-100"
+    isRight: false
   }
 ];
 
@@ -148,44 +148,69 @@ export default function InterviewSection() {
             </p>
           </div>
 
-          {/* 右側：インタビューカード */}
+          {/* 右側：チャットボット風インタビューカード */}
           <div className="lg:w-2/3 relative">
-            <div className="space-y-6">
+            <div className="space-y-4">
               {interviewData.map((interview, index) => (
                 <div
                   key={interview.id}
                   ref={(el) => {
                     if (el) cardsRef.current[index] = el;
                   }}
-                  className={`${interview.bgColor} rounded-2xl p-6 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl`}
+                  className={`flex ${interview.isRight ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className="flex items-start gap-4">
-                    {/* アバター */}
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-16 bg-orange-200 rounded-full flex items-center justify-center overflow-hidden">
-                        <div className="w-12 h-12 bg-orange-300 rounded-full"></div>
+                  <div 
+                    className={`max-w-md ${interview.isRight ? 'order-2' : 'order-1'}`}
+                  >
+                    {/* チャットボット風のカード */}
+                    <div className={`flex gap-3 ${interview.isRight ? 'flex-row-reverse' : 'flex-row'}`}>
+                      {/* アバター */}
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-orange-300 rounded-full overflow-hidden border-2 border-white shadow-md">
+                          <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-400"></div>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* コンテンツ */}
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h4 className="font-bold text-lg text-gray-800">
-                          {interview.name}
-                        </h4>
-                      </div>
-                      <div className="text-sm text-gray-600 mb-3">
-                        <div>{interview.role}</div>
-                        <div>{interview.school}</div>
-                      </div>
-                      <p className="text-gray-700 leading-relaxed">
-                        {interview.message}
-                      </p>
-                      
-                      {/* アイコン */}
-                      <div className="flex gap-2 mt-3">
-                        <span className="text-2xl">❤️</span>
-                        <span className="text-2xl">✨</span>
+                      {/* メッセージバブル */}
+                      <div className="flex flex-col">
+                        {/* 名前とタイトル */}
+                        <div className={`text-xs text-white mb-1 ${interview.isRight ? 'text-right' : 'text-left'}`}>
+                          <div className="font-semibold">{interview.name}</div>
+                          <div className="opacity-80">{interview.role}</div>
+                          <div className="opacity-80">{interview.school}</div>
+                        </div>
+
+                        {/* メッセージバブル */}
+                        <div 
+                          className={`
+                            bg-white rounded-2xl p-4 shadow-lg relative max-w-sm
+                            ${interview.isRight 
+                              ? 'rounded-br-md' 
+                              : 'rounded-bl-md'
+                            }
+                          `}
+                        >
+                          {/* バブルの尻尾 */}
+                          <div 
+                            className={`
+                              absolute top-4 w-0 h-0 
+                              ${interview.isRight 
+                                ? 'right-0 translate-x-full border-l-[12px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent' 
+                                : 'left-0 -translate-x-full border-r-[12px] border-r-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent'
+                              }
+                            `}
+                          />
+                          
+                          <p className="text-gray-800 text-sm leading-relaxed mb-3">
+                            {interview.message}
+                          </p>
+                          
+                          {/* アイコン */}
+                          <div className="flex gap-2">
+                            <span className="text-lg">❤️</span>
+                            <span className="text-lg">✨</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
