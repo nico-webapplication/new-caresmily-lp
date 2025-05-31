@@ -106,7 +106,7 @@ export default function SlideInPopup() {
         <img 
           src={careSmilyPopupImageSrc} 
           alt="CareSmily 文例数100,000例以上！介護ドキュメントDX No.1 無料ご紹介資料はこちら" 
-          className="w-80 h-auto rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-300"
+          className="w-52 h-auto rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-300"
         />
         {/* ホバー時の透明度調整のためのオーバーレイ */}
         <div className="absolute inset-0 bg-transparent rounded-lg"></div>
