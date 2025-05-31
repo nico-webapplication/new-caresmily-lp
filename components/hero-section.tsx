@@ -49,15 +49,17 @@ const HeroSection = styled.section`
   @media (max-width: 1023px) {
     min-height: 100vh;
     background-image: url('/images/CSTOP_A_SP_2.jpg');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #5CC7E6;
     padding: 0;
   }
 
   /* デスクトップ表示 */
   @media (min-width: 1024px) {
     background: white;
+    padding: 4rem 0;
   }
 `;
 
@@ -71,11 +73,16 @@ const HeroBg = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: -2;
+  z-index: -1;
 
   /* モバイルでは非表示 */
   @media (max-width: 1023px) {
     display: none;
+  }
+
+  /* デスクトップで表示 */
+  @media (min-width: 1024px) {
+    display: block;
   }
 `;
 
