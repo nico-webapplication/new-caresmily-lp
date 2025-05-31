@@ -163,14 +163,14 @@ const ButtonContainer = styled.div`
 `;
 
 const PrimaryButton = styled.a`
-  background: linear-gradient(135deg, #ff990a 0%, #ffe10a 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
   color: white;
   font-weight: 500;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    0 10px 15px -3px rgba(59, 130, 246, 0.3),
+    0 4px 6px -2px rgba(59, 130, 246, 0.2);
   transition: all 0.3s;
   display: flex;
   align-items: center;
@@ -179,9 +179,10 @@ const PrimaryButton = styled.a`
   text-decoration: none;
 
   &:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
     box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      0 20px 25px -5px rgba(37, 99, 235, 0.4),
+      0 10px 10px -5px rgba(37, 99, 235, 0.3);
   }
 
   svg {
@@ -192,9 +193,9 @@ const PrimaryButton = styled.a`
 `;
 
 const SecondaryButton = styled.a`
-　background: linear-gradient(135deg, #eff6ff 0%, #eff6ff 100%);;
-  border: 1px solid #60a5fa;
-  color: #eff6ff;
+  background: linear-gradient(135deg, #eff6ff 0%, #eff6ff 100%);
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
   font-weight: 500;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
@@ -205,7 +206,9 @@ const SecondaryButton = styled.a`
   text-decoration: none;
 
   &:hover {
-    background-color: #ffffff;
+    background: #3b82f6;
+    color: white;
+    border-color: #2563eb;
   }
 
   svg {
