@@ -647,14 +647,14 @@ export default function PointsSection() {
                 </DialogContent>
               </Dialog>
             </div>
-            <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+            <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                   <Image
                     src="/images/document-pdf-print-icon.png"
                     alt="書類テンプレート内での編集"
-                    width={200}
-                    height={200}
+                    width={250}
+                    height={250}
                     className="object-contain"
                   />
                 </div>
@@ -663,17 +663,17 @@ export default function PointsSection() {
           </div>
 
           {/* ポイント5 */}
-          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-            <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
-              <div className="flex items-center mb-4">
-                <span className="text-5xl font-bold text-[#42a5d5]">05</span>
-                <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-80">
+            <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
+              <div className="flex items-center mb-6">
+                <span className="text-7xl font-bold text-[#42a5d5]">05</span>
+                <span className="ml-8 text-yellow-400 italic font-light rotate-6 text-2xl">
                   Cloud Access!
                 </span>
               </div>
               <Dialog>
                 <DialogTrigger asChild>
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                  <h3 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4 cursor-pointer hover:text-[#42a5d5] transition-colors">
                      簡単にアクセス可能で
                     <br />
                     シンプルなアプリケーション
@@ -730,14 +730,14 @@ export default function PointsSection() {
                 </DialogContent>
               </Dialog>
             </div>
-            <div className="relative w-36 md:w-72 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+            <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                   <Image
                     src="/images/cloud-computer-icon.png"
                     alt="チーム共有"
-                    width={200}
-                    height={200}
+                    width={250}
+                    height={250}
                     className="object-contain"
                   />
                 </div>
