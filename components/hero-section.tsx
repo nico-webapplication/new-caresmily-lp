@@ -41,8 +41,8 @@ const HeroSection = styled.section`
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  padding: 4rem 0;
+  align-items: flex-start;
+  padding: 4rem 0 0 0; // 上だけ余白、下は無し
   overflow: hidden;
 `;
 
@@ -62,7 +62,7 @@ const HeroBg = styled.div`
 const Container = styled.div`
   width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
+  margin-left: 100px; // ←これだけで左寄せ
   padding: 0 1rem;
   z-index: 10;
 `;
