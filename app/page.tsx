@@ -443,7 +443,7 @@ export default function Home() {
             ref={messageImageRef}
             src="/images/message.png"
             alt="介護現場の大量の書類作業、困っていませんか？"
-            className="max-w-[80%] max-h-[80%] md:max-w-[60%] md:max-h-[60%] object-contain opacity-0"
+            className="max-w-[53%] max-h-[53%] md:max-w-[40%] md:max-h-[40%] object-contain opacity-0"
             style={{
               filter: "drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3))",
             }}
