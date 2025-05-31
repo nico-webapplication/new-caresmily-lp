@@ -135,12 +135,12 @@ export default function ServiceSection() {
       </div>
 
       {/* メインコンテンツ */}
-      <div ref={contentRef} className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div ref={contentRef} className="container mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* 左側：イラスト */}
           <div ref={imageRef} className="relative animate-item">
-            <div className="relative w-full h-[400px] flex items-center justify-center">
-              <div className="relative w-full h-full max-w-md">
+            <div className="relative w-full h-[500px] lg:h-[600px] flex items-center justify-center">
+              <div className="relative w-full h-full max-w-lg lg:max-w-xl">
                 <Image
                   src="/images/care-service-illustration.png"
                   alt="CareSmily サービスイラスト"
@@ -160,9 +160,9 @@ export default function ServiceSection() {
           </div>
 
           {/* 右側：テキストコンテンツ */}
-          <div className="space-y-6">
+          <div className="space-y-8 lg:space-y-10">
             <h2 className="flex items-center font-bold text-[#0a2540] animate-item">
-              <div className="relative h-14 md:h-20 w-48 md:w-64">
+              <div className="relative h-16 md:h-24 lg:h-28 w-56 md:w-80 lg:w-96">
                 <Image
                   src="/images/caresmily-logo.png"
                   alt="CareSmily"
@@ -172,11 +172,11 @@ export default function ServiceSection() {
                   priority
                 />
               </div>
-              <span className="text-2xl md:text-3xl ml-2">とは？</span>
+              <span className="text-3xl md:text-4xl lg:text-5xl ml-2">とは？</span>
             </h2>
-            <div className="space-y-8">
+            <div className="space-y-10 lg:space-y-12">
               <p
-                className="text-2xl md:text-3xl font-bold text-[#1a2b4a] animate-item"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a2b4a] animate-item"
                 style={{ lineHeight: "1.5em" }}
               >
                 介護施設で多くの手間と時間がかかる
@@ -185,7 +185,7 @@ export default function ServiceSection() {
                 <br className="mb-6" />
                 <span className="relative inline-block">
                   <span className="text-[#1a2b4a]">文例特化型</span>
-                  <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow-300 opacity-80 z-[-1]"></span>
+                  <span className="absolute bottom-0 left-0 w-full h-3 lg:h-4 bg-yellow-300 opacity-80 z-[-1]"></span>
                 </span>
                 WEBアプリです。
                 <br className="mb-6" />
@@ -194,13 +194,13 @@ export default function ServiceSection() {
                 ぜひお試しください。
               </p>
             </div>
-            <div className="pt-4 animate-item">
-              <button className="bg-[#FF0000] hover:bg-[#CC0000] text-white px-6 py-3 rounded-md font-medium transition-colors flex items-center shadow-md"
+            <div className="pt-6 lg:pt-8 animate-item">
+              <button className="bg-[#FF0000] hover:bg-[#CC0000] text-white px-8 py-4 lg:px-10 lg:py-5 rounded-lg font-medium text-lg lg:text-xl transition-colors flex items-center shadow-lg"
                 onClick={() => {
                   (window.open("https://www.youtube.com/@CareSmily", '_blank'))
                 }}
                 >
-                <Youtube className="w-5 h-5 mr-2" />
+                <Youtube className="w-6 h-6 lg:w-7 lg:h-7 mr-3" />
                 詳しい内容を動画でcheck！
               </button>
             </div>
