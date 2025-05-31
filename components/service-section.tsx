@@ -135,7 +135,7 @@ export default function ServiceSection() {
       </div>
 
       {/* メインコンテンツ */}
-      <div ref={contentRef} className="container mx-auto max-w-7xl">
+      <div ref={contentRef} className="container mx-auto max-w-[110rem]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* 左側：イラスト */}
           <div ref={imageRef} className="relative animate-item">

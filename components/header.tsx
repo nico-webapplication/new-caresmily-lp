@@ -13,7 +13,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50">
       <div 
         className="h-20 px-6 flex items-center justify-between"
-        style={{ backgroundColor: "rgb(45,123,182)" }}
+        style={{ backgroundColor: "rgb(100,181,246)" }}
       >
         <div className="flex items-center">
           <Link href="/" className="flex items-center">
