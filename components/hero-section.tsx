@@ -71,10 +71,17 @@ const FlexContainer = styled.div`
   width: 100%;
   margin-bottom: 3rem;
   text-align: left;
+  padding-left: 0;
 
   @media (min-width: 1024px) {
-    width: 50%;
+    width: 55%;
     margin-bottom: 0;
+    padding-left: 2rem;
+  }
+
+  @media (min-width: 1280px) {
+    width: 60%;
+    padding-left: 4rem;
   }
 `;
 
