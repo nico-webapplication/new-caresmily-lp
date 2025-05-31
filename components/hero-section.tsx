@@ -68,16 +68,6 @@ const Container = styled.div`
 `;
 
 const FlexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: 1024px) {
-    flex-direction: row;
-    align-items: center;
-  }
-`;
-
-const LeftContent = styled.div`
   width: 100%;
   margin-bottom: 3rem;
   text-align: left;
@@ -85,15 +75,6 @@ const LeftContent = styled.div`
   @media (min-width: 1024px) {
     width: 50%;
     margin-bottom: 0;
-  }
-`;
-
-const RightContent = styled.div`
-  width: 100%;
-  position: relative;
-
-  @media (min-width: 1024px) {
-    width: 50%;
   }
 `;
 
@@ -163,14 +144,14 @@ const ButtonContainer = styled.div`
 `;
 
 const PrimaryButton = styled.a`
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  background: linear-gradient(135deg, #ff990a 0%, #ffe10a 100%);
   color: white;
   font-weight: 500;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   box-shadow:
     0 10px 15px -3px rgba(59, 130, 246, 0.3),
-    0 4px 6px -2px rgba(59, 130, 246, 0.2);
+    0 4px 6px -2px rgba(59, 130, 246, 0.2)
   transition: all 0.3s;
   display: flex;
   align-items: center;
@@ -439,7 +420,7 @@ const HeroSectionComponent = () => {
         <Container>
           <FlexContainer>
             {/* Left content */}
-            <LeftContent data-aos="fade-right">
+
                 <img
                   src="/images/fukidashi.png"
                   alt="吹き出し"
@@ -490,14 +471,6 @@ const HeroSectionComponent = () => {
                   資料請求はこちら
                 </SecondaryButton>
               </ButtonContainer>
-            </LeftContent>
-
-            {/* Right content - Image */}
-            <RightContent data-aos="fade-left" data-aos-delay="200">
-              <ImageContainer>
-                {/* Hero image removed */}
-              </ImageContainer>
-            </RightContent>
           </FlexContainer>
 
           {/* Stats section removed */}
