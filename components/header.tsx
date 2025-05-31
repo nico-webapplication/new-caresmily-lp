@@ -38,7 +38,7 @@ export default function Header() {
               <li>
                 <Link 
                   href="/news" 
-                  className="text-white hover:text-gray-300 transition-colors"
+                  className="text-black hover:text-gray-300 transition-colors"
                 >
                   お知らせ
                 </Link>
@@ -46,7 +46,7 @@ export default function Header() {
               <li>
                 <Link 
                   href="/column" 
-                  className="text-white hover:text-gray-300 transition-colors"
+                  className="text-black hover:text-gray-300 transition-colors"
                 >
                   コラム
                 </Link>
@@ -54,7 +54,7 @@ export default function Header() {
               <li>
                 <Link 
                   href="/media" 
-                  className="text-white hover:text-gray-300 transition-colors"
+                  className="text-black hover:text-gray-300 transition-colors"
                 >
                   メディア情報
                 </Link>
@@ -62,7 +62,7 @@ export default function Header() {
               <li>
                 <Link 
                   href="/contact" 
-                  className="text-white hover:text-gray-300 transition-colors"
+                  className="text-black hover:text-gray-300 transition-colors"
                 >
                   お問い合わせ
                 </Link>
@@ -119,7 +119,7 @@ export default function Header() {
             <li>
               <Link 
                 href="/news" 
-                className="block text-white hover:text-gray-300 transition-colors py-2"
+                className="block text-white hover:text-gray-800 transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 お知らせ
