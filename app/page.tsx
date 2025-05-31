@@ -425,8 +425,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* 固定された枠 */}
-      <div className="fixed inset-0 border-[12px] border-[rgb(10,37,64)] rounded-[15px] pointer-events-none z-30"></div>
       
       {/* Animation container - always visible */}
       <div
