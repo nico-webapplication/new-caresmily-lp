@@ -424,7 +424,7 @@ export default function Home() {
   }, [hasPlayedInitialAnimation])
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-blue-50">
       
       {/* Animation container - always visible */}
       <div

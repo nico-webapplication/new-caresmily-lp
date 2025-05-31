@@ -123,7 +123,7 @@ const HeadingLarge = styled.h1`
 `;
 
 const TextGradient = styled.span`
-  background: linear-gradient(90deg, #38bdf8, #4ade80);
+  background: linear-gradient(90deg, #ff990a, #ff990a);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -163,7 +163,7 @@ const ButtonContainer = styled.div`
 `;
 
 const PrimaryButton = styled.a`
-  background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
+  background: linear-gradient(135deg, #ff990a 0%, #ffe10a 100%);
   color: white;
   font-weight: 500;
   padding: 1rem 2rem;
@@ -192,8 +192,9 @@ const PrimaryButton = styled.a`
 `;
 
 const SecondaryButton = styled.a`
+　background: linear-gradient(135deg, #eff6ff 0%, #eff6ff 100%);;
   border: 1px solid #60a5fa;
-  color: #3b82f6;
+  color: #eff6ff;
   font-weight: 500;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
@@ -204,7 +205,7 @@ const SecondaryButton = styled.a`
   text-decoration: none;
 
   &:hover {
-    background-color: #eff6ff;
+    background-color: #ffffff;
   }
 
   svg {
