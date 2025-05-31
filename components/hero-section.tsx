@@ -44,6 +44,21 @@ const HeroSection = styled.section`
   align-items: center;
   padding: 4rem 0;
   overflow: hidden;
+
+  /* モバイル表示 */
+  @media (max-width: 1023px) {
+    min-height: 100vh;
+    background-image: url('/images/CSTOP_A_SP_2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
+  }
+
+  /* デスクトップ表示 */
+  @media (min-width: 1024px) {
+    background: white;
+  }
 `;
 
 const HeroBg = styled.div`
@@ -57,6 +72,11 @@ const HeroBg = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   z-index: -2;
+
+  /* モバイルでは非表示 */
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 const Container = styled.div`
@@ -81,6 +101,11 @@ const LeftContent = styled.div`
   width: 100%;
   margin-bottom: 3rem;
   text-align: left;
+
+  /* モバイルでは非表示 */
+  @media (max-width: 1023px) {
+    display: none;
+  }
 
   @media (min-width: 1024px) {
     width: 50%;
