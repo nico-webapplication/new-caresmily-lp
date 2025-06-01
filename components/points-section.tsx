@@ -273,7 +273,7 @@ export default function PointsSection() {
 
       <div className="container px-4 relative z-10">
         {/* 横並びレイアウト：ポイントカードとタイトル */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-16">
           <div ref={pointsRef} className="max-w-sm space-y-8">
             {/* ポイント1 */}
             <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
