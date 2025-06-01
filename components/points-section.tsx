@@ -127,36 +127,6 @@ export default function PointsSection() {
             repeatDelay: 0, // 繰り返し時の遅延なし
           });
         }
-
-        // 機能カードのアニメーション
-        const leftCards = leftBorderRef.current.querySelectorAll(".bg-white");
-        const rightCards = rightBorderRef.current.querySelectorAll(".bg-white");
-
-        if (leftCards.length > 0) {
-          // 左側のカードを順次表示
-          gsap.set(leftCards, { opacity: 0, x: -50 });
-          gsap.to(leftCards, {
-            opacity: 1,
-            x: 0,
-            stagger: 0.2,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 1,
-          });
-        }
-
-        if (rightCards.length > 0) {
-          // 右側のカードを順次表示
-          gsap.set(rightCards, { opacity: 0, x: 50 });
-          gsap.to(rightCards, {
-            opacity: 1,
-            x: 0,
-            stagger: 0.2,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 1.5,
-          });
-        }
       }
 
       // 車いすのスクロールアニメーション
@@ -302,17 +272,16 @@ export default function PointsSection() {
       {/* 下部の縁 */}
       <div className="absolute bottom-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div>
 
-      {/* 左側の縁 - 機能カードを表示 */}
+      {/* 左側の縁 */}
       <div
         ref={leftBorderRef}
-        className="absolute left-0 top-4 bottom-4 w-80 bg-[#0a2540] overflow-hidden z-10"
+        className="absolute left-0 top-4 bottom-4 w-12 bg-[#0a2540] overflow-hidden z-10"
       >
-        {/* 左半分にテキストループ */}
-        <div className="text-loop-container absolute left-2 w-8 visibility-hidden">
+        <div className="text-loop-container absolute left-5 w-8 visibility-hidden">
           {borderTexts.map((text, index) => (
             <div
               key={`left-${index}`}
-              className="text-white text-xs font-bold py-2 text-center writing-vertical"
+              className="text-white text-sm md:text-base font-bold py-3 text-center writing-vertical"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(180deg)",
@@ -322,70 +291,18 @@ export default function PointsSection() {
             </div>
           ))}
         </div>
-        
-        {/* 右半分に機能カード */}
-        <div className="absolute left-12 top-0 w-64 h-full flex flex-col justify-center space-y-6 p-4">
-          {/* カード1 */}
-          <div className="bg-white rounded-xl p-4 shadow-lg transform hover:scale-105 transition-transform">
-            <div className="flex items-center mb-2">
-              <span className="text-2xl font-bold text-[#42a5d5]">01</span>
-              <span className="ml-2 text-yellow-400 italic text-xs">Expert Database!</span>
-            </div>
-            <h4 className="text-sm font-bold text-[#0a2540] leading-tight">
-              10万件超の専門家監修<br />文例データベース
-            </h4>
-            <div className="mt-2 flex justify-end">
-              <div className="w-8 h-8 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-[#42a5d5] rounded text-white text-xs flex items-center justify-center">✓</div>
-              </div>
-            </div>
-          </div>
-
-          {/* カード2 */}
-          <div className="bg-white rounded-xl p-4 shadow-lg transform hover:scale-105 transition-transform">
-            <div className="flex items-center mb-2">
-              <span className="text-2xl font-bold text-[#42a5d5]">02</span>
-              <span className="ml-2 text-yellow-400 italic text-xs">Quick Copy & Paste!</span>
-            </div>
-            <h4 className="text-sm font-bold text-[#0a2540] leading-tight">
-              検索・カテゴリ選択 →<br />コピー&ペーストで瞬時作成
-            </h4>
-            <div className="mt-2 flex justify-end">
-              <div className="w-8 h-8 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-[#42a5d5] rounded text-white text-xs flex items-center justify-center">🔍</div>
-              </div>
-            </div>
-          </div>
-
-          {/* カード3 */}
-          <div className="bg-white rounded-xl p-4 shadow-lg transform hover:scale-105 transition-transform">
-            <div className="flex items-center mb-2">
-              <span className="text-2xl font-bold text-[#42a5d5]">03</span>
-              <span className="ml-2 text-yellow-400 italic text-xs">Guided Builder!</span>
-            </div>
-            <h4 className="text-sm font-bold text-[#0a2540] leading-tight">
-              質問形式ビルダーによる<br />レコメンド挿入
-            </h4>
-            <div className="mt-2 flex justify-end">
-              <div className="w-8 h-8 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-[#42a5d5] rounded text-white text-xs flex items-center justify-center">?</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      {/* 右側の縁 - 機能カードを表示 */}
+      {/* 右側の縁 */}
       <div
         ref={rightBorderRef}
-        className="absolute right-0 top-4 bottom-4 w-80 bg-[#0a2540] overflow-hidden z-10"
+        className="absolute right-0 top-4 bottom-4 w-12 bg-[#0a2540] overflow-hidden z-10"
       >
-        {/* 右半分にテキストループ */}
-        <div className="text-loop-container absolute right-2 w-8 visibility-hidden">
+        <div className="text-loop-container absolute left-0 w-full visibility-hidden">
           {borderTexts.map((text, index) => (
             <div
               key={`right-${index}`}
-              className="text-white text-xs font-bold py-2 text-center writing-vertical"
+              className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(180deg)",
@@ -395,44 +312,9 @@ export default function PointsSection() {
             </div>
           ))}
         </div>
-        
-        {/* 左半分に機能カード */}
-        <div className="absolute left-4 top-0 w-64 h-full flex flex-col justify-center space-y-8 p-4">
-          {/* カード4 */}
-          <div className="bg-white rounded-xl p-4 shadow-lg transform hover:scale-105 transition-transform">
-            <div className="flex items-center mb-2">
-              <span className="text-2xl font-bold text-[#42a5d5]">04</span>
-              <span className="ml-2 text-yellow-400 italic text-xs">All-in-One Solution!</span>
-            </div>
-            <h4 className="text-sm font-bold text-[#0a2540] leading-tight">
-              書類テンプレ内での編集・<br />PDF/印刷までワンストップ
-            </h4>
-            <div className="mt-2 flex justify-end">
-              <div className="w-8 h-8 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-[#42a5d5] rounded text-white text-xs flex items-center justify-center">📄</div>
-              </div>
-            </div>
-          </div>
-
-          {/* カード5 */}
-          <div className="bg-white rounded-xl p-4 shadow-lg transform hover:scale-105 transition-transform">
-            <div className="flex items-center mb-2">
-              <span className="text-2xl font-bold text-[#42a5d5]">05</span>
-              <span className="ml-2 text-yellow-400 italic text-xs">Cloud Access!</span>
-            </div>
-            <h4 className="text-sm font-bold text-[#0a2540] leading-tight">
-              簡単にアクセス可能で<br />シンプルなアプリケーション
-            </h4>
-            <div className="mt-2 flex justify-end">
-              <div className="w-8 h-8 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-[#42a5d5] rounded text-white text-xs flex items-center justify-center">☁</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div className="container mx-auto px-80 md:px-96 py-16 relative z-10">
+      <div className="container mx-auto px-8 md:px-20 py-16 relative z-10">
         <div ref={titleRef} className="text-center mb-20">
           <h2 className="text-4xl md:text-7xl font-bold text-[#0a2540]">
             <span className="inline-block text-3xl md:text-4xl font-normal mb-4">
@@ -451,39 +333,414 @@ export default function PointsSection() {
           </h2>
         </div>
 
-        <div ref={pointsRef} className="max-w-4xl mx-auto text-center">
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-2xl">
-            <h3 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-8">
-              CareSmily の特徴
-            </h3>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
-              介護現場の書類作成を劇的に効率化する、5つの革新的な機能をご紹介します。
-              左右のパネルをご覧ください。
-            </p>
-            <div className="grid md:grid-cols-2 gap-8 text-left">
-              <div className="space-y-4">
-                <h4 className="text-xl font-bold text-[#42a5d5]">効率性の向上</h4>
-                <p className="text-gray-600">
-                  文例データベースとコピー&ペースト機能により、書類作成時間を最大60%削減
-                </p>
+        <div ref={pointsRef} className="max-w-6xl mx-auto space-y-20">
+          {/* ポイント1 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-80">
+            <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
+              <div className="flex items-center mb-6">
+                <span className="text-7xl font-bold text-[#42a5d5]">01</span>
+                <span className="ml-8 text-yellow-400 italic font-light rotate-6 text-2xl">
+                  Expert Database!
+                </span>
               </div>
-              <div className="space-y-4">
-                <h4 className="text-xl font-bold text-[#42a5d5]">品質の保証</h4>
-                <p className="text-gray-600">
-                  専門家監修の文例と質問形式ビルダーで、新人でもプロ水準の記録が作成可能
-                </p>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    10万件超の専門家監修
+                    <br />
+                    "文例データベース"
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              01
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            10万件超の専門家監修文例データベース
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            AI自動生成ではなく、法令・現場ニュアンスを踏まえた高品質文例を事前収録。デイサービス／訪問介護／ケアマネ業務など主要書類を網羅し、常に最新データへ更新される仕組みを採用しています。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              法令に準拠した高品質文例が常に最新状態で利用可能
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/database-100k-icon.png"
+                            alt="10万件超の専門家監修文例データベース"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/database-100k-icon.png"
+                    alt="10万件超の専門家監修文例データベース"
+                    width={250}
+                    height={250}
+                    className="object-contain"
+                  />
+                </div>
               </div>
-              <div className="space-y-4">
-                <h4 className="text-xl font-bold text-[#42a5d5]">ワンストップ対応</h4>
-                <p className="text-gray-600">
-                  編集からPDF出力・印刷まで、すべてアプリ内で完結
-                </p>
+            </div>
+          </div>
+
+          {/* ポイント2 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-80">
+            <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
+              <div className="flex items-center mb-6">
+                <span className="text-7xl font-bold text-[#42a5d5]">02</span>
+                <span className="ml-8 text-yellow-400 italic font-light rotate-6 text-2xl">
+                  Quick Copy & Paste!
+                </span>
               </div>
-              <div className="space-y-4">
-                <h4 className="text-xl font-bold text-[#42a5d5]">簡単アクセス</h4>
-                <p className="text-gray-600">
-                  ブラウザからログインするだけ。インストールや複雑な設定は不要
-                </p>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    検索・カテゴリ選択 →
+                    <br />
+                    コピー＆ペーストで瞬時作成
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              02
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            検索・カテゴリ選択 → コピー＆ペーストで瞬時作成
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            書類種類を選んでからキーワード検索・分類フィルタで欲しい表現を絞り込み、そのままコピペ。文章を一から考える作業を大幅に省き、書類作成時間を最大60%削減します。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              書類作成時間を最大60%削減
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/search-document-icon.png"
+                            alt="検索・カテゴリ選択"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/search-document-icon.png"
+                    alt="検索・カテゴリ選択"
+                    width={250}
+                    height={250}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ポイント3 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-80">
+            <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
+              <div className="flex items-center mb-6">
+                <span className="text-7xl font-bold text-[#42a5d5]">03</span>
+                <span className="ml-8 text-yellow-400 italic font-light rotate-6 text-2xl">
+                  Guided Builder!
+                </span>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    "質問形式ビルダー"による
+                    <br />
+                    レコメンド挿入
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              03
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            "質問形式ビルダー"によるレコメンド挿入
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            利用者の身体状況や目標をQ&A方式で入力すると、条件に合った文例が自動提案されるガイド機能を搭載。記入漏れや表現ブレを防ぎ、新人でもプロ水準の書類を短時間で完成できます。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              新人でもプロ水準の記録が作成可能
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/qa-form-icon.png"
+                            alt="質問形式ビルダー"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/qa-form-icon.png"
+                    alt="質問形式ビルダー"
+                    width={250}
+                    height={250}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ポイント4 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-80">
+            <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
+              <div className="flex items-center mb-6">
+                <span className="text-7xl font-bold text-[#42a5d5]">04</span>
+                <span className="ml-8 text-yellow-400 italic font-light rotate-6 text-2xl">
+                  All-in-One Solution!
+                </span>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    書類テンプレ内での編集・
+                    <br />
+                    PDF／印刷までワンストップ
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              04
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            書類テンプレ内での編集・PDF／印刷までワンストップ
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            文例を差し込んだ後はアプリ内フォーマット上で微調整し、そのままPDF出力・印刷が可能。外部ソフトに書き出す手間なく、その場で紙提出用データまで完結します。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              編集からPDF出力・印刷まで一貫して対応
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/document-pdf-print-icon.png"
+                            alt="書類テンプレート内での編集"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/document-pdf-print-icon.png"
+                    alt="書類テンプレート内での編集"
+                    width={250}
+                    height={250}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ポイント5 */}
+          <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-80">
+            <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
+              <div className="flex items-center mb-6">
+                <span className="text-7xl font-bold text-[#42a5d5]">05</span>
+                <span className="ml-8 text-yellow-400 italic font-light rotate-6 text-2xl">
+                  Cloud Access!
+                </span>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <h3 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                     簡単にアクセス可能で
+                    <br />
+                    シンプルなアプリケーション
+                  </h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
+                  <div className="relative bg-gradient-to-r from-[#42a5d5] to-[#007aff] p-1">
+                    <div className="bg-white p-6 sm:p-8">
+                      <DialogHeader className="pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#42a5d5]/20">
+                            <span className="text-3xl font-bold text-[#42a5d5]">
+                              05
+                            </span>
+                          </div>
+                          <DialogTitle className="text-3xl font-bold text-[#0a2540]">
+                            簡単にアクセス可能でシンプルなアプリケーション
+                          </DialogTitle>
+                        </div>
+                      </DialogHeader>
+
+                      <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
+                        <div>
+                          <DialogDescription className="text-base text-gray-600 leading-relaxed">
+                            PCからブラウザでログインするだけ。インストールや複雑な設定は不要です。
+                            PCが不慣れな方でも使いやすいアプリケーションとなっております。
+                          </DialogDescription>
+                          <div className="mt-4 flex justify-end">
+                            <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
+                              <span className="font-bold">POINT:</span>{" "}
+                              誰でも簡単利用
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
+                          <Image
+                            src="/images/cloud-computer-icon.png"
+                            alt="チーム共有"
+                            width={150}
+                            height={150}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
+                        <DialogClose asChild>
+                          <Button variant="outline">閉じる</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-4/5 h-4/5 flex items-center justify-center">
+                  <Image
+                    src="/images/cloud-computer-icon.png"
+                    alt="チーム共有"
+                    width={250}
+                    height={250}
+                    className="object-contain"
+                  />
+                </div>
               </div>
             </div>
           </div>
