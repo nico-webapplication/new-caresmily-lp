@@ -12,6 +12,7 @@ import InterviewSection from "@/components/interview-section"
 import FAQSection from "@/components/faq-section"
 import ServiceCountSection from "@/components/service-count-section"
 import SlideInPopup from "@/components/slide-in-popup"
+import OpenCampusSection from "@/components/open-campus-section"
 
 import { DocumentScatter } from "@/components/document-scatter-component"
 
@@ -459,6 +460,7 @@ export default function Home() {
         <PointsSection />
         {/* <FeaturesSection /> */}
         <ServiceContentSection />
+        <OpenCampusSection />
         <InterviewSection />
         <ServiceCountSection />
         <FAQSection />
