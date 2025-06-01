@@ -495,39 +495,125 @@ export default function ServiceContentSection() {
     </div>
   );
 
-  // 介護記録の内容（Coming Soon）
+  // 福祉用具の内容
   const recordsContent = (
     <div className="py-8">
       <div className="max-w-5xl mx-auto">
-        <div className="bg-gradient-to-r from-[#e6f9ee] to-[#f0fff4] rounded-2xl p-12 text-center mb-12 anim-element">
-          <div className="relative mb-12">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-48 h-48 bg-[#50c878] rounded-full opacity-10 animate-pulse"></div>
-            </div>
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="icon-container w-32 h-32 bg-[#50c878] rounded-full flex items-center justify-center mb-6">
-                <ClipboardList className="w-16 h-16 text-white" />
-              </div>
-              <h3 className="text-4xl font-bold text-[#0a2540] mb-4">
-                Coming Soon...
-              </h3>
-              <div className="w-24 h-1 bg-[#50c878] rounded-full mb-6"></div>
-            </div>
+        {/* ヒーローセクション */}
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#e6f9ee] to-[#f0fff4] p-8 mb-12 anim-element">
+          <div className="absolute top-0 right-0 w-1/2 h-full opacity-20">
+            <div className="absolute inset-0 bg-[url('/placeholder.svg?height=400&width=400&query=abstract green pattern')] bg-no-repeat bg-cover"></div>
           </div>
 
-          <p className="text-2xl text-[#0a2540] mb-8 font-medium">
-            介護記録サービスは現在準備中です
-          </p>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
-            より使いやすく、効率的な介護記録システムを提供するために準備を進めています。
-            最新の技術と専門家の知見を組み合わせた革新的なサービスにご期待ください。
-          </p>
+          <div className="relative z-10 flex flex-col md:flex-row items-center">
+            <div className="md:w-2/3 mb-6 md:mb-0 md:pr-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
+                CareSmily <span className="text-[#50c878]">福祉用具</span>
+              </h2>
+              <p className="text-lg text-gray-700 mb-4">
+                福祉用具貸与・販売事業所で発生するモニタリング報告書・福祉用具サービス計画書・アセスメントなどの書類作成を高速化する"文例データベース特化"サービス。
+              </p>
+              <div className="inline-block bg-[#50c878] text-white px-4 py-2 rounded-full text-sm font-medium">
+                2025年4月正式リリース
+              </div>
+            </div>
+            <div className="md:w-1/3 flex justify-center">
+              <div className="relative w-48 h-48 md:w-64 md:h-64">
+                <div className="absolute inset-0 bg-[#50c878] rounded-full opacity-10 animate-pulse"></div>
+                <div className="absolute inset-2 bg-white rounded-full shadow-lg flex items-center justify-center">
+                  <Image
+                    src="/images/welfare-equipment.svg"
+                    alt="福祉用具イラスト"
+                    width={200}
+                    height={200}
+                    className="p-4"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <div className="mt-12">
-              <a href="/contact" className="bg-[#50c878] text-white px-4 sm:px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors inline-block text-center whitespace-nowrap"
-              >
-              内容について問い合わせる
-            </a>
+        {/* 収録文例セクション */}
+        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
+          収録文例とカバー範囲
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {[
+            {
+              title: "モニタリング報告書",
+              desc: "利用状況・身体機能・生活環境・家族状況等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#50c878",
+            },
+            {
+              title: "福祉用具サービス計画書",
+              desc: "利用者本人/家族の希望・福祉用具選定理由・利用目標等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#50c878",
+            },
+            {
+              title: "取扱説明・指導記録",
+              desc: "用具の使用方法・安全上の注意・メンテナンス方法等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#50c878",
+            },
+            {
+              title: "適合・調整記録",
+              desc: "身体状況に合わせた調整・適合確認・効果測定等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#50c878",
+            },
+            {
+              title: "FAX・連絡書",
+              desc: "ケアマネージャー宛・用具変更・故障/修理対応等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#50c878",
+            },
+            {
+              title: "アセスメントシート",
+              desc: "ADL・IADL・住環境・介護者状況等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#50c878",
+            },
+            {
+              title: "サービス担当者会議",
+              desc: "用具選定提案・利用効果報告・他職種との連携等の文例",
+              icon: <Database className="w-8 h-8 text-white" />,
+              color: "#50c878",
+            },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className="feature-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="p-5">
+                <h4 className="font-bold text-[#0a2540] mb-2">{item.title}</h4>
+                <p className="text-sm text-gray-600">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* まとめセクション */}
+        <div className="bg-gradient-to-r from-[#50c878] to-[#4ade80] rounded-2xl p-8 text-white anim-element">
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="md:w-1/4 flex justify-center mb-6 md:mb-0">
+              <div className="icon-container w-32 h-32 bg-white/20 rounded-full flex items-center justify-center">
+                <ClipboardList className="w-16 h-16 text-white" />
+              </div>
+            </div>
+            <div className="md:w-3/4 md:pl-8">
+              <h3 className="text-2xl font-bold mb-4">
+                CareSmily〈福祉用具〉
+              </h3>
+              <p className="mb-4">
+                "文例を選ぶだけ"に焦点を絞り、確実性・操作性・時短効果を同時に実現したピンポイント型DXツールです。福祉用具専門相談員の業務効率化と、適切な用具選定をサポートする専門的な文例を豊富に収録しています。
+              </p>
+              <a href="/document-request" className="bg-white text-[#50c878] px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors inline-block">
+                資料請求はこちら
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -669,7 +755,7 @@ export default function ServiceContentSection() {
                       <span className="sm:hidden text-xs">
                         {tabKey === "dayservice" ? "デイサービス" :
                          tabKey === "homecare" ? "訪問介護" :
-                         tabKey === "records" ? "介護記録" :
+                         tabKey === "records" ? "福祉用具" :
                          "居宅支援"}
                       </span>
                     </span>
