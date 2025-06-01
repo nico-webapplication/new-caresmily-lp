@@ -276,7 +276,7 @@ export default function PointsSection() {
         <div className="flex flex-col lg:flex-row items-center justify-center gap-16">
           <div ref={pointsRef} className="max-w-sm space-y-8">
             {/* ポイント1 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-48">
               <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">01</span>
@@ -322,13 +322,13 @@ export default function PointsSection() {
                           </div>
 
                           <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/database-icon.png"
-                              alt="データベース"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
+                            <div className="w-32 h-32 bg-blue-100 rounded-lg flex items-center justify-center">
+                              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#42a5d5" strokeWidth="2">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                <path d="M5 12c0 1.657 3.134 3 7 3s7-1.343 7-3"/>
+                                <path d="M5 5v14c0 1.657 3.134 3 7 3s7-1.343 7-3V5"/>
+                              </svg>
+                            </div>
                           </div>
                         </div>
 
@@ -345,20 +345,20 @@ export default function PointsSection() {
               <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/database-icon.png"
-                      alt="データベース"
-                      width={250}
-                      height={250}
-                      className="object-contain"
-                    />
+                    <div className="w-48 h-48 bg-blue-100 rounded-full flex items-center justify-center">
+                      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#42a5d5" strokeWidth="2">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                        <path d="M5 12c0 1.657 3.134 3 7 3s7-1.343 7-3"/>
+                        <path d="M5 5v14c0 1.657 3.134 3 7 3s7-1.343 7-3V5"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* ポイント2 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-40">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-48">
               <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">02</span>
@@ -404,13 +404,15 @@ export default function PointsSection() {
                           </div>
 
                           <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/search-document-icon.png"
-                              alt="検索・カテゴリ選択"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
+                            <div className="w-32 h-32 bg-yellow-100 rounded-lg flex items-center justify-center">
+                              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="m21 21-4.35-4.35"/>
+                                <path d="M16 8H8"/>
+                                <path d="M12 12v4"/>
+                                <path d="M12 8v4"/>
+                              </svg>
+                            </div>
                           </div>
                         </div>
 
@@ -427,20 +429,22 @@ export default function PointsSection() {
               <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/search-document-icon.png"
-                      alt="検索・カテゴリ選択"
-                      width={100}
-                      height={100}
-                      className="object-contain"
-                    />
+                    <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center">
+                      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                        <path d="M16 8H8"/>
+                        <path d="M12 12v4"/>
+                        <path d="M12 8v4"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* ポイント3 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-48">
               <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">03</span>
@@ -486,13 +490,16 @@ export default function PointsSection() {
                           </div>
 
                           <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/suggestion-icon.png"
-                              alt="おすすめ文例"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
+                            <div className="w-32 h-32 bg-red-100 rounded-lg flex items-center justify-center">
+                              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2">
+                                <path d="M9 12l2 2 4-4"/>
+                                <path d="M21 12c.552 0 1-.448 1-1s-.448-1-1-1"/>
+                                <path d="M3 12c-.552 0-1-.448-1-1s.448-1 1-1"/>
+                                <path d="M12 21c0 .552-.448 1-1 1s-1-.448-1-1"/>
+                                <path d="M12 3c0-.552-.448-1-1-1s-1 .448-1 1"/>
+                                <circle cx="12" cy="12" r="9"/>
+                              </svg>
+                            </div>
                           </div>
                         </div>
 
@@ -509,20 +516,23 @@ export default function PointsSection() {
               <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/suggestion-icon.png"
-                      alt="おすすめ文例"
-                      width={250}
-                      height={250}
-                      className="object-contain"
-                    />
+                    <div className="w-48 h-48 bg-red-100 rounded-full flex items-center justify-center">
+                      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2">
+                        <path d="M9 12l2 2 4-4"/>
+                        <path d="M21 12c.552 0 1-.448 1-1s-.448-1-1-1"/>
+                        <path d="M3 12c-.552 0-1-.448-1-1s.448-1 1-1"/>
+                        <path d="M12 21c0 .552-.448 1-1 1s-1-.448-1-1"/>
+                        <path d="M12 3c0-.552-.448-1-1-1s-1 .448-1 1"/>
+                        <circle cx="12" cy="12" r="9"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* ポイント4 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-40">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-48">
               <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">04</span>
@@ -568,13 +578,14 @@ export default function PointsSection() {
                           </div>
 
                           <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/team-collaboration-icon.png"
-                              alt="チーム共有"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
+                            <div className="w-32 h-32 bg-blue-100 rounded-lg flex items-center justify-center">
+                              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                              </svg>
+                            </div>
                           </div>
                         </div>
 
@@ -591,20 +602,21 @@ export default function PointsSection() {
               <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/team-collaboration-icon.png"
-                      alt="チーム共有"
-                      width={250}
-                      height={250}
-                      className="object-contain"
-                    />
+                    <div className="w-48 h-48 bg-blue-100 rounded-full flex items-center justify-center">
+                      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* ポイント5 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-48">
               <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">05</span>
