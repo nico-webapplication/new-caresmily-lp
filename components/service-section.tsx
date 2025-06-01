@@ -176,7 +176,7 @@ export default function ServiceSection() {
             </h2>
             <div className="space-y-10 lg:space-y-12">
               <p
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a2b4a] animate-item"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2b4a] animate-item"
                 style={{ lineHeight: "1.5em" }}
               >
                 介護施設で多くの手間と時間がかかる

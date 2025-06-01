@@ -247,13 +247,13 @@ export default function ServiceContentSection() {
 
           <div className="relative z-10 flex flex-col md:flex-row items-center">
             <div className="md:w-2/3 mb-6 md:mb-0 md:pr-8">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0a2540] mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
                 CareSmily <span className="text-[#42a5d5]">デイサービス</span>
               </h2>
-              <p className="text-xl md:text-2xl text-gray-700 mb-6">
+              <p className="text-lg text-gray-700 mb-4">
                 通所介護（デイサービス）事業所で発生する連絡帳・通所介護計画書・個別機能訓練計画などの書類作成を高速化する"文例データベース特化"サービス。
               </p>
-              <div className="inline-block bg-[#42a5d5] text-white px-6 py-3 rounded-full text-lg font-medium">
+              <div className="inline-block bg-[#42a5d5] text-white px-4 py-2 rounded-full text-sm font-medium">
                 2025年4月正式リリース
               </div>
             </div>
@@ -275,10 +275,10 @@ export default function ServiceContentSection() {
         </div>
 
         {/* 収録文例セクション */}
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a2540] mb-8 anim-element">
+        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
           収録文例とカバー範囲
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {[
             {
               title: "連絡帳",

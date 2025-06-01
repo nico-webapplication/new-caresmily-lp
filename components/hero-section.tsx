@@ -120,7 +120,14 @@ const TextContainer = styled.div`
 `;
 
 const TextGradient = styled.span`
-  background: linear-gradient(90deg, #ff990a, #ff990a);
+  background: linear-gradient(90deg, #ffffff, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+`;
+
+const TextGradientCross = styled.span`
+  background: linear-gradient(90deg, #e40505, #e40505);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -447,7 +454,7 @@ const HeroSectionComponent = () => {
                 }}
               />
               <HeadingLarge>
-                膨大な<TextGradient>文例</TextGradient>×
+               <TextGradient>膨大な文例</TextGradient><TextGradientCross>×</TextGradientCross>
                 <TextGradient>選択</TextGradient>で<br />
                 <UnderlinedText>あなたのケアプランが</UnderlinedText>
                 <br />
@@ -457,6 +464,7 @@ const HeroSectionComponent = () => {
               <Description>
                 介護現場の書類作成時間を<strong>60%削減</strong>
                 する文例特化型アプリ。
+                <br/>
                 <strong>10万件以上</strong>
                 の専門家監修文例で、あなたの業務を革新します。
               </Description>
