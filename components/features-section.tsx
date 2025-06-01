@@ -7,10 +7,10 @@ export default function FeaturesSection() {
     <section className="relative bg-white py-25">
       <div className="relative z-10 mx-auto max-w-8xl px-5 sm:px-8 lg:px-10">
         {/* 左寄せの縦積みレイアウト */}
-        <div className="relative w-full max-w-4xl hidden md:block">
+        <div className="relative w-full hidden md:block">
           
-          {/* 5つのカードの左寄せ配置 */}
-          <div className="flex flex-col items-start space-y-4 max-w-md">
+          {/* 5つのカードの左寄せ配置 - 左半分に配置 */}
+          <div className="flex flex-col items-start space-y-4 max-w-md w-1/2">
             {/* 01 - Expert Database */}
             <FeatureCard
               color="blue"
