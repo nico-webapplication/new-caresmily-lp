@@ -140,7 +140,7 @@ export default function Home() {
                         ease: "power2.out",
                         onComplete: () => {
                           // Wait a moment to let user read the message, then start LP animation
-                          gsap.delayedCall(2.0, () => {
+                          gsap.delayedCall(1.2, () => {
                             // Fade out the message image before LP animation
                             gsap.to(messageImageRef.current, {
                               opacity: 0,
