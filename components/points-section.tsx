@@ -342,19 +342,6 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/database-icon.png"
-                      alt="データベース"
-                      width={250}
-                      height={250}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* ポイント2 */}
@@ -423,19 +410,6 @@ export default function PointsSection() {
                     </div>
                   </DialogContent>
                 </Dialog>
-              </div>
-              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/search-document-icon.png"
-                      alt="検索・カテゴリ選択"
-                      width={100}
-                      height={100}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -506,19 +480,6 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/suggestion-icon.png"
-                      alt="おすすめ文例"
-                      width={250}
-                      height={250}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* ポイント4 */}
@@ -587,19 +548,6 @@ export default function PointsSection() {
                     </div>
                   </DialogContent>
                 </Dialog>
-              </div>
-              <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/team-collaboration-icon.png"
-                      alt="チーム共有"
-                      width={250}
-                      height={250}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -670,19 +618,6 @@ export default function PointsSection() {
                     </div>
                   </DialogContent>
                 </Dialog>
-              </div>
-              <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/cloud-computer-icon.png"
-                      alt="チーム共有"
-                      width={250}
-                      height={250}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
               </div>
             </div>
           </div>
