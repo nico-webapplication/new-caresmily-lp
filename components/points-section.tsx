@@ -317,19 +317,19 @@ export default function PointsSection() {
       <div className="container px-4 relative z-10">
         {/* 左側：ポイントセクション */}
         <div className="flex flex-col lg:flex-row items-start justify-start gap-12">
-          <div ref={pointsRef} className="max-w-xl space-y-12 ml-20">
+          <div ref={pointsRef} className="max-w-sm space-y-8 mr-24">
             {/* ポイント1 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-48">
-              <div className="flex-1 p-4 md:p-6 flex flex-col justify-center">
-                <div className="flex items-center mb-3">
-                  <span className="text-4xl font-bold text-[#42a5d5]">01</span>
-                  <span className="ml-4 text-yellow-400 italic font-light rotate-6 text-lg">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
+              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+                <div className="flex items-center mb-2">
+                  <span className="text-3xl font-bold text-[#42a5d5]">01</span>
+                  <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
                     Expert Database!
                   </span>
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-lg md:text-xl font-bold text-[#0a2540] mb-2 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       10万件超の専門家監修
                       <br />
                       "文例データベース"
@@ -385,14 +385,14 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-20 md:w-24 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                     <Image
                       src="/images/database-100k-icon.png"
                       alt="10万件超の専門家監修文例データベース"
-                      width={120}
-                      height={120}
+                      width={80}
+                      height={80}
                       className="object-contain"
                     />
                   </div>
@@ -401,17 +401,17 @@ export default function PointsSection() {
             </div>
 
             {/* ポイント2 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-48">
-              <div className="flex-1 p-4 md:p-6 flex flex-col justify-center">
-                <div className="flex items-center mb-3">
-                  <span className="text-4xl font-bold text-[#42a5d5]">02</span>
-                  <span className="ml-4 text-yellow-400 italic font-light rotate-6 text-lg">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-40">
+              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+                <div className="flex items-center mb-2">
+                  <span className="text-3xl font-bold text-[#42a5d5]">02</span>
+                  <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
                     Quick Copy & Paste!
                   </span>
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-lg md:text-xl font-bold text-[#0a2540] mb-2 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       検索・カテゴリ選択 →
                       <br />
                       コピー＆ペーストで瞬時作成
@@ -631,7 +631,7 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-end">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                     <Image
