@@ -55,116 +55,76 @@ export default function PointsSection() {
 
       // ポイントカードのアニメーション
       if (pointsRef.current) {
-        const points = pointsRef.current.querySelectorAll(".point-card");
+        const cards = pointsRef.current.querySelectorAll(".point-card");
+        gsap.set(cards, { opacity: 0, x: -50 });
 
-        gsap.set(points, { opacity: 0, y: 50 });
-
-        ScrollTrigger.batch(points, {
-          onEnter: (elements) => {
-            gsap.to(elements, {
+        ScrollTrigger.create({
+          trigger: pointsRef.current,
+          start: "top 80%",
+          scroller: scroller || undefined,
+          onEnter: () => {
+            gsap.to(cards, {
               opacity: 1,
-              y: 0,
-              stagger: 0.2,
+              x: 0,
               duration: 0.8,
+              stagger: 0.2,
               ease: "power2.out",
             });
           },
-          start: "top 80%",
-          scroller: scroller || undefined,
         });
       }
 
-      // 左右の縁の文字アニメーション - 下から上へ流す
-      if (leftBorderRef.current && rightBorderRef.current) {
-        // 左側の文字コンテナ
-        const leftContainer = leftBorderRef.current.querySelector(
-          ".text-loop-container",
-        );
-
-        if (leftContainer) {
-          // コンテナ内の高さを取得するために一時的に表示
-          gsap.set(leftContainer, { visibility: "visible" });
-
-          // 最初のコンテナを一番下に配置して、クローンを作成
-          const leftContainerHeight = leftBorderRef.current.clientHeight;
-          const leftContentHeight = leftContainer.scrollHeight / 2; // 実際のコンテンツの高さ（重複を考慮）
-
-          // 開始位置を設定（一番下から始まる）
-          gsap.set(leftContainer, { y: 0 });
-
-          // 下から上に流す無限ループアニメーション - 途切れないよう調整
-          gsap.to(leftContainer, {
-            y: -leftContentHeight,
-            repeat: -1,
-            duration: 30,
-            ease: "linear",
-            repeatDelay: 0, // 繰り返し時の遅延なし
-          });
-        }
-
-        // 右側の文字コンテナ
-        const rightContainer = rightBorderRef.current.querySelector(
-          ".text-loop-container",
-        );
-
-        if (rightContainer) {
-          // コンテナ内の高さを取得するために一時的に表示
-          gsap.set(rightContainer, { visibility: "visible" });
-
-          // 最初のコンテナを一番下に配置して、クローンを作成
-          const rightContainerHeight = rightBorderRef.current.clientHeight;
-          const rightContentHeight = rightContainer.scrollHeight / 2; // 実際のコンテンツの高さ（重複を考慮）
-
-          // 開始位置を設定（一番下から始まる）
-          gsap.set(rightContainer, { y: 0 });
-
-          // 下から上に流す無限ループアニメーション - 途切れないよう調整
-          gsap.to(rightContainer, {
-            y: -rightContentHeight,
-            repeat: -1,
-            duration: 30,
-            ease: "linear",
-            repeatDelay: 0, // 繰り返し時の遅延なし
-          });
-        }
-      }
-
-      // 車いすのスクロールアニメーション
-      if (wheelchairRef.current && svgPathRef.current && sectionRef.current) {
-        // 車いすの初期設定
-        gsap.set(wheelchairRef.current, {
-          opacity: 0.95,
-          scale: 0.8,
-          transformOrigin: "50% 50%",
-        });
-
-        // 車いすの回転を制御する関数
-        let prevDirection = 0;
-        const rotateTo = gsap.quickTo(wheelchairRef.current, "rotation");
-
-        // スクロールに連動した車いすのアニメーション
-        gsap.to(wheelchairRef.current, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.5,
-            scroller: scroller || undefined,
-            onUpdate: (self) => {
-              if (prevDirection !== self.direction) {
-                // 方向が変わったときだけ実行
-                rotateTo(self.direction === 1 ? 0 : -180);
-                prevDirection = self.direction;
-              }
-            },
-          },
+      // 縁のテキストアニメーション
+      if (leftBorderRef.current) {
+        const textElements = leftBorderRef.current.querySelectorAll("div");
+        gsap.set(textElements, { y: "100%" });
+        gsap.to(textElements, {
+          y: "-100%",
+          duration: 20,
           ease: "none",
-          immediateRender: true,
+          repeat: -1,
+        });
+      }
+
+      if (rightBorderRef.current) {
+        const textElements = rightBorderRef.current.querySelectorAll("div");
+        gsap.set(textElements, { y: "-100%" });
+        gsap.to(textElements, {
+          y: "100%",
+          duration: 20,
+          ease: "none",
+          repeat: -1,
+        });
+      }
+
+      // 車いすのパスアニメーション
+      if (wheelchairRef.current && svgPathRef.current) {
+        gsap.set(wheelchairRef.current, {
           motionPath: {
             path: svgPathRef.current,
             align: svgPathRef.current,
+            autoRotate: true,
             alignOrigin: [0.5, 0.5],
-            autoRotate: 90,
+          },
+          transformOrigin: "50% 50%",
+        });
+
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scroller: scroller || undefined,
+          scrub: 1,
+          onUpdate: (self) => {
+            gsap.set(wheelchairRef.current, {
+              motionPath: {
+                path: svgPathRef.current,
+                align: svgPathRef.current,
+                autoRotate: true,
+                alignOrigin: [0.5, 0.5],
+              },
+              progress: self.progress,
+            });
           },
         });
       }
@@ -281,11 +241,8 @@ export default function PointsSection() {
           {borderTexts.map((text, index) => (
             <div
               key={`left-${index}`}
-              className="text-white text-sm md:text-base font-bold py-3 text-center writing-vertical"
-              style={{
-                writingMode: "vertical-rl",
-                transform: "rotate(180deg)",
-              }}
+              className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
+              style={{ writingMode: "vertical-rl" }}
             >
               {text}
             </div>
@@ -315,9 +272,9 @@ export default function PointsSection() {
       </div>
 
       <div className="container px-4 relative z-10">
-        {/* 左側：ポイントセクション */}
-        <div className="flex flex-col lg:flex-row items-start justify-start gap-12">
-          <div ref={pointsRef} className="max-w-sm space-y-8 mr-24">
+        {/* 横並びレイアウト：ポイントカードとタイトル */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div ref={pointsRef} className="max-w-sm space-y-8">
             {/* ポイント1 */}
             <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
               <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
@@ -359,15 +316,15 @@ export default function PointsSection() {
                             <div className="mt-4 flex justify-end">
                               <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
                                 <span className="font-bold">POINT:</span>{" "}
-                                法令に準拠した高品質文例が常に最新状態で利用可能
+                                高品質な専門家監修文例
                               </div>
                             </div>
                           </div>
 
                           <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
                             <Image
-                              src="/images/database-100k-icon.png"
-                              alt="10万件超の専門家監修文例データベース"
+                              src="/images/database-icon.png"
+                              alt="データベース"
                               width={150}
                               height={150}
                               className="object-contain"
@@ -385,14 +342,14 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-20 md:w-24 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                     <Image
-                      src="/images/database-100k-icon.png"
-                      alt="10万件超の専門家監修文例データベース"
-                      width={80}
-                      height={80}
+                      src="/images/database-icon.png"
+                      alt="データベース"
+                      width={250}
+                      height={250}
                       className="object-contain"
                     />
                   </div>
@@ -473,8 +430,8 @@ export default function PointsSection() {
                     <Image
                       src="/images/search-document-icon.png"
                       alt="検索・カテゴリ選択"
-                      width={120}
-                      height={120}
+                      width={100}
+                      height={100}
                       className="object-contain"
                     />
                   </div>
@@ -483,20 +440,20 @@ export default function PointsSection() {
             </div>
 
             {/* ポイント3 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-48">
-              <div className="flex-1 p-4 md:p-6 flex flex-col justify-center">
-                <div className="flex items-center mb-3">
-                  <span className="text-4xl font-bold text-[#42a5d5]">03</span>
-                  <span className="ml-4 text-yellow-400 italic font-light rotate-6 text-lg">
-                    Guided Builder!
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
+              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+                <div className="flex items-center mb-2">
+                  <span className="text-3xl font-bold text-[#42a5d5]">03</span>
+                  <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
+                    Smart Suggestions!
                   </span>
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-lg md:text-xl font-bold text-[#0a2540] mb-2 cursor-pointer hover:text-[#42a5d5] transition-colors">
-                      "質問形式ビルダー"による
+                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                      書類種類に応じた
                       <br />
-                      レコメンド挿入
+                      おすすめ文例の自動表示
                     </h3>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
@@ -510,7 +467,7 @@ export default function PointsSection() {
                               </span>
                             </div>
                             <DialogTitle className="text-3xl font-bold text-[#0a2540]">
-                              "質問形式ビルダー"によるレコメンド挿入
+                              書類種類に応じたおすすめ文例の自動表示
                             </DialogTitle>
                           </div>
                         </DialogHeader>
@@ -518,20 +475,20 @@ export default function PointsSection() {
                         <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
                           <div>
                             <DialogDescription className="text-base text-gray-600 leading-relaxed">
-                              利用者の身体状況や目標をQ&A方式で入力すると、条件に合った文例が自動提案されるガイド機能を搭載。記入漏れや表現ブレを防ぎ、新人でもプロ水準の書類を短時間で完成できます。
+                              利用者さんの基本情報・介護度・サービス内容に基づき、その方に最適な文例を優先表示。検索に悩む時間を削減し、適切な表現を素早く見つけられます。
                             </DialogDescription>
                             <div className="mt-4 flex justify-end">
                               <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
                                 <span className="font-bold">POINT:</span>{" "}
-                                新人でもプロ水準の記録が作成可能
+                                個別最適化された提案
                               </div>
                             </div>
                           </div>
 
                           <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
                             <Image
-                              src="/images/qa-form-icon.png"
-                              alt="質問形式ビルダー"
+                              src="/images/suggestion-icon.png"
+                              alt="おすすめ文例"
                               width={150}
                               height={150}
                               className="object-contain"
@@ -549,14 +506,14 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                     <Image
-                      src="/images/qa-form-icon.png"
-                      alt="質問形式ビルダー"
-                      width={120}
-                      height={120}
+                      src="/images/suggestion-icon.png"
+                      alt="おすすめ文例"
+                      width={250}
+                      height={250}
                       className="object-contain"
                     />
                   </div>
@@ -565,20 +522,20 @@ export default function PointsSection() {
             </div>
 
             {/* ポイント4 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-48">
-              <div className="flex-1 p-4 md:p-6 flex flex-col justify-center">
-                <div className="flex items-center mb-3">
-                  <span className="text-4xl font-bold text-[#42a5d5]">04</span>
-                  <span className="ml-4 text-yellow-400 italic font-light rotate-6 text-lg">
-                    All-in-One Solution!
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-40">
+              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+                <div className="flex items-center mb-2">
+                  <span className="text-3xl font-bold text-[#42a5d5]">04</span>
+                  <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
+                    Team Sync!
                   </span>
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-lg md:text-xl font-bold text-[#0a2540] mb-2 cursor-pointer hover:text-[#42a5d5] transition-colors">
-                      書類テンプレ内での編集・
+                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                      チーム全体での共有・連携が
                       <br />
-                      PDF／印刷までワンストップ
+                      スムーズに
                     </h3>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[625px] p-0 overflow-hidden">
@@ -592,7 +549,7 @@ export default function PointsSection() {
                               </span>
                             </div>
                             <DialogTitle className="text-3xl font-bold text-[#0a2540]">
-                              書類テンプレ内での編集・PDF／印刷までワンストップ
+                              チーム全体での共有・連携がスムーズに
                             </DialogTitle>
                           </div>
                         </DialogHeader>
@@ -600,20 +557,20 @@ export default function PointsSection() {
                         <div className="mt-6 grid sm:grid-cols-[1fr_200px] gap-6 items-start">
                           <div>
                             <DialogDescription className="text-base text-gray-600 leading-relaxed">
-                              文例を差し込んだ後はアプリ内フォーマット上で微調整し、そのままPDF出力・印刷が可能。外部ソフトに書き出す手間なく、その場で紙提出用データまで完結します。
+                              作成した書類や利用者情報をクラウドで一元管理。権限設定により、必要なメンバーが必要な情報にアクセス可能。情報共有の遅れや重複作業を防ぎます。
                             </DialogDescription>
                             <div className="mt-4 flex justify-end">
                               <div className="bg-yellow-100 p-3 rounded-lg text-yellow-800 text-sm font-medium">
                                 <span className="font-bold">POINT:</span>{" "}
-                                編集からPDF出力・印刷まで一貫して対応
+                                チーム連携の効率化
                               </div>
                             </div>
                           </div>
 
                           <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
                             <Image
-                              src="/images/document-pdf-print-icon.png"
-                              alt="書類テンプレート内での編集"
+                              src="/images/team-collaboration-icon.png"
+                              alt="チーム共有"
                               width={150}
                               height={150}
                               className="object-contain"
@@ -631,14 +588,14 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-end">
+              <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                     <Image
-                      src="/images/document-pdf-print-icon.png"
-                      alt="書類テンプレート内での編集"
-                      width={120}
-                      height={120}
+                      src="/images/team-collaboration-icon.png"
+                      alt="チーム共有"
+                      width={250}
+                      height={250}
                       className="object-contain"
                     />
                   </div>
@@ -647,17 +604,17 @@ export default function PointsSection() {
             </div>
 
             {/* ポイント5 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-48">
-              <div className="flex-1 p-4 md:p-6 flex flex-col justify-center">
-                <div className="flex items-center mb-3">
-                  <span className="text-4xl font-bold text-[#42a5d5]">05</span>
-                  <span className="ml-4 text-yellow-400 italic font-light rotate-6 text-lg">
-                    Cloud Access!
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
+              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+                <div className="flex items-center mb-2">
+                  <span className="text-3xl font-bold text-[#42a5d5]">05</span>
+                  <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
+                    Easy Access!
                   </span>
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-lg md:text-xl font-bold text-[#0a2540] mb-2 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       簡単にアクセス可能で
                       <br />
                       シンプルなアプリケーション
@@ -729,23 +686,24 @@ export default function PointsSection() {
               </div>
             </div>
           </div>
-        </div>
-        {/*右側：タイトルセクション*/}
-        <div className="relative flex justify-end pt-64">
-          <div 
-            ref={titleRef}
-            className="lg:w-1/3 text-white text-center lg:text-right mr-8"
-          >
-            <h2 className="text-6xl lg:text-8xl font-black mb-4 leading-tight">
-              5Points
-            </h2>
-            <h3 className="text-xl lg:text-2xl font-medium mb-6 opacity-90">
-              5つのポイント
-            </h3>
-            <p className="text-lg opacity-80 leading-relaxed">
-              CareSmiliyの<br />
-              5つのポイントをご紹介
-            </p>
+
+          {/* 右側：タイトルセクション */}
+          <div className="relative flex justify-center lg:justify-start">
+            <div 
+              ref={titleRef}
+              className="text-white text-center lg:text-left"
+            >
+              <h2 className="text-6xl lg:text-8xl font-black mb-4 leading-tight">
+                5Points
+              </h2>
+              <h3 className="text-xl lg:text-2xl font-medium mb-6 opacity-90">
+                5つのポイント
+              </h3>
+              <p className="text-lg opacity-80 leading-relaxed">
+                CareSmilyの<br />
+                5つのポイントをご紹介
+              </p>
+            </div>
           </div>
         </div>
       </div>
