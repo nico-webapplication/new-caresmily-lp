@@ -731,10 +731,10 @@ export default function PointsSection() {
           </div>
         </div>
         {/*右側：タイトルセクション*/}
-        <div className="lg:w-1/2 relative flex justify-center">
+        <div className="lg:w-1/2 relative flex justify-end items-start pt-32">
           <div 
             ref={titleRef}
-            className="lg:w-1/3 text-white text-center lg:text-left"
+            className="lg:w-1/3 text-white text-center lg:text-right mr-8"
           >
             <h2 className="text-6xl lg:text-8xl font-black mb-4 leading-tight">
               5Points
