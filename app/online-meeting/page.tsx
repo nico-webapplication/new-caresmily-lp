@@ -17,6 +17,7 @@ import { ja } from "date-fns/locale"
 import { CalendarIcon } from "lucide-react"
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
+import { Loading } from "@/components/ui/loading"
 
 const formSchema = z.object({
   name: z.string().min(1, "お名前を入力してください"),
@@ -31,8 +32,6 @@ const formSchema = z.object({
   }),
   message: z.string().optional(),
 })
-
-import { Loading } from "@/components/ui/loading"
 
 export default function OnlineMeeting() {
   const [isLoading, setIsLoading] = useState(false)
@@ -79,21 +78,20 @@ export default function OnlineMeeting() {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary to-[#55C6F5] py-16 relative overflow-hidden">
+          <div className="bg-gradient-to-r from-primary to-[#55C6F5] py-16 relative overflow-hidden rounded-xl mb-8">
             <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="max-w-7xl mx-auto px-4 relative">
               <div className="max-w-4xl mx-auto text-center text-white">
                 <h1 className="text-3xl md:text-4xl font-bold mb-6">
                   オンライン面談予約
                 </h1>
+                <p className="text-lg">
+                  CareSmily の詳しい説明をオンラインでご案内いたします。
+                  <br />
+                  ご希望の日時をお選びください。
+                </p>
               </div>
             </div>
-          </div>
-            <p className="text-lg text-gray-600">
-              CareSmily の詳しい説明をオンラインでご案内いたします。
-              <br />
-              ご希望の日時をお選びください。
-            </p>
           </div>
 
           {/* Form */}
