@@ -5,18 +5,6 @@ import Image from "next/image";
 export default function FeaturesSection() {
   return (
     <section className="relative bg-white py-25">
-      {/* Vertical side text (desktop only) */}
-      <div className="hidden xl:block absolute top-0 left-0 h-full pointer-events-none select-none">
-        <p className="whitespace-nowrap text-[138px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-left ml-[-105px]">
-          MEDIA ARTS IN THE DATA  SEE MEDIA ARTS IN THE DATA
-        </p>
-      </div>
-      <div className="hidden xl:block absolute top-0 right-0 h-full pointer-events-none select-none">
-        <p className="whitespace-nowrap text-[138px] tracking-[0.2em] font-extrabold text-gray-100 rotate-90 origin-top-right mr-[-105px]">
-          MEDIA ARTS IN THE DATA  SEE MEDIA ARTS IN THE DATA
-        </p>
-      </div>
-
       <div className="relative z-10 mx-auto max-w-8xl px-5 sm:px-8 lg:px-10">
         {/* 2列3行グリッドレイアウト */}
         <div className="relative w-full max-w-5xl mx-auto hidden md:block">

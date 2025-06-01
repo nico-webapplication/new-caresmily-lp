@@ -57,6 +57,10 @@ const HeroBg = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   z-index: -2;
+  
+  @media (max-width: 768px) {
+    background-image: url("/images/mobile-hero-bg.jpg");
+  }
 `;
 
 const Container = styled.div`
@@ -65,6 +69,12 @@ const Container = styled.div`
   margin-left: 100px;
   padding: 0 1rem;
   z-index: 10;
+  
+  @media (max-width: 768px) {
+    margin-top: 620px;
+    margin-left: 0px;
+    margin-right: 50px;
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -104,7 +114,7 @@ const HeadingLarge = styled.h1`
 `;
 
 const TextContainer = styled.div`
-  @media (min-width: 1024px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `;

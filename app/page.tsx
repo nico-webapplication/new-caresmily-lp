@@ -454,7 +454,7 @@ export default function Home() {
         <HeroSection />
         <ServiceSection />
         <PointsSection />
-        <FeaturesSection />
+        {/* <FeaturesSection /> */}
         <ServiceContentSection />
         <InterviewSection />
         <ServiceCountSection />

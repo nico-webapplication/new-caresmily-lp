@@ -253,8 +253,8 @@ export default function PointsSection() {
       >
         <div className="relative w-full h-full">
           <Image
-            src="/images/wheelchair_no_background.png"
-            alt="車いす"
+            src="/images/CareSmily_ロゴ.png"
+            alt="ロゴ"
             fill
             style={{ objectFit: "contain" }}
           />

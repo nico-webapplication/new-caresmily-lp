@@ -118,15 +118,6 @@ export default function Header() {
           <ul className="flex flex-col space-y-3 px-6">
             <li>
               <Link 
-                href="/news" 
-                className="block text-white hover:text-gray-800 transition-colors py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                お知らせ
-              </Link>
-            </li>
-            <li>
-              <Link 
                 href="/column" 
                 className="block text-white hover:text-gray-300 transition-colors py-2"
                 onClick={() => setIsOpen(false)}
