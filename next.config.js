@@ -9,9 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  webpack: (config) => {
-    return config;
-  },
+  transpilePackages: ['aos', 'gsap'],
 }
 
 module.exports = nextConfig
