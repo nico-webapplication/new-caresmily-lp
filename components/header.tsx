@@ -37,14 +37,6 @@ export default function Header() {
             <ul className="flex space-x-8">
               <li>
                 <Link 
-                  href="/news" 
-                  className="text-black hover:text-gray-300 transition-colors"
-                >
-                  お知らせ
-                </Link>
-              </li>
-              <li>
-                <Link 
                   href="/column" 
                   className="text-black hover:text-gray-300 transition-colors"
                 >
