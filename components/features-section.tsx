@@ -10,11 +10,11 @@ export default function FeaturesSection() {
         <div className="relative w-full hidden md:block">
           
           {/* 5つのカードの左寄せ配置 - 左半分に配置 */}
-          <div className="flex flex-col items-start space-y-4 max-w-md w-1/2">
+          <div className="flex flex-col items-start space-y-2 max-w-sm w-1/2">
             {/* 01 - Expert Database */}
             <FeatureCard
               color="blue"
-              icon={() => <span className="text-xl font-bold text-blue-600">01</span>}
+              icon={() => <span className="text-sm font-bold text-blue-600">01</span>}
               headerLines={[
                 "10万件超の専門家監修",
                 '"文例データベース"',
@@ -24,7 +24,7 @@ export default function FeaturesSection() {
             {/* 02 - Quick Copy & Paste */}
             <FeatureCard
               color="blue"
-              icon={() => <span className="text-xl font-bold text-blue-600">02</span>}
+              icon={() => <span className="text-sm font-bold text-blue-600">02</span>}
               headerLines={[
                 "検索・カテゴリ選択 →",
                 "コピー＆ペーストで瞬時作成",
@@ -34,7 +34,7 @@ export default function FeaturesSection() {
             {/* 03 - Question Builder */}
             <FeatureCard
               color="blue"
-              icon={() => <span className="text-xl font-bold text-blue-600">03</span>}
+              icon={() => <span className="text-sm font-bold text-blue-600">03</span>}
               headerLines={[
                 '"質問形式ビルダー"による',
                 "レコメンド挿入",
@@ -44,7 +44,7 @@ export default function FeaturesSection() {
             {/* 04 - All-in-One Solution */}
             <FeatureCard
               color="blue"
-              icon={() => <span className="text-xl font-bold text-blue-600">04</span>}
+              icon={() => <span className="text-sm font-bold text-blue-600">04</span>}
               headerLines={[
                 "書類テンプレ内での編集・",
                 "PDF／印刷まで ワンストップ",
@@ -54,7 +54,7 @@ export default function FeaturesSection() {
             {/* 05 - Cloud Access */}
             <FeatureCard
               color="blue"
-              icon={() => <span className="text-xl font-bold text-blue-600">05</span>}
+              icon={() => <span className="text-sm font-bold text-blue-600">05</span>}
               headerLines={[
                 "簡単にアクセス可能で",
                 "シンプルなアプリケーション",
@@ -158,25 +158,25 @@ function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardPr
   }[color];
 
   return (
-    <div className={`relative rounded-3xl p-4 ${bg} flex flex-col justify-between w-full max-w-sm min-h-[120px]`}>
+    <div className={`relative rounded-2xl p-3 ${bg} flex flex-col justify-between w-full max-w-xs min-h-[80px]`}>
       {/* floating icon */}
-      <div className="absolute -top-2 -left-2 bg-white shadow-md rounded-full p-2 text-sm">
+      <div className="absolute -top-1.5 -left-1.5 bg-white shadow-md rounded-full p-1.5 text-xs">
         {Icon()}
       </div>
 
       {/* body */}
-      <div className="space-y-1 ml-8">
+      <div className="space-y-0.5 ml-6">
         {headerLines.map((line, idx) => (
           <p
             key={idx}
-            className="text-gray-900 font-bold leading-tight text-sm"
+            className="text-gray-900 font-bold leading-tight text-xs"
             dangerouslySetInnerHTML={{ __html: line }}
           />
         ))}
       </div>
 
       {footnote && (
-        <p className="text-xs text-gray-400 mt-2 ml-8" dangerouslySetInnerHTML={{ __html: footnote }} />
+        <p className="text-[10px] text-gray-400 mt-1 ml-6" dangerouslySetInnerHTML={{ __html: footnote }} />
       )}
     </div>
   );
