@@ -158,8 +158,7 @@ export default function InterviewSection() {
             </h3>
             <p className="text-lg opacity-80 leading-relaxed">
               CareSmiliyについての<br />
-              最新の情報を
-              お届けします！
+              最新の情報をお届けします！
             </p>
           </div>
 
