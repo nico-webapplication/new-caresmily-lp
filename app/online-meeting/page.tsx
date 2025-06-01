@@ -79,8 +79,16 @@ export default function OnlineMeeting() {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 text-gray-900">オンライン面談予約</h1>
+          <div className="bg-gradient-to-r from-primary to-[#55C6F5] py-16 relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+            <div className="max-w-7xl mx-auto px-4 relative">
+              <div className="max-w-4xl mx-auto text-center text-white">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6">
+                  オンライン面談予約
+                </h1>
+              </div>
+            </div>
+          </div>
             <p className="text-lg text-gray-600">
               CareSmily の詳しい説明をオンラインでご案内いたします。
               <br />

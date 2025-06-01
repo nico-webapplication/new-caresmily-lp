@@ -30,8 +30,8 @@ function getServiceName(serviceId: string): string {
 
 function getRequestTypeName(requestType: string): string {
   const requestTypeMap: { [key: string]: string } = {
-    demo: "デモをご覧になりたい",
-    document: "資料をご覧になりたい",
+    trial: "無料トライアル希望",
+    document: "資料希望",
     other: "その他",
   };
 

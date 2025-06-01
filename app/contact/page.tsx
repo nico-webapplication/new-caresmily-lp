@@ -28,7 +28,7 @@ const formSchema = z.object({
     "caresmily-enterprise",
     "caresmily-home-care",
   ]),
-  requestType: z.enum(["demo", "document", "other"]),
+  requestType: z.enum(["trial", "document", "other"]),
   inquiry: z.string().min(1, "お問い合わせ内容を入力してください"),
   companyName: z.string().min(1, "会社名を入力してください"),
   industry: z.string().min(1, "業種を入力してください"),
@@ -92,14 +92,17 @@ export default function ContactPage() {
       {isLoading && <Loading />}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-gradient-to-r from-[#35B6F7] to-[#35B6F7] py-16">
-            <h1 className="text-4xl font-bold text-center text-white">
-              お問い合わせ
-            </h1>
+          {/* Header */}
+          <div className="bg-gradient-to-r from-primary to-[#55C6F5] py-16 relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+            <div className="max-w-7xl mx-auto px-4 relative">
+              <div className="max-w-4xl mx-auto text-center text-white">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6">
+                  お問い合わせ
+                </h1>
+              </div>
+            </div>
           </div>
-          <p className="text-xl text-center text-gray-600 mb-12">
-            お気軽にご連絡ください。専門スタッフが丁寧に対応いたします。
-          </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Left Column - Information */}
@@ -278,10 +281,10 @@ export default function ContactPage() {
                               >
                                 <FormItem className="flex items-center space-x-3 space-y-0">
                                   <FormControl>
-                                    <RadioGroupItem value="demo" />
+                                    <RadioGroupItem value="trial" />
                                   </FormControl>
                                   <FormLabel className="font-normal">
-                                    デモをご覧になりたい
+                                    無料トライアル希望
                                   </FormLabel>
                                 </FormItem>
                                 <FormItem className="flex items-center space-x-3 space-y-0">
@@ -289,7 +292,7 @@ export default function ContactPage() {
                                     <RadioGroupItem value="document" />
                                   </FormControl>
                                   <FormLabel className="font-normal">
-                                    資料をご覧になりたい
+                                    資料希望
                                   </FormLabel>
                                 </FormItem>
                                 <FormItem className="flex items-center space-x-3 space-y-0">
