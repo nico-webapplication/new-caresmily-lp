@@ -38,7 +38,8 @@ export default function Header() {
               <li>
                 <Link 
                   href="/column" 
-                  className="text-black hover:text-gray-300 transition-colors"
+                  className="text-black hover:text-gray-300 transition-colors font-bold"
+                  style={{ fontFamily: "'Noto Sans JP', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif" }}
                 >
                   コラム
                 </Link>
@@ -46,7 +47,8 @@ export default function Header() {
               <li>
                 <Link 
                   href="/media" 
-                  className="text-black hover:text-gray-300 transition-colors"
+                  className="text-black hover:text-gray-300 transition-colors font-bold"
+                  style={{ fontFamily: "'Noto Sans JP', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif" }}
                 >
                   メディア情報
                 </Link>
@@ -54,7 +56,8 @@ export default function Header() {
               <li>
                 <Link 
                   href="/contact" 
-                  className="text-black hover:text-gray-300 transition-colors"
+                  className="text-black hover:text-gray-300 transition-colors font-bold"
+                  style={{ fontFamily: "'Noto Sans JP', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif" }}
                 >
                   お問い合わせ
                 </Link>
