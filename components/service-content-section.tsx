@@ -247,13 +247,13 @@ export default function ServiceContentSection() {
 
           <div className="relative z-10 flex flex-col md:flex-row items-center">
             <div className="md:w-2/3 mb-6 md:mb-0 md:pr-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0a2540] mb-6">
                 CareSmily <span className="text-[#42a5d5]">デイサービス</span>
               </h2>
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-xl md:text-2xl text-gray-700 mb-6">
                 通所介護（デイサービス）事業所で発生する連絡帳・通所介護計画書・個別機能訓練計画などの書類作成を高速化する"文例データベース特化"サービス。
               </p>
-              <div className="inline-block bg-[#42a5d5] text-white px-4 py-2 rounded-full text-sm font-medium">
+              <div className="inline-block bg-[#42a5d5] text-white px-6 py-3 rounded-full text-lg font-medium">
                 2025年4月正式リリース
               </div>
             </div>
@@ -275,10 +275,10 @@ export default function ServiceContentSection() {
         </div>
 
         {/* 収録文例セクション */}
-        <h3 className="text-2xl font-bold text-[#0a2540] mb-6 anim-element">
+        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a2540] mb-8 anim-element">
           収録文例とカバー範囲
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {[
             {
               title: "連絡帳",
@@ -584,7 +584,7 @@ export default function ServiceContentSection() {
   const tabs = {
     dayservice: {
       label: "デイサービス",
-      icon: <Calendar className="h-5 w-5 mr-2" />,
+      icon: <Calendar className="h-8 w-8 mr-3" />,
       color: "#81d9ff",
       hoverColor: "#9ae2ff",
       activeColor: "linear-gradient(to right, #81d9ff, #9ae2ff)",
@@ -593,7 +593,7 @@ export default function ServiceContentSection() {
     },
     homecare: {
       label: "訪問介護",
-      icon: <Home className="h-5 w-5 mr-2" />,
+      icon: <Home className="h-8 w-8 mr-3" />,
       color: "#ff5a5a",
       hoverColor: "#ff7575",
       activeColor: "linear-gradient(to right, #ff5a5a, #ff7575)",
@@ -602,7 +602,7 @@ export default function ServiceContentSection() {
     },
     records: {
       label: "介護記録",
-      icon: <ClipboardList className="h-5 w-5 mr-2" />,
+      icon: <ClipboardList className="h-8 w-8 mr-3" />,
       color: "#50c878", // 明るい緑色（エメラルドグリーン）
       hoverColor: "#6ad890",
       activeColor: "linear-gradient(to right, #50c878, #6ad890)",
@@ -611,7 +611,7 @@ export default function ServiceContentSection() {
     },
     support: {
       label: "居宅支援",
-      icon: <Users className="h-5 w-5 mr-2" />,
+      icon: <Users className="h-8 w-8 mr-3" />,
       color: "#ffb347", // 明るいオレンジ色
       hoverColor: "#ffc168",
       activeColor: "linear-gradient(to right, #ffb347, #ffc168)",
@@ -623,7 +623,7 @@ export default function ServiceContentSection() {
   return (
     <section ref={sectionRef} className="w-full">
       {/* タブコンテナ - 固定高さと位置 */}
-      <div className="flex w-full relative h-[100px] overflow-hidden">
+      <div className="flex w-full relative h-[120px] overflow-hidden">
         {(Object.keys(tabs) as Array<keyof typeof tabs>).map(
           (tabKey, index) => {
             const isActive = activeTab === tabKey;
@@ -634,7 +634,7 @@ export default function ServiceContentSection() {
                 ref={(el) => {
                   tabRefs.current[index] = el;
                 }}
-                className="h-[80px] md:h-[100px] flex items-center justify-center cursor-pointer relative transition-all duration-300"
+                className="h-[100px] md:h-[120px] flex items-center justify-center cursor-pointer relative transition-all duration-300"
                 style={{
                   width: isActive ? "40%" : "20%", // 初期幅設定
                 }}
@@ -659,14 +659,14 @@ export default function ServiceContentSection() {
                     }}
                   />
                 </div>
-                <div className="relative flex items-center justify-center px-2">
-                  <div className="flex items-center text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg">
+                <div className="relative flex items-center justify-center px-3">
+                  <div className="flex items-center text-white font-bold text-sm sm:text-lg md:text-xl lg:text-2xl">
                     <div className="hidden sm:flex">
                       {tab.icon}
                     </div>
                     <span className="truncate max-w-full text-center sm:text-left">
                       <span className="hidden sm:inline">{tab.label}</span>
-                      <span className="sm:hidden">
+                      <span className="sm:hidden text-xs">
                         {tabKey === "dayservice" ? "デイサービス" :
                          tabKey === "homecare" ? "訪問介護" :
                          tabKey === "records" ? "介護記録" :
