@@ -522,7 +522,7 @@ export default function ServiceContentSection() {
                 <div className="absolute inset-0 bg-[#50c878] rounded-full opacity-10 animate-pulse"></div>
                 <div className="absolute inset-2 bg-white rounded-full shadow-lg flex items-center justify-center">
                   <Image
-                    src="/images/welfare-equipment.svg"
+                    src="/images/welfare-equipment.png"
                     alt="福祉用具イラスト"
                     width={200}
                     height={200}
@@ -687,7 +687,7 @@ export default function ServiceContentSection() {
       bgColor: "#fff0f0", // 薄い赤色の背景
     },
     records: {
-      label: "介護記録",
+      label: "福祉用具",
       icon: <ClipboardList className="h-8 w-8 mr-3" />,
       color: "#50c878", // 明るい緑色（エメラルドグリーン）
       hoverColor: "#6ad890",

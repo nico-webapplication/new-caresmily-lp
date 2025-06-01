@@ -57,7 +57,7 @@ const HeroBg = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   z-index: -2;
-  
+
   @media (max-width: 768px) {
     background-image: url("/images/mobile-hero-bg.jpg");
   }
@@ -69,7 +69,7 @@ const Container = styled.div`
   margin-left: 100px;
   padding: 0 1rem;
   z-index: 10;
-  
+
   @media (max-width: 768px) {
     margin-top: 620px;
     margin-left: 0px;
@@ -182,12 +182,17 @@ const PrimaryButton = styled.a`
   animation: pulse 2s infinite;
   text-decoration: none;
 
-  &:hover {
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-    box-shadow:
-      0 20px 25px -5px rgba(37, 99, 235, 0.4),
-      0 10px 10px -5px rgba(37, 99, 235, 0.3);
-  }
+&:hover {
+  /* ほんのり明るいグラデーションに変化 */
+  background: linear-gradient(135deg, #ffb30a 0%, #fff60a 100%);
+
+  /* 暖色系の影に置き換え */
+  box-shadow:
+    0 10px 15px -3px rgba(255, 153, 10, 0.35),
+    0  4px  6px -2px rgba(255, 225, 10, 0.25);
+
+  transform: translateY(-2px);      /* 浮き上がり感を追加（任意） */
+}
 
   svg {
     margin-left: 0.5rem;
@@ -454,7 +459,8 @@ const HeroSectionComponent = () => {
                 }}
               />
               <HeadingLarge>
-               <TextGradient>膨大な文例</TextGradient><TextGradientCross>×</TextGradientCross>
+                <TextGradient>膨大な文例</TextGradient>
+                <TextGradientCross>×</TextGradientCross>
                 <TextGradient>選択</TextGradient>で<br />
                 <UnderlinedText>あなたのケアプランが</UnderlinedText>
                 <br />
@@ -464,7 +470,7 @@ const HeroSectionComponent = () => {
               <Description>
                 介護現場の書類作成時間を<strong>60%削減</strong>
                 する文例特化型アプリ。
-                <br/>
+                <br />
                 <strong>10万件以上</strong>
                 の専門家監修文例で、あなたの業務を革新します。
               </Description>
