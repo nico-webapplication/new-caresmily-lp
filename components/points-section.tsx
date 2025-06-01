@@ -663,13 +663,14 @@ export default function PointsSection() {
                           </div>
 
                           <div className="relative h-[200px] bg-[#42a5d5]/10 rounded-lg flex items-center justify-center p-4">
-                            <Image
-                              src="/images/cloud-computer-icon.png"
-                              alt="チーム共有"
-                              width={150}
-                              height={150}
-                              className="object-contain"
-                            />
+                            <div className="w-32 h-32 bg-pink-100 rounded-lg flex items-center justify-center">
+                              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2">
+                                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                                <path d="M12 4v4"/>
+                                <path d="M8 8l2 2"/>
+                                <path d="M16 8l-2 2"/>
+                              </svg>
+                            </div>
                           </div>
                         </div>
 
@@ -686,13 +687,14 @@ export default function PointsSection() {
               <div className="relative w-48 md:w-80 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                    <Image
-                      src="/images/cloud-computer-icon.png"
-                      alt="チーム共有"
-                      width={250}
-                      height={250}
-                      className="object-contain"
-                    />
+                    <div className="w-48 h-48 bg-pink-100 rounded-full flex items-center justify-center">
+                      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2">
+                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                        <path d="M12 4v4"/>
+                        <path d="M8 8l2 2"/>
+                        <path d="M16 8l-2 2"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
