@@ -52,7 +52,7 @@ const HeroBg = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/images/hero-background.jpg');
+  background-image: url("/images/hero-background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -62,7 +62,7 @@ const HeroBg = styled.div`
 const Container = styled.div`
   width: 100%;
   max-width: 1280px;
-  margin-left: 100px; // ←これだけで左寄せ
+  margin-left: 100px;
   padding: 0 1rem;
   z-index: 10;
 `;
@@ -100,6 +100,12 @@ const HeadingLarge = styled.h1`
 
   @media (min-width: 1024px) {
     font-size: 3.75rem;
+  }
+`;
+
+const TextContainer = styled.div`
+  @media (min-width: 1024px) {
+    display: none;
   }
 `;
 
@@ -420,12 +426,16 @@ const HeroSectionComponent = () => {
         <Container>
           <FlexContainer>
             {/* Left content */}
-
-                <img
-                  src="/images/fukidashi.png"
-                  alt="吹き出し"
-                  style={{ width: '200px', height: 'auto' ,animation: 'floating 3s ease-in-out infinite'}}
-                />
+            <TextContainer>
+              <img
+                src="/images/fukidashi.png"
+                alt="吹き出し"
+                style={{
+                  width: "200px",
+                  height: "auto",
+                  animation: "floating 3s ease-in-out infinite",
+                }}
+              />
               <HeadingLarge>
                 膨大な<TextGradient>文例</TextGradient>×
                 <TextGradient>選択</TextGradient>で<br />
@@ -440,37 +450,37 @@ const HeroSectionComponent = () => {
                 <strong>10万件以上</strong>
                 の専門家監修文例で、あなたの業務を革新します。
               </Description>
-
-              <ButtonContainer>
-                <PrimaryButton href="/online-meeting">
-                  オンライン面談を予約
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </PrimaryButton>
-                <SecondaryButton href="/document-request">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  資料請求はこちら
-                </SecondaryButton>
-              </ButtonContainer>
+            </TextContainer>
+            <ButtonContainer>
+              <PrimaryButton href="/online-meeting">
+                オンライン面談を予約
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </PrimaryButton>
+              <SecondaryButton href="/document-request">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                資料請求はこちら
+              </SecondaryButton>
+            </ButtonContainer>
           </FlexContainer>
 
           {/* Stats section removed */}

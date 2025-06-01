@@ -583,7 +583,7 @@ export default function ServiceContentSection() {
   // タブ情報
   const tabs = {
     dayservice: {
-      label: "CareSmily デイサービス",
+      label: "デイサービス",
       icon: <Calendar className="h-5 w-5 mr-2" />,
       color: "#81d9ff",
       hoverColor: "#9ae2ff",
@@ -592,7 +592,7 @@ export default function ServiceContentSection() {
       bgColor: "#e6f7ff", // 薄い青色の背景
     },
     homecare: {
-      label: "CareSmily 訪問介護",
+      label: "訪問介護",
       icon: <Home className="h-5 w-5 mr-2" />,
       color: "#ff5a5a",
       hoverColor: "#ff7575",
@@ -601,7 +601,7 @@ export default function ServiceContentSection() {
       bgColor: "#fff0f0", // 薄い赤色の背景
     },
     records: {
-      label: "CareSmily 介護記録",
+      label: "介護記録",
       icon: <ClipboardList className="h-5 w-5 mr-2" />,
       color: "#50c878", // 明るい緑色（エメラルドグリーン）
       hoverColor: "#6ad890",
@@ -610,7 +610,7 @@ export default function ServiceContentSection() {
       bgColor: "#e6f9ee", // 薄い緑色の背景
     },
     support: {
-      label: "CareSmily 居宅支援",
+      label: "居宅支援",
       icon: <Users className="h-5 w-5 mr-2" />,
       color: "#ffb347", // 明るいオレンジ色
       hoverColor: "#ffc168",
