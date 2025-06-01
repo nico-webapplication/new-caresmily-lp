@@ -731,7 +731,7 @@ export default function PointsSection() {
           </div>
         </div>
         {/*右側：タイトルセクション*/}
-        <div className="lg:w-1/2 relative flex justify-end items-start pt-32">
+        <div className="relative flex justify-end pt-64">
           <div 
             ref={titleRef}
             className="lg:w-1/3 text-white text-center lg:text-right mr-8"
