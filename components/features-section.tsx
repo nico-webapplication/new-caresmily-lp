@@ -6,91 +6,60 @@ export default function FeaturesSection() {
   return (
     <section className="relative bg-white py-25">
       <div className="relative z-10 mx-auto max-w-8xl px-5 sm:px-8 lg:px-10">
-        {/* 2列3行グリッドレイアウト */}
-        <div className="relative w-full max-w-5xl mx-auto hidden md:block">
+        {/* 左寄せの縦積みレイアウト */}
+        <div className="relative w-full max-w-4xl hidden md:block">
           
-          {/* 6つのカードのグリッド配置 */}
-          <div className="grid grid-cols-2 gap-x-1.5">
-            
-            {/* 左列 */}
-            <div className="space-y-1.5">
-              {/* 左上 - 就職率 */}
-              <FeatureCard
-                color="orange"
-                icon={() => <span className="text-3xl">😊</span>}
-                headerLines={[
-                  "個性を仕事に。",
-                  "就職率 <span class='text-[60px] leading-none font-extrabold text-orange-500'>95.2%</span>",
-                  "徹底した就職サポート",
-                ]}
-                footnote="2025年3月 卒業生実績"
-              />
+          {/* 5つのカードの左寄せ配置 */}
+          <div className="flex flex-col items-start space-y-4 max-w-md">
+            {/* 01 - Expert Database */}
+            <FeatureCard
+              color="blue"
+              icon={() => <span className="text-xl font-bold text-blue-600">01</span>}
+              headerLines={[
+                "10万件超の専門家監修",
+                '"文例データベース"',
+              ]}
+            />
 
-              {/* 左中 - 創立49年 */}
-              <FeatureCard
-                color="red"
-                icon={() => <span className="text-3xl">❤️</span>}
-                headerLines={[
-                  "創立",
-                  "<span class='text-[60px] leading-none font-extrabold text-orange-500'>49</span> 年",
-                  "地元に根付き、地域の人々に愛される場所であること",
-                ]}
-              />
+            {/* 02 - Quick Copy & Paste */}
+            <FeatureCard
+              color="blue"
+              icon={() => <span className="text-xl font-bold text-blue-600">02</span>}
+              headerLines={[
+                "検索・カテゴリ選択 →",
+                "コピー＆ペーストで瞬時作成",
+              ]}
+            />
 
-              {/* 左下 - 卒業生 */}
-              <FeatureCard
-                color="indigo"
-                icon={() => <span className="text-3xl">👨‍🎓</span>}
-                headerLines={[
-                  "各業界の最前線で頼れる卒業生が活躍中!!",
-                  "卒業生のべ",
-                  "<span class='text-[60px] leading-none font-extrabold text-orange-500'>2,913</span> 人",
-                ]}
-                footnote="2024年3月 卒業生実績"
-              />
-            </div>
+            {/* 03 - Question Builder */}
+            <FeatureCard
+              color="blue"
+              icon={() => <span className="text-xl font-bold text-blue-600">03</span>}
+              headerLines={[
+                '"質問形式ビルダー"による',
+                "レコメンド挿入",
+              ]}
+            />
 
-            {/* 右列 */}
-            <div className="space-y-1.5">
-              {/* 右上 - 授業料免除 */}
-              <FeatureCard
-                color="yellow"
-                icon={() => <span className="text-3xl">📚</span>}
-                headerLines={[
-                  "2年間の授業料",
-                  "<span class='text-[60px] leading-none font-extrabold text-orange-500'>最大124万円</span> 免除",
-                  "独自の学費サポートで進学を応援します!!",
-                ]}
-              />
+            {/* 04 - All-in-One Solution */}
+            <FeatureCard
+              color="blue"
+              icon={() => <span className="text-xl font-bold text-blue-600">04</span>}
+              headerLines={[
+                "書類テンプレ内での編集・",
+                "PDF／印刷まで ワンストップ",
+              ]}
+            />
 
-              {/* 右中 - 産学官連携 */}
-              <FeatureCard
-                color="blue"
-                icon={() => <span className="text-3xl">🏆</span>}
-                headerLines={[
-                  "産学官連携で現場がわかる!",
-                  "企業コラボ数 年間",
-                  "<span class='text-[60px] leading-none font-extrabold text-orange-500'>100</span> 件",
-                ]}
-              />
-
-              {/* 右下 - 国家資格合格率 */}
-              <FeatureCard
-                color="pink"
-                icon={() => <span className="text-3xl">🎉</span>}
-                headerLines={[
-                  "少人数ならではのサポート体制!",
-                  "国家資格2級建築士製図試験",
-                  "資格合格率 <span class='text-[60px] leading-none font-extrabold text-orange-500'>100%</span>",
-                ]}
-                footnote="2024年3月 卒業生実績"
-              />
-            </div>
-          </div>
-
-          {/* 中央 - About Us （楕円形、テキストに重ならない位置） */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-            <AboutCard />
+            {/* 05 - Cloud Access */}
+            <FeatureCard
+              color="blue"
+              icon={() => <span className="text-xl font-bold text-blue-600">05</span>}
+              headerLines={[
+                "簡単にアクセス可能で",
+                "シンプルなアプリケーション",
+              ]}
+            />
           </div>
 
         </div>
@@ -189,25 +158,25 @@ function FeatureCard({ color, icon: Icon, headerLines, footnote }: FeatureCardPr
   }[color];
 
   return (
-    <div className={`relative rounded-2xl p-8 ${bg} flex flex-col justify-between w-full min-h-[425px]`}>
+    <div className={`relative rounded-3xl p-4 ${bg} flex flex-col justify-between w-full max-w-sm min-h-[120px]`}>
       {/* floating icon */}
-      <div className="absolute -top-4 -left-4 bg-white shadow-md rounded-full p-3 text-4xl">
+      <div className="absolute -top-2 -left-2 bg-white shadow-md rounded-full p-2 text-sm">
         {Icon()}
       </div>
 
       {/* body */}
-      <div className="space-y-3">
+      <div className="space-y-1 ml-8">
         {headerLines.map((line, idx) => (
           <p
             key={idx}
-            className="text-gray-900 font-bold leading-tight text-base"
+            className="text-gray-900 font-bold leading-tight text-sm"
             dangerouslySetInnerHTML={{ __html: line }}
           />
         ))}
       </div>
 
       {footnote && (
-        <p className="text-sm text-gray-400 mt-4" dangerouslySetInnerHTML={{ __html: footnote }} />
+        <p className="text-xs text-gray-400 mt-2 ml-8" dangerouslySetInnerHTML={{ __html: footnote }} />
       )}
     </div>
   );
