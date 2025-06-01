@@ -467,14 +467,14 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-32 md:w-48 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                     <Image
                       src="/images/search-document-icon.png"
                       alt="検索・カテゴリ選択"
-                      width={180}
-                      height={180}
+                      width={120}
+                      height={120}
                       className="object-contain"
                     />
                   </div>
@@ -483,17 +483,17 @@ export default function PointsSection() {
             </div>
 
             {/* ポイント3 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-              <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">03</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-48">
+              <div className="flex-1 p-4 md:p-6 flex flex-col justify-center">
+                <div className="flex items-center mb-3">
+                  <span className="text-4xl font-bold text-[#42a5d5]">03</span>
+                  <span className="ml-4 text-yellow-400 italic font-light rotate-6 text-lg">
                     Guided Builder!
                   </span>
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-lg md:text-xl font-bold text-[#0a2540] mb-2 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       "質問形式ビルダー"による
                       <br />
                       レコメンド挿入
@@ -549,14 +549,14 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-32 md:w-48 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                     <Image
                       src="/images/qa-form-icon.png"
                       alt="質問形式ビルダー"
-                      width={180}
-                      height={180}
+                      width={120}
+                      height={120}
                       className="object-contain"
                     />
                   </div>
@@ -565,17 +565,17 @@ export default function PointsSection() {
             </div>
 
             {/* ポイント4 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-64">
-              <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">04</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-48">
+              <div className="flex-1 p-4 md:p-6 flex flex-col justify-center">
+                <div className="flex items-center mb-3">
+                  <span className="text-4xl font-bold text-[#42a5d5]">04</span>
+                  <span className="ml-4 text-yellow-400 italic font-light rotate-6 text-lg">
                     All-in-One Solution!
                   </span>
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-lg md:text-xl font-bold text-[#0a2540] mb-2 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       書類テンプレ内での編集・
                       <br />
                       PDF／印刷までワンストップ
@@ -631,14 +631,14 @@ export default function PointsSection() {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="relative w-32 md:w-48 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
+              <div className="relative w-24 md:w-32 bg-[#42a5d5]/20 rounded-full flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="relative w-4/5 h-4/5 flex items-center justify-center">
                     <Image
                       src="/images/document-pdf-print-icon.png"
                       alt="書類テンプレート内での編集"
-                      width={180}
-                      height={180}
+                      width={120}
+                      height={120}
                       className="object-contain"
                     />
                   </div>
@@ -647,17 +647,17 @@ export default function PointsSection() {
             </div>
 
             {/* ポイント5 */}
-            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-64">
-              <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
-                <div className="flex items-center mb-4">
-                  <span className="text-5xl font-bold text-[#42a5d5]">05</span>
-                  <span className="ml-6 text-yellow-400 italic font-light rotate-6 text-xl">
+            <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-48">
+              <div className="flex-1 p-4 md:p-6 flex flex-col justify-center">
+                <div className="flex items-center mb-3">
+                  <span className="text-4xl font-bold text-[#42a5d5]">05</span>
+                  <span className="ml-4 text-yellow-400 italic font-light rotate-6 text-lg">
                     Cloud Access!
                   </span>
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-3 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-lg md:text-xl font-bold text-[#0a2540] mb-2 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       簡単にアクセス可能で
                       <br />
                       シンプルなアプリケーション
