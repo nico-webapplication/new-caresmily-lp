@@ -78,11 +78,12 @@ export default function Home() {
       // Store documents for later use
       documentsRef.current = Array.from(documents) as HTMLElement[]
 
-      // Hide content initially
+      // Hide content initially and make it visible for animation
       gsap.set(contentRef.current, {
         opacity: 0,
         y: "100%", // Start from bottom
         display: "block",
+        visibility: "visible", // Override the hidden visibility
       })
 
       // Hide message image initially
@@ -449,8 +450,15 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Landing page content */}
-      <div ref={contentRef} className="relative z-20">
+      {/* Landing page content - initially hidden */}
+      <div 
+        ref={contentRef} 
+        className="relative z-20"
+        style={{ 
+          opacity: hasPlayedInitialAnimation ? 1 : 0,
+          visibility: hasPlayedInitialAnimation ? 'visible' : 'hidden'
+        }}
+      >
         <HeroSection />
         <ServiceSection />
         <PointsSection />
