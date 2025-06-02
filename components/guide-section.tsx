@@ -38,20 +38,20 @@ export default function OpenCampusSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Open Campus Card */}
-          <div className="bg-white bg-opacity-90 rounded-3xl p-8 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white bg-opacity-90 rounded-3xl p-8 backdrop-blur-sm shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
             <div className="flex flex-col h-full">
               <div className="mb-6">
-                <p className="text-sm text-gray-600 mb-2">オープンキャンパスに行こう</p>
+                <p className="text-sm text-gray-600 mb-2">実際の操作画面を見てみませんか？</p>
                 <div className="flex items-center gap-3 mb-4">
-                  <h2 className="text-3xl font-bold text-gray-900">Open Campus</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 hover:text-blue-500 transition-colors duration-300">オンライン面談予約</h2>
                   <div className="bg-orange-500 rounded-full p-2">
                     <ArrowRight className="w-5 h-5 text-white" />
                   </div>
                 </div>
                 <div className="space-y-2 text-gray-700">
-                  <p>オープンキャンパスに参加して、</p>
-                  <p>入学後の本来の学修をもっとリアルに！</p>
-                  <p>はじめの一歩を踏み出してみましょう。</p>
+                  <p>オンライン面談にてアプリの実際の操作感や</p>
+                  <p>本アプリ自慢の文例の質を</p>
+                  <p>一度確認してみませんか？</p>
                 </div>
               </div>
               
@@ -107,19 +107,19 @@ export default function OpenCampusSection() {
           </div>
 
           {/* School Guide Card */}
-          <div className="bg-white bg-opacity-90 rounded-3xl p-8 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white bg-opacity-90 rounded-3xl p-8 backdrop-blur-sm shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
             <div className="flex flex-col h-full">
               <div className="mb-6">
                 <p className="text-sm text-gray-600 mb-2">各資料を無料でお届けいたします</p>
                 <div className="flex items-center gap-3 mb-4">
-                  <h2 className="text-3xl font-bold text-gray-900">School Guide</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 hover:text-blue-500 transition-colors duration-300">資料請求</h2>
                   <div className="bg-orange-500 rounded-full p-2">
                     <ArrowRight className="w-5 h-5 text-white" />
                   </div>
                 </div>
                 <div className="space-y-2 text-gray-700">
-                  <p>学科紹介から就職状況や設備について、</p>
-                  <p>学校の魅力情報をぎゅっとつめこんだパンフレットを見てみよう！</p>
+                  <p>CareSmilyの詳細情報や導入効果など</p>
+                  <p>もっと詳しく知りたい方はこちらから！</p>
                 </div>
               </div>
               

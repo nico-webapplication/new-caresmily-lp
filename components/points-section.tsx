@@ -203,7 +203,7 @@ export default function PointsSection() {
       </svg>
 
       {/* 車いすのアニメーション - スクロールで動く */}
-      <div
+      {/* <div
         ref={wheelchairRef}
         className="absolute z-0 pointer-events-none"
         style={{
@@ -218,13 +218,13 @@ export default function PointsSection() {
             fill
             style={{ objectFit: "contain" }}
           />
-          {/* 車いすの影 */}
+          
           <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4/5 h-1/6 bg-black opacity-20 rounded-full blur-md"
             style={{ filter: "blur(8px)" }}
           ></div>
         </div>
-      </div>
+      </div> */}
 
       {/* 上部の縁 */}
       <div className="absolute top-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div>
