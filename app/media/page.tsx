@@ -71,7 +71,7 @@ export default function MediaPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <div className="bg-gradient-to-r from-primary to-[#55C6F5] py-16 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-sky-300 to-cyan-400 py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center text-white">

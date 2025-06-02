@@ -78,7 +78,7 @@ export default function OnlineMeeting() {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary to-[#55C6F5] py-16 relative overflow-hidden rounded-xl mb-8">
+          <div className="bg-gradient-to-r from-sky-300 to-cyan-400 py-16 relative overflow-hidden rounded-xl mb-8">
             <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="max-w-7xl mx-auto px-4 relative">
               <div className="max-w-4xl mx-auto text-center text-white">
