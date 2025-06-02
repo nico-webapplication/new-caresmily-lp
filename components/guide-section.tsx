@@ -50,8 +50,7 @@ export default function OpenCampusSection() {
                 </div>
                 <div className="space-y-2 text-gray-700">
                   <p>オンライン面談にてアプリの実際の操作感や</p>
-                  <p>本アプリ自慢の文例の質を</p>
-                  <p>一度確認してみませんか？</p>
+                  <p>本アプリ自慢の文例の質を一度確認してみませんか？</p>
                 </div>
               </div>
               

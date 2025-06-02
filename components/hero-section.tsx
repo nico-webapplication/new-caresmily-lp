@@ -67,7 +67,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1280px;
   margin-left: 100px;
-  margin-top: 100px
+  margin-top: 180px;
   padding: 0 1rem;
   z-index: 10;
 
