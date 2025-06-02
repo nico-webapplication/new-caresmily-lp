@@ -232,6 +232,20 @@ export default function PointsSection() {
       {/* 下部の縁 */}
       <div className="absolute bottom-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div>
 
+      {/* 流れるCARESMILYテキスト - 左側 */}
+      <div className="absolute left-8 top-0 h-full overflow-hidden opacity-20 z-5">
+        <div className="animate-marquee-vertical whitespace-nowrap text-8xl lg:text-9xl font-black text-white transform rotate-90 origin-center flex items-center h-full">
+          CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY
+        </div>
+      </div>
+
+      {/* 流れるCARESMILYテキスト - 右側 */}
+      <div className="absolute right-8 top-0 h-full overflow-hidden opacity-20 z-5">
+        <div className="animate-marquee-vertical-reverse whitespace-nowrap text-8xl lg:text-9xl font-black text-white transform -rotate-90 origin-center flex items-center h-full">
+          CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY
+        </div>
+      </div>
+
       {/* 左側の縁 */}
       <div
         ref={leftBorderRef}
