@@ -307,13 +307,13 @@ export default function PointsSection() {
         </div>
       </div> */}
 
-      <div className="container px-4 relative z-10">
+      <div className="container px-5 relative z-10">
         {/* 横並びレイアウト：ポイントカードとタイトル */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-16">
-          <div ref={pointsRef} className="max-w-sm space-y-8">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
+          <div ref={pointsRef} className="max-w-4xl space-y-4">
             {/* ポイント1 */}
             <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
-              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+              <div className="flex-1 p-6 md:p-7 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">01</span>
                   <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
@@ -322,7 +322,7 @@ export default function PointsSection() {
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       10万件超の専門家監修
                       <br />
                       "文例データベース"
@@ -382,7 +382,7 @@ export default function PointsSection() {
 
             {/* ポイント2 */}
             <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-40">
-              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+              <div className="flex-1 p-6 md:p-7 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">02</span>
                   <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
@@ -391,7 +391,7 @@ export default function PointsSection() {
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       検索・カテゴリ選択 →
                       <br />
                       コピー＆ペーストで瞬時作成
@@ -451,7 +451,7 @@ export default function PointsSection() {
 
             {/* ポイント3 */}
             <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
-              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+              <div className="flex-1 p-6 md:p-7 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">03</span>
                   <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
@@ -460,7 +460,7 @@ export default function PointsSection() {
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       書類種類に応じた
                       <br />
                       おすすめ文例の自動表示
@@ -520,7 +520,7 @@ export default function PointsSection() {
 
             {/* ポイント4 */}
             <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg flex-row-reverse h-40">
-              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+              <div className="flex-1 p-6 md:p-7 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">04</span>
                   <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
@@ -529,7 +529,7 @@ export default function PointsSection() {
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       チーム全体での共有・連携が
                       <br />
                       スムーズに
@@ -589,7 +589,7 @@ export default function PointsSection() {
 
             {/* ポイント5 */}
             <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
-              <div className="flex-1 p-3 md:p-4 flex flex-col justify-center">
+              <div className="flex-1 p-6 md:p-7 flex flex-col justify-center">
                 <div className="flex items-center mb-2">
                   <span className="text-3xl font-bold text-[#42a5d5]">05</span>
                   <span className="ml-3 text-yellow-400 italic font-light rotate-6 text-base">
@@ -598,7 +598,7 @@ export default function PointsSection() {
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <h3 className="text-base md:text-lg font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#0a2540] mb-1 cursor-pointer hover:text-[#42a5d5] transition-colors">
                       簡単にアクセス可能で
                       <br />
                       シンプルなアプリケーション

@@ -463,7 +463,7 @@ export default function Home() {
         <InterviewSection />
         <ServiceCountSection />
         <FAQSection />
-        {/* <GuideSection /> */}
+        <GuideSection />
       </div>
 
       {/* SlideInPopup - ヒーローセクションを出るとスライドイン */}

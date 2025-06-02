@@ -34,18 +34,18 @@ export default function OpenCampusSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16" style={{backgroundColor: '#3caafb'}}>
+    <section ref={sectionRef} className="py-24" style={{backgroundColor: '#3caafb'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* White base container */}
-        <div className="bg-white rounded-3xl p-8 shadow-2xl">
+        <div className="bg-white rounded-[10rem] p-8 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Open Campus Card */}
-            <div className="bg-gray-50 rounded-3xl p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
+            <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
               <div className="flex flex-col h-full">
                 <div className="mb-6">
-                  <p className="text-sm text-gray-600 mb-2">実際の操作画面を見てみませんか？</p>
+                  <p className="text-sm text-gray-600 mb-2">オンライン面談</p>
                   <div className="flex items-center gap-3 mb-4">
-                    <h2 className="text-3xl font-bold text-gray-900 hover:text-blue-500 transition-colors duration-300">オンライン面談予約</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 hover:text-blue-500 transition-colors duration-300">Online Meeting</h2>
                     <div className="bg-orange-500 rounded-full p-2">
                       <ArrowRight className="w-5 h-5 text-white" />
                     </div>
@@ -108,12 +108,12 @@ export default function OpenCampusSection() {
             </div>
 
             {/* School Guide Card */}
-            <div className="bg-gray-50 rounded-3xl p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
+            <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
               <div className="flex flex-col h-full">
                 <div className="mb-6">
                   <p className="text-sm text-gray-600 mb-2">各資料を無料でお届けいたします</p>
                   <div className="flex items-center gap-3 mb-4">
-                    <h2 className="text-3xl font-bold text-gray-900 hover:text-blue-500 transition-colors duration-300">資料請求</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 hover:text-blue-500 transition-colors duration-300">CareSmily Guide</h2>
                     <div className="bg-orange-500 rounded-full p-2">
                       <ArrowRight className="w-5 h-5 text-white" />
                     </div>
