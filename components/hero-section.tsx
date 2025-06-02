@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
 // スタイルコンポーネント
 const HeroSection = styled.section`
   position: relative;
-  min-height: 100vh;
+  min-height: 120vh;
   display: flex;
   align-items: flex-start;
   padding: 4rem 0 0 0; // 上だけ余白、下は無し
