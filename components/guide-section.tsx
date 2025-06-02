@@ -34,7 +34,7 @@ export default function OpenCampusSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16 bg-gradient-to-r from-orange-400 to-orange-500">
+    <section ref={sectionRef} className="py-16" style={{backgroundColor: '#3caafb'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Open Campus Card */}
