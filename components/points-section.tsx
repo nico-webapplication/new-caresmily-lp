@@ -75,59 +75,59 @@ export default function PointsSection() {
       }
 
       // 縁のテキストアニメーション
-      if (leftBorderRef.current) {
-        const textElements = leftBorderRef.current.querySelectorAll("div");
-        gsap.set(textElements, { y: "100%" });
-        gsap.to(textElements, {
-          y: "-100%",
-          duration: 20,
-          ease: "none",
-          repeat: -1,
-        });
-      }
+      // if (leftBorderRef.current) {
+      //   const textElements = leftBorderRef.current.querySelectorAll("div");
+      //   gsap.set(textElements, { y: "100%" });
+      //   gsap.to(textElements, {
+      //     y: "-100%",
+      //     duration: 20,
+      //     ease: "none",
+      //     repeat: -1,
+      //   });
+      // }
 
-      if (rightBorderRef.current) {
-        const textElements = rightBorderRef.current.querySelectorAll("div");
-        gsap.set(textElements, { y: "-100%" });
-        gsap.to(textElements, {
-          y: "100%",
-          duration: 20,
-          ease: "none",
-          repeat: -1,
-        });
-      }
+      // if (rightBorderRef.current) {
+      //   const textElements = rightBorderRef.current.querySelectorAll("div");
+      //   gsap.set(textElements, { y: "-100%" });
+      //   gsap.to(textElements, {
+      //     y: "100%",
+      //     duration: 20,
+      //     ease: "none",
+      //     repeat: -1,
+      //   });
+      // }
 
       // 車いすのパスアニメーション
-      if (wheelchairRef.current && svgPathRef.current) {
-        gsap.set(wheelchairRef.current, {
-          motionPath: {
-            path: svgPathRef.current,
-            align: svgPathRef.current,
-            autoRotate: true,
-            alignOrigin: [0.5, 0.5],
-          },
-          transformOrigin: "50% 50%",
-        });
+      // if (wheelchairRef.current && svgPathRef.current) {
+      //   gsap.set(wheelchairRef.current, {
+      //     motionPath: {
+      //       path: svgPathRef.current,
+      //       align: svgPathRef.current,
+      //       autoRotate: true,
+      //       alignOrigin: [0.5, 0.5],
+      //     },
+      //     transformOrigin: "50% 50%",
+      //   });
 
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scroller: scroller || undefined,
-          scrub: 1,
-          onUpdate: (self) => {
-            gsap.set(wheelchairRef.current, {
-              motionPath: {
-                path: svgPathRef.current,
-                align: svgPathRef.current,
-                autoRotate: true,
-                alignOrigin: [0.5, 0.5],
-              },
-              progress: self.progress,
-            });
-          },
-        });
-      }
+      //   ScrollTrigger.create({
+      //     trigger: sectionRef.current,
+      //     start: "top bottom",
+      //     end: "bottom top",
+      //     scroller: scroller || undefined,
+      //     scrub: 1,
+      //     onUpdate: (self) => {
+      //       gsap.set(wheelchairRef.current, {
+      //         motionPath: {
+      //           path: svgPathRef.current,
+      //           align: svgPathRef.current,
+      //           autoRotate: true,
+      //           alignOrigin: [0.5, 0.5],
+      //         },
+      //         progress: self.progress,
+      //       });
+      //     },
+      //   });
+      // }
 
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -139,48 +139,48 @@ export default function PointsSection() {
   }, [scroller]);
 
   // 縁の中に表示する文字の配列（繰り返し表示用に複数回書く）
-  const borderTexts = [
-    "CARE",
-    "CARING",
-    "CAREGIVING",
-    "ELDERCARE",
-    "DAY-SERVICE",
-    "DAY-CARE",
-    "RESPITE",
-    "WELLBEING",
-    "PERSON-CENTERED",
-    "DIGNITY",
-    "SUPPORT",
-    "INDEPENDENCE",
-    "QUALITY-OF-LIFE",
-    "WORKFLOW",
-    "EFFICIENCY",
-    "STREAMLINING",
-    "TIME-SAVING",
-    "PAPERWORK-REDUCTION",
-    "TEMPLATE-DRIVEN",
-    "DOCUMENTATION",
-    "CARE-PLAN",
-    "SERVICE-PLAN",
-    "TRAINING-PLAN",
-    "PROGRESS-NOTE",
-    "DAILY-LOG",
-    "INCIDENT-REPORT",
-    "ASSESSMENT",
-    "EVALUATION",
-    "INTAKE-FORM",
-    "DISCHARGE-SUMMARY",
-    "SOAP-NOTE",
-    "CHECKLIST",
-    "KPI-SHEET",
-    "CONSENT-FORM",
-    "QUESTIONNAIRE",
-    "HANDOVER-SHEET",
-    "ROSTER",
-    "ATTENDANCE-RECORD",
-    "SCHEDULE",
-    "REPORT-GENERATOR",
-  ];
+  // const borderTexts = [
+  //   "CARE",
+  //   "CARING",
+  //   "CAREGIVING",
+  //   "ELDERCARE",
+  //   "DAY-SERVICE",
+  //   "DAY-CARE",
+  //   "RESPITE",
+  //   "WELLBEING",
+  //   "PERSON-CENTERED",
+  //   "DIGNITY",
+  //   "SUPPORT",
+  //   "INDEPENDENCE",
+  //   "QUALITY-OF-LIFE",
+  //   "WORKFLOW",
+  //   "EFFICIENCY",
+  //   "STREAMLINING",
+  //   "TIME-SAVING",
+  //   "PAPERWORK-REDUCTION",
+  //   "TEMPLATE-DRIVEN",
+  //   "DOCUMENTATION",
+  //   "CARE-PLAN",
+  //   "SERVICE-PLAN",
+  //   "TRAINING-PLAN",
+  //   "PROGRESS-NOTE",
+  //   "DAILY-LOG",
+  //   "INCIDENT-REPORT",
+  //   "ASSESSMENT",
+  //   "EVALUATION",
+  //   "INTAKE-FORM",
+  //   "DISCHARGE-SUMMARY",
+  //   "SOAP-NOTE",
+  //   "CHECKLIST",
+  //   "KPI-SHEET",
+  //   "CONSENT-FORM",
+  //   "QUESTIONNAIRE",
+  //   "HANDOVER-SHEET",
+  //   "ROSTER",
+  //   "ATTENDANCE-RECORD",
+  //   "SCHEDULE",
+  //   "REPORT-GENERATOR",
+  // ];
 
   return (
     <section
@@ -227,27 +227,35 @@ export default function PointsSection() {
       </div> */}
 
       {/* 上部の縁 */}
-      <div className="absolute top-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div>
+      {/* <div className="absolute top-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div> */}
 
       {/* 下部の縁 */}
-      <div className="absolute bottom-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div>
+      {/* <div className="absolute bottom-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div> */}
 
       {/* 流れるCARESMILYテキスト - 左側 */}
-      <div className="absolute left-8 top-0 h-full overflow-hidden opacity-20 z-5">
-        <div className="animate-marquee-vertical whitespace-nowrap text-8xl lg:text-9xl font-black text-white transform rotate-90 origin-center flex items-center h-full">
-          CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY
+      <div className="absolute left-16 top-0 h-full overflow-hidden opacity-20 z-5">
+        <div className="animate-marquee-vertical text-8xl lg:text-9xl xl:text-[10rem] font-black text-white writing-mode-vertical flex flex-col">
+          {"CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY".split("").map((char, index) => (
+            <span key={index} className="block leading-none">
+              {char === " " ? "　" : char}
+            </span>
+          ))}
         </div>
       </div>
 
       {/* 流れるCARESMILYテキスト - 右側 */}
-      <div className="absolute right-8 top-0 h-full overflow-hidden opacity-20 z-5">
-        <div className="animate-marquee-vertical-reverse whitespace-nowrap text-8xl lg:text-9xl font-black text-white transform -rotate-90 origin-center flex items-center h-full">
-          CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY
+      <div className="absolute right-16 top-0 h-full overflow-hidden opacity-20 z-5">
+        <div className="animate-marquee-vertical-reverse text-8xl lg:text-9xl xl:text-[10rem] font-black text-white writing-mode-vertical flex flex-col">
+          {"CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY".split("").map((char, index) => (
+            <span key={index} className="block leading-none">
+              {char === " " ? "　" : char}
+            </span>
+          ))}
         </div>
       </div>
 
       {/* 左側の縁 */}
-      <div
+      {/* <div
         ref={leftBorderRef}
         className="absolute left-0 top-4 bottom-4 w-12 bg-[#0a2540] overflow-hidden z-10"
       >
@@ -262,10 +270,10 @@ export default function PointsSection() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* 右側の縁 */}
-      <div
+      {/* <div
         ref={rightBorderRef}
         className="absolute right-0 top-4 bottom-4 w-12 bg-[#0a2540] overflow-hidden z-10"
       >
@@ -283,7 +291,7 @@ export default function PointsSection() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="container px-4 relative z-10">
         {/* 横並びレイアウト：ポイントカードとタイトル */}
