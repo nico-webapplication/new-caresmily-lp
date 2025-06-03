@@ -47,7 +47,12 @@ export default function OpenCampusSection() {
                   <div className="mb-6">
                     <p className="text-sm text-gray-600 mb-2">オンライン面談</p>
                     <div className="flex items-center gap-3 mb-4">
-                      <h2 className="text-3xl font-bold text-gray-900 hover:text-blue-500 transition-colors duration-300">Online Meeting</h2>
+                      <h2 className="text-3xl font-bold text-gray-900 relative overflow-hidden group">
+                        <span className="relative z-10">Online Meeting</span>
+                        <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-blue-600 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out flex items-center">
+                          Online Meeting
+                        </span>
+                      </h2>
                       <div className="bg-orange-500 rounded-full p-2">
                         <ArrowRight className="w-5 h-5 text-white" />
                       </div>
@@ -61,7 +66,7 @@ export default function OpenCampusSection() {
                   <div className="flex-1 flex justify-center items-end">
                     <div className="relative w-80 h-64">
                       <Image
-                        src="/attached_assets/image.png"
+                        src="/images/online_meeting.png"
                         alt="CareSmilyミーティングの様子"
                         width={320}
                         height={256}
@@ -80,7 +85,12 @@ export default function OpenCampusSection() {
                   <div className="mb-6">
                     <p className="text-sm text-gray-600 mb-2">各資料を無料でお届けいたします</p>
                     <div className="flex items-center gap-3 mb-4">
-                      <h2 className="text-3xl font-bold text-gray-900 hover:text-blue-500 transition-colors duration-300">CareSmily Guide</h2>
+                      <h2 className="text-3xl font-bold text-gray-900 relative overflow-hidden group">
+                        <span className="relative z-10">CareSmily Guide</span>
+                        <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-blue-600 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out flex items-center">
+                          CareSmily Guide
+                        </span>
+                      </h2>
                       <div className="bg-orange-500 rounded-full p-2">
                         <ArrowRight className="w-5 h-5 text-white" />
                       </div>
@@ -94,8 +104,8 @@ export default function OpenCampusSection() {
                   <div className="flex-1 flex justify-center items-end">
                     <div className="relative w-80 h-64">
                       <Image
-                        src="/attached_assets/targeted_element_1748913793526.png"
-                        alt="カラフルなビルのイラスト"
+                        src="/images/caresmily_guide.png"
+                        alt="資料請求"
                         width={320}
                         height={256}
                         className="w-full h-full object-contain"
