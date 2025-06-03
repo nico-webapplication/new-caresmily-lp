@@ -75,24 +75,28 @@ export default function OnlineMeeting() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {isLoading && <Loading />}
+      
+      {/* Header */}
+      <div className="bg-gradient-to-r from-sky-300 to-cyan-400 py-16 relative overflow-hidden rounded-xl mb-8">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-4 relative">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <h1 className="text-3xl md:text-4xl font-bold mb-6">
+              オンライン面談予約
+            </h1>
+            <p className="text-lg">
+              CareSmily の詳しい説明をオンラインでご案内いたします。
+              <br />
+              ご希望の日時をお選びください。
+            </p>
+          </div>
+        </div>
+      </div>
+      
+
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-sky-300 to-cyan-400 py-16 relative overflow-hidden rounded-xl mb-8">
-            <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-            <div className="max-w-7xl mx-auto px-4 relative">
-              <div className="max-w-4xl mx-auto text-center text-white">
-                <h1 className="text-3xl md:text-4xl font-bold mb-6">
-                  オンライン面談予約
-                </h1>
-                <p className="text-lg">
-                  CareSmily の詳しい説明をオンラインでご案内いたします。
-                  <br />
-                  ご希望の日時をお選びください。
-                </p>
-              </div>
-            </div>
-          </div>
+
 
           {/* Form */}
           <div className="bg-white rounded-xl shadow-lg p-8">

@@ -28,8 +28,8 @@ const config: Config = {
         float: "float 3s ease-in-out infinite",
         marquee: "marquee 15s linear infinite",
         "marquee-reverse": "marquee-reverse 15s linear infinite",
-        "marquee-vertical": "marquee-vertical 120s linear infinite",
-        "marquee-vertical-reverse": "marquee-vertical-reverse 120s linear infinite",
+        "marquee-vertical": "marquee-vertical 60s linear infinite",
+        "marquee-vertical-reverse": "marquee-vertical-reverse 60s linear infinite",
       },
       keyframes: {
         float: {

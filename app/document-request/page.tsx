@@ -70,27 +70,28 @@ export default function DocumentRequestPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {isLoading && <Loading />}
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-sky-300 to-cyan-400 py-16 relative overflow-hidden">
-            <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-            <div className="max-w-7xl mx-auto px-4 relative">
-              <div className="max-w-4xl mx-auto text-center text-white">
-                <h1 className="text-3xl md:text-4xl font-bold mb-6">
-                  資料請求
-                </h1>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-b-xl shadow-lg p-8 mb-12">
-            <p className="text-xl text-center text-gray-600 mb-8">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-sky-300 to-cyan-400 py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-4 relative">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <h1 className="text-3xl md:text-4xl font-bold mb-6">
+              資料請求
+            </h1>
+            <p className="text-lg">
               CareSmily の詳しい資料をご希望の方は、以下のフォームよりお申し込みください。
               <br />
               ご入力いただいたメールアドレスに、資料をお送りいたします。
             </p>
+          </div>
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
 
+
+          <div className="bg-white rounded-b-xl shadow-lg p-8 mb-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               <div className="bg-blue-50 p-6 rounded-xl text-center">
                 <FileText className="w-12 h-12 text-primary mx-auto mb-4" />

@@ -93,7 +93,7 @@ export default function PointsSection() {
           {Array.from({ length: 3 }, (_, groupIndex) => 
             ("CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY " + 
              "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY").split("").map((char, index) => (
-              <span key={`left-${groupIndex}-${index}`} className="block leading-none">
+              <span key={`left-${groupIndex}-${index}`} className="block leading-none text-center">
                 {char === " " ? "　" : char}
               </span>
             ))
@@ -108,7 +108,7 @@ export default function PointsSection() {
           {Array.from({ length: 3 }, (_, groupIndex) => 
             ("CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY " + 
              "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY").split("").map((char, index) => (
-              <span key={`right-${groupIndex}-${index}`} className="block leading-none">
+              <span key={`right-${groupIndex}-${index}`} className="block leading-none text-center">
                 {char === " " ? "　" : char}
               </span>
             ))
