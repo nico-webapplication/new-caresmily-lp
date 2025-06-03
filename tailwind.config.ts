@@ -28,8 +28,8 @@ const config: Config = {
         float: "float 3s ease-in-out infinite",
         marquee: "marquee 15s linear infinite",
         "marquee-reverse": "marquee-reverse 15s linear infinite",
-        "marquee-vertical": "marquee-vertical 100s linear infinite",
-        "marquee-vertical-reverse": "marquee-vertical-reverse 100s linear infinite",
+        "marquee-vertical": "marquee-vertical 120s linear infinite",
+        "marquee-vertical-reverse": "marquee-vertical-reverse 120s linear infinite",
       },
       keyframes: {
         float: {
@@ -45,12 +45,12 @@ const config: Config = {
           "100%": { transform: "translateX(100%)" },
         },
         "marquee-vertical": {
-          "0%": { transform: "translateY(100%)" },
-          "100%": { transform: "translateY(-100%)" },
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(-200%)" },
         },
         "marquee-vertical-reverse": {
-          "0%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(100%)" },
+          "0%": { transform: "translateY(-200%)" },
+          "100%": { transform: "translateY(0%)" },
         },
       },
       colors: {

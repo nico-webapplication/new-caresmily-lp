@@ -88,12 +88,12 @@ export default function PointsSection() {
 
       {/* 流れるCARESMILYテキスト - 左側 */}
       <div className="absolute left-16 top-0 h-full overflow-hidden opacity-20 z-5">
-        <div className="animate-marquee-vertical text-8xl lg:text-9xl xl:text-[10rem] font-black text-white writing-mode-vertical flex flex-col h-[300%] items-center">
+        <div className="animate-marquee-vertical text-8xl lg:text-9xl xl:text-[10rem] font-black text-white writing-mode-vertical flex flex-col h-[300%]">
           {/* 3倍の高さで連続表示 */}
           {Array.from({ length: 3 }, (_, groupIndex) => 
             ("CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY " + 
              "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY").split("").map((char, index) => (
-              <span key={`left-${groupIndex}-${index}`} className="block leading-none text-center">
+              <span key={`left-${groupIndex}-${index}`} className="block leading-none">
                 {char === " " ? "　" : char}
               </span>
             ))
@@ -103,12 +103,12 @@ export default function PointsSection() {
 
       {/* 流れるCARESMILYテキスト - 右側 */}
       <div className="absolute right-16 top-0 h-full overflow-hidden opacity-20 z-5">
-        <div className="animate-marquee-vertical-reverse text-8xl lg:text-9xl xl:text-[10rem] font-black text-white writing-mode-vertical flex flex-col h-[300%] items-center">
+        <div className="animate-marquee-vertical-reverse text-8xl lg:text-9xl xl:text-[10rem] font-black text-white writing-mode-vertical flex flex-col h-[300%]">
           {/* 3倍の高さで連続表示 */}
           {Array.from({ length: 3 }, (_, groupIndex) => 
             ("CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY " + 
              "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY").split("").map((char, index) => (
-              <span key={`right-${groupIndex}-${index}`} className="block leading-none text-center">
+              <span key={`right-${groupIndex}-${index}`} className="block leading-none">
                 {char === " " ? "　" : char}
               </span>
             ))
