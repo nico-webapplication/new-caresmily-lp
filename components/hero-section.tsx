@@ -2,20 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Head from "next/head";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 // グローバルスタイル
 const GlobalStyle = createGlobalStyle`
-  :root {
-    --primary: #38bdf8;
-    --primary-dark: #0ea5e9;
-    --secondary: #4ade80;
-    --accent: #22c55e;
-    --tw-bg-opacity: 1;
-  }
-
   body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow-x: hidden;
@@ -316,12 +307,6 @@ const HeroSectionComponent = () => {
 
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <GlobalStyle />
 
       <HeroSection>

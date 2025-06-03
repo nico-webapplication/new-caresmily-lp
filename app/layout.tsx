@@ -1,6 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 // ScrollTriggerProviderをインポート
 import ScrollTriggerProvider from "@/components/scroll-trigger-provider";
@@ -9,6 +9,11 @@ import Footer from "@/components/footer";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
+const notoSansJP = Noto_Sans_JP({ 
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   title: "CareSmily",
@@ -23,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${notoSansJP.className}`}>
         <Header />
         <main className="pt-16">
           <ScrollTriggerProvider>{children}</ScrollTriggerProvider>
