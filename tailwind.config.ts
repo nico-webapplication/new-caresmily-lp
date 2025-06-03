@@ -45,12 +45,12 @@ const config: Config = {
           "100%": { transform: "translateX(100%)" },
         },
         "marquee-vertical": {
-          "0%": { transform: "translateY(100%)" },
-          "100%": { transform: "translateY(-100%)" },
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(-200%)" },
         },
         "marquee-vertical-reverse": {
-          "0%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(100%)" },
+          "0%": { transform: "translateY(-200%)" },
+          "100%": { transform: "translateY(0%)" },
         },
       },
       colors: {
