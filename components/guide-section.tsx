@@ -40,7 +40,7 @@ export default function OpenCampusSection() {
         <div className="bg-white rounded-[10rem] p-8 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Open Campus Card */}
-            <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
+            <div className="bg-gray rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
               <div className="flex flex-col h-full">
                 <div className="mb-6">
                   <p className="text-sm text-gray-600 mb-2">オンライン面談</p>
@@ -59,8 +59,8 @@ export default function OpenCampusSection() {
                 <div className="flex-1 flex justify-center items-end">
                   <div className="relative w-80 h-64">
                     <Image
-                      src="/attached_assets/24438020.png"
-                      alt="Online Meeting Illustration"
+                      src="/attached_assets/image.png"
+                      alt="CareSmilyミーティングの様子"
                       width={320}
                       height={256}
                       className="w-full h-full object-contain"
@@ -90,8 +90,8 @@ export default function OpenCampusSection() {
                 <div className="flex-1 flex justify-center items-end">
                   <div className="relative w-80 h-64">
                     <Image
-                      src="/attached_assets/targeted_element_1748859708597.png"
-                      alt="Colorful Building Guide Illustration"
+                      src="/attached_assets/targeted_element_1748913793526.png"
+                      alt="カラフルなビルのイラスト"
                       width={320}
                       height={256}
                       className="w-full h-full object-contain"
