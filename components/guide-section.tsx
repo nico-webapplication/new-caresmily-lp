@@ -35,19 +35,19 @@ export default function OpenCampusSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24" style={{backgroundColor: '#3caafb'}}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="py-32" style={{backgroundColor: '#3caafb'}}>
+      <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* White base container */}
-        <div className="bg-white rounded-[10rem] p-8 shadow-2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-white rounded-[10rem] p-12 shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Open Campus Card */}
             <Link href="/online-meeting">
-              <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
+              <div className="bg-gray-50 rounded-[10rem] p-12 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
                 <div className="flex flex-col h-full">
                   <div className="mb-6">
                     <p className="text-sm text-gray-600 mb-2">オンライン面談</p>
-                    <div className="flex items-center gap-3 mb-4">
-                      <h2 className="text-3xl font-bold text-gray-900 relative overflow-hidden">
+                    <div className="flex items-center gap-4 mb-6">
+                      <h2 className="text-4xl font-bold text-gray-900 relative overflow-hidden">
                         <span className="inline-block transition-all duration-500 ease-in-out bg-gradient-to-r from-gray-900 via-gray-900 to-blue-500 bg-[length:200%_100%] bg-left group-hover:bg-right bg-clip-text text-transparent">
                           Online Meeting
                         </span>
@@ -63,12 +63,12 @@ export default function OpenCampusSection() {
                   </div>
                   
                   <div className="flex-1 flex justify-center items-end">
-                    <div className="relative w-80 h-64">
+                    <div className="relative w-96 h-80">
                       <Image
                         src="/attached_assets/image.png"
                         alt="CareSmilyミーティングの様子"
-                        width={320}
-                        height={256}
+                        width={400}
+                        height={320}
                         className="w-full h-full object-contain transform transition-transform duration-300 ease-in-out group-hover:scale-105"
                       />
                     </div>
@@ -79,12 +79,12 @@ export default function OpenCampusSection() {
 
             {/* School Guide Card */}
             <Link href="/document-request">
-              <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
+              <div className="bg-gray-50 rounded-[10rem] p-12 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
                 <div className="flex flex-col h-full">
                   <div className="mb-6">
                     <p className="text-sm text-gray-600 mb-2">各資料を無料でお届けいたします</p>
-                    <div className="flex items-center gap-3 mb-4">
-                      <h2 className="text-3xl font-bold text-gray-900 relative overflow-hidden">
+                    <div className="flex items-center gap-4 mb-6">
+                      <h2 className="text-4xl font-bold text-gray-900 relative overflow-hidden">
                         <span className="inline-block transition-all duration-500 ease-in-out bg-gradient-to-r from-gray-900 via-gray-900 to-blue-500 bg-[length:200%_100%] bg-left group-hover:bg-right bg-clip-text text-transparent">
                           CareSmily Guide
                         </span>
@@ -100,12 +100,12 @@ export default function OpenCampusSection() {
                   </div>
                   
                   <div className="flex-1 flex justify-center items-end">
-                    <div className="relative w-80 h-64">
+                    <div className="relative w-96 h-80">
                       <Image
                         src="/attached_assets/targeted_element_1748913793526.png"
                         alt="カラフルなビルのイラスト"
-                        width={320}
-                        height={256}
+                        width={400}
+                        height={320}
                         className="w-full h-full object-contain transform transition-transform duration-300 ease-in-out group-hover:scale-105"
                       />
                     </div>
