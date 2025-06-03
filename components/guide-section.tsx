@@ -44,32 +44,32 @@ export default function OpenCampusSection() {
             <Link href="/online-meeting">
               <div className="bg-gray-50 rounded-[10rem] p-12 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
                 <div className="flex flex-col h-full">
-                  <div className="mb-6">
-                    <p className="text-sm text-gray-600 mb-2">オンライン面談</p>
-                    <div className="flex items-center gap-4 mb-6">
-                      <h2 className="text-4xl font-bold text-gray-900 relative overflow-hidden">
+                  <div className="mb-10">
+                    <p className="text-xl text-cyan-400 mb-4 font-bold">オンライン面談</p>
+                    <div className="flex items-center gap-6 mb-8">
+                      <h2 className="text-6xl font-bold text-gray-900 relative overflow-hidden">
                         <span className="relative z-10 transition-colors duration-500 ease-in-out group-hover:text-cyan-400">Online Meeting</span>
                         <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out transform -translate-x-full group-hover:translate-x-0 flex items-center">
                           Online Meeting
                         </span>
                       </h2>
-                      <div className="bg-orange-500 rounded-full p-2">
-                        <ArrowRight className="w-5 h-5 text-white" />
+                      <div className="bg-orange-500 rounded-full p-4">
+                        <ArrowRight className="w-8 h-8 text-white" />
                       </div>
                     </div>
-                    <div className="space-y-2 text-gray-700">
+                    <div className="space-y-3 text-gray-700 font-bold text-lg">
                       <p>オンライン面談にてアプリの実際の操作感や</p>
                       <p>本アプリ自慢の文例の質を一度確認してみませんか？</p>
                     </div>
                   </div>
                   
                   <div className="flex-1 flex justify-center items-end">
-                    <div className="relative w-96 h-80">
+                    <div className="relative w-[30rem] h-[24rem]">
                       <Image
-                        src="/images/caresmily_guide.png"
+                        src="/image.png"
                         alt="CareSmilyミーティングの様子"
-                        width={400}
-                        height={320}
+                        width={480}
+                        height={384}
                         className="w-full h-full object-contain transform transition-transform duration-300 ease-in-out group-hover:scale-105"
                       />
                     </div>
@@ -82,32 +82,32 @@ export default function OpenCampusSection() {
             <Link href="/document-request">
               <div className="bg-gray-50 rounded-[10rem] p-12 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
                 <div className="flex flex-col h-full">
-                  <div className="mb-6">
-                    <p className="text-sm text-gray-600 mb-2">各資料を無料でお届けいたします</p>
-                    <div className="flex items-center gap-4 mb-6">
-                      <h2 className="text-4xl font-bold text-gray-900 relative overflow-hidden">
+                  <div className="mb-10">
+                    <p className="text-xl text-cyan-400 mb-4 font-bold">各資料を無料でお届けいたします</p>
+                    <div className="flex items-center gap-6 mb-8">
+                      <h2 className="text-6xl font-bold text-gray-900 relative overflow-hidden">
                         <span className="relative z-10 transition-colors duration-500 ease-in-out group-hover:text-cyan-400">CareSmily Guide</span>
                         <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out transform -translate-x-full group-hover:translate-x-0 flex items-center">
                           CareSmily Guide
                         </span>
                       </h2>
-                      <div className="bg-orange-500 rounded-full p-2">
-                        <ArrowRight className="w-5 h-5 text-white" />
+                      <div className="bg-orange-500 rounded-full p-4">
+                        <ArrowRight className="w-8 h-8 text-white" />
                       </div>
                     </div>
-                    <div className="space-y-2 text-gray-700">
+                    <div className="space-y-3 text-gray-700 font-bold text-lg">
                       <p>CareSmilyの詳細情報や導入効果など</p>
                       <p>もっと詳しく知りたい方はこちらから！</p>
                     </div>
                   </div>
                   
                   <div className="flex-1 flex justify-center items-end">
-                    <div className="relative w-96 h-80">
+                    <div className="relative w-[30rem] h-[24rem]">
                       <Image
-                        src="/images/caresmily_guide.png"
+                        src="/attached_assets/targeted_element_1748913793526.png"
                         alt="カラフルなビルのイラスト"
-                        width={400}
-                        height={320}
+                        width={480}
+                        height={384}
                         className="w-full h-full object-contain transform transition-transform duration-300 ease-in-out group-hover:scale-105"
                       />
                     </div>
