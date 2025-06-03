@@ -322,7 +322,34 @@ const SecondaryButton = styled.a`
   }
 `;
 
-// Removed IllustrationWrapper - focusing on text animations instead
+const LogoContainer = styled.div`
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 10;
+  animation: fadeInDown 1s ease-out 0.5s both;
+
+  @media (max-width: 768px) {
+    top: 1rem;
+    right: 1rem;
+    transform: scale(0.8);
+  }
+`;
+
+const LogoImage = styled.img`
+  height: 80px;
+  width: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    height: 60px;
+  }
+`;
 
 const HeroSectionComponent = () => {
   const countersRef = useRef<HTMLElement[]>([]);
@@ -378,17 +405,14 @@ const HeroSectionComponent = () => {
 
       <HeroSection>
 
-        <HeroBg>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          >
-            <source src="/hero-video2.mp4" type="video/mp4" />
-          </video>
-        </HeroBg>
+        <HeroBg></HeroBg>
+        
+        <LogoContainer>
+          <LogoImage 
+            src="/images/CareSmily_ロゴ.png" 
+            alt="CareSmily Logo"
+          />
+        </LogoContainer>
 
         <Container>
           <FlexContainer>
