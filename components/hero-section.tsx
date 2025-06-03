@@ -5,6 +5,9 @@ import styled, { createGlobalStyle } from "styled-components";
 import Head from "next/head";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Lottie from "lottie-react";
+// 背景に舞う書類のアニメーション（https://lottiefiles.com などから入手してください）
+import papersAnimation from "@/public/lottie/papers-flight.json";
 
 // グローバルスタイル
 const GlobalStyle = createGlobalStyle`
@@ -67,7 +70,7 @@ const HeroBg = styled.div`
     transform: translate(-50%, -50%);
     opacity: 0.5;
   }
-
+  
   /* Semi-transparent overlay to dim the video */
   &::after {
     content: '';
@@ -76,7 +79,7 @@ const HeroBg = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.4);
+rgba(0,0,0,0.8) 100%);
     z-index: 1;
   }
 
@@ -93,7 +96,6 @@ const HeroBg = styled.div`
     background-repeat: no-repeat;
     z-index: -1;
   }
-
   @media (max-width: 768px) {
     &::before {
     }
@@ -135,8 +137,9 @@ const HeadingLarge = styled.h1`
   margin-bottom: 1.5rem;
   line-height: 1.2;
   letter-spacing: -0.025em;
-  color: rgb(10, 37, 64);
+  color: white;
   text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 
   @media (min-width: 768px) {
     font-size: 3rem;
@@ -156,26 +159,24 @@ const TextContainer = styled.div`
 `;
 
 const TextGradient = styled.span`
-  background: linear-gradient(90deg, #4b5563, #4b5563);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #e5e7eb;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 `;
 
 const TextGradientCross = styled.span`
-  background: linear-gradient(90deg, #e40505, #e40505);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding: 300px;
+  color: #ef4444;
+  font-weight: 900;
+  font-size: 1.5em;
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+  filter: brightness(1.2);
+  margin: 0 0.5rem;
 `;
 
 const TextGradientSelect = styled.span`
-  background: linear-gradient(90deg, #4b5563, #4b5563);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding: 200px;
+  color: #e5e7eb;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 `;
 
 const UnderlinedText = styled.span`
@@ -194,11 +195,12 @@ const UnderlinedText = styled.span`
 `;
 
 const Description = styled.p`
-  color: #4b5563;
+  color: #d1d5db;
   font-size: 1.125rem;
   margin-bottom: 2rem;
   max-width: 32rem;
   text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 `;
 
 const ButtonContainer = styled.div`
@@ -272,6 +274,15 @@ const SecondaryButton = styled.a`
   }
 `;
 
+const IllustrationWrapper = styled.div`
+  position: absolute;
+  bottom: -4rem;
+  width: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.85;
+`;
+
 const HeroSectionComponent = () => {
   const countersRef = useRef<HTMLElement[]>([]);
 
@@ -325,6 +336,7 @@ const HeroSectionComponent = () => {
       <GlobalStyle />
 
       <HeroSection>
+
         <HeroBg>
           <video
             autoPlay
@@ -342,16 +354,13 @@ const HeroSectionComponent = () => {
             {/* Left content */}
             <TextContainer>
               <HeadingLarge>
-                <TextGradient>専門家監修の膨大な文例</TextGradient>
-              <br/>
+                <TextGradient>専門家監修の</TextGradient>
+                <br/>
+                <TextGradient>膨大な文例</TextGradient>
+                <br/>
                 <TextGradientCross>×</TextGradientCross>
                 <br/>
                 <TextGradientSelect>簡単選択</TextGradientSelect>
-                 <br/>
-                <br/>
-                <UnderlinedText>あなただけのケアプランが</UnderlinedText>
-                <br />
-                <UnderlinedText>瞬時に形になる</UnderlinedText>
               </HeadingLarge>
 
               <Description>
@@ -396,6 +405,10 @@ const HeroSectionComponent = () => {
 
           {/* Stats section removed */}
         </Container>
+        {/* Floating papers illustration */}
+        <IllustrationWrapper>
+          <Lottie animationData={papersAnimation} loop={true} style={{ width: "100%", height: "200px" }} />
+        </IllustrationWrapper>
       </HeroSection>
     </>
   );
