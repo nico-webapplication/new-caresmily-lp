@@ -28,6 +28,13 @@ const mediaItems = [
     source: "PR TIMES",
     link: "https://prtimes.jp/main/html/rd/p/000000004.000155002.html",
   },
+  {
+    date: "2025年6月2日",
+    title: "TOKYO FM『ONE MORNING』でCareSmilyが紹介されました",
+    description: "TOKYO FMの朝の人気番組『ONE MORNING』内コーナー「NEW TREND ONE」で、CareSmilyをご紹介いただきました。",
+    source: "RADIO",
+    link: "https://www.tfm.co.jp/one/",
+  },
 ];
 
 function MediaItem({ date, title, description, source, link }) {

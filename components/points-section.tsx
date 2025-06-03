@@ -23,10 +23,7 @@ export default function PointsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const pointsRef = useRef<HTMLDivElement>(null);
-  const leftBorderRef = useRef<HTMLDivElement>(null);
-  const rightBorderRef = useRef<HTMLDivElement>(null);
   const wheelchairRef = useRef<HTMLDivElement>(null);
-  const svgPathRef = useRef<SVGPathElement>(null);
   const { scroller } = useScrollTrigger();
 
   useEffect(() => {
@@ -74,61 +71,6 @@ export default function PointsSection() {
         });
       }
 
-      // 縁のテキストアニメーション
-      // if (leftBorderRef.current) {
-      //   const textElements = leftBorderRef.current.querySelectorAll("div");
-      //   gsap.set(textElements, { y: "100%" });
-      //   gsap.to(textElements, {
-      //     y: "-100%",
-      //     duration: 20,
-      //     ease: "none",
-      //     repeat: -1,
-      //   });
-      // }
-
-      // if (rightBorderRef.current) {
-      //   const textElements = rightBorderRef.current.querySelectorAll("div");
-      //   gsap.set(textElements, { y: "-100%" });
-      //   gsap.to(textElements, {
-      //     y: "100%",
-      //     duration: 20,
-      //     ease: "none",
-      //     repeat: -1,
-      //   });
-      // }
-
-      // 車いすのパスアニメーション
-      // if (wheelchairRef.current && svgPathRef.current) {
-      //   gsap.set(wheelchairRef.current, {
-      //     motionPath: {
-      //       path: svgPathRef.current,
-      //       align: svgPathRef.current,
-      //       autoRotate: true,
-      //       alignOrigin: [0.5, 0.5],
-      //     },
-      //     transformOrigin: "50% 50%",
-      //   });
-
-      //   ScrollTrigger.create({
-      //     trigger: sectionRef.current,
-      //     start: "top bottom",
-      //     end: "bottom top",
-      //     scroller: scroller || undefined,
-      //     scrub: 1,
-      //     onUpdate: (self) => {
-      //       gsap.set(wheelchairRef.current, {
-      //         motionPath: {
-      //           path: svgPathRef.current,
-      //           align: svgPathRef.current,
-      //           autoRotate: true,
-      //           alignOrigin: [0.5, 0.5],
-      //         },
-      //         progress: self.progress,
-      //       });
-      //     },
-      //   });
-      // }
-
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         if (wheelchairRef.current) {
@@ -138,99 +80,11 @@ export default function PointsSection() {
     }
   }, [scroller]);
 
-  // 縁の中に表示する文字の配列（繰り返し表示用に複数回書く）
-  // const borderTexts = [
-  //   "CARE",
-  //   "CARING",
-  //   "CAREGIVING",
-  //   "ELDERCARE",
-  //   "DAY-SERVICE",
-  //   "DAY-CARE",
-  //   "RESPITE",
-  //   "WELLBEING",
-  //   "PERSON-CENTERED",
-  //   "DIGNITY",
-  //   "SUPPORT",
-  //   "INDEPENDENCE",
-  //   "QUALITY-OF-LIFE",
-  //   "WORKFLOW",
-  //   "EFFICIENCY",
-  //   "STREAMLINING",
-  //   "TIME-SAVING",
-  //   "PAPERWORK-REDUCTION",
-  //   "TEMPLATE-DRIVEN",
-  //   "DOCUMENTATION",
-  //   "CARE-PLAN",
-  //   "SERVICE-PLAN",
-  //   "TRAINING-PLAN",
-  //   "PROGRESS-NOTE",
-  //   "DAILY-LOG",
-  //   "INCIDENT-REPORT",
-  //   "ASSESSMENT",
-  //   "EVALUATION",
-  //   "INTAKE-FORM",
-  //   "DISCHARGE-SUMMARY",
-  //   "SOAP-NOTE",
-  //   "CHECKLIST",
-  //   "KPI-SHEET",
-  //   "CONSENT-FORM",
-  //   "QUESTIONNAIRE",
-  //   "HANDOVER-SHEET",
-  //   "ROSTER",
-  //   "ATTENDANCE-RECORD",
-  //   "SCHEDULE",
-  //   "REPORT-GENERATOR",
-  // ];
-
   return (
     <section
       ref={sectionRef}
       className="w-full py-16 bg-[#a8e0ff] overflow-hidden relative"
     >
-      {/* SVGパス（非表示） */}
-      <svg
-        className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-0"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <path
-          ref={svgPathRef}
-          d="M90,10 C75,30 25,40 10,50 C25,60 75,70 90,90"
-          fill="none"
-          stroke="rgba(255,255,255,0.2)"
-          strokeWidth="0.5"
-        />
-      </svg>
-
-      {/* 車いすのアニメーション - スクロールで動く */}
-      {/* <div
-        ref={wheelchairRef}
-        className="absolute z-0 pointer-events-none"
-        style={{
-          width: "300px",
-          height: "300px",
-        }}
-      >
-        <div className="relative w-full h-full">
-          <Image
-            src="/images/CareSmily_ロゴ.png"
-            alt="ロゴ"
-            fill
-            style={{ objectFit: "contain" }}
-          />
-          
-          <div
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4/5 h-1/6 bg-black opacity-20 rounded-full blur-md"
-            style={{ filter: "blur(8px)" }}
-          ></div>
-        </div>
-      </div> */}
-
-      {/* 上部の縁 */}
-      {/* <div className="absolute top-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div> */}
-
-      {/* 下部の縁 */}
-      {/* <div className="absolute bottom-0 left-0 right-0 h-4 bg-[#0a2540] z-10"></div> */}
 
       {/* 流れるCARESMILYテキスト - 左側 */}
       <div className="absolute left-16 top-0 h-full overflow-hidden opacity-20 z-5">
@@ -268,48 +122,9 @@ export default function PointsSection() {
         </div>
       </div>
 
-      {/* 左側の縁 */}
-      {/* <div
-        ref={leftBorderRef}
-        className="absolute left-0 top-4 bottom-4 w-12 bg-[#0a2540] overflow-hidden z-10"
-      >
-        <div className="text-loop-container absolute left-5 w-8 visibility-hidden">
-          {borderTexts.map((text, index) => (
-            <div
-              key={`left-${index}`}
-              className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
-              style={{ writingMode: "vertical-rl" }}
-            >
-              {text}
-            </div>
-          ))}
-        </div>
-      </div> */}
-
-      {/* 右側の縁 */}
-      {/* <div
-        ref={rightBorderRef}
-        className="absolute right-0 top-4 bottom-4 w-12 bg-[#0a2540] overflow-hidden z-10"
-      >
-        <div className="text-loop-container absolute left-0 w-full visibility-hidden">
-          {borderTexts.map((text, index) => (
-            <div
-              key={`right-${index}`}
-              className="text-white text-base md:text-lg font-bold py-3 text-center writing-vertical"
-              style={{
-                writingMode: "vertical-rl",
-                transform: "rotate(180deg)",
-              }}
-            >
-              {text}
-            </div>
-          ))}
-        </div>
-      </div> */}
-
       <div className="container px-5 relative z-10">
         {/* 横並びレイアウト：ポイントカードとタイトル */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-[140px]">
           <div ref={pointsRef} className="max-w-4xl space-y-4">
             {/* ポイント1 */}
             <div className="point-card bg-white rounded-full flex overflow-hidden shadow-lg h-40">
