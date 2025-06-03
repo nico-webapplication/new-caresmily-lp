@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import Head from "next/head";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -41,7 +42,8 @@ const HeroSection = styled.section`
   position: relative;
   min-height: 90vh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   padding: 4rem 0 0 0; // 上だけ余白、下は無し
   overflow: hidden;
 `;
@@ -101,25 +103,28 @@ const HeroBg = styled.div`
 const Container = styled.div`
   width: 100%;
   max-width: 1500px;
-  margin-left: 100px;
-  margin-top: 180px;
+  margin: 0 auto;
   padding: 0 1rem;
   z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
-    margin-top: 620px;
-    margin-left: 0px;
-    margin-right: 50px;
+    padding: 0 2rem;
   }
 `;
 
 const FlexContainer = styled.div`
   width: 100%;
   margin-bottom: 3rem;
-  text-align: left;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   @media (min-width: 1024px) {
-    width: 50%;
     margin-bottom: 0;
   }
 `;
@@ -131,7 +136,7 @@ const HeadingLarge = styled.h1`
   line-height: 1.2;
   letter-spacing: -0.025em;
   color: rgb(10, 37, 64);
-  text-align: left;
+  text-align: center;
 
   @media (min-width: 768px) {
     font-size: 3rem;
@@ -143,7 +148,11 @@ const HeadingLarge = styled.h1`
 `;
 
 const TextContainer = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
 
 const TextGradient = styled.span`
@@ -189,7 +198,7 @@ const Description = styled.p`
   font-size: 1.125rem;
   margin-bottom: 2rem;
   max-width: 32rem;
-  text-align: left;
+  text-align: center;
 `;
 
 const ButtonContainer = styled.div`
@@ -307,11 +316,13 @@ const HeroSectionComponent = () => {
 
   return (
     <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <GlobalStyle />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
 
       <HeroSection>
         <HeroBg>
