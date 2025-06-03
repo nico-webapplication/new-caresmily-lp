@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
 // スタイルコンポーネント
 const HeroSection = styled.section`
   position: relative;
-  min-height: 120vh;
+  min-height: 90vh;
   display: flex;
   align-items: flex-start;
   padding: 4rem 0 0 0; // 上だけ余白、下は無し
@@ -63,6 +63,19 @@ const HeroBg = styled.div`
     height: 100%;
     object-fit: cover;
     transform: translate(-50%, -50%);
+    opacity: 0.5;
+  }
+
+  /* Semi-transparent overlay to dim the video */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    z-index: 1;
   }
 
   /* Fallback background for unsupported devices */
@@ -73,7 +86,6 @@ const HeroBg = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    //background-image: url("/images/hero-background.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -82,14 +94,13 @@ const HeroBg = styled.div`
 
   @media (max-width: 768px) {
     &::before {
-      background-image: url("/images/mobile-hero-bg.jpg");
     }
   }
 `;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1280px;
+  max-width: 1500px;
   margin-left: 100px;
   margin-top: 180px;
   padding: 0 1rem;
@@ -113,13 +124,6 @@ const FlexContainer = styled.div`
   }
 `;
 
-const HeadingSmall = styled.h5`
-  font-size: 1.125rem;
-  color: #3b82f6;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-`;
-
 const HeadingLarge = styled.h1`
   font-size: 2.25rem;
   font-weight: 700;
@@ -139,13 +143,11 @@ const HeadingLarge = styled.h1`
 `;
 
 const TextContainer = styled.div`
-  @media (max-width: 768px) {
-    display: none;
-  }
+
 `;
 
 const TextGradient = styled.span`
-  background: linear-gradient(90deg, #ffffff, #ffffff);
+  background: linear-gradient(90deg, #4b5563, #4b5563);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -156,6 +158,15 @@ const TextGradientCross = styled.span`
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding: 300px;
+`;
+
+const TextGradientSelect = styled.span`
+  background: linear-gradient(90deg, #4b5563, #4b5563);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 200px;
 `;
 
 const UnderlinedText = styled.span`
@@ -252,171 +263,6 @@ const SecondaryButton = styled.a`
   }
 `;
 
-const ImageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 36rem;
-  margin: 0 auto;
-`;
-
-const FloatingImage = styled.div`
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  padding: 0.5rem;
-  animation: floating 3s ease-in-out infinite;
-
-  img {
-    border-radius: 0.75rem;
-    width: 100%;
-  }
-`;
-
-const FloatingCard = styled.div`
-  position: absolute;
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  animation: floating 3s ease-in-out infinite;
-  display: flex;
-  align-items: center;
-
-  &.top-left {
-    top: -2.5rem;
-    left: -2.5rem;
-    width: 12rem;
-    animation-delay: 0.5s;
-  }
-
-  &.bottom-right {
-    bottom: -2.5rem;
-    right: 0;
-    width: 13rem;
-    animation-delay: 0.8s;
-  }
-`;
-
-const IconCircle = styled.div`
-  flex-shrink: 0;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &.blue {
-    background-color: #dbeafe;
-
-    svg {
-      color: #3b82f6;
-    }
-  }
-
-  &.green {
-    background-color: #dcfce7;
-
-    svg {
-      color: #22c55e;
-    }
-  }
-
-  svg {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
-`;
-
-const CardContent = styled.div`
-  margin-left: 0.75rem;
-
-  p.label {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #111827;
-  }
-
-  p.value {
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-
-  p.value.blue {
-    color: #3b82f6;
-  }
-
-  p.value.green {
-    color: #22c55e;
-  }
-`;
-
-const StatsGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-top: 4rem;
-
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-`;
-
-const StatCard = styled.div`
-  background-color: white;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
-  }
-`;
-
-const StatValue = styled.div`
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  font-variant-numeric: tabular-nums;
-
-  @media (min-width: 768px) {
-    font-size: 2.25rem;
-  }
-
-  &.blue {
-    color: #3b82f6;
-  }
-
-  &.green {
-    color: #22c55e;
-  }
-
-  &.teal {
-    color: #14b8a6;
-  }
-
-  &.cyan {
-    color: #06b6d4;
-  }
-
-  span {
-    font-size: 1.125rem;
-  }
-`;
-
-const StatLabel = styled.p`
-  color: #4b5563;
-`;
-
 const HeroSectionComponent = () => {
   const countersRef = useRef<HTMLElement[]>([]);
 
@@ -476,7 +322,7 @@ const HeroSectionComponent = () => {
             playsInline
             preload="auto"
           >
-            <source src="/hero-video.mp4" type="video/mp4" />
+            <source src="/hero-video2.mp4" type="video/mp4" />
           </video>
         </HeroBg>
 
@@ -484,7 +330,7 @@ const HeroSectionComponent = () => {
           <FlexContainer>
             {/* Left content */}
             <TextContainer>
-              <img
+              {/* <img
                 src="/images/fukidashi.png"
                 alt="吹き出し"
                 style={{
@@ -492,12 +338,14 @@ const HeroSectionComponent = () => {
                   height: "auto",
                   animation: "floating 3s ease-in-out infinite",
                 }}
-              />
+              /> */}
               <HeadingLarge>
-                <TextGradient>膨大な文例</TextGradient>
+                <TextGradient>膨大な専門家監修の文例</TextGradient>
+              <br/>
                 <TextGradientCross>×</TextGradientCross>
-                <TextGradient>選択</TextGradient>で<br />
-                <UnderlinedText>あなたのケアプランが</UnderlinedText>
+                <br/>
+                <TextGradientSelect>簡単選択</TextGradientSelect>
+                <UnderlinedText>あなただけのケアプランが</UnderlinedText>
                 <br />
                 <UnderlinedText>瞬時に形になる</UnderlinedText>
               </HeadingLarge>
