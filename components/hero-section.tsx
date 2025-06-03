@@ -52,14 +52,38 @@ const HeroBg = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/images/hero-background.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   z-index: -2;
+  overflow: hidden;
+
+  video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Fallback background for unsupported devices */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    //background-image: url("/images/hero-background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
 
   @media (max-width: 768px) {
-    background-image: url("/images/mobile-hero-bg.jpg");
+    &::before {
+      background-image: url("/images/mobile-hero-bg.jpg");
+    }
   }
 `;
 
@@ -444,7 +468,17 @@ const HeroSectionComponent = () => {
       />
 
       <HeroSection>
-        <HeroBg />
+        <HeroBg>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          >
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+        </HeroBg>
 
         <Container>
           <FlexContainer>
