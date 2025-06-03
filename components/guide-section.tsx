@@ -63,13 +63,13 @@ export default function OpenCampusSection() {
                   </div>
                   
                   <div className="flex-1 flex justify-center items-end">
-                    <div className="relative w-80 h-64">
+                    <div className="relative w-80 h-64 overflow-hidden">
                       <Image
-                        src="/images/online_meeting.png"
+                        src="/attached_assets/image.png"
                         alt="CareSmilyミーティングの様子"
                         width={320}
                         height={256}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-contain transform transition-transform duration-300 ease-in-out group-hover:scale-110"
                       />
                     </div>
                   </div>
@@ -100,13 +100,13 @@ export default function OpenCampusSection() {
                   </div>
                   
                   <div className="flex-1 flex justify-center items-end">
-                    <div className="relative w-80 h-64">
+                    <div className="relative w-80 h-64 overflow-hidden">
                       <Image
-                        src="/images/caresmily_guide.png"
-                        alt="資料請求"
+                        src="/attached_assets/targeted_element_1748913793526.png"
+                        alt="カラフルなビルのイラスト"
                         width={320}
                         height={256}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-contain transform transition-transform duration-300 ease-in-out group-hover:scale-110"
                       />
                     </div>
                   </div>
