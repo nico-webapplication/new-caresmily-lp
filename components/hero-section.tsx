@@ -5,9 +5,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import Head from "next/head";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Lottie from "lottie-react";
-// 背景に舞う書類のアニメーション（https://lottiefiles.com などから入手してください）
-import papersAnimation from "@/public/lottie/papers-flight.json";
+// Removed Lottie import for now - will add custom animations instead
 
 // グローバルスタイル
 const GlobalStyle = createGlobalStyle`
@@ -37,6 +35,48 @@ const GlobalStyle = createGlobalStyle`
     0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
     70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
     100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+    }
+    50% {
+      text-shadow: 0 0 30px rgba(239, 68, 68, 1), 0 0 40px rgba(239, 68, 68, 0.8);
+    }
   }
 `;
 
@@ -162,6 +202,8 @@ const TextGradient = styled.span`
   color: #e5e7eb;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: fadeInUp 1.2s ease-out;
+  display: inline-block;
 `;
 
 const TextGradientCross = styled.span`
@@ -171,12 +213,16 @@ const TextGradientCross = styled.span`
   text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
   filter: brightness(1.2);
   margin: 0 0.5rem;
+  animation: scaleIn 1.5s ease-out 0.8s both, glowPulse 2s ease-in-out 2s infinite;
+  display: inline-block;
 `;
 
 const TextGradientSelect = styled.span`
   color: #e5e7eb;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: fadeInUp 1.2s ease-out 1.2s both;
+  display: inline-block;
 `;
 
 const UnderlinedText = styled.span`
@@ -201,12 +247,14 @@ const Description = styled.p`
   max-width: 32rem;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  animation: fadeInUp 1.5s ease-out 1.6s both;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  animation: fadeInUp 1.8s ease-out 2s both;
 
   @media (min-width: 640px) {
     flex-direction: row;
@@ -274,14 +322,7 @@ const SecondaryButton = styled.a`
   }
 `;
 
-const IllustrationWrapper = styled.div`
-  position: absolute;
-  bottom: -4rem;
-  width: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.85;
-`;
+// Removed IllustrationWrapper - focusing on text animations instead
 
 const HeroSectionComponent = () => {
   const countersRef = useRef<HTMLElement[]>([]);
@@ -405,10 +446,7 @@ const HeroSectionComponent = () => {
 
           {/* Stats section removed */}
         </Container>
-        {/* Floating papers illustration */}
-        <IllustrationWrapper>
-          <Lottie animationData={papersAnimation} loop={true} style={{ width: "100%", height: "200px" }} />
-        </IllustrationWrapper>
+
       </HeroSection>
     </>
   );
