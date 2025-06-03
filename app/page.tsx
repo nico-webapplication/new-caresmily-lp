@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import HeroSection from "@/components/hero-section"
+import HeroSection from "@/components/hero-centered"
 import ServiceSection from "@/components/service-section"
 import PointsSection from "@/components/points-section"
 import ServiceContentSection from "@/components/service-content-section"
