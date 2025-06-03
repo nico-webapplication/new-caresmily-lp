@@ -42,14 +42,13 @@ export default function OpenCampusSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Open Campus Card */}
             <Link href="/online-meeting">
-              <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
+              <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
                 <div className="flex flex-col h-full">
                   <div className="mb-6">
                     <p className="text-sm text-gray-600 mb-2">オンライン面談</p>
                     <div className="flex items-center gap-3 mb-4">
-                      <h2 className="text-3xl font-bold text-gray-900 relative overflow-hidden group">
-                        <span className="relative z-10">Online Meeting</span>
-                        <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-blue-600 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out flex items-center">
+                      <h2 className="text-3xl font-bold text-gray-900 relative overflow-hidden">
+                        <span className="inline-block transition-all duration-500 ease-in-out bg-gradient-to-r from-gray-900 via-gray-900 to-blue-500 bg-[length:200%_100%] bg-left group-hover:bg-right bg-clip-text text-transparent">
                           Online Meeting
                         </span>
                       </h2>
@@ -80,14 +79,13 @@ export default function OpenCampusSection() {
 
             {/* School Guide Card */}
             <Link href="/document-request">
-              <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer">
+              <div className="bg-gray-50 rounded-[10rem] p-8 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
                 <div className="flex flex-col h-full">
                   <div className="mb-6">
                     <p className="text-sm text-gray-600 mb-2">各資料を無料でお届けいたします</p>
                     <div className="flex items-center gap-3 mb-4">
-                      <h2 className="text-3xl font-bold text-gray-900 relative overflow-hidden group">
-                        <span className="relative z-10">CareSmily Guide</span>
-                        <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-blue-600 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out flex items-center">
+                      <h2 className="text-3xl font-bold text-gray-900 relative overflow-hidden">
+                        <span className="inline-block transition-all duration-500 ease-in-out bg-gradient-to-r from-gray-900 via-gray-900 to-blue-500 bg-[length:200%_100%] bg-left group-hover:bg-right bg-clip-text text-transparent">
                           CareSmily Guide
                         </span>
                       </h2>
