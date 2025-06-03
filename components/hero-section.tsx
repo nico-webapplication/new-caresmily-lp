@@ -78,6 +78,28 @@ const GlobalStyle = createGlobalStyle`
       text-shadow: 0 0 30px rgba(239, 68, 68, 1), 0 0 40px rgba(239, 68, 68, 0.8);
     }
   }
+
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 0.1;
+    }
+  }
+
+  @keyframes slideInRight {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 0.1;
+    }
+  }
 `;
 
 // スタイルコンポーネント
@@ -351,6 +373,85 @@ const LogoImage = styled.img`
   }
 `;
 
+const SideDecoration = styled.div`
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 300px;
+  z-index: 5;
+  opacity: 0.1;
+  overflow: hidden;
+  
+  &.left {
+    left: 0;
+    background: linear-gradient(45deg, transparent 0%, rgba(56, 189, 248, 0.3) 50%, transparent 100%);
+    animation: slideInLeft 2s ease-out;
+  }
+  
+  &.right {
+    right: 0;
+    background: linear-gradient(-45deg, transparent 0%, rgba(74, 222, 128, 0.3) 50%, transparent 100%);
+    animation: slideInRight 2s ease-out;
+  }
+
+  @media (max-width: 1024px) {
+    width: 200px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100px;
+    opacity: 0.05;
+  }
+`;
+
+const FloatingElement = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(74, 222, 128, 0.15) 100%);
+  animation: floating 6s ease-in-out infinite;
+  
+  &.element-1 {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+  
+  &.element-2 {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    left: 15%;
+    animation-delay: 2s;
+  }
+  
+  &.element-3 {
+    width: 100px;
+    height: 100px;
+    top: 30%;
+    right: 8%;
+    animation-delay: 4s;
+  }
+  
+  &.element-4 {
+    width: 40px;
+    height: 40px;
+    top: 70%;
+    right: 12%;
+    animation-delay: 1s;
+  }
+
+  @media (max-width: 768px) {
+    opacity: 0.5;
+    
+    &.element-1 { width: 50px; height: 50px; }
+    &.element-2 { width: 40px; height: 40px; }
+    &.element-3 { width: 60px; height: 60px; }
+    &.element-4 { width: 30px; height: 30px; }
+  }
+`;
+
 const HeroSectionComponent = () => {
   const countersRef = useRef<HTMLElement[]>([]);
 
@@ -406,6 +507,14 @@ const HeroSectionComponent = () => {
       <HeroSection>
 
         <HeroBg></HeroBg>
+        
+        <SideDecoration className="left" />
+        <SideDecoration className="right" />
+        
+        <FloatingElement className="element-1" />
+        <FloatingElement className="element-2" />
+        <FloatingElement className="element-3" />
+        <FloatingElement className="element-4" />
         
         <LogoContainer>
           <LogoImage 
