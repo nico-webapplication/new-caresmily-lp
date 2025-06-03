@@ -48,7 +48,8 @@ export default function OpenCampusSection() {
                     <p className="text-sm text-gray-600 mb-2">オンライン面談</p>
                     <div className="flex items-center gap-4 mb-6">
                       <h2 className="text-4xl font-bold text-gray-900 relative overflow-hidden">
-                        <span className="inline-block transition-all duration-500 ease-in-out bg-gradient-to-r from-gray-900 via-gray-900 to-blue-500 bg-[length:200%_100%] bg-left group-hover:bg-right bg-clip-text text-transparent">
+                        <span className="relative z-10 transition-colors duration-500 ease-in-out group-hover:text-cyan-400">Online Meeting</span>
+                        <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out transform -translate-x-full group-hover:translate-x-0 flex items-center">
                           Online Meeting
                         </span>
                       </h2>
@@ -65,7 +66,7 @@ export default function OpenCampusSection() {
                   <div className="flex-1 flex justify-center items-end">
                     <div className="relative w-96 h-80">
                       <Image
-                        src="/attached_assets/image.png"
+                        src="/images/caresmily_guide.png"
                         alt="CareSmilyミーティングの様子"
                         width={400}
                         height={320}
@@ -85,7 +86,8 @@ export default function OpenCampusSection() {
                     <p className="text-sm text-gray-600 mb-2">各資料を無料でお届けいたします</p>
                     <div className="flex items-center gap-4 mb-6">
                       <h2 className="text-4xl font-bold text-gray-900 relative overflow-hidden">
-                        <span className="inline-block transition-all duration-500 ease-in-out bg-gradient-to-r from-gray-900 via-gray-900 to-blue-500 bg-[length:200%_100%] bg-left group-hover:bg-right bg-clip-text text-transparent">
+                        <span className="relative z-10 transition-colors duration-500 ease-in-out group-hover:text-cyan-400">CareSmily Guide</span>
+                        <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out transform -translate-x-full group-hover:translate-x-0 flex items-center">
                           CareSmily Guide
                         </span>
                       </h2>
@@ -102,7 +104,7 @@ export default function OpenCampusSection() {
                   <div className="flex-1 flex justify-center items-end">
                     <div className="relative w-96 h-80">
                       <Image
-                        src="/attached_assets/targeted_element_1748913793526.png"
+                        src="/images/caresmily_guide.png"
                         alt="カラフルなビルのイラスト"
                         width={400}
                         height={320}
