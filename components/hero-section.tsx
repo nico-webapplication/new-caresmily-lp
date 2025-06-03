@@ -341,21 +341,14 @@ const HeroSectionComponent = () => {
           <FlexContainer>
             {/* Left content */}
             <TextContainer>
-              {/* <img
-                src="/images/fukidashi.png"
-                alt="吹き出し"
-                style={{
-                  width: "200px",
-                  height: "auto",
-                  animation: "floating 3s ease-in-out infinite",
-                }}
-              /> */}
               <HeadingLarge>
-                <TextGradient>膨大な専門家監修の文例</TextGradient>
+                <TextGradient>専門家監修の膨大な文例</TextGradient>
               <br/>
                 <TextGradientCross>×</TextGradientCross>
                 <br/>
                 <TextGradientSelect>簡単選択</TextGradientSelect>
+                 <br/>
+                <br/>
                 <UnderlinedText>あなただけのケアプランが</UnderlinedText>
                 <br />
                 <UnderlinedText>瞬時に形になる</UnderlinedText>
