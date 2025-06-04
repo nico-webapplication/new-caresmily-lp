@@ -506,7 +506,18 @@ const HeroSectionComponent = () => {
 
       <HeroSection>
 
-        <HeroBg></HeroBg>
+
+        <HeroBg>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          >
+            <source src="/hero-video2.mp4" type="video/mp4" />
+          </video>
+        </HeroBg>
         
         <SideDecoration className="left" />
         <SideDecoration className="right" />

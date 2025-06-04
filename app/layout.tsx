@@ -23,6 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <header>
+        
+      </header>
       <body className={inter.className}>
         <Header />
         <main className="pt-16">
