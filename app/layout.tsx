@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -8,7 +8,10 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Script from "next/script";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin" as "latin"],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "CareSmily",
