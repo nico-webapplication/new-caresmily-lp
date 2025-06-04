@@ -1,13 +1,20 @@
 // app/online-meeting/page.tsx
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function OnlineMeeting() {
   /* ❶ TimeRex カレンダー描画先 */
   const calRef = useRef<HTMLDivElement>(null);
-  /* ❷ BowNow フォーム描画先 */
+  /* �② BowNow フォーム描画先 */
   const formRef = useRef<HTMLDivElement>(null);
+  /* ❸ クライアントサイドのマウント状態 */
+  const [isMounted, setIsMounted] = useState(false);
+
+  /* クライアントサイドマウントの検出 */
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   /* --- A. TimeRex 予約確定 → 自前 API へ中継 ------------------------- */
   useEffect(() => {
@@ -54,26 +61,37 @@ export default function OnlineMeeting() {
 
   /* --- D. TimeRex ウィジェット読み込み & アンマウント時掃除 --------- */
   useEffect(() => {
-    if (!calRef.current) return;
+    if (!isMounted || !calRef.current) return;
+
+    const timerexUrl = process.env.NEXT_PUBLIC_TIMEREX_WIDGET_URL;
+    if (!timerexUrl) {
+      console.error('NEXT_PUBLIC_TIMEREX_WIDGET_URL environment variable is not set');
+      return;
+    }
 
     /* すでに読み込まれていれば再読み込みしない */
     if (!window.TimeRexWidget) {
       const s = document.createElement("script");
       s.async = true;
-      s.src = "https://asset.timerex.net/js/embed.js"; // ★最新版 URL
+      s.src = "https://asset.timerex.net/js/embed.js";
       s.onload = () => {
-        window.TimeRexWidget.init({
-          container: "#timerex-widget",
-          url: process.env.TIMEREX_WIDGET_URL!,
-          locale: "ja",
-          style: { primaryColor: "#0ea5e9" },
-        });
+        if (window.TimeRexWidget) {
+          window.TimeRexWidget.init({
+            container: "#timerex-widget",
+            url: timerexUrl,
+            locale: "ja",
+            style: { primaryColor: "#0ea5e9" },
+          });
+        }
+      };
+      s.onerror = () => {
+        console.error('Failed to load TimeRex widget script');
       };
       document.head.appendChild(s);
     } else {
       window.TimeRexWidget.init({
         container: "#timerex-widget",
-        url: process.env.TIMEREX_WIDGET_URL!,
+        url: timerexUrl,
         locale: "ja",
         style: { primaryColor: "#0ea5e9" },
       });
@@ -81,9 +99,11 @@ export default function OnlineMeeting() {
 
     /* アンマウント → カレンダー iframe 除去 */
     return () => {
-      calRef.current!.innerHTML = "";
+      if (calRef.current) {
+        calRef.current.innerHTML = "";
+      }
     };
-  }, []);
+  }, [isMounted]);
 
   /* ---------------------------- JSX ---------------------------- */
   return (
@@ -113,7 +133,16 @@ export default function OnlineMeeting() {
             <div ref={formRef} className="min-h-[400px]" />
 
             {/* TimeRex カレンダー（ここだけに描画） */}
-            <div ref={calRef} id="timerex-widget" />
+            <div ref={calRef} id="timerex-widget" className="min-h-[500px]">
+              {!isMounted && (
+                <div className="flex items-center justify-center h-64">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500 mx-auto mb-4"></div>
+                    <p className="text-gray-600">カレンダーを読み込み中...</p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

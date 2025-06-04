@@ -11,8 +11,10 @@ const nextConfig = {
   },
   transpilePackages: ['aos', 'gsap'],
   serverExternalPackages: ['@radix-ui/react-dismissable-layer'],
-  env: {
-    PORT: '5000'
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['localhost:3000', '*.replit.dev']
+    }
   }
 }
 
