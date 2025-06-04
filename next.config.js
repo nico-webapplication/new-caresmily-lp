@@ -10,7 +10,10 @@ const nextConfig = {
     unoptimized: true,
   },
   transpilePackages: ['aos', 'gsap'],
-  serverExternalPackages: ['@radix-ui/react-dismissable-layer']
+  serverExternalPackages: ['@radix-ui/react-dismissable-layer'],
+  env: {
+    PORT: '5000'
+  }
 }
 
 module.exports = nextConfig

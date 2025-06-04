@@ -2,11 +2,11 @@
 
 const { exec } = require('child_process');
 
-// Set environment variables for port 5000
+// Set environment variables
 process.env.PORT = '5000';
 process.env.HOSTNAME = '0.0.0.0';
 
-console.log('Starting Next.js application on port 5000...');
+console.log('Starting Next.js on port 5000...');
 
 // Start Next.js with proper configuration
 const server = exec('npx next dev -p 5000 -H 0.0.0.0', {

@@ -18,14 +18,11 @@ export const metadata: Metadata = {
 // RootLayoutのbodyにScrollTriggerProvider、Header、Footerを追加
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="ja">
-      <header>
-        
-      </header>
       <body className={inter.className}>
         <Header />
         <main className="pt-16">
