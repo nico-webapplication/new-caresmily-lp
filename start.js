@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 
 console.log('Starting Next.js application on port 5000...');
-const nextProcess = spawn('npx', ['next', 'dev', '-p', '5000'], {
+const nextProcess = spawn('npx', ['next', 'dev', '-p', '5000', '-H', '0.0.0.0'], {
   stdio: 'inherit',
   shell: true
 });
