@@ -130,7 +130,6 @@ const HeroBg = styled.div`
     height: 100%;
     object-fit: cover;
     transform: translate(-50%, -50%);
-    opacity: 0.5;
   }
   
   /* Semi-transparent overlay to dim the video */
@@ -218,12 +217,14 @@ const TextContainer = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding-left: 450px;
+  transform: rotate(-4.5deg);
 `;
 
 const TextGradient = styled.span`
-  color: #e5e7eb;
+  color: rgb(26 43 74);
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
   animation: fadeInUp 1.2s ease-out;
   display: inline-block;
 `;
@@ -240,22 +241,11 @@ const TextGradientCross = styled.span`
 `;
 
 const TextGradientSelect = styled.span`
-  color: #e5e7eb;
+  color: rgb(26 43 74);
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
   animation: fadeInUp 1.2s ease-out 1.2s both;
   display: inline-block;
-`;
-
-
-const Description = styled.p`
-  color: #d1d5db;
-  font-size: 1.125rem;
-  margin-bottom: 2rem;
-  max-width: 32rem;
-  text-align: center;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  animation: fadeInUp 1.5s ease-out 1.6s both;
 `;
 
 const ButtonContainer = styled.div`
@@ -263,6 +253,9 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   animation: fadeInUp 1.8s ease-out 2s both;
+  padding-bottom: 400px;
+  padding-left: 300px;
+  transform: rotate(-4deg);
 
   @media (min-width: 640px) {
     flex-direction: row;
@@ -332,10 +325,11 @@ const SecondaryButton = styled.a`
 
 const LogoContainer = styled.div`
   position: absolute;
-  top: 2rem;
-  right: 2rem;
   z-index: 10;
   animation: fadeInDown 1s ease-out 0.5s both;
+  padding-bottom: 300px;
+  padding-right: 650px;
+  transform: rotate(-4deg);
 
   @media (max-width: 768px) {
     top: 1rem;
@@ -533,15 +527,8 @@ const HeroSectionComponent = () => {
                 <br/>
                 <TextGradientSelect>簡単選択</TextGradientSelect>
               </HeadingLarge>
-
-              <Description>
-                介護現場の書類作成時間を<strong>60%削減</strong>
-                する文例特化型アプリ。
-                <br />
-                <strong>10万件以上</strong>
-                の専門家監修文例で、あなたの業務を革新します。
-              </Description>
             </TextContainer>
+            </FlexContainer>
             <ButtonContainer>
               <PrimaryButton href="/online-meeting">
                 オンライン面談を予約
@@ -572,7 +559,6 @@ const HeroSectionComponent = () => {
                 資料請求はこちら
               </SecondaryButton>
             </ButtonContainer>
-          </FlexContainer>
 
           {/* Stats section removed */}
         </Container>

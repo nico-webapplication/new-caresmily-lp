@@ -1,22 +1,39 @@
-// app/contact/page.tsx など
 "use client";
-
-import Script from "next/script";
+import { useEffect, useRef } from "react";
 
 export default function ContactPage() {
-  return (
-    <>
-      {/* --- BowNow フォーム本体 --- */}
-      <Script
-        id="_bownow_cs_sid_0d095ce895393bcc2770"
-        src="https://contents.bownow.jp/forms/sid_0d095ce895393bcc2770/trace.js"
-        strategy="afterInteractive"   // CSR 時に一度だけ実行
-        // ↓必要なら onLoad で初期化処理や console.log を書ける
-        // onLoad={() => console.log("BowNow form script loaded")}
-      />
+  const containerRef = useRef<HTMLDivElement>(null);
 
-      {/* フォームを描画する場所（BowNow 側で自動的に上書きされる）*/}
-      <div id="bow-now-form" />
-    </>
+  useEffect(() => {
+    // ----- マウント時 -----
+    const script = document.createElement("script");
+    script.id = "_bownow_cs_sid_0d095ce895393bcc2770";
+    script.charset = "utf-8";
+    script.src =
+      "https://contents.bownow.jp/forms/sid_0d095ce895393bcc2770/trace.js";
+    containerRef.current?.appendChild(script);
+
+    // ----- アンマウント時（別ページに遷移したら） -----
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.innerHTML = ""; // iframe も丸ごと除去
+      }
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto">
+          <h1 className="text-3xl font-bold text-center mb-8">お問い合わせ</h1>
+
+          {/* BowNow フォームがここに出る */}
+          <div
+            ref={containerRef}
+            className="bg-white rounded-lg shadow-md p-8 min-h-[400px]"
+          />
+        </div>
+      </div>
+    </div>
   );
 }

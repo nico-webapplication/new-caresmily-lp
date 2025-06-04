@@ -26,6 +26,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
+      <head>
+        {/* BowNow Tracking */}
+        <Script id="_bownow_ts">
+          {`
+            var _bownow_ts = document.createElement('script');
+            _bownow_ts.charset = 'utf-8';
+            _bownow_ts.src = 'https://contents.bownow.jp/js/UTC_82ae68d5f77f624d01e6/trace.js';
+            document.getElementsByTagName('head')[0].appendChild(_bownow_ts);
+          `}
+        </Script>
+      </head>
       <body className={inter.className}>
         <Header />
         <main className="pt-16">
