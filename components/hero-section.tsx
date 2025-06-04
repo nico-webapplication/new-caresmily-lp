@@ -247,20 +247,6 @@ const TextGradientSelect = styled.span`
   display: inline-block;
 `;
 
-const UnderlinedText = styled.span`
-  position: relative;
-  display: inline-block;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0.2rem;
-    left: 0;
-    width: 100%;
-    height: 0.25rem;
-    background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
-  }
-`;
 
 const Description = styled.p`
   color: #d1d5db;
@@ -515,7 +501,7 @@ const HeroSectionComponent = () => {
             playsInline
             preload="auto"
           >
-            <source src="/hero-video2.mp4" type="video/mp4" />
+            <source src="/hero-video3.mp4" type="video/mp4" />
           </video>
         </HeroBg>
         
