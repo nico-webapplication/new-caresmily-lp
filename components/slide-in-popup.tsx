@@ -87,7 +87,7 @@ export default function SlideInPopup() {
   return (
     <div
       ref={popupRef}
-      className="fixed bottom-6 right-6 z-50 cursor-pointer transition-opacity duration-300 hover:opacity-70"
+      className="fixed bottom-6 right-6 z-50 cursor-pointer transition-opacity duration-300 hover:opacity-70 sm:bottom-6 sm:right-6 bottom-4 right-4"
       onClick={handleClick}
     >
       {/* Close button */}
@@ -96,10 +96,10 @@ export default function SlideInPopup() {
           e.stopPropagation();
           handleClose();
         }}
-        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors duration-200 z-10 shadow-lg"
+        className="absolute -top-2 -right-2 w-6 h-6 sm:w-6 sm:h-6 w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors duration-200 z-10 shadow-lg"
         aria-label="ポップアップを閉じる"
       >
-        <X size={14} />
+        <X className="sm:w-3.5 sm:h-3.5 w-3 h-3" />
       </button>
 
       {/* CareSmilyポップアップ画像 */}
@@ -107,7 +107,7 @@ export default function SlideInPopup() {
         <img
           src={careSmilyPopupImageSrc}
           alt="CareSmily 文例数100,000例以上！介護ドキュメントDX No.1 無料ご紹介資料はこちら"
-          className="w-52 h-auto rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-300"
+          className="w-52 h-auto sm:w-52 w-40 rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-300"
         />
         {/* ホバー時の透明度調整のためのオーバーレイ */}
         <div className="absolute inset-0 bg-transparent rounded-lg"></div>
