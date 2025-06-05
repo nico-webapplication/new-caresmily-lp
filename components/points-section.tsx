@@ -17,6 +17,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import styled, { createGlobalStyle } from "styled-components";
 
 // useScrollTriggerを使用する部分を修正
 export default function PointsSection() {
@@ -25,6 +26,18 @@ export default function PointsSection() {
   const pointsRef = useRef<HTMLDivElement>(null);
   const wheelchairRef = useRef<HTMLDivElement>(null);
   const { scroller } = useScrollTrigger();
+
+  const TopTitle = styled.div`
+    @media (min-width: 1005px) {
+      display: none;
+    }
+  `;
+
+  const SideTitle = styled.div`
+    @media (max-width: 1006px) {
+      display: none;
+    }
+  `;
 
   useEffect(() => {
     // GSAPプラグインを登録
@@ -85,18 +98,24 @@ export default function PointsSection() {
       ref={sectionRef}
       className="w-full py-16 bg-[#a8e0ff] overflow-hidden relative"
     >
-
       {/* 流れるCARESMILYテキスト - 左側 */}
       <div className="absolute left-16 top-0 h-full overflow-hidden opacity-20 z-5">
         <div className="animate-marquee-vertical text-8xl lg:text-9xl xl:text-[10rem] font-black text-white writing-mode-vertical flex flex-col h-[300%]">
           {/* 3倍の高さで連続表示 */}
-          {Array.from({ length: 3 }, (_, groupIndex) => 
-            ("CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY " + 
-             "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY").split("").map((char, index) => (
-              <span key={`left-${groupIndex}-${index}`} className="block leading-none text-center">
-                {char === " " ? "　" : char}
-              </span>
-            ))
+          {Array.from({ length: 3 }, (_, groupIndex) =>
+            (
+              "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY " +
+              "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY"
+            )
+              .split("")
+              .map((char, index) => (
+                <span
+                  key={`left-${groupIndex}-${index}`}
+                  className="block leading-none text-center"
+                >
+                  {char === " " ? "　" : char}
+                </span>
+              )),
           )}
         </div>
       </div>
@@ -105,18 +124,44 @@ export default function PointsSection() {
       <div className="absolute right-16 top-0 h-full overflow-hidden opacity-20 z-5">
         <div className="animate-marquee-vertical-reverse text-8xl lg:text-9xl xl:text-[10rem] font-black text-white writing-mode-vertical flex flex-col h-[300%]">
           {/* 3倍の高さで連続表示 */}
-          {Array.from({ length: 3 }, (_, groupIndex) => 
-            ("CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY " + 
-             "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY").split("").map((char, index) => (
-              <span key={`right-${groupIndex}-${index}`} className="block leading-none text-center">
-                {char === " " ? "　" : char}
-              </span>
-            ))
+          {Array.from({ length: 3 }, (_, groupIndex) =>
+            (
+              "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY " +
+              "CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY CARESMILY"
+            )
+              .split("")
+              .map((char, index) => (
+                <span
+                  key={`right-${groupIndex}-${index}`}
+                  className="block leading-none text-center"
+                >
+                  {char === " " ? "　" : char}
+                </span>
+              )),
           )}
         </div>
       </div>
 
       <div className="container px-5 relative z-10">
+        {/* 右側：タイトルセクション */}
+        <TopTitle>
+          <div className="relative flex justify-center lg:justify-start pb-12">
+            <div ref={titleRef} className="text-white text-center lg:text-left">
+              <h2 className="text-6xl lg:text-8xl font-black mb-4 leading-tight">
+                5Points
+              </h2>
+              <h3 className="text-xl lg:text-2xl font-medium mb-6 opacity-90">
+                5つのポイント
+              </h3>
+              <p className="text-lg opacity-80 leading-relaxed">
+                CareSmilyの
+                <br />
+                5つのポイントをご紹介
+              </p>
+            </div>
+          </div>
+        </TopTitle>
+
         {/* 横並びレイアウト：ポイントカードとタイトル */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-[140px]">
           <div ref={pointsRef} className="max-w-4xl space-y-4">
@@ -467,24 +512,28 @@ export default function PointsSection() {
             </div>
           </div>
 
-          {/* 右側：タイトルセクション */}
-          <div className="relative flex justify-center lg:justify-start">
-            <div 
-              ref={titleRef}
-              className="text-white text-center lg:text-left"
-            >
-              <h2 className="text-6xl lg:text-8xl font-black mb-4 leading-tight">
-                5Points
-              </h2>
-              <h3 className="text-xl lg:text-2xl font-medium mb-6 opacity-90">
-                5つのポイント
-              </h3>
-              <p className="text-lg opacity-80 leading-relaxed">
-                CareSmilyの<br />
-                5つのポイントをご紹介
-              </p>
+          <SideTitle>
+            {/* 右側：タイトルセクション */}
+            <div className="relative flex justify-center lg:justify-start">
+              <div
+                ref={titleRef}
+                className="text-white text-center lg:text-left"
+              >
+                <h2 className="text-6xl lg:text-8xl font-black mb-4 leading-tight">
+                  5Points
+                </h2>
+                <h3 className="text-xl lg:text-2xl font-medium mb-6 opacity-90">
+                  5つのポイント
+                </h3>
+                <p className="text-lg opacity-80 leading-relaxed">
+                  CareSmilyの
+                  <br />
+                  5つのポイントをご紹介
+                </p>
+              </div>
             </div>
-          </div>
+          </SideTitle>
+          
         </div>
       </div>
     </section>
