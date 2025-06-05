@@ -117,15 +117,6 @@ export default function PointsSection() {
       </div>
 
       <div className="container px-5 relative z-10">
-        {/* 5 Points タイトルセクション - 縦並び時は先頭に表示 */}
-        <div className="text-center mb-16 lg:hidden">
-          <div className="bg-[#0a2540] text-white py-8 px-6 rounded-2xl inline-block shadow-xl">
-            <h2 className="text-6xl font-black mb-3">5Points</h2>
-            <p className="text-2xl font-bold mb-2">5つのポイント</p>
-            <p className="text-lg font-medium">CareSmilyの<br />5つのポイントをご紹介</p>
-          </div>
-        </div>
-
         {/* 横並びレイアウト：ポイントカードとタイトル */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-[140px]">
           <div ref={pointsRef} className="max-w-4xl space-y-4">
