@@ -121,45 +121,26 @@ const HeroBg = styled.div`
   height: 100%;
   z-index: -2;
   overflow: hidden;
+  background-image: url("/images/hero-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-  video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-  }
-  
-  /* Semi-transparent overlay to dim the video */
+  /* Semi-transparent overlay to enhance text readability */
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-rgba(0,0,0,0.8) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
     z-index: 1;
-  }
-
-  /* Fallback background for unsupported devices */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-  }
-  @media (max-width: 768px) {
-    &::before {
-    }
   }
 `;
 
@@ -236,7 +217,9 @@ const TextGradientCross = styled.span`
   text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
   filter: brightness(1.2);
   margin: 0 0.5rem;
-  animation: scaleIn 1.5s ease-out 0.8s both, glowPulse 2s ease-in-out 2s infinite;
+  animation:
+    scaleIn 1.5s ease-out 0.8s both,
+    glowPulse 2s ease-in-out 2s infinite;
   display: inline-block;
 `;
 
@@ -353,43 +336,16 @@ const LogoImage = styled.img`
   }
 `;
 
-const SideDecoration = styled.div`
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 300px;
-  z-index: 5;
-  opacity: 0.1;
-  overflow: hidden;
-  
-  &.left {
-    left: 0;
-    background: linear-gradient(45deg, transparent 0%, rgba(56, 189, 248, 0.3) 50%, transparent 100%);
-    animation: slideInLeft 2s ease-out;
-  }
-  
-  &.right {
-    right: 0;
-    background: linear-gradient(-45deg, transparent 0%, rgba(74, 222, 128, 0.3) 50%, transparent 100%);
-    animation: slideInRight 2s ease-out;
-  }
-
-  @media (max-width: 1024px) {
-    width: 200px;
-  }
-
-  @media (max-width: 768px) {
-    width: 100px;
-    opacity: 0.05;
-  }
-`;
-
 const FloatingElement = styled.div`
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(74, 222, 128, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.15) 0%,
+    rgba(74, 222, 128, 0.15) 100%
+  );
   animation: floating 6s ease-in-out infinite;
-  
+
   &.element-1 {
     width: 80px;
     height: 80px;
@@ -397,7 +353,7 @@ const FloatingElement = styled.div`
     left: 10%;
     animation-delay: 0s;
   }
-  
+
   &.element-2 {
     width: 60px;
     height: 60px;
@@ -405,7 +361,7 @@ const FloatingElement = styled.div`
     left: 15%;
     animation-delay: 2s;
   }
-  
+
   &.element-3 {
     width: 100px;
     height: 100px;
@@ -413,7 +369,7 @@ const FloatingElement = styled.div`
     right: 8%;
     animation-delay: 4s;
   }
-  
+
   &.element-4 {
     width: 40px;
     height: 40px;
@@ -424,11 +380,23 @@ const FloatingElement = styled.div`
 
   @media (max-width: 768px) {
     opacity: 0.5;
-    
-    &.element-1 { width: 50px; height: 50px; }
-    &.element-2 { width: 40px; height: 40px; }
-    &.element-3 { width: 60px; height: 60px; }
-    &.element-4 { width: 30px; height: 30px; }
+
+    &.element-1 {
+      width: 50px;
+      height: 50px;
+    }
+    &.element-2 {
+      width: 40px;
+      height: 40px;
+    }
+    &.element-3 {
+      width: 60px;
+      height: 60px;
+    }
+    &.element-4 {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;
 
@@ -485,84 +453,54 @@ const HeroSectionComponent = () => {
       <GlobalStyle />
 
       <HeroSection>
-
-
-        <HeroBg>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          >
-            <source src="/hero-video3.mp4" type="video/mp4" />
-          </video>
-        </HeroBg>
-        
-        <SideDecoration className="left" />
-        <SideDecoration className="right" />
-        
-        <FloatingElement className="element-1" />
-        <FloatingElement className="element-2" />
-        <FloatingElement className="element-3" />
-        <FloatingElement className="element-4" />
-        
-        <LogoContainer>
-          <LogoImage 
-            src="/images/CareSmily_ロゴ.png" 
-            alt="CareSmily Logo"
-          />
-        </LogoContainer>
+        <HeroBg />
 
         <Container>
-          <FlexContainer>
-            {/* Left content */}
+          {/* <FlexContainer>
             <TextContainer>
               <HeadingLarge>
                 <TextGradient>専門家監修の</TextGradient>
-                <br/>
+                <br />
                 <TextGradient>膨大な文例</TextGradient>
-                <br/>
+                <br />
                 <TextGradientCross>×</TextGradientCross>
-                <br/>
+                <br />
                 <TextGradientSelect>簡単選択</TextGradientSelect>
               </HeadingLarge>
             </TextContainer>
-            </FlexContainer>
-            <ButtonContainer>
-              <PrimaryButton href="/online-meeting">
-                オンライン面談を予約
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </PrimaryButton>
-              <SecondaryButton href="/document-request">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                資料請求はこちら
-              </SecondaryButton>
-            </ButtonContainer>
-
-          {/* Stats section removed */}
+          </FlexContainer>
+          <ButtonContainer>
+            <PrimaryButton href="/online-meeting">
+              オンライン面談を予約
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </PrimaryButton>
+            <SecondaryButton href="/document-request">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              資料請求はこちら
+            </SecondaryButton>
+          </ButtonContainer> */}
+          
         </Container>
-
       </HeroSection>
     </>
   );
