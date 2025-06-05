@@ -121,27 +121,10 @@ const HeroBg = styled.div`
   height: 100%;
   z-index: -2;
   overflow: hidden;
-  background-image: url("/images/hero-background.jpg");
+  background-image: url("/images/many_documents.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  /* Semi-transparent overlay to enhance text readability */
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0, 0, 0, 0.3) 100%
-    );
-    z-index: 1;
-  }
 `;
 
 const Container = styled.div`
@@ -400,6 +383,37 @@ const FloatingElement = styled.div`
   }
 `;
 
+const LeftTextImage = styled.img`
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 400px;
+  width: 30%;
+  height: auto;
+  z-index: 10;
+  animation: fadeInUp 1.5s ease-out 0.5s both;
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.3));
+
+  @media (max-width: 1024px) {
+    max-width: 300px;
+    width: 35%;
+    left: 3%;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 250px;
+    width: 40%;
+    left: 2%;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 200px;
+    width: 45%;
+    top: 40%;
+  }
+`;
+
 const HeroSectionComponent = () => {
   const countersRef = useRef<HTMLElement[]>([]);
 
@@ -454,6 +468,11 @@ const HeroSectionComponent = () => {
 
       <HeroSection>
         <HeroBg />
+        
+        <LeftTextImage 
+          src="/images/hero-text.png" 
+          alt="専門家監修の膨大な文例×選択 あなたのケアプランが瞬時に形になる"
+        />
 
         <Container>
           {/* <FlexContainer>

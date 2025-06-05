@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Youtube } from "lucide-react";
 // useScrollTriggerをインポート
 import { useScrollTrigger } from "@/components/scroll-trigger-provider";
+import styled, { createGlobalStyle } from "styled-components";
 
 // useScrollTriggerを使用する部分を修正
 export default function ServiceSection() {
@@ -17,6 +18,12 @@ export default function ServiceSection() {
   const imageRef = useRef<HTMLDivElement>(null);
   const { scroller } = useScrollTrigger();
 
+  const TextContainer = styled.div`
+    @media (max-width: 768px) {
+      font-size: 1.1rem
+    }
+  `;
+  
   useEffect(() => {
     // ScrollTriggerを登録
     if (typeof window !== "undefined") {
@@ -172,10 +179,10 @@ export default function ServiceSection() {
                   priority
                 />
               </div>
-              <span className="text-3xl md:text-4xl lg:text-5xl ml-2">とは？</span>
+              <span className="text-3xl md:text-4xl lg:text-5xl">とは？</span>
             </h2>
             <div className="space-y-10 lg:space-y-12">
-              <p
+              <TextContainer
                 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2b4a] animate-item"
                 style={{ lineHeight: "1.5em" }}
               >
@@ -192,7 +199,7 @@ export default function ServiceSection() {
                 様々な書類に使用できる豊富な文例を
                 <br className="mb-6" />
                 ぜひお試しください。
-              </p>
+              </TextContainer>
             </div>
             <div className="pt-6 lg:pt-8 animate-item">
               <button className="bg-[#FF0000] hover:bg-[#CC0000] text-white px-8 py-4 lg:px-10 lg:py-5 rounded-lg font-medium text-lg lg:text-xl transition-colors flex items-center shadow-lg"
