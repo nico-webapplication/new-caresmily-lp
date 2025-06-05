@@ -6,8 +6,6 @@ import { useEffect, useRef, useState } from "react";
 export default function OnlineMeeting() {
   /* ❶ TimeRex カレンダー描画先 */
   const calRef = useRef<HTMLDivElement>(null);
-  /* �② BowNow フォーム描画先 */
-  const formRef = useRef<HTMLDivElement>(null);
   /* ❸ クライアントサイドのマウント状態 */
   const [isMounted, setIsMounted] = useState(false);
 
@@ -16,93 +14,30 @@ export default function OnlineMeeting() {
     setIsMounted(true);
   }, []);
 
-  /* --- A. TimeRex 予約確定 → 自前 API へ中継 ------------------------- */
-  useEffect(() => {
-    const handler = (ev: MessageEvent) => {
-      if (ev.data?.type === "timerex:booking.confirmed") {
-        fetch("/api/timerex-callback", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(ev.data.payload),
-        });
-      }
-    };
-    window.addEventListener("message", handler);
-    return () => window.removeEventListener("message", handler);
-  }, []);
-
-  /* --- B. BowNow 送信完了後にカレンダーへスムーズスクロール ---------- */
-  useEffect(() => {
-    const obs = new MutationObserver(() => {
-      if (document.querySelector(".bownow-end-message") && calRef.current) {
-        calRef.current.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-    obs.observe(document.body, { childList: true, subtree: true });
-    return () => obs.disconnect();
-  }, []);
-
-  /* --- C. BowNow フォームを所定位置へ埋め込み & アンマウント時掃除 --- */
-  useEffect(() => {
-    if (!formRef.current) return;
-
-    const script = document.createElement("script");
-    script.id = "_bownow_cs_sid_cd4980c99e6a9ee47d50";
-    script.charset = "utf-8";
-    script.src =
-      "https://contents.bownow.jp/forms/sid_cd4980c99e6a9ee47d50/trace.js";
-    formRef.current.appendChild(script);
-
-    /* ページ遷移時に iframe ごと除去 */
-    return () => {
-      formRef.current!.innerHTML = "";
-    };
-  }, []);
-
-  /* --- D. TimeRex ウィジェット読み込み & アンマウント時掃除 --------- */
+  /* --- TimeRex ウィジェット読み込み & アンマウント時掃除 --------- */
   useEffect(() => {
     if (!isMounted || !calRef.current) return;
 
-    const timerexUrl = process.env.NEXT_PUBLIC_TIMEREX_WIDGET_URL;
-    if (!timerexUrl) {
-      console.error('NEXT_PUBLIC_TIMEREX_WIDGET_URL environment variable is not set');
-      return;
-    }
+    const widgetUrl = "https://timerex.net/s/CareSmily/c0de45e9";
 
-    /* すでに読み込まれていれば再読み込みしない */
-    if (!window.TimeRexWidget) {
-      const s = document.createElement("script");
-      s.async = true;
-      s.src = "https://asset.timerex.net/js/embed.js";
-      s.onload = () => {
-        if (window.TimeRexWidget) {
-          window.TimeRexWidget.init({
-            container: "#timerex-widget",
-            url: timerexUrl,
-            locale: "ja",
-            style: { primaryColor: "#0ea5e9" },
-          });
-        }
-      };
-      s.onerror = () => {
-        console.error('Failed to load TimeRex widget script');
-      };
-      document.head.appendChild(s);
-    } else {
-      window.TimeRexWidget.init({
-        container: "#timerex-widget",
-        url: timerexUrl,
+    const mount = () =>
+      window.TimerexCalendar({
         locale: "ja",
         style: { primaryColor: "#0ea5e9" },
       });
+
+    if (!window.TimerexCalendar) {
+      const js = document.createElement("script");
+      js.id = "timerex_embed";
+      js.async = true;
+      js.src = "https://asset.timerex.net/js/embed.js";
+      js.onload = mount;
+      document.head.appendChild(js);
+    } else {
+      mount();
     }
 
-    /* アンマウント → カレンダー iframe 除去 */
-    return () => {
-      if (calRef.current) {
-        calRef.current.innerHTML = "";
-      }
-    };
+    return () => (calRef.current!.innerHTML = "");
   }, [isMounted]);
 
   /* ---------------------------- JSX ---------------------------- */
@@ -129,11 +64,13 @@ export default function OnlineMeeting() {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-md min-h-[400px]">
-            {/* BowNow フォーム（ここだけに描画） */}
-            <div ref={formRef} className="min-h-[400px]" />
-
             {/* TimeRex カレンダー（ここだけに描画） */}
-            <div ref={calRef} id="timerex-widget" className="min-h-[500px]">
+            <div
+              ref={calRef}
+              id="timerex_calendar"
+              data-url="https://timerex.net/s/CareSmily/c0de45e9"
+              className="min-h-[500px]"
+            >
               {!isMounted && (
                 <div className="flex items-center justify-center h-64">
                   <div className="text-center">
@@ -153,7 +90,7 @@ export default function OnlineMeeting() {
 /* 型定義の補助（グローバルに TimeRexWidget が入る） */
 declare global {
   interface Window {
-    TimeRexWidget: {
+    TimerexCalendar: {
       init: (opts: Record<string, unknown>) => void;
     };
   }
