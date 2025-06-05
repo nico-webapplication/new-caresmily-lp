@@ -157,18 +157,14 @@ const FlexContainer = styled.div`
 `;
 
 const HeadingLarge = styled.h1`
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   line-height: 1.2;
   letter-spacing: -0.025em;
   color: white;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-
-  @media (min-width: 480px) {
-    font-size: 2rem;
-  }
 
   @media (min-width: 768px) {
     font-size: 3rem;
@@ -187,16 +183,6 @@ const TextContainer = styled.div`
   text-align: center;
   padding-left: 450px;
   transform: rotate(-4.5deg);
-
-  @media (max-width: 768px) {
-    padding-left: 0;
-    padding: 0 1rem;
-    transform: rotate(0deg);
-  }
-
-  @media (max-width: 480px) {
-    padding: 0 0.5rem;
-  }
 `;
 
 const TextGradient = styled.span`
@@ -236,19 +222,6 @@ const ButtonContainer = styled.div`
   padding-bottom: 400px;
   padding-left: 300px;
   transform: rotate(-4deg);
-
-  @media (max-width: 768px) {
-    padding-bottom: 2rem;
-    padding-left: 0;
-    padding: 0 1rem 2rem 1rem;
-    transform: rotate(0deg);
-    gap: 0.75rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0 0.5rem 1rem 0.5rem;
-    gap: 0.5rem;
-  }
 
   @media (min-width: 640px) {
     flex-direction: row;
