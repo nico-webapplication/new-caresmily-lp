@@ -20,7 +20,7 @@ export default function ServiceSection() {
 
   const TextContainer = styled.div`
     @media (max-width: 768px) {
-      font-size: 1.1rem;
+      font-size: 1.1rem
     }
   `;
   

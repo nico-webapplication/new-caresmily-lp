@@ -117,20 +117,6 @@ export default function PointsSection() {
       </div>
 
       <div className="container px-5 relative z-10">
-        {/* 5Points ヘッダー - レスポンシブ対応 */}
-        <div className="flex justify-center mb-8 lg:mb-12">
-          <div className="bg-black text-white px-6 py-4 rounded-lg shadow-lg">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">5Points</h2>
-              <div className="text-sm md:text-base lg:text-lg mt-2">
-                <div>5つのポイント</div>
-                <div className="mt-1">CareSmily の</div>
-                <div>5つのポイントをご紹介</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
         {/* 横並びレイアウト：ポイントカードとタイトル */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-[140px]">
           <div ref={pointsRef} className="max-w-4xl space-y-4">
