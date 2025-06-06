@@ -111,6 +111,59 @@ const GlobalStyle = createGlobalStyle`
       opacity: 1;
     }
   }
+
+  @keyframes slideInFromLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes zoomInOut {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes colorShift {
+    0%, 100% {
+      filter: hue-rotate(0deg);
+    }
+    25% {
+      filter: hue-rotate(10deg);
+    }
+    75% {
+      filter: hue-rotate(-10deg);
+    }
+  }
+
+  @keyframes textGlow {
+    0%, 100% {
+      text-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(0,0,0,0.3), 0 0 30px rgba(0,0,0,0.2);
+    }
+  }
+
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(1deg);
+    }
+    75% {
+      transform: rotate(-1deg);
+    }
+  }
 `;
 
 // スタイルコンポーネント
@@ -121,9 +174,9 @@ const HeroSection = styled.section`
   align-items: center;
   overflow: hidden;
   background: 
-    radial-gradient(ellipse 120% 150% at 15% 75%, rgba(135, 206, 250, 0.2) 0%, rgba(30, 144, 255, 0.15) 35%, transparent 80%),
-    radial-gradient(ellipse 130% 120% at 85% 15%, rgba(135, 206, 250, 0.15) 0%, rgba(70, 130, 180, 0.1) 45%, transparent 90%),
-    radial-gradient(ellipse 110% 140% at 55% 55%, rgba(100, 149, 237, 0.1) 0%, transparent 75%),
+    radial-gradient(ellipse 120% 150% at 15% 75%, rgba(248, 246, 243, 0.95) 0%, rgba(240, 235, 230, 0.8) 35%, transparent 80%),
+    radial-gradient(ellipse 130% 120% at 85% 15%, rgba(245, 240, 235, 0.85) 0%, rgba(240, 235, 230, 0.7) 45%, transparent 90%),
+    radial-gradient(ellipse 110% 140% at 55% 55%, rgba(250, 248, 245, 0.6) 0%, transparent 75%),
     #f8f6f3;
 `;
 
@@ -138,6 +191,7 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 0 2rem;
   gap: 12rem;
+  animation: slideInFromLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) both, zoomInOut 4s ease-in-out 2s infinite;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -169,7 +223,7 @@ const MainTitle = styled.h1`
   color: #111827;
   line-height: 1.1;
   margin: 0 0 1.5rem 0;
-  animation: slideInScale 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: slideInScale 1.2s cubic-bezier(0.4, 0, 0.2, 1) both, textGlow 3s ease-in-out 2s infinite, wiggle 0.5s ease-in-out 4s infinite;
   letter-spacing: -0.02em;
   position: relative;
   background: linear-gradient(135deg, #111827 0%, #374151 50%, #111827 100%);
@@ -288,6 +342,23 @@ const CTAButtonGroup = styled.div`
   gap: 1.5rem;
   flex-wrap: wrap;
   align-items: center;
+  animation: slideInFromLeft 1.5s ease-out 0.5s both;
+  
+  & > *:nth-child(1) {
+    animation: slideInScale 1s ease-out 0.8s both, pulse 2s ease-in-out 3s infinite;
+  }
+  
+  & > *:nth-child(2) {
+    animation: slideInScale 1s ease-out 1s both, pulse 2s ease-in-out 3.5s infinite;
+  }
+  
+  & > *:nth-child(3) {
+    animation: slideInScale 1s ease-out 1.2s both, pulse 2s ease-in-out 4s infinite;
+  }
+  
+  & > *:nth-child(4) {
+    animation: slideInScale 1s ease-out 1.4s both, pulse 2s ease-in-out 4.5s infinite;
+  }
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -494,7 +565,7 @@ const VideoContainer = styled.div`
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
   transition: all 0.3s ease;
-  animation: float 6s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite, rotateIn 1.5s ease-out 1s both, zoomInOut 3s ease-in-out 4s infinite;
   
   &:hover {
     transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.02);
@@ -826,18 +897,21 @@ const HeroSectionComponent = () => {
             <CTASection>
               <CTAButtonGroup>
                 <CTAButton href="/online-meeting" $variant="primary">
-                  オンライン面談予約
+                  オンライン面談予約はこちら
                 </CTAButton>
                 
-                <CTAButton href="/document-request" $variant="secondary">
-                  資料請求
+                <CTAButton href="/contact" $variant="secondary">
+                  お問い合わせはこちら
+                </CTAButton>
+                
+                <CTAButton href="/document-request" $variant="primary">
+                  資料請求はこちら
+                </CTAButton>
+                
+                <CTAButton href="/media" $variant="secondary">
+                  CareSmilyについてのその他動画はこちら
                 </CTAButton>
               </CTAButtonGroup>
-              
-              <VideoPrompt>
-                <ArrowIcon />
-                動画でCareSmily の使い方を確認
-              </VideoPrompt>
             </CTASection>
           </LeftSection>
 
