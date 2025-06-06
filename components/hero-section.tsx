@@ -225,12 +225,7 @@ const HeroSectionComponent = () => {
 
           <RightSection>
             <CircularFrame>
-              
-
-              <CircularStamp>
-                PAGE TOP<br />
-                ふんこも展示室
-              </CircularStamp>
+            
             </CircularFrame>
           </RightSection>
         </Container>
