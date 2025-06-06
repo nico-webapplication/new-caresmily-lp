@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Head from "next/head";
 
@@ -164,6 +164,59 @@ const GlobalStyle = createGlobalStyle`
       transform: rotate(-1deg);
     }
   }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+      transform: translateY(-10px) translateX(-5px);
+    }
+    75% {
+      transform: translateY(-15px) translateX(8px);
+    }
+  }
+
+  @keyframes waveAnimation {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
 `;
 
 // スタイルコンポーネント
@@ -173,7 +226,9 @@ const HeroSection = styled.section`
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: #f8f6f3;
+  background: linear-gradient(-45deg, #f8f6f3, #faf8f5, #f3f1ee, #f6f4f1);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
 `;
 
 const Container = styled.div`
@@ -597,7 +652,137 @@ const VideoOverlay = styled.div`
   opacity: 0.7;
 `;
 
+// Animated background elements
+const BackgroundAnimation = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+`;
+
+const FloatingParticle = styled.div<{ $delay: number; $size: number; $left: number; $duration: number }>`
+  position: absolute;
+  left: ${props => props.$left}%;
+  bottom: -50px;
+  width: ${props => props.$size}px;
+  height: ${props => props.$size}px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+  border-radius: 50%;
+  animation: floatUp ${props => props.$duration}s linear infinite;
+  animation-delay: ${props => props.$delay}s;
+  filter: blur(1px);
+  
+  &:nth-child(even) {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.3));
+  }
+  
+  &:nth-child(3n) {
+    background: linear-gradient(135deg, rgba(245, 101, 101, 0.3), rgba(239, 68, 68, 0.3));
+  }
+`;
+
+const GeometricShape = styled.div<{ $type: 'circle' | 'square' | 'triangle'; $delay: number; $left: number; $top: number }>`
+  position: absolute;
+  left: ${props => props.$left}%;
+  top: ${props => props.$top}%;
+  width: 20px;
+  height: 20px;
+  animation: particleFloat 8s ease-in-out infinite;
+  animation-delay: ${props => props.$delay}s;
+  opacity: 0.1;
+  
+  ${props => props.$type === 'circle' && `
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  `}
+  
+  ${props => props.$type === 'square' && `
+    background: linear-gradient(135deg, #10b981, #059669);
+    transform: rotate(45deg);
+  `}
+  
+  ${props => props.$type === 'triangle' && `
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #f59e0b;
+    background: transparent;
+  `}
+`;
+
+const WaveOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.05) 25%, 
+    rgba(139, 92, 246, 0.05) 50%, 
+    rgba(59, 130, 246, 0.05) 75%, 
+    transparent 100%);
+  animation: waveAnimation 20s linear infinite;
+  z-index: 2;
+`;
+
+const LightRay = styled.div<{ $delay: number; $angle: number }>`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform-origin: top;
+  transform: translate(-50%, -100%) rotate(${props => props.$angle}deg);
+  animation: rotateIn 10s linear infinite;
+  animation-delay: ${props => props.$delay}s;
+  opacity: 0.3;
+`;
+
 const HeroSectionComponent = () => {
+  const [animationElements, setAnimationElements] = useState<{
+    particles: Array<{ id: number; delay: number; size: number; left: number; duration: number; }>;
+    shapes: Array<{ id: number; type: 'circle' | 'square' | 'triangle'; delay: number; left: number; top: number; }>;
+    lightRays: Array<{ id: number; delay: number; angle: number; }>;
+  }>({
+    particles: [],
+    shapes: [],
+    lightRays: []
+  });
+
+  useEffect(() => {
+    // Generate random positions and properties for animated elements on client side
+    const particles = Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      delay: Math.random() * 10,
+      size: Math.random() * 15 + 5,
+      left: Math.random() * 100,
+      duration: Math.random() * 10 + 15
+    }));
+
+    const shapes = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      type: ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)] as 'circle' | 'square' | 'triangle',
+      delay: Math.random() * 8,
+      left: Math.random() * 100,
+      top: Math.random() * 100
+    }));
+
+    const lightRays = Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      delay: i * 1.5,
+      angle: (360 / 8) * i
+    }));
+
+    setAnimationElements({ particles, shapes, lightRays });
+  }, []);
+
   return (
     <>
       <Head>
@@ -609,6 +794,42 @@ const HeroSectionComponent = () => {
       <GlobalStyle />
 
       <HeroSection>
+        <BackgroundAnimation>
+          {/* Floating particles */}
+          {animationElements.particles.map((particle) => (
+            <FloatingParticle
+              key={particle.id}
+              $delay={particle.delay}
+              $size={particle.size}
+              $left={particle.left}
+              $duration={particle.duration}
+            />
+          ))}
+          
+          {/* Geometric shapes */}
+          {animationElements.shapes.map((shape) => (
+            <GeometricShape
+              key={shape.id}
+              $type={shape.type}
+              $delay={shape.delay}
+              $left={shape.left}
+              $top={shape.top}
+            />
+          ))}
+          
+          {/* Light rays */}
+          {animationElements.lightRays.map((ray) => (
+            <LightRay
+              key={ray.id}
+              $delay={ray.delay}
+              $angle={ray.angle}
+            />
+          ))}
+          
+          {/* Wave overlay */}
+          <WaveOverlay />
+        </BackgroundAnimation>
+        
         <Container>
           <LeftSection>
 
