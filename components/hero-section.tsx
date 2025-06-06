@@ -267,18 +267,13 @@ const Container = styled.div`
   max-width: auto;
   margin: 0 auto;
   padding: 0 2rem;
-  gap: 8rem;
+  gap: 12rem;
   /* animation: slideInFromLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) both, zoomInOut 4s ease-in-out 2s infinite; */
-
-  @media (max-width: 1024px) {
-    gap: 6rem;
-  }
 
   @media (max-width: 768px) {
     flex-direction: column;
     text-align: center;
     padding: 2rem 1rem;
-    gap: 3rem;
   }
 `;
 
@@ -355,6 +350,7 @@ const CrossSymbol = styled.span`
   margin: 0 1rem;
   font-weight: 300;
   vertical-align: middle;
+  animation: bounce 2s infinite;
   
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
@@ -562,72 +558,22 @@ const LogoImage = styled.img`
   }
 `;
 
-const VideoAnnouncementBanner = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin: 1.5rem 0 2rem 0;
-  animation: slideInFromLeft 1.2s ease-out 0.5s both, bounce 2s ease-in-out 2.5s infinite;
-  
-  img {
-    height: 160px;
-    width: auto;
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    transform: perspective(800px) rotateX(5deg) rotateY(-2deg);
-    
-    &:hover {
-      transform: perspective(800px) rotateX(0deg) rotateY(0deg) scale(1.05);
-      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
-    }
-  }
-  
-  @media (max-width: 1024px) {
-    img {
-      height: 140px;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    justify-content: center;
-    margin: 1rem 0 1.5rem 0;
-    
-    img {
-      height: 120px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    img {
-      height: 90px;
-    }
-  }
-`;
-
 
 const RightSection = styled.div`
-  flex: 1.8;
+  flex: 2;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding-left: 2rem;
-
-  @media (max-width: 1024px) {
-    flex: 1.5;
-    padding-left: 1rem;
-  }
 
   @media (max-width: 768px) {
     margin-top: 2rem;
-    padding-left: 0;
-    justify-content: center;
   }
 `;
 
 const CircularFrame = styled.div`
-  position: relative;
-  width: 1000px;
-  height: 750px;
+  position: absolute;
+  width: 1200px;
+  height: 900px;
   border-color: #000;
   border-radius: 45%;
   background: white;
@@ -636,24 +582,19 @@ const CircularFrame = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  margin-left: -100px;
+  margin-right: 0;
 
   @media (max-width: 1024px) {
-    width: 700px;
-    height: 525px;
-    margin-left: -50px;
+    width: 750px;
+    height: 500px;
+    margin-right: 0;
   }
 
   @media (max-width: 768px) {
-    width: 550px;
+    width: 600px;
     height: 400px;
-    margin-left: 0;
+    margin-right: 0;
     align-items: center;
-  }
-
-  @media (max-width: 480px) {
-    width: 400px;
-    height: 300px;
   }
 `;
 
@@ -1035,10 +976,6 @@ const HeroSectionComponent = () => {
               <LogoContainer>
                 <LogoImage src="/images/caresmily-logo.png" alt="CareSmily Logo" />
               </LogoContainer>
-              
-              <VideoAnnouncementBanner>
-                <img src="/images/について.png" alt="CareSmily について動画上映中" />
-              </VideoAnnouncementBanner>
               
               <MainTitle>
                 <HighlightText>膨大な文例</HighlightText>

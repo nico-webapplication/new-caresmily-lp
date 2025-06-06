@@ -34,51 +34,54 @@ const DocumentButton = ({
 
   return (
     <div
-      className="absolute cursor-pointer group hover:z-50"
+      className="absolute cursor-pointer transition-all duration-500 ease-out hover:z-50"
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
         transform: `translate(-50%, -50%) rotate(${position.rotation}deg)`,
-        transformOrigin: 'center center',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+        transformOrigin: 'center center'
       }}
       onClick={handleClick}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget;
+        el.style.transform = `translate(-50%, -50%) rotate(${position.rotation + 2}deg) scale(1.05) translateY(-15px)`;
+        el.style.boxShadow = `0 25px 35px rgba(0, 0, 0, 0.2), 0 15px 25px rgba(0, 0, 0, 0.15), 0 0 20px ${colorMap[color]}40`;
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget;
+        el.style.transform = `translate(-50%, -50%) rotate(${position.rotation}deg) scale(1) translateY(0)`;
+        el.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)';
+      }}
     >
       <div
-        className="w-48 h-32 relative transition-all duration-300 ease-out group-hover:-translate-y-3 group-hover:scale-105"
+        className="w-48 h-32 rounded-xl relative overflow-hidden border border-white/20 shadow-lg"
         style={{
-          filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06))',
-          transition: 'filter 0.3s ease, transform 0.3s ease'
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.filter = `drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 8px 15px rgba(0, 0, 0, 0.1)) drop-shadow(0 0 20px ${colorMap[color]}40)`;
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.filter = 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06))';
+          background: `linear-gradient(145deg, ${colorMap[color]} 0%, ${colorMap[color]}E6 50%, ${colorMap[color]} 100%)`,
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
         }}
       >
-        {/* メイン書類 */}
-        <div
-          className="w-full h-full relative rounded border border-gray-300"
+        {/* 紙の折り目 */}
+        <div 
+          className="absolute top-0 right-0 w-5 h-5"
           style={{
             background: 'linear-gradient(-45deg, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.1) 50%, transparent 55%, transparent 100%)',
             clipPath: 'polygon(0 0, 100% 0, 100% 100%)'
           }}
-
-          />
-
-          {/* 紙の線 */}
-          <div className="absolute top-5 left-5 right-5 bottom-5">
-            <div className="absolute top-5 left-0 right-0 h-px bg-white/20" />
-            <div className="absolute top-8 left-0 right-0 h-px bg-white/20" />
+        />
+        
+        {/* 紙の線 */}
+        <div className="absolute top-5 left-5 right-5 bottom-5">
+          <div className="absolute top-5 left-0 right-0 h-px bg-white/20" />
+          <div className="absolute top-8 left-0 right-0 h-px bg-white/20" />
         </div>
+        
         {/* テキスト */}
         <div className="absolute inset-0 flex items-center justify-center px-4">
           <div className="text-white font-bold text-sm leading-tight text-center text-shadow-lg">
             {children}
           </div>
         </div>
-
+        
         {/* シマーエフェクト */}
         <div 
           className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
@@ -94,9 +97,9 @@ const DocumentButton = ({
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
-          }
-          .text-shadow-lg {
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        .text-shadow-lg {
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
       `}</style>
     </div>
