@@ -138,7 +138,6 @@ const LogoImage = styled.img`
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
   animation: fadeInText 1s ease-out 0.5s both;
 
   @media (max-width: 768px) {
@@ -197,7 +196,7 @@ const HeroSectionComponent = () => {
             <path
               d="M-50,300 Q200,100 400,200 T800,150 Q1000,100 1200,200 T1450,250"
               stroke="#22c55e"
-              strokeWidth="12"
+              strokeWidth="24"
               fill="none"
               strokeLinecap="round"
               style={{
@@ -209,7 +208,7 @@ const HeroSectionComponent = () => {
             <path
               d="M-50,400 Q150,500 350,400 T650,350 Q850,300 1050,400 T1450,450"
               stroke="#3b82f6"
-              strokeWidth="12"
+              strokeWidth="24"
               fill="none"
               strokeLinecap="round"
               style={{
@@ -221,7 +220,7 @@ const HeroSectionComponent = () => {
             <path
               d="M-50,100 Q300,50 500,150 T900,200 Q1100,250 1300,150 T1450,100"
               stroke="#fbbf24"
-              strokeWidth="12"
+              strokeWidth="24"
               fill="none"
               strokeLinecap="round"
               style={{
@@ -233,7 +232,7 @@ const HeroSectionComponent = () => {
             <path
               d="M-50,600 Q250,700 450,600 T750,550 Q950,500 1150,600 T1450,650"
               stroke="#ec4899"
-              strokeWidth="12"
+              strokeWidth="24"
               fill="none"
               strokeLinecap="round"
               style={{
@@ -245,7 +244,7 @@ const HeroSectionComponent = () => {
             <path
               d="M200,50 Q400,150 600,100 T1000,50 Q1200,0 1400,100"
               stroke="#22c55e"
-              strokeWidth="8"
+              strokeWidth="16"
               fill="none"
               strokeLinecap="round"
               opacity="0.6"
@@ -257,7 +256,7 @@ const HeroSectionComponent = () => {
             <path
               d="M100,750 Q300,650 500,700 T900,750 Q1100,800 1300,700"
               stroke="#3b82f6"
-              strokeWidth="8"
+              strokeWidth="16"
               fill="none"
               strokeLinecap="round"
               opacity="0.6"
@@ -271,15 +270,18 @@ const HeroSectionComponent = () => {
         <Container>
           <LogoContainer>
             <LogoImage 
-              src="/images/caresmily-logo-new.png"
+              src="/images/CareSmily_ロゴ.png"
               alt="CareSmily Social Action"
             />
           </LogoContainer>
           
           <TextContainer>
             <MainHeading>
-              可能性を探求し、<br />
-              道を拓く。
+              各専門家監修の<br />膨大な文例<br />
+              ✖️<br />
+              簡単な選択<br />
+              <br />
+              あなただけのケアプランが瞬時に形になる
             </MainHeading>
           </TextContainer>
         </Container>
