@@ -254,7 +254,6 @@ const HeroSection = styled.section`
   overflow: hidden;
   background: linear-gradient(-45deg, #f8f6f3, #faf8f5, #f3f1ee, #f6f4f1);
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
 `;
 
 const Container = styled.div`
@@ -268,7 +267,7 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 0 2rem;
   gap: 12rem;
-  animation: slideInFromLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) both, zoomInOut 4s ease-in-out 2s infinite;
+  /* animation: slideInFromLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) both, zoomInOut 4s ease-in-out 2s infinite; */
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -564,7 +563,6 @@ const RightSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: slideInRight 1s ease-out 0.5s both;
 
   @media (max-width: 768px) {
     margin-top: 2rem;
@@ -612,7 +610,6 @@ const VideoContainer = styled.div`
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
   transition: all 0.3s ease;
-  animation: float 6s ease-in-out infinite, rotateIn 1.5s ease-out 1s both, zoomInOut 3s ease-in-out 4s infinite;
   
   &:hover {
     transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.02);
@@ -637,7 +634,6 @@ const VideoContainer = styled.div`
       rgba(135, 206, 250, 0.8) 100%);
     border-radius: 27px;
     z-index: -1;
-    animation: borderGlow 3s ease-in-out infinite;
   }
   
   &::after {
