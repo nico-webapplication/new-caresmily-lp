@@ -300,7 +300,6 @@ const MainTitle = styled.h1`
   color: #111827;
   line-height: 1.1;
   margin: 0 0 1.5rem 0;
-  animation: slideInScale 1.2s cubic-bezier(0.4, 0, 0.2, 1) both, textGlow 3s ease-in-out 2s infinite, wiggle 0.5s ease-in-out 4s infinite;
   letter-spacing: -0.02em;
   position: relative;
   background: linear-gradient(135deg, #111827 0%, #374151 50%, #111827 100%);
@@ -543,7 +542,7 @@ const RightSection = styled.div`
 
 const CircularFrame = styled.div`
   position: absolute;
-  width: 1200px;
+  width: 1100px;
   height: 900px;
   border-color: #000;
   border-radius: 45%;
@@ -572,66 +571,12 @@ const CircularFrame = styled.div`
 const VideoContainer = styled.div`
   position: relative;
   width: 75%;
-  height: 65%;
+  height: 50%;
   border-radius: 25px;
-  overflow: hidden;
   box-shadow: 
     0 25px 50px rgba(0, 0, 0, 0.25),
     0 0 30px rgba(135, 206, 250, 0.3),
     inset 0 0 0 2px rgba(255, 255, 255, 0.2);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.02);
-    box-shadow: 
-      0 35px 70px rgba(0, 0, 0, 0.3),
-      0 0 40px rgba(135, 206, 250, 0.4),
-      inset 0 0 0 2px rgba(255, 255, 255, 0.3);
-  }
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, 
-      rgba(135, 206, 250, 0.8) 0%, 
-      rgba(70, 130, 180, 0.8) 25%,
-      rgba(30, 144, 255, 0.8) 50%,
-      rgba(70, 130, 180, 0.8) 75%,
-      rgba(135, 206, 250, 0.8) 100%);
-    border-radius: 27px;
-    z-index: -1;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(255,255,255,0.15) 0%, 
-      rgba(255,255,255,0.05) 50%,
-      rgba(255,255,255,0.1) 100%);
-    z-index: 2;
-    pointer-events: none;
-    border-radius: 25px;
-  }
-  
-  @keyframes borderGlow {
-    0%, 100% {
-      opacity: 0.7;
-    }
-    50% {
-      opacity: 1;
-    }
-  }
 `;
 const GlowEffect = styled.div`
   position: absolute;
@@ -657,8 +602,6 @@ const GlowEffect = styled.div`
 `;
 
 const StyledVideo = styled.video`
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   border-radius: 25px;
   position: relative;
@@ -680,24 +623,6 @@ const StyledVideo = styled.video`
   &::-webkit-media-controls-start-playback-button {
     display: none !important;
   }
-`;
-
-const VideoOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(135, 206, 250, 0.1) 0%,
-    rgba(70, 130, 180, 0.05) 50%,
-    rgba(30, 144, 255, 0.1) 100%
-  );
-  z-index: 3;
-  pointer-events: none;
-  border-radius: 25px;
-  opacity: 0.7;
 `;
 
 // Animated background elements
@@ -949,7 +874,7 @@ const HeroSectionComponent = () => {
               </LogoContainer>
               
               <MainTitle>
-                膨大な文例
+                膨大な文例<br/>
                 <CrossSymbol>×</CrossSymbol>
                 選択
               </MainTitle>
@@ -998,8 +923,7 @@ const HeroSectionComponent = () => {
                   playsInline
                   preload="auto"
                   src="/images/CareSmily広告動画.mp4"
-                />
-                <VideoOverlay />           
+                />       
               </VideoContainer>
 
             </CircularFrame>
