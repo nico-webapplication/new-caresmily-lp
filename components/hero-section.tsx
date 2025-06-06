@@ -48,7 +48,8 @@ const GlobalStyle = createGlobalStyle`
 // スタイルコンポーネント
 const HeroSection = styled.section`
   position: relative;
-  min-height: 100vh;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -56,7 +57,15 @@ const HeroSection = styled.section`
     radial-gradient(ellipse 120% 150% at 15% 75%, rgba(135, 206, 250, 0.7) 0%, rgba(30, 144, 255, 0.5) 35%, transparent 80%),
     radial-gradient(ellipse 130% 120% at 85% 15%, rgba(135, 206, 250, 0.5) 0%, rgba(70, 130, 180, 0.4) 45%, transparent 90%),
     radial-gradient(ellipse 110% 140% at 55% 55%, rgba(100, 149, 237, 0.4) 0%, transparent 75%),
-    linear-gradient(135deg, #f5f5dc 0%, #f0e68c 15%, #f5deb3 30%, #e6ddd4 60%, #d4c5b9 100%);
+    linear-gradient(135deg, #87CEEB 0%, #4682B4 50%, #5F9EA0 100%);
+  
+  @media (max-width: 768px) {
+    aspect-ratio: 4 / 3;
+  }
+  
+  @media (max-width: 480px) {
+    aspect-ratio: 1 / 1;
+  }
 `;
 
 const Container = styled.div`
@@ -176,29 +185,34 @@ const RightSection = styled.div`
 `;
 
 const CircularFrame = styled.div`
-  position: absolute;
-  width: 1200px;
-  height: 900px;
-  border-radius: 45%;
+  position: relative;
+  width: 60vw;
+  height: 60vw;
+  max-width: 800px;
+  max-height: 800px;
+  border-radius: 50%;
   background: white;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
-  align-items: right;
+  align-items: center;
   overflow: hidden;
-  margin-right: 0;
+  transform: translateX(25%);
 
   @media (max-width: 1024px) {
-    width: 750px;
-    height: 500px;
-    margin-right: 0;
+    width: 50vw;
+    height: 50vw;
+    max-width: 600px;
+    max-height: 600px;
+    transform: translateX(15%);
   }
 
   @media (max-width: 768px) {
-    width: 600px;
-    height: 400px;
-    margin-right: 0;
-    align-items: center;
+    width: 70vw;
+    height: 70vw;
+    max-width: 400px;
+    max-height: 400px;
+    transform: translateX(0);
   }
 `;
 
@@ -222,6 +236,23 @@ const CircularStamp = styled.div`
   transform: rotate(15deg);
 `;
 
+const LogoN = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  z-index: 20;
+`;
+
 const HeroSectionComponent = () => {
   return (
     <>
@@ -234,9 +265,9 @@ const HeroSectionComponent = () => {
       <GlobalStyle />
 
       <HeroSection>
+        <LogoN>N</LogoN>
         <Container>
           <LeftSection>
-
             <MainContent>
               <MainTitle>
                 膨大な文例
@@ -245,17 +276,12 @@ const HeroSectionComponent = () => {
               </MainTitle>
               
               <SubtitleText>
-
-
               </SubtitleText>
-
             </MainContent>
           </LeftSection>
 
           <RightSection>
             <CircularFrame>
-              
-
               <CircularStamp>
                 PAGE TOP<br />
                 ふんこも展示室
