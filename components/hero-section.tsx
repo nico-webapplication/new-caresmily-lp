@@ -79,8 +79,8 @@ const Container = styled.div`
 `;
 
 const LeftSection = styled.div`
-  flex: 1;
-  padding-right: 2rem;
+  flex: 2.2;
+  padding-right: 4rem;
 
   @media (max-width: 768px) {
     padding-right: 0;
@@ -193,7 +193,7 @@ const PersonIllustration = styled.div`
 `;
 
 const RightSection = styled.div`
-  flex: 1;
+  flex: 0.6;
   display: flex;
   justify-content: center;
   align-items: center;
