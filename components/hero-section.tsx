@@ -955,8 +955,7 @@ const HeroSectionComponent = () => {
                   playsInline
                   src="/images/CareSmily広告動画.mp4"
                 />
-                <VideoOverlay />
-                <PlayIcon />             
+                <VideoOverlay />           
               </VideoContainer>
 
             </CircularFrame>
