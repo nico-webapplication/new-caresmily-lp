@@ -121,10 +121,10 @@ const HeroSection = styled.section`
   align-items: center;
   overflow: hidden;
   background: 
-    radial-gradient(ellipse 120% 150% at 15% 75%, rgba(135, 206, 250, 0.7) 0%, rgba(30, 144, 255, 0.5) 35%, transparent 80%),
-    radial-gradient(ellipse 130% 120% at 85% 15%, rgba(135, 206, 250, 0.5) 0%, rgba(70, 130, 180, 0.4) 45%, transparent 90%),
-    radial-gradient(ellipse 110% 140% at 55% 55%, rgba(100, 149, 237, 0.4) 0%, transparent 75%),
-    linear-gradient(135deg, #f5f5dc 0%, #f0e68c 15%, #f5deb3 30%, #e6ddd4 60%, #d4c5b9 100%);
+    radial-gradient(ellipse 120% 150% at 15% 75%, rgba(135, 206, 250, 0.2) 0%, rgba(30, 144, 255, 0.15) 35%, transparent 80%),
+    radial-gradient(ellipse 130% 120% at 85% 15%, rgba(135, 206, 250, 0.15) 0%, rgba(70, 130, 180, 0.1) 45%, transparent 90%),
+    radial-gradient(ellipse 110% 140% at 55% 55%, rgba(100, 149, 237, 0.1) 0%, transparent 75%),
+    #f8f6f3;
 `;
 
 const Container = styled.div`
