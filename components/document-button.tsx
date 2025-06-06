@@ -77,7 +77,7 @@ const DocumentButton = ({
         
         {/* テキスト */}
         <div className="absolute inset-0 flex items-center justify-center px-4">
-          <div className="text-white font-bold text-sm leading-tight text-center text-shadow-lg">
+          <div className="text-white font-bold text-xl leading-tight text-center text-shadow-lg">
             {children}
           </div>
         </div>
