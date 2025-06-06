@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { DocumentButton } from "./document-button";
 
 // useScrollTriggerをインポート
 import { useScrollTrigger } from "@/components/scroll-trigger-provider";
@@ -66,6 +67,29 @@ export default function ContactSection() {
             CareSmily
             についてのご質問や導入のご相談は、お気軽にお問い合わせください
           </p>
+        </div>
+
+        {/* Document Buttons Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {/* お問い合わせはこちら Document Button */}
+          <DocumentButton
+            href="/contact"
+            title="お問い合わせはこちら"
+            subtitle="Contact Us"
+            description="CareSmily についてのご質問や導入のご相談はお気軽にお問い合わせください"
+            variant="note"
+            className="transform rotate-2"
+          />
+
+          {/* CareSmilyについてのその他動画はこちら Document Button */}
+          <DocumentButton
+            href="/media"
+            title="CareSmilyについてのその他動画はこちら"
+            subtitle="Media Gallery"
+            description="CareSmilyの機能紹介動画や導入事例など豊富なコンテンツをご覧いただけます"
+            variant="envelope"
+            className="transform -rotate-1"
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

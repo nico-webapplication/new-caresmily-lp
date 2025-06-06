@@ -4,8 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { DocumentButton } from "./document-button";
 
 export default function OpenCampusSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -40,81 +39,25 @@ export default function OpenCampusSection() {
         {/* White base container */}
         <div className="bg-white rounded-[10rem] p-12 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* オンライン面談 Card */}
-            <Link href="/online-meeting">
-              <div className="bg-gray-50 rounded-[10rem] p-12 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
-                <div className="flex flex-col h-full">
-                  <div className="mb-10">
-                    <p className="text-lg text-cyan-400 mb-3 font-bold">オンライン面談</p>
-                    <div className="flex items-center gap-5 mb-6">
-                      <h2 className="text-4xl font-bold text-gray-900 relative overflow-hidden leading-tight">
-                        <span className="relative z-10 transition-colors duration-500 ease-in-out group-hover:text-cyan-400">Online Meeting</span>
-                        <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out transform -translate-x-full group-hover:translate-x-0 flex items-center">
-                          Online Meeting
-                        </span>
-                      </h2>
-                      <div className="bg-orange-500 rounded-full p-3">
-                        <ArrowRight className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                    <div className="space-y-2 text-gray-700 font-bold text-base">
-                      <p>オンライン面談にてアプリの実際の操作感や</p>
-                      <p>本アプリ自慢の文例の質を一度確認してみませんか？</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex-1 flex justify-center items-end">
-                    <div className="relative w-[26rem] h-[20rem]">
-                      <Image
-                        src="/images/online_meeting.png"
-                        alt="CareSmilyミーティングの様子"
-                        width={480}
-                        height={384}
-                        className="w-full h-full object-contain transform transition-transform duration-300 ease-in-out group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+            {/* オンライン面談予約はこちら Document Button */}
+            <DocumentButton
+              href="/online-meeting"
+              title="オンライン面談予約はこちら"
+              subtitle="Online Meeting"
+              description="オンライン面談にてアプリの実際の操作感や本アプリ自慢の文例の質を一度確認してみませんか？"
+              variant="paper"
+              className="transform rotate-1"
+            />
 
-            {/* School Guide Card */}
-            <Link href="/document-request">
-              <div className="bg-gray-50 rounded-[10rem] p-12 shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer group">
-                <div className="flex flex-col h-full">
-                  <div className="mb-10">
-                    <p className="text-lg text-cyan-400 mb-3 font-bold">各資料を無料でお届けいたします</p>
-                    <div className="flex items-center gap-5 mb-6">
-                      <h2 className="text-4xl font-bold text-gray-900 relative overflow-hidden leading-tight">
-                        <span className="relative z-10 transition-colors duration-500 ease-in-out group-hover:text-cyan-400">CareSmily Guide</span>
-                        <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out transform -translate-x-full group-hover:translate-x-0 flex items-center">
-                          CareSmily Guide
-                        </span>
-                      </h2>
-                      <div className="bg-orange-500 rounded-full p-3">
-                        <ArrowRight className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                    <div className="space-y-2 text-gray-700 font-bold text-base">
-                      <p>CareSmilyの詳細情報や導入効果など</p>
-                      <p>もっと詳しく知りたい方はこちらから！</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex-1 flex justify-center items-end">
-                    <div className="relative w-[26rem] h-[20rem]">
-                      <Image
-                        src="/images/caresmily_guide.png"
-                        alt="caresmily_guide"
-                        width={480}
-                        height={384}
-                        className="w-full h-full object-contain transform transition-transform duration-300 ease-in-out group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+            {/* 資料請求はこちら Document Button */}
+            <DocumentButton
+              href="/document-request"
+              title="資料請求はこちら"
+              subtitle="CareSmily Guide"
+              description="CareSmilyの詳細情報や導入効果などもっと詳しく知りたい方はこちらから！"
+              variant="folder"
+              className="transform -rotate-1"
+            />
           </div>
         </div>
       </div>
