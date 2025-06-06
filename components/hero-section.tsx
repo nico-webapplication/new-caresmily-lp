@@ -183,6 +183,9 @@ const Container = styled.div`
     flex-direction: column;
     text-align: center;
     padding: 2rem 1rem;
+    gap: 2rem;
+    min-height: 100vh;
+    justify-content: center;
   }
 `;
 
@@ -267,7 +270,13 @@ const RightSection = styled.div`
   position: relative;
 
   @media (max-width: 768px) {
-    margin-top: 2rem;
+    margin-top: 1rem;
+    width: 100%;
+    flex: none;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 0.5rem;
   }
 `;
 
@@ -292,10 +301,18 @@ const CircularFrame = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 600px;
-    height: 400px;
-    margin-right: 0;
-    align-items: center;
+    width: 90vw;
+    max-width: 400px;
+    height: 60vw;
+    max-height: 300px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 480px) {
+    width: 95vw;
+    max-width: 350px;
+    height: 65vw;
+    max-height: 250px;
   }
 `;
 
@@ -308,6 +325,18 @@ const VideoContainer = styled.div`
     0 25px 50px rgba(0, 0, 0, 0.25),
     0 0 30px rgba(135, 206, 250, 0.3),
     inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+
+  @media (max-width: 768px) {
+    width: 85%;
+    height: 60%;
+    border-radius: 15px;
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+    height: 65%;
+    border-radius: 12px;
+  }
 `;
 
 const GlowEffect = styled.div`
@@ -357,6 +386,16 @@ const StyledVideo = styled.video`
   &::-webkit-media-controls-start-playback-button {
     display: none !important;
   }
+
+  @media (max-width: 768px) {
+    border-radius: 15px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 12px;
+  }
 `;
 
 // 動画上映中バナーのスタイル
@@ -380,17 +419,29 @@ const VideoBanner = styled.div`
   }
 
   @media (max-width: 1024px) {
+    left: 400px;
     img {
-      height: 100px;
+      height: 150px;
     }
   }
 
   @media (max-width: 768px) {
-    top: 15px;
-    right: 15px;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: center;
     
     img {
-      height: 80px;
+      height: 120px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    img {
+      height: 100px;
     }
   }
 `;

@@ -7,6 +7,7 @@ interface DocumentButtonProps {
   children: string;
   color: 'pink' | 'green' | 'blue' | 'yellow';
   position: { x: number; y: number; rotation: number };
+  target?: string;
   onClick?: () => void;
 }
 
@@ -22,13 +23,18 @@ const DocumentButton = ({
   children, 
   color, 
   position,
+  target,
   onClick 
 }: DocumentButtonProps) => {
   const handleClick = () => {
     if (onClick) {
       onClick();
     } else {
-      window.location.href = href;
+      if (target === "_blank") {
+        window.open(href, target);
+      } else {
+        window.location.href = href;
+      }
     }
   };
 
@@ -111,6 +117,7 @@ interface ScatteredDocumentButtonsProps {
     href: string;
     text: string;
     color: 'pink' | 'green' | 'blue' | 'yellow';
+    target?: string;
   }>;
 }
 
@@ -130,6 +137,7 @@ export const ScatteredDocumentButtons = ({ buttons }: ScatteredDocumentButtonsPr
           href={button.href}
           color={button.color}
           position={positions[index]}
+          target={button.target}
         >
           {button.text}
         </DocumentButton>
