@@ -84,9 +84,9 @@ const DocumentButton = ({
           />
           
           {/* 穴あけパンチの穴 */}
-          <div className="absolute left-4 top-6 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
-          <div className="absolute left-4 top-16 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
-          <div className="absolute left-4 top-26 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
+          <div className="absolute left-3 top-6 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
+          <div className="absolute left-3 top-16 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
+          <div className="absolute left-3 bottom-6 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
           
           {/* 右上の折り目 */}
           <div 
