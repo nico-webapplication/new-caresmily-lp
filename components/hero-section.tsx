@@ -1032,6 +1032,8 @@ const HeroSectionComponent = () => {
           <RightSection>
             <CircularFrame>
               <GlowEffect />
+              
+              <VideoContainer>
                 <StyledVideo
                   ref={videoRef}
                   autoPlay
@@ -1041,6 +1043,8 @@ const HeroSectionComponent = () => {
                   preload="auto"
                   src="/images/CareSmily広告動画.mp4"
                 />
+                <VideoOverlay />
+              </VideoContainer>
             </CircularFrame>
           </RightSection>
         </Container>
