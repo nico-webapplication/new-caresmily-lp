@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Head from "next/head";
+import { ScatteredDocumentButtons } from "./document-button";
 
 // グローバルスタイル
 const GlobalStyle = createGlobalStyle`
@@ -986,23 +987,30 @@ const HeroSectionComponent = () => {
             </MainContent>
             
             <CTASection>
-              <CTAButtonGroup>
-                <CTAButton href="/online-meeting" $variant="primary">
-                  オンライン面談予約はこちら
-                </CTAButton>
-                
-                <CTAButton href="/contact" $variant="secondary">
-                  お問い合わせはこちら
-                </CTAButton>
-                
-                <CTAButton href="/document-request" $variant="primary">
-                  資料請求はこちら
-                </CTAButton>
-                
-                <CTAButton href="/media" $variant="secondary">
-                  CareSmilyについてのその他動画はこちら
-                </CTAButton>
-              </CTAButtonGroup>
+              <ScatteredDocumentButtons
+                buttons={[
+                  {
+                    href: "/online-meeting",
+                    text: "オンライン面談予約はこちら",
+                    color: "pink"
+                  },
+                  {
+                    href: "/contact",
+                    text: "お問い合わせはこちら",
+                    color: "blue"
+                  },
+                  {
+                    href: "/document-request",
+                    text: "資料請求はこちら",
+                    color: "green"
+                  },
+                  {
+                    href: "/media",
+                    text: "CareSmilyについてのその他動画はこちら",
+                    color: "yellow"
+                  }
+                ]}
+              />
             </CTASection>
           </LeftSection>
 
