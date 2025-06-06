@@ -173,11 +173,7 @@ const HeroSection = styled.section`
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: 
-    radial-gradient(ellipse 120% 150% at 15% 75%, rgba(248, 246, 243, 0.95) 0%, rgba(240, 235, 230, 0.8) 35%, transparent 80%),
-    radial-gradient(ellipse 130% 120% at 85% 15%, rgba(245, 240, 235, 0.85) 0%, rgba(240, 235, 230, 0.7) 45%, transparent 90%),
-    radial-gradient(ellipse 110% 140% at 55% 55%, rgba(250, 248, 245, 0.6) 0%, transparent 75%),
-    #f8f6f3;
+  background: #f8f6f3;
 `;
 
 const Container = styled.div`
@@ -269,11 +265,11 @@ const MainTitle = styled.h1`
 const CrossSymbol = styled.span`
   display: inline-block;
   font-size: 3rem;
-  color: #ef4444;
+  color: #ba0000;
   margin: 0 1rem;
   font-weight: 300;
   vertical-align: middle;
-  animation: bounce 2s ease-in-out infinite;
+  animation: bounce 2s infinite;
   
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
@@ -290,43 +286,6 @@ const CrossSymbol = styled.span`
   @media (max-width: 768px) {
     font-size: 2.5rem;
     margin: 0 0.5rem;
-  }
-`;
-
-const SubtitleText = styled.p`
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: #4b5563;
-  line-height: 1.6;
-  margin: 0 0 2.5rem 0;
-  animation: slideInScale 1.3s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
-  max-width: 90%;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 50%;
-    width: 4px;
-    height: 0;
-    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
-    border-radius: 2px;
-    transform: translateY(-50%);
-    animation: slideInScale 0.8s ease-out 1.2s both;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%);
-    transform: translateX(-100%);
-    animation: shimmer 2s ease-in-out 2s infinite;
   }
 `;
 
@@ -432,78 +391,6 @@ const CTAButton = styled.a<{ $variant?: 'primary' | 'secondary' }>`
   }
 `;
 
-const VideoPrompt = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #6b7280;
-  font-size: 0.95rem;
-  font-weight: 500;
-  animation: slideInScale 1.4s cubic-bezier(0.4, 0, 0.2, 1) 1s both;
-  position: relative;
-  padding: 12px 20px;
-  border-radius: 25px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 25px;
-    padding: 1px;
-    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  &:hover {
-    color: #3b82f6;
-    transform: translateX(5px) scale(1.05);
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-    
-    &::before {
-      opacity: 1;
-      animation: shimmer 1.5s ease-in-out infinite;
-    }
-  }
-`;
-
-const ArrowIcon = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: pointRight 2s ease-in-out infinite;
-  
-  &::after {
-    content: '→';
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  @keyframes pointRight {
-    0%, 100% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(8px);
-    }
-  }
-`;
-
 const HighlightText = styled.span`
   background: linear-gradient(135deg, #667eea, #764ba2);
   -webkit-background-clip: text;
@@ -553,6 +440,7 @@ const CircularFrame = styled.div`
   position: absolute;
   width: 1200px;
   height: 900px;
+  border-color: #000;
   border-radius: 45%;
   background: white;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -642,124 +530,6 @@ const VideoContainer = styled.div`
     }
   }
 `;
-
-const DecorationElements = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 4;
-`;
-
-const FloatingElement = styled.div<{ top: string; left: string; delay: number; size: string }>`
-  position: absolute;
-  top: ${props => props.top};
-  left: ${props => props.left};
-  width: ${props => props.size};
-  height: ${props => props.size};
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(135, 206, 250, 0.6));
-  border-radius: 50%;
-  animation: floatDeco ${props => 4 + props.delay}s ease-in-out infinite;
-  animation-delay: ${props => props.delay}s;
-  box-shadow: 0 4px 20px rgba(135, 206, 250, 0.3);
-  
-  @keyframes floatDeco {
-    0%, 100% {
-      transform: translateY(0px) scale(1);
-      opacity: 0.6;
-    }
-    50% {
-      transform: translateY(-15px) scale(1.1);
-      opacity: 0.9;
-    }
-  }
-`;
-
-const BrandOverlay = styled.div`
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 12px 20px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  z-index: 5;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
-  font-size: 14px;
-  font-weight: 600;
-  color: #1f2937;
-  animation: fadeInUp 1s ease-out 1s both;
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-`;
-
-const LogoIcon = styled.div`
-  width: 24px;
-  height: 24px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-`;
-
-const FeatureTag = styled.div<{ position: string }>`
-  position: absolute;
-  ${props => props.position};
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  z-index: 5;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  animation: popIn 0.8s ease-out both;
-  
-  &:nth-child(1) {
-    animation-delay: 1.2s;
-  }
-  
-  &:nth-child(2) {
-    animation-delay: 1.5s;
-  }
-  
-  &:nth-child(3) {
-    animation-delay: 1.8s;
-  }
-  
-  @keyframes popIn {
-    0% {
-      opacity: 0;
-      transform: scale(0.5) translateY(20px);
-    }
-    80% {
-      transform: scale(1.1) translateY(-5px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-`;
-
 const GlowEffect = styled.div`
   position: absolute;
   top: -20px;
@@ -827,69 +597,6 @@ const VideoOverlay = styled.div`
   opacity: 0.7;
 `;
 
-const PlayIcon = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 4;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  opacity: 0.8;
-  animation: pulse 2s ease-in-out infinite;
-  
-  &::before {
-    content: '';
-    width: 0;
-    height: 0;
-    border-left: 18px solid #1f2937;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    margin-left: 4px;
-  }
-  
-  &:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-  }
-  
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 255, 255, 0.7);
-    }
-    50% {
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 15px rgba(255, 255, 255, 0);
-    }
-  }
-`;
-
-const CircularStamp = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  width: 80px;
-  height: 80px;
-  border: 3px solid #1f2937;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  font-size: 0.7rem;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1.2;
-  color: #1f2937;
-  transform: rotate(15deg);
-`;
-
 const HeroSectionComponent = () => {
   return (
     <>
@@ -913,12 +620,9 @@ const HeroSectionComponent = () => {
               <MainTitle>
                 <HighlightText>膨大な文例</HighlightText>
                 <CrossSymbol>×</CrossSymbol>
-                簡単な選択
+                選択
               </MainTitle>
-              
-              <SubtitleText>
-                介護施設で多くの手間と時間がかかる書類作成を効率化するための文例特化型WEBアプリケーションです。AI技術により、適切な文例を瞬時に選択して効率的な書類作成を実現します。
-              </SubtitleText>
+            
 
             </MainContent>
             
