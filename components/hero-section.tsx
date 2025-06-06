@@ -68,6 +68,7 @@ const Container = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -204,24 +205,27 @@ const RightSection = styled.div`
 
 const CircularFrame = styled.div`
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: 1200px;
+  height: 900px;
   border-radius: 50%;
-  background: white;
+  background: linear-gradient(135deg, #ff9a8b 0%, #a8a8a8 50%, #ffcc70 100%);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin-right: -150px;
 
   @media (max-width: 1024px) {
-    width: 400px;
-    height: 400px;
+    width: 750px;
+    height: 500px;
+    margin-right: -100px;
   }
 
   @media (max-width: 768px) {
-    width: 350px;
-    height: 350px;
+    width: 600px;
+    height: 400px;
+    margin-right: -80px;
   }
 `;
 
@@ -229,84 +233,116 @@ const EventCard = styled.div`
   position: relative;
   width: 90%;
   height: 90%;
-  background: #1f2937;
+  background: white;
   border-radius: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const EventHeader = styled.div`
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-  color: white;
-  position: relative;
-`;
-
-const HeaderTag = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-`;
-
-const MagazineIcon = styled.div`
-  width: 24px;
-  height: 24px;
-  background: #ef4444;
-  border-radius: 4px;
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: bold;
+  gap: 0.5rem;
+  padding: 0 2rem;
+  z-index: 10;
+`;
+
+const HeaderIcon = styled.div`
+  width: 24px;
+  height: 16px;
+  background: linear-gradient(45deg, #3b82f6, #1e40af);
+  border-radius: 2px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: white;
+    border-radius: 1px;
+  }
 `;
 
 const HeaderText = styled.span`
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: 0.5px;
 `;
 
-const EventTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0 0 1rem 0;
-  color: white;
+const HeaderSeparator = styled.span`
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0 0.5rem;
 `;
 
-const EventNumber = styled.div`
-  font-size: 3rem;
-  font-weight: 900;
-  color: white;
-  text-align: center;
-  margin: 1rem 0;
-`;
-
-const EventImage = styled.div`
-  flex: 1;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23fbbf24" width="400" height="300"/><circle fill="%23ffffff" cx="150" cy="150" r="80" opacity="0.3"/><rect fill="%23000000" x="200" y="100" width="150" height="100" opacity="0.4"/></svg>');
-  background-size: cover;
-  background-position: center;
+const BookContainer = styled.div`
   position: relative;
+  width: 200px;
+  height: 280px;
+  margin: 3rem auto 2rem;
+  transform: perspective(600px) rotateY(-15deg);
+  transition: transform 0.3s ease;
 `;
 
-const SidebarInfo = styled.div`
+const BookCover = styled.div`
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+`;
+
+const BookSpine = styled.div`
   position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 2rem 1rem;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  height: 60%;
+  right: -8px;
+  top: 0;
+  width: 16px;
+  height: 100%;
+  background: linear-gradient(to bottom, #0891b2 0%, #0e7490 100%);
+  border-radius: 0 8px 8px 0;
+`;
+
+const BookContent = styled.div`
+  padding: 1.5rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  position: relative;
+`;
+
+const BookTitle = styled.h3`
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  text-align: center;
+`;
+
+const BookAccent = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(45deg, #fbbf24, #f59e0b);
 `;
 
 const DateSection = styled.div`
@@ -317,6 +353,7 @@ const DateSection = styled.div`
   background: rgba(255, 255, 255, 0.95);
   padding: 1rem;
   border-radius: 12px;
+  backdrop-filter: blur(10px);
 `;
 
 const DateLarge = styled.div`
@@ -347,11 +384,45 @@ const DateWeek = styled.span`
   margin-left: 0.5rem;
 `;
 
+const TagSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+  color: #374151;
+  
+  span:first-child {
+    font-weight: 600;
+  }
+  
+  span:last-child {
+    font-weight: 400;
+    color: #6b7280;
+  }
+`;
+
+const TagLine = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+  
+  span {
+    background: #f3f4f6;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+`;
+
 const EventDescription = styled.p`
   font-size: 0.9rem;
   color: #374151;
   margin: 0.5rem 0 0 0;
   line-height: 1.4;
+  font-weight: 600;
 `;
 
 const NavigationDots = styled.div`
@@ -481,39 +552,49 @@ const HeroSectionComponent = () => {
             <CircularFrame>
               <EventCard>
                 <EventHeader>
-                  <HeaderTag>
-                    <MagazineIcon>W</MagazineIcon>
-                    <HeaderText>WEB MAGAZINE</HeaderText>
-                    <span style={{ marginLeft: 'auto', fontSize: '0.8rem' }}>PICK UP</span>
-                  </HeaderTag>
-                  
-                  <EventTitle>
-                    官方沙龙
-                    <EventNumber>第6回</EventNumber>
-                  </EventTitle>
+                  <HeaderIcon />
+                  <HeaderText>WEB MAGAZINE</HeaderText>
+                  <HeaderSeparator>——</HeaderSeparator>
+                  <HeaderText>PICK UP</HeaderText>
                 </EventHeader>
 
-                <EventImage>
-                  <SidebarInfo>
-                    映画監督<br />
-                    カラシタキ<br />
-                    に<br />
-                    ここでぶつかる<br />
-                    の？
-                  </SidebarInfo>
-                </EventImage>
+                <BookContainer>
+                  <BookCover>
+                    <BookSpine />
+                    <BookContent>
+                      <BookTitle>
+                        自由に<br />
+                        生きよう。<br />
+                        変でも<br />
+                        いいじゃん。
+                      </BookTitle>
+                    </BookContent>
+                    <BookAccent />
+                  </BookCover>
+                </BookContainer>
 
                 <DateSection>
                   <DateLarge>
-                    <DateMonth>12</DateMonth>
-                    <DateDay>.25</DateDay>
-                    <DateYear>2024</DateYear>
-                    <DateWeek>WED</DateWeek>
+                    <DateMonth>03</DateMonth>
+                    <DateDay>.03</DateDay>
+                    <DateYear>2025</DateYear>
+                    <DateWeek>MON</DateWeek>
                   </DateLarge>
                   
+                  <TagSection>
+                    <span>● コラム</span>
+                    <span>ふんこも編集部</span>
+                  </TagSection>
+                  
+                  <TagLine>
+                    <span>#倫理学</span>
+                    <span>#哲学</span>
+                    <span>#著者</span>
+                    <span>#新刊紹介</span>
+                  </TagLine>
+                  
                   <EventDescription>
-                    官方沙龙｜第6回 映像音楽カラシタキー
-                    の意外が多うの? 映像音楽さんを語らめして
+                    新書『哲学古典授業 ミル『自由論』の歩き方』ができるまで
                   </EventDescription>
 
                   <NavigationDots>
@@ -540,8 +621,7 @@ const HeroSectionComponent = () => {
               </NavArrows>
 
               <CircularStamp>
-                DESKTOP<br />
-                FIRST<br />
+                PAGE TOP<br />
                 ふんこも展示室
               </CircularStamp>
             </CircularFrame>
