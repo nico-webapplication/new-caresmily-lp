@@ -195,14 +195,12 @@ const PersonIllustration = styled.div`
 const RightSection = styled.div`
   flex: 1;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   animation: slideInRight 1s ease-out 0.5s both;
-  overflow: visible;
 
   @media (max-width: 768px) {
     margin-top: 2rem;
-    justify-content: center;
   }
 `;
 
@@ -215,23 +213,21 @@ const CircularFrame = styled.div`
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: right;
   overflow: hidden;
-  margin-left: calc(100vw / 3);
-  transform: translateX(33.33%);
+  margin-right: 0;
 
   @media (max-width: 1024px) {
     width: 750px;
     height: 500px;
-    margin-left: calc(100vw / 4);
-    transform: translateX(25%);
+    margin-right: 0;
   }
 
   @media (max-width: 768px) {
     width: 600px;
     height: 400px;
-    margin-left: 0;
-    transform: translateX(0);
+    margin-right: 0;
+    align-items: center;
   }
 `;
 
