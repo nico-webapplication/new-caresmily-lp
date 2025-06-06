@@ -13,6 +13,7 @@ import FAQSection from "@/components/faq-section"
 import ServiceCountSection from "@/components/service-count-section"
 import SlideInPopup from "@/components/slide-in-popup"
 import GuideSection from "@/components/guide-section"
+import VideoSection from "@/components/video-section"
 
 import { DocumentScatter } from "@/components/document-scatter-component"
 
@@ -458,6 +459,7 @@ export default function Home() {
         <HeroSection />
         <ServiceSection />
         <PointsSection />
+        <VideoSection />
         {/* <FeaturesSection /> */}
         <ServiceContentSection />
         <InterviewSection />
