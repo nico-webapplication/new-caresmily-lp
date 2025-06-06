@@ -177,6 +177,32 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  @keyframes documentFloat {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.07),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      transform: translateY(-2px) rotate(0.5deg);
+      box-shadow: 
+        0 6px 8px rgba(0, 0, 0, 0.1),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  @keyframes paperRipple {
+    0% {
+      transform: scale(0) rotate(0deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(4) rotate(180deg);
+      opacity: 0;
+    }
+  }
+
   @keyframes floatUp {
     0% {
       transform: translateY(100vh) rotate(0deg);
@@ -382,67 +408,121 @@ const CTAButtonGroup = styled.div`
 `;
 
 const CTAButton = styled.a<{ $variant?: 'primary' | 'secondary' }>`
-  background: ${props => props.$variant === 'secondary' 
-    ? 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)'
-    : 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)'};
-  color: ${props => props.$variant === 'secondary' ? '#1e293b' : 'white'};
-  border: ${props => props.$variant === 'secondary' ? '2px solid #3b82f6' : 'none'};
-  padding: 18px 36px;
-  border-radius: 60px;
-  font-size: 1.2rem;
-  font-weight: 700;
+  background: 
+    linear-gradient(135deg, #ffffff 0%, #fefefe 50%, #ffffff 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      rgba(0, 0, 0, 0.02) 25px,
+      rgba(0, 0, 0, 0.02) 26px
+    );
+  color: ${props => props.$variant === 'secondary' ? '#2563eb' : '#1e40af'};
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid ${props => props.$variant === 'secondary' ? '#ef4444' : '#3b82f6'};
+  border-top: 1px solid #f3f4f6;
+  padding: 20px 32px 20px 28px;
+  border-radius: 3px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: ${props => props.$variant === 'secondary' 
-    ? '0 10px 30px rgba(59, 130, 246, 0.3)' 
-    : '0 10px 30px rgba(29, 78, 216, 0.4)'};
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   width: fit-content;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
   position: relative;
-  overflow: hidden;
-  min-width: 200px;
+  overflow: visible;
+  min-width: 240px;
+  transform: translateZ(0) rotate(0deg);
+  animation: documentFloat 6s ease-in-out infinite;
   
   &::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%,
+      ${props => props.$variant === 'secondary' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(59, 130, 246, 0.3)'} 50%,
+      transparent 100%
+    );
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    background: ${props => props.$variant === 'secondary' ? '#ef4444' : '#3b82f6'};
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+    opacity: 0.4;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   
   &:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: ${props => props.$variant === 'secondary' 
-      ? '0 15px 40px rgba(59, 130, 246, 0.4)' 
-      : '0 15px 40px rgba(29, 78, 216, 0.5)'};
-    ${props => props.$variant === 'secondary' ? `
-      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-      border-color: #1d4ed8;
-    ` : `
-      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-    `}
+    transform: translateY(-12px) translateZ(0) scale(1.03) rotate(-1deg);
+    box-shadow: 
+      0 25px 35px rgba(0, 0, 0, 0.15),
+      0 15px 15px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+      0 0 25px ${props => props.$variant === 'secondary' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(59, 130, 246, 0.3)'};
+    background: 
+      linear-gradient(135deg, 
+        ${props => props.$variant === 'secondary' ? '#ffffff 0%, #fef2f2 50%, #ffffff 100%' : '#f8fafc 0%, #ffffff 50%, #f8fafc 100%'}
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 24px,
+        rgba(0, 0, 0, 0.03) 25px,
+        rgba(0, 0, 0, 0.03) 26px
+      );
+    border-color: ${props => props.$variant === 'secondary' ? '#fca5a5' : '#bfdbfe'};
+    border-left-color: ${props => props.$variant === 'secondary' ? '#dc2626' : '#2563eb'};
+    border-left-width: 5px;
+    animation-play-state: paused;
     
     &::before {
-      left: 100%;
+      transform: scaleX(1);
+    }
+    
+    &::after {
+      opacity: 0.8;
+      transform: scale(1.3);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
   }
   
   &:active {
-    transform: translateY(-2px) scale(1.01);
+    transform: translateY(-6px) translateZ(0) scale(1.02) rotate(-0.5deg);
+    box-shadow: 
+      0 15px 20px rgba(0, 0, 0, 0.1),
+      0 8px 10px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }
   
   @media (max-width: 768px) {
     width: 100%;
     min-width: auto;
-    font-size: 1.1rem;
-    padding: 16px 32px;
+    font-size: 1rem;
+    padding: 18px 28px 18px 24px;
+    min-width: 200px;
   }
 `;
 
