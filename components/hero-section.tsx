@@ -512,6 +512,30 @@ const HighlightText = styled.span`
   font-weight: 700;
 `;
 
+const LogoContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+  animation: slideInFromLeft 1s ease-out 0.3s both, zoomInOut 2s ease-in-out 3s infinite;
+`;
+
+const LogoImage = styled.img`
+  height: 80px;
+  width: auto;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+  animation: float 4s ease-in-out infinite;
+  
+  &:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 25px rgba(0, 0, 0, 0.15));
+  }
+  
+  @media (max-width: 768px) {
+    height: 60px;
+  }
+`;
+
 
 const RightSection = styled.div`
   flex: 2;
@@ -882,6 +906,10 @@ const HeroSectionComponent = () => {
           <LeftSection>
 
             <MainContent>
+              <LogoContainer>
+                <LogoImage src="/images/caresmily-logo.png" alt="CareSmily Logo" />
+              </LogoContainer>
+              
               <MainTitle>
                 <HighlightText>膨大な文例</HighlightText>
                 <CrossSymbol>×</CrossSymbol>
