@@ -79,8 +79,8 @@ const Container = styled.div`
 `;
 
 const LeftSection = styled.div`
-  flex: 2.2;
-  padding-right: 4rem;
+  flex: 1;
+  padding-right: 3rem;
 
   @media (max-width: 768px) {
     padding-right: 0;
@@ -88,27 +88,6 @@ const LeftSection = styled.div`
   }
 `;
 
-const QuestionSection = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 3rem;
-  animation: fadeInText 0.8s ease-out;
-`;
-
-const SmileyIcon = styled.div`
-  font-size: 2rem;
-  margin-right: 1rem;
-  animation: float 3s ease-in-out infinite;
-`;
-
-const QuestionText = styled.p`
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #374151;
-  margin: 0;
-  border-bottom: 2px dotted #9ca3af;
-  padding-bottom: 0.5rem;
-`;
 
 const MainContent = styled.div`
   margin-bottom: 3rem;
@@ -140,6 +119,8 @@ const CrossSymbol = styled.span`
   font-size: 2.5rem;
   color: #ef4444;
   margin: 1rem 0;
+  justify-content: center;
+  align-items: center;
   font-weight: 300;
 `;
 
@@ -152,19 +133,9 @@ const SubtitleText = styled.p`
   animation: fadeInText 1s ease-out 0.6s both;
 `;
 
-const IllustrationContainer = styled.div`
-  display: flex;
-  align-items: flex-end;
-  animation: fadeInText 1.2s ease-out 1.2s both;
-`;
-
-const PersonIllustration = styled.div`
-  position: relative;
-  margin-right: 1rem;
-`;
 
 const RightSection = styled.div`
-  flex: 0.6;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,7 +216,7 @@ const HeroSectionComponent = () => {
               </MainTitle>
               
               <SubtitleText>
-
+                介護施設で多くの手間と時間がかかる書類作成を効率化するための文例特化型WEBアプリケーションです。様々な書類に使用できる 
 
               </SubtitleText>
 
