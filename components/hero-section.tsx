@@ -512,9 +512,9 @@ const HeroSectionComponent = () => {
 
             <MainContent>
               <MainTitle>
-                ONLINE
+                膨大な文例
                 <CrossSymbol>×</CrossSymbol>
-                OFFLINE
+                簡単な選択
               </MainTitle>
               
               <SubtitleText>
