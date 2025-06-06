@@ -65,10 +65,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1400px;
+  max-width: auto;
   margin: 0 auto;
   padding: 0 2rem;
   overflow: hidden;
+  gap: 12rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -208,24 +209,25 @@ const CircularFrame = styled.div`
   width: 1200px;
   height: 900px;
   border-radius: 40%;
-  background: linear-gradient(135deg, #ff9a8b 0%, #a8a8a8 50%, #ffcc70 100%);
+  background: white;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: right;
   overflow: hidden;
-  margin-right: -150px;
+  margin-right: 0;
 
   @media (max-width: 1024px) {
     width: 750px;
     height: 500px;
-    margin-right: -100px;
+    margin-right: 0;
   }
 
   @media (max-width: 768px) {
     width: 600px;
     height: 400px;
-    margin-right: -80px;
+    margin-right: 0;
+    align-items: center;
   }
 `;
 
@@ -550,75 +552,7 @@ const HeroSectionComponent = () => {
 
           <RightSection>
             <CircularFrame>
-              <EventCard>
-                <EventHeader>
-                  <HeaderIcon />
-                  <HeaderText>WEB MAGAZINE</HeaderText>
-                  <HeaderSeparator>——</HeaderSeparator>
-                  <HeaderText>PICK UP</HeaderText>
-                </EventHeader>
-
-                <BookContainer>
-                  <BookCover>
-                    <BookSpine />
-                    <BookContent>
-                      <BookTitle>
-                        自由に<br />
-                        生きよう。<br />
-                        変でも<br />
-                        いいじゃん。
-                      </BookTitle>
-                    </BookContent>
-                    <BookAccent />
-                  </BookCover>
-                </BookContainer>
-
-                <DateSection>
-                  <DateLarge>
-                    <DateMonth>03</DateMonth>
-                    <DateDay>.03</DateDay>
-                    <DateYear>2025</DateYear>
-                    <DateWeek>MON</DateWeek>
-                  </DateLarge>
-                  
-                  <TagSection>
-                    <span>● コラム</span>
-                    <span>ふんこも編集部</span>
-                  </TagSection>
-                  
-                  <TagLine>
-                    <span>#倫理学</span>
-                    <span>#哲学</span>
-                    <span>#著者</span>
-                    <span>#新刊紹介</span>
-                  </TagLine>
-                  
-                  <EventDescription>
-                    新書『哲学古典授業 ミル『自由論』の歩き方』ができるまで
-                  </EventDescription>
-
-                  <NavigationDots>
-                    <Dot />
-                    <Dot $active={true} />
-                    <Dot />
-                    <Dot />
-                    <Dot />
-                  </NavigationDots>
-                </DateSection>
-              </EventCard>
-
-              <NavArrows>
-                <ArrowButton>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M10 12l-4-4 4-4" />
-                  </svg>
-                </ArrowButton>
-                <ArrowButton>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M6 12l4-4-4-4" />
-                  </svg>
-                </ArrowButton>
-              </NavArrows>
+              
 
               <CircularStamp>
                 PAGE TOP<br />
