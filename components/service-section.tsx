@@ -194,11 +194,13 @@ export default function ServiceSection() {
                   <span className="text-[#1a2b4a]">文例特化型</span>
                   <span className="absolute bottom-0 left-0 w-full h-3 lg:h-4 bg-yellow-300 opacity-80 z-[-1]"></span>
                 </span>
-                WEBアプリです。
+                WEBアプリです。(月額4980円※)
                 <br className="mb-6" />
                 様々な書類に使用できる豊富な文例を
                 <br className="mb-6" />
                 ぜひお試しください。
+                <br className="mb-6" />
+                <span className="text-sm">※契約内容によって異なる場合あり</span>
               </TextContainer>
             </div>
             <div className="pt-6 lg:pt-8 animate-item">
