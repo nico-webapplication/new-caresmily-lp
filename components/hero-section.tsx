@@ -264,16 +264,28 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  max-width: auto;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
-  gap: 12rem;
-  /* animation: slideInFromLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) both, zoomInOut 4s ease-in-out 2s infinite; */
+  gap: 6rem;
+  min-height: 100vh;
+
+  @media (max-width: 1200px) {
+    gap: 4rem;
+    padding: 0 1.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    gap: 3rem;
+    padding: 0 1rem;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
     text-align: center;
     padding: 2rem 1rem;
+    gap: 2rem;
+    min-height: auto;
   }
 `;
 
@@ -535,9 +547,23 @@ const RightSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding: 2rem 0;
+
+  @media (max-width: 1024px) {
+    min-height: 80vh;
+    padding: 1.5rem 0;
+  }
 
   @media (max-width: 768px) {
     margin-top: 2rem;
+    min-height: 60vh;
+    padding: 1rem 0;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 50vh;
+    padding: 0.5rem 0;
   }
 `;
 
@@ -555,24 +581,32 @@ const CircularFrame = styled.div`
   overflow: hidden;
   margin-right: 0;
 
+  @media (max-width: 1200px) {
+    width: min(85vw, 700px);
+    height: min(65vh, 550px);
+  }
+
   @media (max-width: 1024px) {
-    width: 750px;
-    height: 500px;
-    margin-right: 0;
+    width: min(80vw, 600px);
+    height: min(60vh, 450px);
   }
 
   @media (max-width: 768px) {
-    width: 600px;
-    height: 400px;
+    width: min(90vw, 500px);
+    height: min(50vh, 350px);
     margin-right: 0;
-    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    width: min(95vw, 400px);
+    height: min(45vh, 300px);
   }
 `;
 
 const VideoContainer = styled.div`
   position: relative;
-  width: 75%;
-  height: 65%;
+  width: 100%;
+  height: 100%;
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 
@@ -622,6 +656,16 @@ const VideoContainer = styled.div`
     z-index: 2;
     pointer-events: none;
     border-radius: 25px;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    height: 85%;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+    height: 90%;
   }
   
   @keyframes borderGlow {
@@ -988,8 +1032,6 @@ const HeroSectionComponent = () => {
           <RightSection>
             <CircularFrame>
               <GlowEffect />
-              
-              <VideoContainer>
                 <StyledVideo
                   ref={videoRef}
                   autoPlay
@@ -999,9 +1041,6 @@ const HeroSectionComponent = () => {
                   preload="auto"
                   src="/images/CareSmily広告動画.mp4"
                 />
-                <VideoOverlay />           
-              </VideoContainer>
-
             </CircularFrame>
           </RightSection>
         </Container>
