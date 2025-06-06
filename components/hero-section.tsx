@@ -746,6 +746,7 @@ const LightRay = styled.div<{ $delay: number; $angle: number }>`
 `;
 
 const HeroSectionComponent = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [animationElements, setAnimationElements] = useState<{
     particles: Array<{ id: number; delay: number; size: number; left: number; duration: number; }>;
     shapes: Array<{ id: number; type: 'circle' | 'square' | 'triangle'; delay: number; left: number; top: number; }>;
@@ -781,6 +782,67 @@ const HeroSectionComponent = () => {
     }));
 
     setAnimationElements({ particles, shapes, lightRays });
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const handleVideoLoad = async () => {
+        try {
+          // 確実にミュートにする
+          video.muted = true;
+          video.playsInline = true;
+          
+          // 動画の再生を試行
+          await video.play();
+        } catch (error) {
+          console.log('動画の自動再生に失敗しました:', error);
+          
+          // ユーザーの操作を待つためのイベントリスナーを追加
+          const handleUserInteraction = async () => {
+            try {
+              await video.play();
+              // 成功したらイベントリスナーを削除
+              document.removeEventListener('click', handleUserInteraction);
+              document.removeEventListener('touchstart', handleUserInteraction);
+              document.removeEventListener('keydown', handleUserInteraction);
+            } catch (e) {
+              console.log('ユーザー操作後の再生にも失敗しました:', e);
+            }
+          };
+          
+          document.addEventListener('click', handleUserInteraction);
+          document.addEventListener('touchstart', handleUserInteraction);
+          document.addEventListener('keydown', handleUserInteraction);
+        }
+      };
+
+      // 動画がロードされていれば即座に再生、そうでなければロードを待つ
+      if (video.readyState >= 3) {
+        handleVideoLoad();
+      } else {
+        video.addEventListener('canplay', handleVideoLoad, { once: true });
+        video.addEventListener('loadedmetadata', handleVideoLoad, { once: true });
+      }
+
+      // Intersection Observer で画面に表示されたときに再生を確認
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && video.paused) {
+              handleVideoLoad();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(video);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
   }, []);
 
   return (
@@ -874,10 +936,12 @@ const HeroSectionComponent = () => {
               
               <VideoContainer>
                 <StyledVideo
+                  ref={videoRef}
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload="auto"
                   src="/images/CareSmily広告動画.mp4"
                 />
                 <VideoOverlay />           
