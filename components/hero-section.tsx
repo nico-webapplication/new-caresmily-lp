@@ -267,13 +267,18 @@ const Container = styled.div`
   max-width: auto;
   margin: 0 auto;
   padding: 0 2rem;
-  gap: 12rem;
+  gap: 8rem;
   /* animation: slideInFromLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) both, zoomInOut 4s ease-in-out 2s infinite; */
+
+  @media (max-width: 1024px) {
+    gap: 6rem;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
     text-align: center;
     padding: 2rem 1rem;
+    gap: 3rem;
   }
 `;
 
@@ -559,12 +564,12 @@ const LogoImage = styled.img`
 
 const VideoAnnouncementBanner = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   margin: 1.5rem 0 2rem 0;
   animation: slideInFromLeft 1.2s ease-out 0.5s both, bounce 2s ease-in-out 2.5s infinite;
   
   img {
-    height: 120px;
+    height: 160px;
     width: auto;
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -577,38 +582,52 @@ const VideoAnnouncementBanner = styled.div`
     }
   }
   
+  @media (max-width: 1024px) {
+    img {
+      height: 140px;
+    }
+  }
+  
   @media (max-width: 768px) {
     justify-content: center;
     margin: 1rem 0 1.5rem 0;
     
     img {
-      height: 90px;
+      height: 120px;
     }
   }
   
   @media (max-width: 480px) {
     img {
-      height: 75px;
+      height: 90px;
     }
   }
 `;
 
 
 const RightSection = styled.div`
-  flex: 2;
+  flex: 1.8;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-left: 2rem;
+
+  @media (max-width: 1024px) {
+    flex: 1.5;
+    padding-left: 1rem;
+  }
 
   @media (max-width: 768px) {
     margin-top: 2rem;
+    padding-left: 0;
+    justify-content: center;
   }
 `;
 
 const CircularFrame = styled.div`
-  position: absolute;
-  width: 1200px;
-  height: 900px;
+  position: relative;
+  width: 1000px;
+  height: 750px;
   border-color: #000;
   border-radius: 45%;
   background: white;
@@ -617,19 +636,24 @@ const CircularFrame = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  margin-right: 0;
+  margin-left: -100px;
 
   @media (max-width: 1024px) {
-    width: 750px;
-    height: 500px;
-    margin-right: 0;
+    width: 700px;
+    height: 525px;
+    margin-left: -50px;
   }
 
   @media (max-width: 768px) {
-    width: 600px;
+    width: 550px;
     height: 400px;
-    margin-right: 0;
+    margin-left: 0;
     align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    width: 400px;
+    height: 300px;
   }
 `;
 
