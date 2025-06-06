@@ -9,68 +9,16 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow-x: hidden;
-    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
   }
 
-  @keyframes pathExpand1 {
-    0% { 
-      stroke-dasharray: 0 1000;
-      opacity: 0;
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
     }
     50% {
-      stroke-dasharray: 500 500;
-      opacity: 1;
-    }
-    100% { 
-      stroke-dasharray: 1000 0;
-      opacity: 0.8;
-    }
-  }
-
-  @keyframes pathExpand2 {
-    0% { 
-      stroke-dasharray: 0 800;
-      opacity: 0;
-    }
-    50% {
-      stroke-dasharray: 400 400;
-      opacity: 1;
-    }
-    100% { 
-      stroke-dasharray: 800 0;
-      opacity: 0.8;
-    }
-  }
-
-  @keyframes pathExpand3 {
-    0% { 
-      stroke-dasharray: 0 1200;
-      opacity: 0;
-    }
-    50% {
-      stroke-dasharray: 600 600;
-      opacity: 1;
-    }
-    100% { 
-      stroke-dasharray: 1200 0;
-      opacity: 0.8;
-    }
-  }
-
-  @keyframes pathExpand4 {
-    0% { 
-      stroke-dasharray: 0 900;
-      opacity: 0;
-    }
-    50% {
-      stroke-dasharray: 450 450;
-      opacity: 1;
-    }
-    100% { 
-      stroke-dasharray: 900 0;
-      opacity: 0.8;
+      transform: translateY(-10px);
     }
   }
 
@@ -84,6 +32,17 @@ const GlobalStyle = createGlobalStyle`
       transform: translateY(0);
     }
   }
+
+  @keyframes slideInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 `;
 
 // スタイルコンポーネント
@@ -92,18 +51,8 @@ const HeroSection = styled.section`
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
-  background-color: #f5f5f5;
-`;
-
-const AnimatedBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  background: linear-gradient(135deg, #f8fafc 0%, #fef3c7 30%, #fed7aa 60%, #fca5a5 100%);
 `;
 
 const Container = styled.div`
@@ -111,7 +60,6 @@ const Container = styled.div`
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -124,40 +72,49 @@ const Container = styled.div`
   }
 `;
 
-const LogoContainer = styled.div`
-  flex: 0 0 auto;
-  margin-right: 4rem;
+const LeftSection = styled.div`
+  flex: 1;
+  padding-right: 2rem;
 
   @media (max-width: 768px) {
-    margin-right: 0;
+    padding-right: 0;
     margin-bottom: 2rem;
   }
 `;
 
-const LogoImage = styled.img`
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  animation: fadeInText 1s ease-out 0.5s both;
-
-  @media (max-width: 768px) {
-    width: 100px;
-    height: 100px;
-  }
+const QuestionSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  animation: fadeInText 0.8s ease-out;
 `;
 
-const TextContainer = styled.div`
-  flex: 1;
-  max-width: 600px;
+const SmileyIcon = styled.div`
+  font-size: 2rem;
+  margin-right: 1rem;
+  animation: float 3s ease-in-out infinite;
 `;
 
-const MainHeading = styled.h1`
-  font-size: 4rem;
-  font-weight: 700;
-  color: #1f2937;
-  line-height: 1.2;
+const QuestionText = styled.p`
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #374151;
   margin: 0;
-  animation: fadeInText 1s ease-out 1s both;
+  border-bottom: 2px dotted #9ca3af;
+  padding-bottom: 0.5rem;
+`;
+
+const MainContent = styled.div`
+  margin-bottom: 3rem;
+`;
+
+const MainTitle = styled.h1`
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.2;
+  margin: 0 0 2rem 0;
+  animation: fadeInText 1s ease-out 0.3s both;
 
   @media (max-width: 1024px) {
     font-size: 3rem;
@@ -172,6 +129,291 @@ const MainHeading = styled.h1`
   }
 `;
 
+const CrossSymbol = styled.span`
+  display: block;
+  font-size: 2.5rem;
+  color: #ef4444;
+  margin: 1rem 0;
+  font-weight: 300;
+`;
+
+const SubtitleText = styled.p`
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #374151;
+  line-height: 1.7;
+  margin: 0 0 2rem 0;
+  animation: fadeInText 1s ease-out 0.6s both;
+`;
+
+const SpeechBubble = styled.div`
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  animation: fadeInText 1s ease-out 0.9s both;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+  }
+`;
+
+const SpeechText = styled.p`
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 0;
+  font-weight: 500;
+`;
+
+const IllustrationContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  animation: fadeInText 1.2s ease-out 1.2s both;
+`;
+
+const PersonIllustration = styled.div`
+  position: relative;
+  margin-right: 1rem;
+`;
+
+const RightSection = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideInRight 1s ease-out 0.5s both;
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+  }
+`;
+
+const CircularFrame = styled.div`
+  position: relative;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    width: 400px;
+    height: 400px;
+  }
+
+  @media (max-width: 768px) {
+    width: 350px;
+    height: 350px;
+  }
+`;
+
+const EventCard = styled.div`
+  position: relative;
+  width: 90%;
+  height: 90%;
+  background: #1f2937;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+`;
+
+const EventHeader = styled.div`
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+  color: white;
+  position: relative;
+`;
+
+const HeaderTag = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
+const MagazineIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  background: #ef4444;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+`;
+
+const HeaderText = styled.span`
+  font-size: 0.9rem;
+  font-weight: 500;
+`;
+
+const EventTitle = styled.h3`
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: white;
+`;
+
+const EventNumber = styled.div`
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+  margin: 1rem 0;
+`;
+
+const EventImage = styled.div`
+  flex: 1;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23fbbf24" width="400" height="300"/><circle fill="%23ffffff" cx="150" cy="150" r="80" opacity="0.3"/><rect fill="%23000000" x="200" y="100" width="150" height="100" opacity="0.4"/></svg>');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+`;
+
+const SidebarInfo = styled.div`
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2rem 1rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+`;
+
+const DateSection = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+  border-radius: 12px;
+`;
+
+const DateLarge = styled.div`
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #1f2937;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+`;
+
+const DateMonth = styled.span`
+  font-size: 2.5rem;
+`;
+
+const DateDay = styled.span`
+  font-size: 2.5rem;
+`;
+
+const DateYear = styled.span`
+  font-size: 1.2rem;
+  color: #6b7280;
+`;
+
+const DateWeek = styled.span`
+  font-size: 1.2rem;
+  color: #6b7280;
+  margin-left: 0.5rem;
+`;
+
+const EventDescription = styled.p`
+  font-size: 0.9rem;
+  color: #374151;
+  margin: 0.5rem 0 0 0;
+  line-height: 1.4;
+`;
+
+const NavigationDots = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: center;
+`;
+
+const Dot = styled.div<{ $active?: boolean }>`
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: ${props => props.$active ? '#1f2937' : '#d1d5db'};
+`;
+
+const NavArrows = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2rem;
+  pointer-events: none;
+`;
+
+const ArrowButton = styled.button`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: all;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+`;
+
+const CircularStamp = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 80px;
+  height: 80px;
+  border: 3px solid #1f2937;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
+  color: #1f2937;
+  transform: rotate(15deg);
+`;
+
 const HeroSectionComponent = () => {
   return (
     <>
@@ -184,106 +426,122 @@ const HeroSectionComponent = () => {
       <GlobalStyle />
 
       <HeroSection>
-        <AnimatedBackground>
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 1400 800"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Green curved line */}
-            <path
-              d="M-50,300 Q200,100 400,200 T800,150 Q1000,100 1200,200 T1450,250"
-              stroke="#22c55e"
-              strokeWidth="24"
-              fill="none"
-              strokeLinecap="round"
-              style={{
-                animation: "pathExpand1 4s ease-in-out infinite alternate",
-              }}
-            />
-            
-            {/* Blue curved line */}
-            <path
-              d="M-50,400 Q150,500 350,400 T650,350 Q850,300 1050,400 T1450,450"
-              stroke="#3b82f6"
-              strokeWidth="24"
-              fill="none"
-              strokeLinecap="round"
-              style={{
-                animation: "pathExpand2 4s ease-in-out infinite alternate 1s",
-              }}
-            />
-            
-            {/* Yellow curved line */}
-            <path
-              d="M-50,100 Q300,50 500,150 T900,200 Q1100,250 1300,150 T1450,100"
-              stroke="#fbbf24"
-              strokeWidth="24"
-              fill="none"
-              strokeLinecap="round"
-              style={{
-                animation: "pathExpand3 4s ease-in-out infinite alternate 2s",
-              }}
-            />
-            
-            {/* Pink curved line */}
-            <path
-              d="M-50,600 Q250,700 450,600 T750,550 Q950,500 1150,600 T1450,650"
-              stroke="#ec4899"
-              strokeWidth="24"
-              fill="none"
-              strokeLinecap="round"
-              style={{
-                animation: "pathExpand4 4s ease-in-out infinite alternate 3s",
-              }}
-            />
-            
-            {/* Additional curved paths for complexity */}
-            <path
-              d="M200,50 Q400,150 600,100 T1000,50 Q1200,0 1400,100"
-              stroke="#22c55e"
-              strokeWidth="16"
-              fill="none"
-              strokeLinecap="round"
-              opacity="0.6"
-              style={{
-                animation: "pathExpand1 5s ease-in-out infinite alternate 0.5s",
-              }}
-            />
-            
-            <path
-              d="M100,750 Q300,650 500,700 T900,750 Q1100,800 1300,700"
-              stroke="#3b82f6"
-              strokeWidth="16"
-              fill="none"
-              strokeLinecap="round"
-              opacity="0.6"
-              style={{
-                animation: "pathExpand2 5s ease-in-out infinite alternate 1.5s",
-              }}
-            />
-          </svg>
-        </AnimatedBackground>
-
         <Container>
-          <LogoContainer>
-            <LogoImage 
-              src="/images/CareSmily_ロゴ.png"
-              alt="CareSmily Social Action"
-            />
-          </LogoContainer>
-          
-          <TextContainer>
-            <MainHeading>
-              各専門家監修の<br />膨大な文例<br />
-              ✖️<br />
-              簡単な選択<br />
-              <br />
-              あなただけのケアプランが瞬時に形になる
-            </MainHeading>
-          </TextContainer>
+          <LeftSection>
+            <QuestionSection>
+              <SmileyIcon>😊</SmileyIcon>
+              <QuestionText>What is "ふんこも"?</QuestionText>
+            </QuestionSection>
+
+            <MainContent>
+              <MainTitle>
+                ONLINE
+                <CrossSymbol>×</CrossSymbol>
+                OFFLINE
+              </MainTitle>
+              
+              <SubtitleText>
+                ふんこもは、京都大学文学研究科のイノベーションコモンズです。
+                <br /><br />
+                オープンスペース・イベントスペースとしてお使いのいただける
+                「オフラインの場」であることとと、文学研究科のいろい
+                ろなWebを発信する「オンラインの場」でもあります。
+              </SubtitleText>
+
+              <SpeechBubble>
+                <SpeechText>"ふんこも"についてもっと知りたい？</SpeechText>
+              </SpeechBubble>
+
+              <IllustrationContainer>
+                <PersonIllustration>
+                  <svg width="120" height="120" viewBox="0 0 120 120">
+                    {/* Person reading illustration */}
+                    <circle cx="60" cy="40" r="20" fill="#1f2937" />
+                    <ellipse cx="60" cy="85" rx="25" ry="30" fill="#1f2937" />
+                    <rect x="45" y="95" width="30" height="15" rx="7" fill="#1f2937" />
+                  </svg>
+                </PersonIllustration>
+                <svg width="60" height="40" viewBox="0 0 60 40">
+                  {/* Cat illustration */}
+                  <ellipse cx="30" cy="25" rx="20" ry="12" fill="#1f2937" />
+                  <circle cx="20" cy="20" r="8" fill="#1f2937" />
+                  <circle cx="40" cy="20" r="8" fill="#1f2937" />
+                  <polygon points="25,10 30,5 35,10" fill="#1f2937" />
+                  <polygon points="35,10 40,5 45,10" fill="#1f2937" />
+                </svg>
+              </IllustrationContainer>
+            </MainContent>
+          </LeftSection>
+
+          <RightSection>
+            <CircularFrame>
+              <EventCard>
+                <EventHeader>
+                  <HeaderTag>
+                    <MagazineIcon>W</MagazineIcon>
+                    <HeaderText>WEB MAGAZINE</HeaderText>
+                    <span style={{ marginLeft: 'auto', fontSize: '0.8rem' }}>PICK UP</span>
+                  </HeaderTag>
+                  
+                  <EventTitle>
+                    官方沙龙
+                    <EventNumber>第6回</EventNumber>
+                  </EventTitle>
+                </EventHeader>
+
+                <EventImage>
+                  <SidebarInfo>
+                    映画監督<br />
+                    カラシタキ<br />
+                    に<br />
+                    ここでぶつかる<br />
+                    の？
+                  </SidebarInfo>
+                </EventImage>
+
+                <DateSection>
+                  <DateLarge>
+                    <DateMonth>12</DateMonth>
+                    <DateDay>.25</DateDay>
+                    <DateYear>2024</DateYear>
+                    <DateWeek>WED</DateWeek>
+                  </DateLarge>
+                  
+                  <EventDescription>
+                    官方沙龙｜第6回 映像音楽カラシタキー
+                    の意外が多うの? 映像音楽さんを語らめして
+                  </EventDescription>
+
+                  <NavigationDots>
+                    <Dot />
+                    <Dot $active={true} />
+                    <Dot />
+                    <Dot />
+                    <Dot />
+                  </NavigationDots>
+                </DateSection>
+              </EventCard>
+
+              <NavArrows>
+                <ArrowButton>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M10 12l-4-4 4-4" />
+                  </svg>
+                </ArrowButton>
+                <ArrowButton>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M6 12l4-4-4-4" />
+                  </svg>
+                </ArrowButton>
+              </NavArrows>
+
+              <CircularStamp>
+                DESKTOP<br />
+                FIRST<br />
+                ふんこも展示室
+              </CircularStamp>
+            </CircularFrame>
+          </RightSection>
         </Container>
       </HeroSection>
     </>
