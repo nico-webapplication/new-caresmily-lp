@@ -43,6 +43,74 @@ const GlobalStyle = createGlobalStyle`
       transform: translateX(0);
     }
   }
+
+  @keyframes titleTypewriter {
+    0% {
+      width: 0;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInScale {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px) scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-5px);
+    }
+    60% {
+      transform: translateY(-3px);
+    }
+  }
+
+  @keyframes rotateIn {
+    0% {
+      transform: rotate(-180deg) scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+  }
 `;
 
 // スタイルコンポーネント
@@ -101,8 +169,35 @@ const MainTitle = styled.h1`
   color: #111827;
   line-height: 1.1;
   margin: 0 0 1.5rem 0;
-  animation: fadeInText 1s ease-out 0.3s both;
+  animation: slideInScale 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
   letter-spacing: -0.02em;
+  position: relative;
+  background: linear-gradient(135deg, #111827 0%, #374151 50%, #111827 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+    background-size: 200% 100%;
+    border-radius: 2px;
+    animation: titleTypewriter 2s ease-out 0.8s both, shimmer 2s ease-in-out infinite 3s;
+  }
+  
+  &:hover {
+    animation-play-state: paused;
+    
+    &::after {
+      animation: pulse 1s ease-in-out infinite;
+    }
+  }
 
   @media (max-width: 1024px) {
     font-size: 3.2rem;
@@ -124,18 +219,20 @@ const CrossSymbol = styled.span`
   margin: 0 1rem;
   font-weight: 300;
   vertical-align: middle;
-  animation: bounce 2s ease-in-out infinite;
+  animation: rotateIn 1s ease-out 0.5s both, bounce 2s ease-in-out infinite 1.5s;
+  position: relative;
   
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    animation: pulse 2s ease-in-out infinite 2s;
   }
 
   @media (max-width: 768px) {
@@ -150,8 +247,35 @@ const SubtitleText = styled.p`
   color: #4b5563;
   line-height: 1.6;
   margin: 0 0 2.5rem 0;
-  animation: fadeInText 1s ease-out 0.6s both;
+  animation: slideInScale 1.3s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
   max-width: 90%;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+    border-radius: 2px;
+    transform: translateY(-50%);
+    animation: slideInScale 0.8s ease-out 1.2s both;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: shimmer 2s ease-in-out 2s infinite;
+  }
 `;
 
 const CTASection = styled.div`
@@ -161,26 +285,81 @@ const CTASection = styled.div`
   animation: fadeInText 1s ease-out 0.9s both;
 `;
 
-const CTAButton = styled.button`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
+const CTAButtonGroup = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+`;
+
+const CTAButton = styled.a<{ $variant?: 'primary' | 'secondary' }>`
+  background: ${props => props.$variant === 'secondary' 
+    ? 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)'
+    : 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)'};
+  color: ${props => props.$variant === 'secondary' ? '#1e293b' : 'white'};
+  border: ${props => props.$variant === 'secondary' ? '2px solid #3b82f6' : 'none'};
+  padding: 18px 36px;
+  border-radius: 60px;
+  font-size: 1.2rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: ${props => props.$variant === 'secondary' 
+    ? '0 10px 30px rgba(59, 130, 246, 0.3)' 
+    : '0 10px 30px rgba(29, 78, 216, 0.4)'};
   width: fit-content;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-width: 200px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
   
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: ${props => props.$variant === 'secondary' 
+      ? '0 15px 40px rgba(59, 130, 246, 0.4)' 
+      : '0 15px 40px rgba(29, 78, 216, 0.5)'};
+    ${props => props.$variant === 'secondary' ? `
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-color: #1d4ed8;
+    ` : `
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    `}
+    
+    &::before {
+      left: 100%;
+    }
   }
   
   &:active {
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    min-width: auto;
+    font-size: 1.1rem;
+    padding: 16px 32px;
   }
 `;
 
@@ -611,9 +790,15 @@ const HeroSectionComponent = () => {
             </MainContent>
             
             <CTASection>
-              <CTAButton>
-                今すぐ始める
-              </CTAButton>
+              <CTAButtonGroup>
+                <CTAButton href="/online-meeting" $variant="primary">
+                  オンライン面談予約
+                </CTAButton>
+                
+                <CTAButton href="/document-request" $variant="secondary">
+                  資料請求
+                </CTAButton>
+              </CTAButtonGroup>
               
               <VideoPrompt>
                 <ArrowIcon />
