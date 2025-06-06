@@ -34,72 +34,108 @@ const DocumentButton = ({
 
   return (
     <div
-      className="absolute cursor-pointer transition-all duration-500 ease-out hover:z-50"
+      className="absolute cursor-pointer group hover:z-50"
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
         transform: `translate(-50%, -50%) rotate(${position.rotation}deg)`,
-        transformOrigin: 'center center'
+        transformOrigin: 'center center',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
       onClick={handleClick}
-      onMouseEnter={(e) => {
-        const el = e.currentTarget;
-        el.style.transform = `translate(-50%, -50%) rotate(${position.rotation + 2}deg) scale(1.05) translateY(-15px)`;
-        el.style.boxShadow = `0 25px 35px rgba(0, 0, 0, 0.2), 0 15px 25px rgba(0, 0, 0, 0.15), 0 0 20px ${colorMap[color]}40`;
-      }}
-      onMouseLeave={(e) => {
-        const el = e.currentTarget;
-        el.style.transform = `translate(-50%, -50%) rotate(${position.rotation}deg) scale(1) translateY(0)`;
-        el.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)';
-      }}
     >
       <div
-        className="w-48 h-32 rounded-xl relative overflow-hidden border border-white/20 shadow-lg"
+        className="w-52 h-36 relative transition-all duration-300 ease-out group-hover:-translate-y-3 group-hover:scale-105"
         style={{
-          background: `linear-gradient(145deg, ${colorMap[color]} 0%, ${colorMap[color]}E6 50%, ${colorMap[color]} 100%)`,
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+          filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06))',
+          transition: 'filter 0.3s ease, transform 0.3s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.filter = `drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 8px 15px rgba(0, 0, 0, 0.1)) drop-shadow(0 0 20px ${colorMap[color]}40)`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.filter = 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06))';
         }}
       >
-        {/* 紙の折り目 */}
-        <div 
-          className="absolute top-0 right-0 w-5 h-5"
+        {/* メイン書類 */}
+        <div
+          className="w-full h-full relative rounded-sm border border-gray-200"
           style={{
-            background: 'linear-gradient(-45deg, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.1) 50%, transparent 55%, transparent 100%)',
-            clipPath: 'polygon(0 0, 100% 0, 100% 100%)'
+            background: `
+              linear-gradient(to bottom, #ffffff 0%, #fefefe 50%, #fcfcfc 100%),
+              repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 18px,
+                rgba(230, 230, 235, 0.4) 19px,
+                rgba(230, 230, 235, 0.4) 20px
+              )
+            `,
+            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.2)'
           }}
-        />
-        
-        {/* 紙の線 */}
-        <div className="absolute top-5 left-5 right-5 bottom-5">
-          <div className="absolute top-5 left-0 right-0 h-px bg-white/20" />
-          <div className="absolute top-8 left-0 right-0 h-px bg-white/20" />
-        </div>
-        
-        {/* テキスト */}
-        <div className="absolute inset-0 flex items-center justify-center px-4">
-          <div className="text-white font-bold text-sm leading-tight text-center text-shadow-lg">
-            {children}
+        >
+          {/* 左マージン */}
+          <div 
+            className="absolute left-0 top-0 bottom-0 w-8"
+            style={{
+              background: 'linear-gradient(90deg, rgba(255, 182, 193, 0.3) 0%, transparent 100%)',
+              borderRight: '1px solid rgba(255, 182, 193, 0.5)'
+            }}
+          />
+          
+          {/* 穴あけパンチの穴 */}
+          <div className="absolute left-4 top-6 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
+          <div className="absolute left-4 top-16 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
+          <div className="absolute left-4 top-26 w-1.5 h-1.5 rounded-full bg-white border border-gray-300 shadow-inner" />
+          
+          {/* 右上の折り目 */}
+          <div 
+            className="absolute top-0 right-0 w-4 h-4"
+            style={{
+              background: 'linear-gradient(-45deg, #f5f5f5 0%, #e8e8e8 50%, #f0f0f0 100%)',
+              clipPath: 'polygon(0 0, 100% 0, 100% 100%)',
+              boxShadow: 'inset -1px -1px 2px rgba(0, 0, 0, 0.1)'
+            }}
+          />
+          
+          {/* テキスト部分 */}
+          <div className="absolute inset-0 flex items-center justify-center px-6 py-4">
+            <div 
+              className="font-semibold text-sm leading-tight text-center"
+              style={{ 
+                color: colorMap[color],
+                fontFamily: "'Noto Sans JP', sans-serif",
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              {children}
+            </div>
           </div>
+          
+          {/* カラーアクセント */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-1"
+            style={{
+              background: `linear-gradient(90deg, ${colorMap[color]} 0%, ${colorMap[color]}80 50%, ${colorMap[color]} 100%)`
+            }}
+          />
+          
+          {/* ホバー時のシマーエフェクト */}
+          <div 
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={{
+              background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%)',
+              animation: 'shimmer 1.8s ease-in-out infinite',
+              transform: 'translateX(-100%)'
+            }}
+          />
         </div>
-        
-        {/* シマーエフェクト */}
-        <div 
-          className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%)',
-            animation: 'shimmer 1.5s ease-in-out infinite',
-            transform: 'translateX(-100%)'
-          }}
-        />
       </div>
       
       <style jsx>{`
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
-        }
-        .text-shadow-lg {
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
       `}</style>
     </div>

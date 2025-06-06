@@ -350,7 +350,6 @@ const CrossSymbol = styled.span`
   margin: 0 1rem;
   font-weight: 300;
   vertical-align: middle;
-  animation: bounce 2s infinite;
   
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
@@ -555,6 +554,42 @@ const LogoImage = styled.img`
   
   @media (max-width: 768px) {
     height: 60px;
+  }
+`;
+
+const VideoAnnouncementBanner = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin: 1.5rem 0 2rem 0;
+  animation: slideInFromLeft 1.2s ease-out 0.5s both, bounce 2s ease-in-out 2.5s infinite;
+  
+  img {
+    height: 120px;
+    width: auto;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    transform: perspective(800px) rotateX(5deg) rotateY(-2deg);
+    
+    &:hover {
+      transform: perspective(800px) rotateX(0deg) rotateY(0deg) scale(1.05);
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
+    }
+  }
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+    margin: 1rem 0 1.5rem 0;
+    
+    img {
+      height: 90px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    img {
+      height: 75px;
+    }
   }
 `;
 
@@ -976,6 +1011,10 @@ const HeroSectionComponent = () => {
               <LogoContainer>
                 <LogoImage src="/images/caresmily-logo.png" alt="CareSmily Logo" />
               </LogoContainer>
+              
+              <VideoAnnouncementBanner>
+                <img src="/images/について.png" alt="CareSmily について動画上映中" />
+              </VideoAnnouncementBanner>
               
               <MainTitle>
                 <HighlightText>膨大な文例</HighlightText>
