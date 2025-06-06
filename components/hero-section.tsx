@@ -309,17 +309,6 @@ const MainTitle = styled.h1`
   -webkit-text-fill-color: transparent;
   background-clip: text;
   
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
-    background-size: 200% 100%;
-    border-radius: 2px;
-    animation: titleTypewriter 2s ease-out 0.8s both, shimmer 2s ease-in-out infinite 3s;
   }
   
   &:hover {
@@ -350,18 +339,7 @@ const CrossSymbol = styled.span`
   margin: 0 1rem;
   font-weight: 300;
   vertical-align: middle;
-  animation: bounce 2s infinite;
   
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
   }
 
   @media (max-width: 768px) {
@@ -526,13 +504,6 @@ const CTAButton = styled.a<{ $variant?: 'primary' | 'secondary' }>`
   }
 `;
 
-const HighlightText = styled.span`
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-`;
 
 const LogoContainer = styled.div`
   display: flex;
@@ -978,7 +949,7 @@ const HeroSectionComponent = () => {
               </LogoContainer>
               
               <MainTitle>
-                <HighlightText>膨大な文例</HighlightText>
+                膨大な文例
                 <CrossSymbol>×</CrossSymbol>
                 選択
               </MainTitle>
