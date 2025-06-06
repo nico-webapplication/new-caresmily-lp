@@ -219,20 +219,18 @@ const CrossSymbol = styled.span`
   margin: 0 1rem;
   font-weight: 300;
   vertical-align: middle;
-  animation: rotateIn 1s ease-out 0.5s both, bounce 2s ease-in-out infinite 1.5s;
-  position: relative;
+  animation: bounce 2s ease-in-out infinite;
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%);
-    transform: translate(-50%, -50%) scale(0);
-    animation: pulse 2s ease-in-out infinite 2s;
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
   }
 
   @media (max-width: 768px) {
@@ -370,6 +368,42 @@ const VideoPrompt = styled.div`
   color: #6b7280;
   font-size: 0.95rem;
   font-weight: 500;
+  animation: slideInScale 1.4s cubic-bezier(0.4, 0, 0.2, 1) 1s both;
+  position: relative;
+  padding: 12px 20px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 25px;
+    padding: 1px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover {
+    color: #3b82f6;
+    transform: translateX(5px) scale(1.05);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    
+    &::before {
+      opacity: 1;
+      animation: shimmer 1.5s ease-in-out infinite;
+    }
+  }
 `;
 
 const ArrowIcon = styled.div`
@@ -820,52 +854,9 @@ const HeroSectionComponent = () => {
                   src="/images/CareSmily広告動画.mp4"
                 />
                 <VideoOverlay />
-                <PlayIcon />
-                
-                <BrandOverlay>
-                  <LogoIcon>C</LogoIcon>
-                  CareSmily
-                </BrandOverlay>
+                <PlayIcon />             
               </VideoContainer>
 
-              <DecorationElements>
-                <FloatingElement 
-                  top="15%" 
-                  left="10%" 
-                  delay={0} 
-                  size="20px" 
-                />
-                <FloatingElement 
-                  top="25%" 
-                  left="80%" 
-                  delay={1} 
-                  size="15px" 
-                />
-                <FloatingElement 
-                  top="70%" 
-                  left="15%" 
-                  delay={2} 
-                  size="18px" 
-                />
-                <FloatingElement 
-                  top="60%" 
-                  left="85%" 
-                  delay={1.5} 
-                  size="12px" 
-                />
-              </DecorationElements>
-
-              <FeatureTag position="top: 10%; left: 20%;">
-                AI書類作成
-              </FeatureTag>
-              
-              <FeatureTag position="top: 30%; right: 15%;">
-                簡単操作
-              </FeatureTag>
-              
-              <FeatureTag position="bottom: 15%; left: 15%;">
-                時短効率化
-              </FeatureTag>
             </CircularFrame>
           </RightSection>
         </Container>
