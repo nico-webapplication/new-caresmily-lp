@@ -207,7 +207,7 @@ const CircularFrame = styled.div`
   position: relative;
   width: 1200px;
   height: 900px;
-  border-radius: 50%;
+  border-radius: 40%;
   background: linear-gradient(135deg, #ff9a8b 0%, #a8a8a8 50%, #ffcc70 100%);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -290,7 +290,7 @@ const BookContainer = styled.div`
   position: relative;
   width: 200px;
   height: 280px;
-  margin: 3rem auto 2rem;
+  margin: 3rem 0 2rem auto;
   transform: perspective(600px) rotateY(-15deg);
   transition: transform 0.3s ease;
 `;
